@@ -161,12 +161,10 @@ function whyTonight(title) {
 
 function rankLocally(heroes, alts, queryLabel, contentMode) {
   const normalizedSelection = normalizeFilterLabel(queryLabel);
-  const selectedLabels = normalizedSelection
+  const isSciFiSelection = normalizedSelection
     .split(",")
     .map(item => item.trim())
-    .filter(Boolean);
-
-  const isSciFiSelection = selectedLabels.includes("sci-fi");
+    .includes("sci-fi");
 
   const sortedHeroes = [...heroes]
     .filter(title => title.poster_path)
@@ -181,9 +179,16 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
   const selected = [];
   const selectedIds = new Set();
 
-  const isAnimation = title => (title.genre_ids || []).includes(16);
-  const isClassic = title =>
-    !title.isTV && Number(title.year) > 0 && Number(title.year) < 1990;
+  const addTitle = title => {
+    if (!title || selected.length >= 6 || selectedIds.has(title.id)) return false;
+
+    const classicCount = selected.filter(item => Number(item.year) < 1990).length;
+    if (Number(title.year) < 1990 && classicCount >= 1) return false;
+
+    selected.push(title);
+    selectedIds.add(title.id);
+    return true;
+  };
 
   const isAuteurLean = title => {
     const votes = Number(title.vote_count || 0);
@@ -193,85 +198,61 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
 
     return (
       rating >= 7.5 &&
-      votes >= 60 &&
-      votes <= 5000 &&
-      popularity < 45 &&
-      (language !== "en" || votes < 1800 || popularity < 25)
+      votes >= 80 &&
+      votes <= 4500 &&
+      popularity < 42 &&
+      (
+        language !== "en" ||
+        votes < 1800 ||
+        popularity < 25
+      )
     );
   };
 
-  const franchisePattern =
-    /\b(avengers|batman|clone wars|dc|dragon ball|evangelion|jojo|jujutsu|marvel|overlord|spider-man|star wars|superman|transformers|x-men)\b/i;
-
-  const isFranchise = title =>
-    franchisePattern.test(`${title.title || ""} ${title.overview || ""}`);
-
-  const addTitle = (title, {allowSecondAnimation=false, allowThirdFranchise=false} = {}) => {
-    if (!title || selected.length >= 6 || selectedIds.has(title.id)) return false;
-
-    const classicCount = selected.filter(isClassic).length;
-    const animationCount = selected.filter(isAnimation).length;
-    const franchiseCount = selected.filter(isFranchise).length;
-
-    if (isClassic(title) && classicCount >= 1) return false;
-    if (isAnimation(title) && animationCount >= (allowSecondAnimation ? 2 : 1)) return false;
-    if (isFranchise(title) && franchiseCount >= (allowThirdFranchise ? 3 : 2)) return false;
-
-    selected.push(title);
-    selectedIds.add(title.id);
-    return true;
-  };
-
+  // Sci-Fi gets a deliberate cinematic spectrum rather than six franchise titles.
   if (isSciFiSelection) {
-    const classic = candidates.find(isClassic);
+    const classic = candidates.find(title =>
+      !title.isTV &&
+      Number(title.year) > 0 &&
+      Number(title.year) < 1990
+    );
 
-    const auteur = candidates.find(title =>
+    const auteurOrIndependent = candidates.find(title =>
       title.id !== classic?.id &&
-      !isFranchise(title) &&
       isAuteurLean(title)
     );
 
     const international = candidates.find(title =>
       title.id !== classic?.id &&
-      title.id !== auteur?.id &&
-      !isFranchise(title) &&
+      title.id !== auteurOrIndependent?.id &&
       String(title.original_language || "").toLowerCase() !== "en"
     );
 
-    const series = contentMode !== "movie"
-      ? candidates.find(title =>
-          title.isTV &&
-          title.id !== classic?.id &&
-          title.id !== auteur?.id &&
-          title.id !== international?.id
-        )
-      : null;
-
-    const animation = candidates.find(title =>
-      isAnimation(title) &&
+    const series = candidates.find(title =>
+      title.isTV &&
       title.id !== classic?.id &&
-      title.id !== auteur?.id &&
-      title.id !== international?.id &&
-      title.id !== series?.id
+      title.id !== auteurOrIndependent?.id &&
+      title.id !== international?.id
     );
 
-    const mainstreamFilm = candidates.find(title =>
-      !title.isTV &&
-      !isAnimation(title) &&
-      title.id !== classic?.id &&
-      title.id !== auteur?.id &&
-      title.id !== international?.id &&
-      !isFranchise(title)
-    ) || candidates.find(title => !title.isTV && !isAnimation(title));
-
     addTitle(classic);
-    addTitle(auteur);
+    addTitle(auteurOrIndependent);
     addTitle(international);
     addTitle(series);
-    addTitle(animation);
-    addTitle(mainstreamFilm);
   } else if (contentMode === "both") {
-    addTitle(candidates.find(title => title.isTV));
+    // For general mixed requests, include at least one series or limited series.
+    const romanceSelection = normalizedSelection
+      .split(",")
+      .some(label => ["romance", "romcom", "date night"].includes(label.trim()));
+
+    const matchingSeries = candidates.find(title =>
+      title.isTV &&
+      (!romanceSelection || (title.genres || []).some(genre =>
+        ["romance", "comedy", "drama"].includes(String(genre).toLowerCase())
+      ))
+    );
+
+    addTitle(matchingSeries);
   }
 
   const bucketTargets = {
@@ -293,7 +274,7 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
 
   for (const title of candidates) {
     if (selected.length >= 6) break;
-    addTitle(title, {allowSecondAnimation:true, allowThirdFranchise:true});
+    addTitle(title);
   }
 
   return {
@@ -897,7 +878,6 @@ async function buildPicks(
       popularity: item.popularity || 0,
       overview: item.overview || "Synopsis unavailable.",
       original_language: item.original_language || "",
-      genre_ids: item.genre_ids || [],
       media_type: item.media_type,
       isTV,
       format: isTV ? "TV Series" : "Film",
@@ -929,18 +909,9 @@ async function buildPicks(
     )
     .map(normalizeTitle);
 
-  if (!heroes.length && alts.length) {
-    heroes = [...alts]
-      .sort((a, b) => titleScore(b) - titleScore(a))
-      .slice(0, Math.min(12, alts.length));
-
-    const fallbackHeroIds = new Set(heroes.map(item => item.id));
-    alts = alts.filter(item => !fallbackHeroIds.has(item.id));
-  }
-
   if (!heroes.length) {
     throw new Error(
-      `No fresh titles remain for "${queryLabel}" in this seven-set session.`
+      `TMDB returned no suitable ${CURRENT_YEAR} or ${CURRENT_YEAR - 1} titles for "${queryLabel}".`
     );
   }
 
@@ -1817,196 +1788,6 @@ const CINEMA_MOMENTS = [
     note:"A reminder that every image is also a choice."
   }
 ];
-const CURATED_CINEMA_MOMENTS = CINEMA_MOMENTS.map((moment, index) => ({
-  ...moment,
-  key:`curated-${index}`
-}));
-
-
-
-async function fetchCinemaMomentCandidates() {
-  const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
-  if (!TOKEN) return [];
-
-  const endpoints = [
-    "movie/top_rated",
-    "movie/popular",
-    "trending/movie/week"
-  ];
-
-  const requests = [];
-
-  for (const endpoint of endpoints) {
-    for (let page = 1; page <= 4; page += 1) {
-      requests.push(
-        fetch(`https://api.themoviedb.org/3/${endpoint}?language=en-US&page=${page}`, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-            accept: "application/json"
-          }
-        })
-          .then(response => response.ok ? response.json() : {results:[]})
-          .then(data => data.results || [])
-          .catch(() => [])
-      );
-    }
-  }
-
-  const groups = await Promise.all(requests);
-  const unique = new Map();
-
-  groups.flat().forEach(movie => {
-    if (
-      movie?.id &&
-      movie?.title &&
-      movie?.overview &&
-      movie?.release_date &&
-      movie?.vote_average >= 7
-    ) {
-      unique.set(movie.id, movie);
-    }
-  });
-
-  return [...unique.values()];
-}
-
-async function fetchCinemaMomentDetail(movieId) {
-  const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
-  if (!TOKEN) return null;
-
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits`,
-      {
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-          accept: "application/json"
-        }
-      }
-    );
-
-    if (!response.ok) return null;
-    return await response.json();
-  } catch {
-    return null;
-  }
-}
-
-function compactMoney(value) {
-  if (!value) return "";
-  if (value >= 1_000_000_000) return `$${(value / 1_000_000_000).toFixed(1)} billion`;
-  if (value >= 1_000_000) return `$${Math.round(value / 1_000_000)} million`;
-  return `$${value.toLocaleString()}`;
-}
-
-function buildDynamicCinemaMoment(movie, details) {
-  const year = String(movie.release_date || details?.release_date || "").slice(0, 4);
-  const director = details?.credits?.crew?.find(person => person.job === "Director")?.name;
-  const writer = details?.credits?.crew?.find(person =>
-    ["Screenplay", "Writer"].includes(person.job)
-  )?.name;
-  const country = details?.production_countries?.[0]?.name;
-  const language = details?.spoken_languages?.[0]?.english_name;
-  const runtime = details?.runtime;
-  const revenue = details?.revenue || 0;
-  const rating = Number(movie.vote_average || details?.vote_average || 0);
-  const votes = Number(movie.vote_count || details?.vote_count || 0);
-  const categories = [];
-
-  if (revenue >= 50_000_000) {
-    categories.push({
-      key:`boxoffice-${movie.id}`,
-      type:"💰 Box Office Story",
-      title:`${movie.title} (${year})`,
-      quote:`A worldwide theatrical journey of ${compactMoney(revenue)}.`,
-      credit:director ? `Directed by ${director}.` : "A film that found a global audience.",
-      note:"Box-office figures supplied by TMDB."
-    });
-  }
-
-  if (director) {
-    categories.push({
-      key:`director-${movie.id}`,
-      type:"🎬 Behind the Camera",
-      title:`${movie.title} (${year})`,
-      quote:`A film shaped by ${director}.`,
-      credit:`Directed by ${director}.`,
-      note:country ? `Produced in ${country}.` : "A reminder that every frame begins with a creative vision."
-    });
-  }
-
-  if (writer) {
-    categories.push({
-      key:`writer-${movie.id}`,
-      type:"✍️ Screenwriter Spotlight",
-      title:`${movie.title} (${year})`,
-      quote:"Before it reached the screen, it began on the page.",
-      credit:`Written by ${writer}.`,
-      note:"Celebrating the storyteller behind the screenplay."
-    });
-  }
-
-  if (rating >= 8 && votes >= 1000) {
-    categories.push({
-      key:`audience-${movie.id}`,
-      type:"⭐ Audience Discovery",
-      title:`${movie.title} (${year})`,
-      quote:`Rated ${Math.round(rating * 10)}% by TMDB viewers.`,
-      credit:director ? `Directed by ${director}.` : "A title embraced by film lovers.",
-      note:`Based on more than ${votes.toLocaleString()} audience votes.`
-    });
-  }
-
-  if (language && language !== "English") {
-    categories.push({
-      key:`world-${movie.id}`,
-      type:"🌍 World Cinema",
-      title:`${movie.title} (${year})`,
-      quote:`Cinema speaks ${language}.`,
-      credit:country ? `A production from ${country}.` : "A story crossing borders through film.",
-      note:"A reminder that the Seventh Art has no single language."
-    });
-  }
-
-  if (runtime) {
-    categories.push({
-      key:`craft-${movie.id}`,
-      type:"🎞️ Film Craft",
-      title:`${movie.title} (${year})`,
-      quote:`${runtime} minutes of carefully shaped screen time.`,
-      credit:director ? `Directed by ${director}.` : "Built one scene, cut and performance at a time.",
-      note:"Every finished minute represents the work of hundreds of artists."
-    });
-  }
-
-  return categories;
-}
-
-function readMomentHistory() {
-  try {
-    const raw = JSON.parse(localStorage.getItem("mycine-moment-history") || "[]");
-    const cutoff = Date.now() - (30 * 24 * 60 * 60 * 1000);
-    return raw.filter(item => item?.key && item?.seenAt >= cutoff);
-  } catch {
-    return [];
-  }
-}
-
-function saveMomentSeen(key) {
-  const history = readMomentHistory().filter(item => item.key !== key);
-  history.push({key, seenAt:Date.now()});
-  localStorage.setItem("mycine-moment-history", JSON.stringify(history.slice(-500)));
-}
-
-function pickUnseenMoment(momentOptions) {
-  const seen = new Set(readMomentHistory().map(item => item.key));
-  const unseen = momentOptions.filter(moment => !seen.has(moment.key));
-
-  const pool = unseen.length ? unseen : momentOptions;
-  if (!pool.length) return null;
-
-  return pool[Math.floor(Math.random() * pool.length)];
-}
 
 function LobbyDecor() {
   return (
@@ -2029,8 +1810,9 @@ function LobbyDecor() {
 function TopNav({page, setPage, savedCount}) {
   const items = [
     {id:"home", label:"MY CINÉ"},
-    {id:"standard", label:"Standard 🎬"},
-    {id:"saved", label:`❤️ Watchlist${savedCount ? ` ${savedCount}` : ""}`},
+    {id:"standard", label:"My Ciné Standard 🎬"},
+    {id:"moments", label:"Cinema Moments 🎞️"},
+    {id:"saved", label:`❤️ My Watchlist${savedCount ? ` ${savedCount}` : ""}`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
 
@@ -2339,10 +2121,6 @@ export default function App() {
   const [loadingMsg, setLoadingMsg] = useState(LOADING_MSGS[0]);
   const [page, setPage] = useState("home");
   const [momentIndex, setMomentIndex] = useState(0);
-  const [cinemaMoment, setCinemaMoment] = useState(CURATED_CINEMA_MOMENTS[0]);
-  const [cinemaMomentCandidates, setCinemaMomentCandidates] = useState([]);
-  const [seenPickIds, setSeenPickIds] = useState([]);
-  const [batchNumber, setBatchNumber] = useState(0);
   const [savedTitles, setSavedTitles] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("mycine-saved") || "[]");
@@ -2387,7 +2165,7 @@ export default function App() {
   }, 3000);
 };
 
-const run = async (excludeIds = [], resetSession = false) => {
+const run = async (excludeIds = []) => {
   setLoading(true);
   setError(null);
   setLoadingMsg(LOADING_MSGS[0]);
@@ -2404,18 +2182,9 @@ const run = async (excludeIds = [], resetSession = false) => {
       excludeIds
     );
 
-    const newIds = [result.hero?.id, ...result.alts.map(item => item.id)].filter(Boolean);
-
     setHero(result.hero);
     setAlts(result.alts);
     setGenerated(true);
-
-    setSeenPickIds(previous => {
-      const base = resetSession ? [] : previous;
-      return [...new Set([...base, ...newIds])];
-    });
-
-    setBatchNumber(previous => resetSession ? 1 : Math.min(7, previous + 1));
   } catch (error) {
     console.error("MY CINÉ recommendation error:", error);
     setError(error.message || "Unable to load movie recommendations.");
@@ -2424,19 +2193,8 @@ const run = async (excludeIds = [], resetSession = false) => {
     clearInterval(timer);
   }
 };
-
-  const doFetch = () => {
-    setHero(null);
-    setAlts([]);
-    setSeenPickIds([]);
-    setBatchNumber(0);
-    run([], true);
-  };
-
-  const doMore = () => {
-    if (batchNumber >= 7) return;
-    run(seenPickIds, false);
-  };
+    const doFetch = () => { setHero(null); setAlts([]); run([]); };
+  const doMore  = () => run([hero?.id, ...alts.map(a=>a.id)].filter(Boolean));
 
   const watchedCount = Object.values(watched).filter(Boolean).length;
   const total = (hero?1:0) + alts.length;
@@ -2446,77 +2204,12 @@ const run = async (excludeIds = [], resetSession = false) => {
   }, [savedTitles]);
 
   useEffect(() => {
-    let cancelled = false;
+    const timer = setInterval(() => {
+      setMomentIndex(index => (index + 1) % CINEMA_MOMENTS.length);
+    }, 9000);
 
-    fetchCinemaMomentCandidates().then(candidates => {
-      if (!cancelled) setCinemaMomentCandidates(candidates);
-    });
-
-    return () => {
-      cancelled = true;
-    };
+    return () => clearInterval(timer);
   }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const showNextMoment = async () => {
-      const curatedOptions = CURATED_CINEMA_MOMENTS.filter(moment =>
-        !new Set(readMomentHistory().map(item => item.key)).has(moment.key)
-      );
-
-      const useCurated = curatedOptions.length > 0 && Math.random() < 0.22;
-
-      if (useCurated) {
-        const moment = pickUnseenMoment(curatedOptions);
-        if (moment && !cancelled) {
-          saveMomentSeen(moment.key);
-          setCinemaMoment(moment);
-        }
-        return;
-      }
-
-      const seenMovieIds = new Set(
-        readMomentHistory()
-          .map(item => String(item.key).split("-").pop())
-      );
-
-      const availableMovies = cinemaMomentCandidates.filter(movie =>
-        !seenMovieIds.has(String(movie.id))
-      );
-
-      const moviePool = availableMovies.length
-        ? availableMovies
-        : cinemaMomentCandidates;
-
-      if (!moviePool.length) {
-        const fallback = pickUnseenMoment(CURATED_CINEMA_MOMENTS);
-        if (fallback && !cancelled) {
-          saveMomentSeen(fallback.key);
-          setCinemaMoment(fallback);
-        }
-        return;
-      }
-
-      const movie = moviePool[Math.floor(Math.random() * moviePool.length)];
-      const details = await fetchCinemaMomentDetail(movie.id);
-      const options = buildDynamicCinemaMoment(movie, details);
-      const moment = pickUnseenMoment(options);
-
-      if (moment && !cancelled) {
-        saveMomentSeen(moment.key);
-        setCinemaMoment(moment);
-      }
-    };
-
-    showNextMoment();
-    const timer = setInterval(showNextMoment, 16000);
-
-    return () => {
-      cancelled = true;
-      clearInterval(timer);
-    };
-  }, [cinemaMomentCandidates]);
 
   return (
     <div
@@ -2555,9 +2248,8 @@ const run = async (excludeIds = [], resetSession = false) => {
     max-width:1180px;
     margin:0 auto;
     display:flex;
-    gap:8px;
+    gap:6px;
     align-items:center;
-    justify-content:center;
     overflow-x:auto;
     padding:8px 12px;
     scrollbar-width:none;
@@ -3426,11 +3118,7 @@ const run = async (excludeIds = [], resetSession = false) => {
     .mycine-footer{padding:22px 14px 12px;}
     .mycine-footer .closing-promise{font-size:25px;}
     .footer-meta{flex-direction:column;gap:4px;}
-    .top-nav-inner{
-      justify-content:flex-start;
-      padding-left:8px;
-      padding-right:8px;
-    }
+    .top-nav-inner{padding-left:8px;padding-right:8px;}
   }
 
   @keyframes shimmer{0%,100%{opacity:1;}50%{opacity:0.4;}}
@@ -3510,6 +3198,7 @@ const run = async (excludeIds = [], resetSession = false) => {
       {showAbout && <AboutModal onClose={()=>setShowAbout(false)}/>}
 
       {page === "standard" && <StandardPage/>}
+      {page === "moments" && <CinemaMomentsPage/>}
       {page === "saved" && <SavedPage savedTitles={savedTitles} onToggle={toggleWatched}/>}
       {page === "curator" && <CuratorPage/>}
 
@@ -3525,7 +3214,7 @@ const run = async (excludeIds = [], resetSession = false) => {
 
       <div className="lobby-feature-grid">
       <section className="moment-strip">
-        <CinemaMomentCard moment={cinemaMoment} compact/>
+        <CinemaMomentCard moment={CINEMA_MOMENTS[momentIndex]} compact/>
       </section>
 
       <section className="concierge-panel">
@@ -3690,32 +3379,10 @@ const run = async (excludeIds = [], resetSession = false) => {
               </div>
             )}
             <div style={{marginTop:"28px"}}>
-              <button
-                onClick={doMore}
-                disabled={loading || batchNumber >= 7}
-                style={{
-                  width:"100%",
-                  background:"transparent",
-                  border:`1.5px solid ${C.goldBright}88`,
-                  borderRadius:"10px",
-                  padding:"13px",
-                  color:C.goldBright,
-                  fontWeight:"800",
-                  fontSize:"14px",
-                  cursor:(loading || batchNumber >= 7)?"not-allowed":"pointer",
-                  fontFamily:"Georgia,serif",
-                  opacity:(loading || batchNumber >= 7)?0.5:1
-                }}
-              >
-                {loading
-                  ? loadingMsg
-                  : batchNumber >= 7
-                    ? "🎬 Seven complete sets revealed"
-                    : `🎬 Show me 7 more · Set ${batchNumber + 1} of 7`}
+              <button onClick={doMore} disabled={loading} style={{width:"100%",background:"transparent",border:`1.5px solid ${C.goldBright}88`,borderRadius:"10px",padding:"13px",color:C.goldBright,fontWeight:"800",fontSize:"14px",cursor:loading?"not-allowed":"pointer",fontFamily:"Georgia,serif",opacity:loading?0.5:1}}>
+                {loading?loadingMsg:"🎬 Show me 7 more"}
               </button>
-              <p style={{color:`${C.goldBright}88`,fontSize:"11px",textAlign:"center",marginTop:"6px",fontStyle:"italic"}}>
-                Set {Math.max(batchNumber,1)} of 7 · fresh picks · no repeats · the 7th Art
-              </p>
+              <p style={{color:`${C.goldBright}55`,fontSize:"11px",textAlign:"center",marginTop:"6px",fontStyle:"italic"}}>7 fresh picks · no repeats · the 7th Art</p>
             </div>
           </div>
         )}
