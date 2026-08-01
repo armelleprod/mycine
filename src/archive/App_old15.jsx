@@ -2054,7 +2054,8 @@ function SavedPage({savedTitles, onToggle}) {
     <main className="page-shell">
       <div className="page-heading">
         <span>❤️</span>
-        <h1>My personal collection</h1>
+        <h1>My Watchlist</h1>
+        <p>Your personal collection of films and series waiting for the right night.</p>
       </div>
 
       {savedTitles.length === 0 ? (
@@ -2065,39 +2066,16 @@ function SavedPage({savedTitles, onToggle}) {
         </div>
       ) : (
         <div className="saved-grid">
-          {savedTitles.map(title => {
-            const googleLink = `https://www.google.com/search?q=${encodeURIComponent(
-              `${title.title} ${title.year || ""} ${title.isTV ? "TV series" : "film"}`
-            )}`;
-
-            return (
-              <div key={`${title.media_type || "movie"}-${title.id}`} className="saved-card">
-                <a
-                  href={googleLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="saved-card-link"
-                  aria-label={`Search for ${title.title} on Google`}
-                >
-                  <Poster path={title.poster_path} title={title.title} size="w342"/>
-                </a>
-
-                <div className="saved-card-body">
-                  <a
-                    href={googleLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="saved-title-link"
-                  >
-                    {title.title}
-                  </a>
-
-                  <p>{title.year} · {title.format || (title.isTV ? "TV Series" : "Film")}</p>
-                  <button onClick={() => onToggle(title.id)}>Remove</button>
-                </div>
+          {savedTitles.map(title => (
+            <div key={`${title.media_type || "movie"}-${title.id}`} className="saved-card">
+              <Poster path={title.poster_path} title={title.title} size="w342"/>
+              <div className="saved-card-body">
+                <h3>{title.title}</h3>
+                <p>{title.year} · {title.format || (title.isTV ? "TV Series" : "Film")}</p>
+                <button onClick={() => onToggle(title.id)}>Remove</button>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       )}
     </main>
@@ -2470,24 +2448,6 @@ const run = async (excludeIds = []) => {
   }
   .saved-card{background:rgba(11,31,74,0.94);border:1px solid rgba(255,184,0,0.35);border-radius:18px;overflow:hidden;}
   .saved-card-body{padding:12px;color:#fff;}
-  .saved-card-link{
-    display:block;
-    text-decoration:none;
-  }
-  .saved-title-link{
-    display:block;
-    margin:0 0 6px;
-    color:${C.white};
-    font-family:Georgia,serif;
-    font-size:16px;
-    font-weight:900;
-    line-height:1.2;
-    text-decoration:none;
-  }
-  .saved-title-link:hover{
-    color:${C.goldBright};
-    text-decoration:underline;
-  }
   .saved-card-body h3{font-family:Georgia,serif;margin:0 0 6px;}
   .saved-card-body p{font-size:11px;color:${C.goldBright};}
   .saved-card-body button{width:100%;border:1px solid rgba(255,184,0,0.5);background:transparent;color:${C.goldBright};border-radius:8px;padding:8px;cursor:pointer;}
