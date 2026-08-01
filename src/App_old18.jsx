@@ -412,7 +412,7 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     const votes = Number(item.vote_count || 0);
 
     const romanceWords =
-      /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/i;
+      /\b(love|romance|romantic|couple|relationship|marriage|wedding|dating|heart|boyfriend|girlfriend|husband|wife|affair|soulmate|bride|groom)\b/i;
 
     const sciFiWords =
       /\b(alien|android|artificial intelligence|astronaut|clone|cyber|cyborg|dystopi|experiment|extraterrestrial|future|futuristic|galaxy|genetic|interstellar|laboratory|mars|moon|parallel universe|planet|robot|science|scientist|space|spaceship|technology|time travel|virtual reality)\b/i;
@@ -456,19 +456,8 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
       case "make me laugh":
         return genreIds.has(35);
 
-      case "romance": {
-        if (isMovie) return genreIds.has(10749);
-
-        const matches = titleText.match(
-          /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/gi
-        ) || [];
-
-        const uniqueSignals = new Set(matches.map(value => value.toLowerCase()));
-        const romanticTitle = /\b(love|heart|romance|wedding|dating)\b/i
-          .test(item.name || item.title || "");
-
-        return romanticTitle || uniqueSignals.size >= 2;
-      }
+      case "romance":
+        return isMovie ? genreIds.has(10749) : textMatches(titleText, romanceWords);
 
       case "drama":
         return genreIds.has(18);
@@ -744,7 +733,7 @@ async function fetchTitleDetails(title) {
   const mediaType = title.media_type || (title.isTV ? "tv" : "movie");
 
   const response = await fetch(
-    `https://api.themoviedb.org/3/${mediaType}/${title.id}?append_to_response=credits,keywords`,
+    `https://api.themoviedb.org/3/${mediaType}/${title.id}?append_to_response=credits`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -782,15 +771,9 @@ async function fetchTitleDetails(title) {
         ? "Limited Series"
         : "TV Series";
 
-  const keywordItems =
-    details.keywords?.keywords ||
-    details.keywords?.results ||
-    [];
-
   return {
     ...title,
     genres: (details.genres || []).slice(0, 3).map(genre => genre.name),
-    keywords: keywordItems.map(keyword => keyword.name).filter(Boolean),
     director,
     runtime,
     countryCode,
@@ -801,50 +784,6 @@ async function fetchTitleDetails(title) {
     isTV: mediaType === "tv",
     media_type: mediaType
   };
-}
-
-function passesDetailedIntent(title, selectedLabels) {
-  const labels = selectedLabels.map(normalizeFilterLabel);
-  const genreNames = new Set((title.genres || []).map(genre => genre.toLowerCase()));
-  const keywordText = (title.keywords || []).join(" ").toLowerCase();
-  const titleText = `${title.title || ""} ${title.overview || ""}`.toLowerCase();
-
-  const romanceRequested = labels.some(label =>
-    ["romance", "romcom", "date night"].includes(label)
-  );
-
-  const comedyRequested = labels.some(label =>
-    ["comedy", "romcom", "make me laugh"].includes(label)
-  );
-
-  if (romanceRequested) {
-    if (!title.isTV && !genreNames.has("romance")) {
-      return false;
-    }
-
-    if (title.isTV) {
-      const strongKeyword =
-        /\b(romance|romantic comedy|love story|first love|romantic relationship|teen romance|lgbtq romance)\b/i
-          .test(keywordText);
-
-      const matches = titleText.match(
-        /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/gi
-      ) || [];
-
-      const uniqueSignals = new Set(matches.map(value => value.toLowerCase()));
-      const romanticTitle = /\b(love|heart|romance|wedding|dating)\b/i.test(title.title || "");
-
-      if (!strongKeyword && !romanticTitle && uniqueSignals.size < 2) {
-        return false;
-      }
-    }
-  }
-
-  if (comedyRequested && !genreNames.has("comedy")) {
-    return false;
-  }
-
-  return true;
 }
 
 function buildHighlight(title) {
@@ -1037,7 +976,7 @@ async function buildPicks(
   const usedIds = new Set([hero.id]);
 
   for (const alternative of ranked.alts || []) {
-    if (result.length >= 20) break;
+    if (result.length >= 6) break;
 
     const raw = alts[alternative.i];
     if (!raw || usedIds.has(raw.id)) continue;
@@ -1059,7 +998,7 @@ async function buildPicks(
   }
 
   for (const raw of alts) {
-    if (result.length >= 20) break;
+    if (result.length >= 6) break;
     if (usedIds.has(raw.id)) continue;
 
     usedIds.add(raw.id);
@@ -1095,10 +1034,6 @@ async function buildPicks(
     const selectedLabels = String(queryLabel || "")
       .split(",")
       .map(normalizeFilterLabel);
-
-    if (!passesDetailedIntent(details, selectedLabels)) {
-      return null;
-    }
 
     const inferredGenres = [...(details.genres || [])];
 
@@ -1505,13 +1440,9 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
         <div style={{position:"absolute",top:"12px",left:"12px"}}>
           <span style={{background:C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.1em"}}>🍿 Tonight's Pick</span>
         </div>
-        {Number(film.year) === CURRENT_YEAR && (
-          <div style={{position:"absolute",top:"12px",right:"12px"}}>
-            <span style={{background:C.red,color:C.white,fontSize:"10px",fontWeight:"800",padding:"4px 10px",borderRadius:"999px"}}>
-              NEW {film.year}
-            </span>
-          </div>
-        )}
+        <div style={{position:"absolute",top:"12px",right:"12px"}}>
+          <span style={{background:C.red,color:C.white,fontSize:"10px",fontWeight:"800",padding:"4px 10px",borderRadius:"999px"}}>NEW {film.year}</span>
+        </div>
       </a>
 
       <div style={{padding:"16px 18px 20px"}}>
@@ -1560,20 +1491,18 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
           <span style={{color:`${C.goldBright}55`}}>•</span>
           <span style={{color:C.white,fontSize:"12px"}}>{film.year}</span>
         </div>
-        <div style={{marginBottom:"16px",borderTop:`1px solid ${C.goldBright}22`,paddingTop:"14px"}}>
-          <a href={search} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"inline-block"}}>
-            <div style={{display:"flex",alignItems:"baseline",gap:"9px"}}>
-              <div style={{fontSize:"30px",fontWeight:"800",color:scoreColor,fontFamily:"Georgia,serif",lineHeight:1}}>
-                {film.rating ? Math.round(film.rating * 10) + "%" : "—"}
-              </div>
-              <div>
-                <div style={{fontSize:"9px",color:C.white,letterSpacing:"0.08em",textTransform:"uppercase",fontWeight:"800"}}>
-                  ⭐ TMDB Community Score
-                </div>
-                <div style={{fontSize:"9px",color:`${C.white}99`,marginTop:"3px"}}>
-                  {film.vote_count ? `${film.vote_count.toLocaleString()} votes` : "Vote count unavailable"}
-                </div>
-              </div>
+        <div style={{display:"flex",gap:"20px",marginBottom:"16px",borderTop:`1px solid ${C.goldBright}22`,paddingTop:"14px"}}>
+          <a href={search} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:"28px",fontWeight:"800",color:scoreColor,fontFamily:"Georgia,serif",lineHeight:1}}>{film.rtCritics?film.rtCritics+"%":"—"}</div>
+              <div style={{fontSize:"9px",color:C.white,letterSpacing:"0.08em",textTransform:"uppercase",marginTop:"3px",fontWeight:"700",textDecoration:"underline"}}>🍅 Critics</div>
+            </div>
+          </a>
+          <div style={{width:"1px",background:`${C.goldBright}22`}}/>
+          <a href={search} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:"28px",fontWeight:"800",color:C.goldBright,fontFamily:"Georgia,serif",lineHeight:1}}>{film.rtAudience?film.rtAudience+"%":"—"}</div>
+              <div style={{fontSize:"9px",color:C.white,letterSpacing:"0.08em",textTransform:"uppercase",marginTop:"3px",fontWeight:"700",textDecoration:"underline"}}>👥 Audience</div>
             </div>
           </a>
         </div>
@@ -1700,27 +1629,25 @@ function AltCard({film, watched, onToggle, watchRegion}) {
 >
   <Poster path={film.poster_path} title={film.title} size="w342"/>
 
-{(Number(film.year) === CURRENT_YEAR || film.era === "classic" || film.era === "modern") && (
-  <div style={{position:"absolute",top:"7px",left:"7px"}}>
-    <span
-      style={{
-        background:Number(film.year) === CURRENT_YEAR ? C.red : eraColor,
-        color:C.white,
-        fontSize:"8px",
-        fontWeight:"800",
-        padding:"2px 7px",
-        borderRadius:"4px",
-        textTransform:"uppercase"
-      }}
-    >
-      {Number(film.year) === CURRENT_YEAR
-        ? "New"
-        : film.era === "classic"
-          ? "Classic"
-          : "Modern"}
-    </span>
-  </div>
-)}
+<div style={{position:"absolute",top:"7px",left:"7px"}}>
+  <span
+    style={{
+      background:eraColor,
+      color:C.white,
+      fontSize:"8px",
+      fontWeight:"800",
+      padding:"2px 7px",
+      borderRadius:"4px",
+      textTransform:"uppercase"
+    }}
+  >
+    {film.era === "classic"
+      ? "Classic"
+      : film.era === "modern"
+        ? "Modern"
+        : "New"}
+  </span>
+</div>
 
 </a>
       <div style={{padding:"10px 10px 12px"}}>
@@ -1738,9 +1665,7 @@ function AltCard({film, watched, onToggle, watchRegion}) {
           ))}
         </div>
         <a href={search} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
-          <span style={{color:scoreColor,fontWeight:"800",fontSize:"11px",textDecoration:"underline"}}>
-            ⭐ {film.rating ? Math.round(film.rating * 10) : "—"}% TMDB
-          </span>
+          <span style={{color:scoreColor,fontWeight:"800",fontSize:"11px",textDecoration:"underline"}}>🍅 {film.rtCritics||"—"}%</span>
         </a>
        <div style={{display:"flex",gap:"4px",marginTop:"8px"}}>
   <a
@@ -1826,7 +1751,7 @@ function AboutModal({onClose}) {
         ].map((t,i)=><p key={i} style={{color:C.cream,fontSize:"13px",lineHeight:"1.7",margin:"0 0 14px"}}>{t}</p>)}
         <div style={{background:"rgba(0,0,0,0.2)",border:`1px solid ${C.goldBright}44`,borderRadius:"12px",padding:"16px",marginBottom:"16px"}}>
           <h3 style={{color:C.goldBright,fontSize:"14px",fontWeight:"800",margin:"0 0 8px",fontFamily:"Georgia,serif"}}>⭐ The My Ciné Standard</h3>
-          {["⭐ TMDB Community Score: 75%+","👥 Meaningful vote count","🏆 Awards, cultural impact or strong audience enthusiasm"].map(item=><div key={item} style={{color:C.cream,fontSize:"12px",marginBottom:"4px"}}>• {item}</div>)}
+          {["🍅 Rotten Tomatoes Critics: 75%+","👥 Rotten Tomatoes Audience: 75%+","⭐ IMDb: Strong overall rating","🏆 Major awards or lasting cultural impact"].map(item=><div key={item} style={{color:C.cream,fontSize:"12px",marginBottom:"4px"}}>• {item}</div>)}
         </div>
         <div style={{background:"rgba(0,0,0,0.2)",border:`1px solid ${C.goldBright}44`,borderRadius:"12px",padding:"14px",marginBottom:"16px"}}>
           <p style={{color:C.goldBright,fontSize:"13px",fontWeight:"700",margin:"0 0 6px",fontFamily:"Georgia,serif"}}>The My Ciné Promise</p>
@@ -1976,176 +1901,85 @@ function compactMoney(value) {
 
 function buildDynamicCinemaMoment(movie, details) {
   const year = String(movie.release_date || details?.release_date || "").slice(0, 4);
-  const director = details?.credits?.crew?.find(person => person.job === "Director")?.name || "";
-  const screenwriters = [...new Set(
-    (details?.credits?.crew || [])
-      .filter(person => ["Screenplay", "Writer", "Story"].includes(person.job))
-      .map(person => person.name)
-      .filter(Boolean)
-  )].slice(0, 3);
-
-  const composer = details?.credits?.crew?.find(person =>
-    ["Original Music Composer", "Music"].includes(person.job)
-  )?.name || "";
-
-  const cinematographer = details?.credits?.crew?.find(person =>
-    person.job === "Director of Photography"
-  )?.name || "";
-
-  const editor = details?.credits?.crew?.find(person =>
-    person.job === "Editor"
-  )?.name || "";
-
-  const country = details?.production_countries?.[0]?.name || "";
-  const language = details?.spoken_languages?.[0]?.english_name || "";
-  const runtime = Number(details?.runtime || 0);
-  const budget = Number(details?.budget || 0);
-  const revenue = Number(details?.revenue || 0);
+  const director = details?.credits?.crew?.find(person => person.job === "Director")?.name;
+  const writer = details?.credits?.crew?.find(person =>
+    ["Screenplay", "Writer"].includes(person.job)
+  )?.name;
+  const country = details?.production_countries?.[0]?.name;
+  const language = details?.spoken_languages?.[0]?.english_name;
+  const runtime = details?.runtime;
+  const revenue = details?.revenue || 0;
   const rating = Number(movie.vote_average || details?.vote_average || 0);
   const votes = Number(movie.vote_count || details?.vote_count || 0);
-  const genres = (details?.genres || []).map(genre => genre.name).filter(Boolean);
-  const productionCompany = details?.production_companies?.[0]?.name || "";
+  const categories = [];
 
-  const options = [];
-
-  if (screenwriters.length) {
-    const writerText = screenwriters.join(
-      screenwriters.length > 2 ? ", " : " & "
-    );
-
-    options.push({
-      key:`writer-${movie.id}`,
-      type:"✍️ Great Writing",
-      title:`${movie.title} (${year})`,
-      quote:"Every memorable film begins long before the cameras roll.",
-      credit:`Written by ${writerText}.`,
-      note:director
-        ? `Directed by ${director}.`
-        : "Celebrating the storytellers who created the film on the page."
-    });
-  }
-
-  if (composer && director) {
-    options.push({
-      key:`music-${movie.id}`,
-      type:"🎼 Music Behind the Movie",
-      title:`${movie.title} (${year})`,
-      quote:`Its emotional world was scored by ${composer}.`,
-      credit:`Directed by ${director}.`,
-      note:runtime
-        ? `${runtime} minutes shaped by image, performance and music.`
-        : "A reminder that a film’s soul is often heard before it is understood."
-    });
-  }
-
-  if (cinematographer && director) {
-    options.push({
-      key:`camera-${movie.id}`,
-      type:"📷 Behind the Image",
-      title:`${movie.title} (${year})`,
-      quote:`Photographed by ${cinematographer}.`,
-      credit:`Directed by ${director}.`,
-      note:country
-        ? `A production from ${country}.`
-        : "Celebrating the artist responsible for the film’s visual language."
-    });
-  }
-
-  if (editor && director && runtime) {
-    options.push({
-      key:`editing-${movie.id}`,
-      type:"🎞️ Editing Craft",
-      title:`${movie.title} (${year})`,
-      quote:`${runtime} finished minutes shaped in the editing room.`,
-      credit:`Edited by ${editor}.`,
-      note:`Directed by ${director}.`
-    });
-  }
-
-  if (revenue >= 75_000_000 && budget > 0) {
-    const multiplier = revenue / budget;
-
-    options.push({
+  if (revenue >= 50_000_000) {
+    categories.push({
       key:`boxoffice-${movie.id}`,
       type:"💰 Box Office Story",
       title:`${movie.title} (${year})`,
-      quote:`Made for ${compactMoney(budget)} and earned ${compactMoney(revenue)} worldwide.`,
-      credit:director ? `Directed by ${director}.` : "A remarkable theatrical journey.",
-      note:multiplier >= 2
-        ? `Its worldwide gross was about ${multiplier.toFixed(1)} times its production budget.`
-        : "A reminder that cultural impact and financial outcome do not always travel together."
+      quote:`A worldwide theatrical journey of ${compactMoney(revenue)}.`,
+      credit:director ? `Directed by ${director}.` : "A film that found a global audience.",
+      note:"Box-office figures supplied by TMDB."
     });
   }
 
-  if (rating >= 8 && votes >= 2500 && director) {
-    options.push({
+  if (director) {
+    categories.push({
+      key:`director-${movie.id}`,
+      type:"🎬 Behind the Camera",
+      title:`${movie.title} (${year})`,
+      quote:`A film shaped by ${director}.`,
+      credit:`Directed by ${director}.`,
+      note:country ? `Produced in ${country}.` : "A reminder that every frame begins with a creative vision."
+    });
+  }
+
+  if (writer) {
+    categories.push({
+      key:`writer-${movie.id}`,
+      type:"✍️ Screenwriter Spotlight",
+      title:`${movie.title} (${year})`,
+      quote:"Before it reached the screen, it began on the page.",
+      credit:`Written by ${writer}.`,
+      note:"Celebrating the storyteller behind the screenplay."
+    });
+  }
+
+  if (rating >= 8 && votes >= 1000) {
+    categories.push({
       key:`audience-${movie.id}`,
-      type:"⭐ Audience Favorite",
+      type:"⭐ Audience Discovery",
       title:`${movie.title} (${year})`,
       quote:`Rated ${Math.round(rating * 10)}% by TMDB viewers.`,
-      credit:`Directed by ${director}.`,
+      credit:director ? `Directed by ${director}.` : "A title embraced by film lovers.",
       note:`Based on more than ${votes.toLocaleString()} audience votes.`
     });
   }
 
-  if (language && language !== "English" && country && director) {
-    options.push({
+  if (language && language !== "English") {
+    categories.push({
       key:`world-${movie.id}`,
       type:"🌍 World Cinema",
       title:`${movie.title} (${year})`,
-      quote:`A ${language}-language film from ${country}.`,
-      credit:`Directed by ${director}.`,
-      note:genres.length
-        ? `Its cinematic territory: ${genres.slice(0, 2).join(" and ")}.`
-        : "A reminder that cinema has no single language."
+      quote:`Cinema speaks ${language}.`,
+      credit:country ? `A production from ${country}.` : "A story crossing borders through film.",
+      note:"A reminder that the Seventh Art has no single language."
     });
   }
 
-  if (productionCompany && director && year) {
-    options.push({
-      key:`production-${movie.id}`,
-      type:"🎥 Behind the Production",
+  if (runtime) {
+    categories.push({
+      key:`craft-${movie.id}`,
+      type:"🎞️ Film Craft",
       title:`${movie.title} (${year})`,
-      quote:`Produced by ${productionCompany}.`,
-      credit:`Directed by ${director}.`,
-      note:country
-        ? `Made in ${country}.`
-        : "Celebrating the production teams that turn scripts into finished films."
+      quote:`${runtime} minutes of carefully shaped screen time.`,
+      credit:director ? `Directed by ${director}.` : "Built one scene, cut and performance at a time.",
+      note:"Every finished minute represents the work of hundreds of artists."
     });
   }
 
-  // Quality gate: reject generic cards and any card that repeats the same fact.
-  return options.filter(moment => {
-    const combined = `${moment.quote} ${moment.credit} ${moment.note}`.toLowerCase();
-
-    const repeatedDirector =
-      director &&
-      [moment.quote, moment.credit, moment.note]
-        .filter(Boolean)
-        .filter(line => line.toLowerCase().includes(director.toLowerCase()))
-        .length > 1;
-
-    const tooGeneric =
-      /a film shaped by|a title embraced by|carefully shaped screen time|found a global audience/i
-        .test(combined);
-
-    const meaningfulFacts = [
-      director,
-      screenwriters.length ? screenwriters.join(",") : "",
-      composer,
-      cinematographer,
-      editor,
-      country,
-      language,
-      runtime,
-      budget,
-      revenue,
-      productionCompany,
-      rating >= 8 && votes >= 2500 ? `${rating}-${votes}` : ""
-    ].filter(Boolean).length;
-
-    return !repeatedDirector && !tooGeneric && meaningfulFacts >= 2;
-  });
+  return categories;
 }
 
 function readMomentHistory() {
@@ -2280,9 +2114,9 @@ function StandardPage() {
 
         <section className="standard-card">
           <h2>⭐ A Quality Standard</h2>
-          <p>Every recommendation must currently reach at least 75% in the TMDB community rating, with a meaningful number of votes.</p>
-          <p>My Ciné displays the source transparently. It does not present TMDB scores as Rotten Tomatoes, IMDb, Google, or a fabricated average.</p>
-          <p>Future versions may integrate additional verified rating sources, but each source will remain clearly identified.</p>
+          <p>Every recommendation must reach at least 75% with either critics or audiences. Great cinema is not always unanimous.</p>
+          <p><strong>Critics’ example:</strong> <em>2001: A Space Odyssey</em> became a landmark of cinema even though general audiences have often been more divided by its pace and abstraction.</p>
+          <p><strong>Audience example:</strong> <em>Michael</em>, the story of Michael Jackson, shows how audience enthusiasm can turn a film into a cultural event even when critical opinion is less united.</p>
         </section>
 
         <section className="standard-card">
@@ -2631,7 +2465,7 @@ const run = async (excludeIds = [], resetSession = false) => {
         !new Set(readMomentHistory().map(item => item.key)).has(moment.key)
       );
 
-      const useCurated = curatedOptions.length > 0 && Math.random() < 0.45;
+      const useCurated = curatedOptions.length > 0 && Math.random() < 0.22;
 
       if (useCurated) {
         const moment = pickUnseenMoment(curatedOptions);
@@ -2672,14 +2506,6 @@ const run = async (excludeIds = [], resetSession = false) => {
       if (moment && !cancelled) {
         saveMomentSeen(moment.key);
         setCinemaMoment(moment);
-        return;
-      }
-
-      const fallback = pickUnseenMoment(CURATED_CINEMA_MOMENTS);
-
-      if (fallback && !cancelled) {
-        saveMomentSeen(fallback.key);
-        setCinemaMoment(fallback);
       }
     };
 
