@@ -160,12 +160,6 @@ function whyTonight(title) {
 }
 
 function rankLocally(heroes, alts, queryLabel, contentMode) {
-  const normalizedSelection = normalizeFilterLabel(queryLabel);
-  const isSciFiSelection = normalizedSelection
-    .split(",")
-    .map(item => item.trim())
-    .includes("sci-fi");
-
   const sortedHeroes = [...heroes]
     .filter(title => title.poster_path)
     .sort((a, b) => titleScore(b) - titleScore(a));
@@ -190,58 +184,9 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
     return true;
   };
 
-  const isAuteurLean = title => {
-    const votes = Number(title.vote_count || 0);
-    const popularity = Number(title.popularity || 0);
-    const rating = Number(title.rating || 0);
-    const language = String(title.original_language || "").toLowerCase();
-
-    return (
-      rating >= 7.5 &&
-      votes >= 80 &&
-      votes <= 4500 &&
-      popularity < 42 &&
-      (
-        language !== "en" ||
-        votes < 1800 ||
-        popularity < 25
-      )
-    );
-  };
-
-  // Sci-Fi gets a deliberate cinematic spectrum rather than six franchise titles.
-  if (isSciFiSelection) {
-    const classic = candidates.find(title =>
-      !title.isTV &&
-      Number(title.year) > 0 &&
-      Number(title.year) < 1990
-    );
-
-    const auteurOrIndependent = candidates.find(title =>
-      title.id !== classic?.id &&
-      isAuteurLean(title)
-    );
-
-    const international = candidates.find(title =>
-      title.id !== classic?.id &&
-      title.id !== auteurOrIndependent?.id &&
-      String(title.original_language || "").toLowerCase() !== "en"
-    );
-
-    const series = candidates.find(title =>
-      title.isTV &&
-      title.id !== classic?.id &&
-      title.id !== auteurOrIndependent?.id &&
-      title.id !== international?.id
-    );
-
-    addTitle(classic);
-    addTitle(auteurOrIndependent);
-    addTitle(international);
-    addTitle(series);
-  } else if (contentMode === "both") {
-    // For general mixed requests, include at least one series or limited series.
-    const romanceSelection = normalizedSelection
+  // When "Both" is selected, guarantee at least one series or limited series.
+  if (contentMode === "both") {
+    const romanceSelection = normalizeFilterLabel(queryLabel)
       .split(",")
       .some(label => ["romance", "romcom", "date night"].includes(label.trim()));
 
@@ -296,7 +241,6 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
     }))
   };
 }
-
 // ── TMDB LIVE FETCH ──────────────────────────────────────────────────────────
 // Pull fresh candidates matching the selected genre or mood.
 
@@ -557,16 +501,12 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     mediaType,
     year = null,
     page = 1,
-    minimumVotes = 100,
-    maximumVotes = null,
-    dateLte = null,
-    dateGte = null,
-    sortBy = "vote_average.desc"
+    minimumVotes = 100
   }) => {
     const genreIds = genreIdsFor(mediaType);
     const params = new URLSearchParams({
       language: "en-US",
-      sort_by: sortBy,
+      sort_by: "vote_average.desc",
       include_adult: "false",
       "vote_count.gte": String(minimumVotes),
       watch_region: watchRegion,
@@ -575,21 +515,6 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     });
 
     if (genreIds) params.set("with_genres", genreIds);
-    if (maximumVotes) params.set("vote_count.lte", String(maximumVotes));
-
-    if (dateLte) {
-      params.set(
-        mediaType === "tv" ? "first_air_date.lte" : "primary_release_date.lte",
-        dateLte
-      );
-    }
-
-    if (dateGte) {
-      params.set(
-        mediaType === "tv" ? "first_air_date.gte" : "primary_release_date.gte",
-        dateGte
-      );
-    }
 
     if (year) {
       params.set(
@@ -654,54 +579,14 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
 
   const heroGroups = await Promise.all(mediaTypes.map(fetchCurrent));
 
-  const standardAltRequests = mediaTypes.flatMap(mediaType => [
-    requestDiscover({mediaType, page:dailyPage, minimumVotes:100}),
-    requestDiscover({mediaType, page:dailyPage + 1, minimumVotes:100}),
-    requestDiscover({mediaType, page:dailyPage + 2, minimumVotes:75}),
-    requestDiscover({mediaType, page:dailyPage + 3, minimumVotes:75})
-  ]);
-
-  const sciFiRequests = labels.includes("sci-fi")
-    ? [
-        // Classic cinema: intentionally search before 1990.
-        requestDiscover({
-          mediaType:"movie",
-          page:1,
-          minimumVotes:100,
-          dateLte:"1989-12-31",
-          sortBy:"vote_average.desc"
-        }),
-        requestDiscover({
-          mediaType:"movie",
-          page:2,
-          minimumVotes:75,
-          dateLte:"1989-12-31",
-          sortBy:"vote_average.desc"
-        }),
-        // Auteur / independent leaning: fewer votes and lower popularity.
-        requestDiscover({
-          mediaType:"movie",
-          page:1,
-          minimumVotes:80,
-          maximumVotes:3500,
-          dateGte:"1990-01-01",
-          sortBy:"vote_average.desc"
-        }),
-        requestDiscover({
-          mediaType:"movie",
-          page:2,
-          minimumVotes:50,
-          maximumVotes:2500,
-          dateGte:"1990-01-01",
-          sortBy:"vote_average.desc"
-        })
-      ]
-    : [];
-
-  const altGroups = await Promise.all([
-    ...standardAltRequests,
-    ...sciFiRequests
-  ]);
+  const altGroups = await Promise.all(
+    mediaTypes.flatMap(mediaType => [
+      requestDiscover({mediaType, page:dailyPage, minimumVotes:100}),
+      requestDiscover({mediaType, page:dailyPage + 1, minimumVotes:100}),
+      requestDiscover({mediaType, page:dailyPage + 2, minimumVotes:75}),
+      requestDiscover({mediaType, page:dailyPage + 3, minimumVotes:75})
+    ])
+  );
 
   return {
     heroTitles: heroGroups.flat(),
@@ -2894,57 +2779,6 @@ const run = async (excludeIds = []) => {
   }
 
   /* Laptop homepage: no scrolling before recommendations are generated. */
-  @media (min-width:1200px) and (min-height:760px){
-    .home-before-results .lobby-wrap{
-      width:min(1240px,calc(100% - 40px));
-      max-width:1240px;
-      justify-content:flex-start;
-      padding-top:18px;
-    }
-    .home-before-results .home-hero{
-      padding:8px 14px 24px;
-    }
-    .home-before-results .home-hero .logo{
-      font-size:clamp(58px,5.3vw,82px);
-      line-height:0.95;
-    }
-    .home-before-results .home-hero .tagline{
-      font-size:11px;
-      margin-top:10px;
-      letter-spacing:0.2em;
-    }
-    .home-before-results .lobby-feature-grid{
-      width:min(1120px,100%);
-      max-width:1120px;
-      max-height:560px;
-      margin:0 auto 8px;
-      grid-template-columns:minmax(0,1.03fr) minmax(470px,0.97fr);
-      gap:22px;
-    }
-    .home-before-results .cinema-moment{
-      min-height:100%;
-    }
-    .home-before-results .cinema-moment-inner{
-      padding:34px 44px;
-    }
-    .home-before-results .cinema-moment h3{
-      font-size:clamp(32px,3vw,46px);
-    }
-    .home-before-results .cinema-moment blockquote{
-      font-size:clamp(21px,2vw,29px);
-    }
-    .home-before-results .concierge-panel{
-      padding:22px 20px 5px;
-    }
-    .home-before-results .concierge-title{
-      font-size:27px;
-      margin-bottom:14px;
-    }
-    .home-before-results .format-option{
-      min-height:64px;
-    }
-  }
-
   @media (min-width:981px) and (min-height:700px){
     .home-before-results{
       height:100vh;
