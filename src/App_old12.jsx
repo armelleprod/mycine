@@ -326,175 +326,39 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
       .join(",");
   };
 
-  const textMatches = (value, pattern) => pattern.test(value);
+  const romanceRequested = labels.some(label =>
+    ["romance", "romcom", "date night"].includes(label)
+  );
 
-  const matchesLabel = (label, item, mediaType) => {
-    const genreIds = new Set(item.genre_ids || []);
-    const titleText = `${item.name || item.title || ""} ${item.overview || ""}`.toLowerCase();
-    const isMovie = mediaType === "movie";
-    const originalLanguage = String(item.original_language || "").toLowerCase();
-    const popularity = Number(item.popularity || 0);
-    const votes = Number(item.vote_count || 0);
-
-    const romanceWords =
-      /\b(love|romance|romantic|couple|relationship|marriage|wedding|dating|heart|boyfriend|girlfriend|husband|wife|affair|soulmate|bride|groom)\b/i;
-
-    const sciFiWords =
-      /\b(alien|android|artificial intelligence|astronaut|clone|cyber|cyborg|dystopi|experiment|extraterrestrial|future|futuristic|galaxy|genetic|interstellar|laboratory|mars|moon|parallel universe|planet|robot|science|scientist|space|spaceship|technology|time travel|virtual reality)\b/i;
-
-    const fantasyWords =
-      /\b(curse|demon|dragon|fairy|fantasy|god|goddess|immortal|kingdom|magic|magical|myth|mythology|prophecy|sorcer|spell|spirit|supernatural|vampire|werewolf|witch|wizard)\b/i;
-
-    const horrorWords =
-      /\b(blood|demonic|evil|ghost|haunted|horror|killer|murder|nightmare|possession|serial killer|slasher|survival|terror|undead|zombie)\b/i;
-
-    const thrillerWords =
-      /\b(conspiracy|danger|detective|hostage|investigation|kidnap|manhunt|murder|pursuit|secret agent|serial killer|spy|suspense|terrorist|thriller)\b/i;
-
-    const musicalWords =
-      /\b(band|concert|dance|dancer|music|musical|singer|singing|song|stage performer)\b/i;
-
-    const trueStoryWords =
-      /\b(based on a true story|biograph|historical figure|real-life|true events|true story)\b/i;
-
-    const travelWords =
-      /\b(adventure|across the world|expedition|foreign country|journey|road trip|travel|voyage)\b/i;
-
-    const emotionalWords =
-      /\b(death|dying|farewell|grief|heartbreak|illness|loss|mourning|terminal|tragedy)\b/i;
-
-    const inspiringWords =
-      /\b(against the odds|courage|dream|fight for|inspir|overcome|pioneer|resilience|survive|triumph)\b/i;
-
-    const luxuryWords =
-      /\b(billionaire|couture|elite|fashion|glamour|high society|hotel|luxury|mansion|palace|privilege|rich|royal|wealth)\b/i;
-
-    const mindBlownWords =
-      /\b(alternate reality|consciousness|dream|memory|mind|paradox|parallel universe|reality|simulation|time loop|time travel|twist)\b/i;
-
-    switch (label) {
-      case "romcom":
-        return genreIds.has(35) &&
-          (isMovie ? genreIds.has(10749) : textMatches(titleText, romanceWords));
-
-      case "comedy":
-      case "make me laugh":
-        return genreIds.has(35);
-
-      case "romance":
-        return isMovie ? genreIds.has(10749) : textMatches(titleText, romanceWords);
-
-      case "drama":
-        return genreIds.has(18);
-
-      case "thriller":
-        return isMovie
-          ? genreIds.has(53)
-          : (genreIds.has(9648) || genreIds.has(10759)) &&
-            textMatches(titleText, thrillerWords);
-
-      case "mystery":
-        return genreIds.has(9648);
-
-      case "action & adventure":
-        return isMovie
-          ? genreIds.has(28) || genreIds.has(12)
-          : genreIds.has(10759);
-
-      case "horror":
-        return isMovie
-          ? genreIds.has(27)
-          : textMatches(titleText, horrorWords);
-
-      case "sci-fi":
-        return isMovie
-          ? genreIds.has(878)
-          : genreIds.has(10765) && textMatches(titleText, sciFiWords);
-
-      case "fantasy":
-        return isMovie
-          ? genreIds.has(14)
-          : genreIds.has(10765) && textMatches(titleText, fantasyWords);
-
-      case "animation":
-        return genreIds.has(16);
-
-      case "musical":
-        return isMovie
-          ? genreIds.has(10402)
-          : textMatches(titleText, musicalWords);
-
-      case "true stories / biopic":
-        return genreIds.has(36) || textMatches(titleText, trueStoryWords);
-
-      case "documentary":
-        return genreIds.has(99);
-
-      case "international":
-        return Boolean(originalLanguage) && originalLanguage !== "en";
-
-      case "hidden gems":
-        return Number(item.vote_average || 0) >= 7.5 &&
-          votes >= 100 &&
-          votes <= 3000 &&
-          popularity < 45;
-
-      case "mind blown":
-        return (
-          genreIds.has(878) ||
-          genreIds.has(9648) ||
-          genreIds.has(53) ||
-          genreIds.has(10765)
-        ) && textMatches(titleText, mindBlownWords);
-
-      case "date night":
-        return (
-          (isMovie && genreIds.has(10749)) ||
-          textMatches(titleText, romanceWords)
-        ) && !genreIds.has(27);
-
-      case "travel somewhere":
-        return (
-          genreIds.has(12) ||
-          genreIds.has(10759) ||
-          originalLanguage !== "en"
-        ) && textMatches(titleText, travelWords);
-
-      case "ugly cry":
-        return genreIds.has(18) && textMatches(titleText, emotionalWords);
-
-      case "adrenaline rush":
-        return (
-          genreIds.has(28) ||
-          genreIds.has(53) ||
-          genreIds.has(10759)
-        ) && popularity >= 20;
-
-      case "family night":
-        return genreIds.has(10751) || genreIds.has(16);
-
-      case "inspire me":
-        return (
-          genreIds.has(18) ||
-          genreIds.has(36) ||
-          genreIds.has(99)
-        ) && textMatches(titleText, inspiringWords);
-
-      case "luxury vibes":
-        return textMatches(titleText, luxuryWords);
-
-      default:
-        return true;
-    }
-  };
+  const comedyRequested = labels.some(label =>
+    ["comedy", "romcom", "make me laugh"].includes(label)
+  );
 
   const titleFitsSelection = (item, mediaType) => {
-    // My Ciné quality standard: a recommendation must reach at least 75%.
-    if (Number(item.vote_average || 0) < 7.5) return false;
+    const overview = `${item.name || item.title || ""} ${item.overview || ""}`.toLowerCase();
+    const genreIds = new Set(item.genre_ids || []);
 
-    // Every selected genre must match. Moods are eligibility rules too,
-    // rather than loose suggestions used only for ranking.
-    return labels.every(label => matchesLabel(label, item, mediaType));
+    // Movies have a dedicated Romance genre on TMDB.
+    if (romanceRequested && mediaType === "movie" && !genreIds.has(10749)) {
+      return false;
+    }
+
+    // TMDB TV has no dedicated Romance genre, so require strong romantic context
+    // instead of accepting every Drama series.
+    if (romanceRequested && mediaType === "tv") {
+      const romanticLanguage =
+        /\b(love|romance|romantic|couple|relationship|marriage|wedding|dating|heart|boyfriend|girlfriend|husband|wife|affair)\b/i
+          .test(overview);
+
+      if (!romanticLanguage) return false;
+    }
+
+    if (comedyRequested) {
+      const comedyGenre = mediaType === "movie" ? 35 : 35;
+      if (!genreIds.has(comedyGenre)) return false;
+    }
+
+    return true;
   };
 
   const requestDiscover = async ({
@@ -582,9 +446,7 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
   const altGroups = await Promise.all(
     mediaTypes.flatMap(mediaType => [
       requestDiscover({mediaType, page:dailyPage, minimumVotes:100}),
-      requestDiscover({mediaType, page:dailyPage + 1, minimumVotes:100}),
-      requestDiscover({mediaType, page:dailyPage + 2, minimumVotes:75}),
-      requestDiscover({mediaType, page:dailyPage + 3, minimumVotes:75})
+      requestDiscover({mediaType, page:dailyPage + 1, minimumVotes:100})
     ])
   );
 
@@ -2641,159 +2503,137 @@ const run = async (excludeIds = []) => {
     text-decoration:underline;
   }
 
-  .lobby-feature-grid{
-    display:grid;
-    grid-template-columns:minmax(0,1.02fr) minmax(420px,0.98fr);
-    gap:18px;
-    align-items:stretch;
-    max-width:1120px;
-    margin:0 auto 18px;
+  .mycine-footer{
+    padding:34px 16px 18px;
+    background:linear-gradient(180deg,rgba(176,0,26,0.38),${C.navy});
+    border-top:1px solid rgba(255,184,0,0.4);
   }
-  .lobby-feature-grid .moment-strip,
-  .lobby-feature-grid .concierge-panel{
-    margin:0;
-    max-width:none;
-    height:100%;
-  }
-  .lobby-feature-grid .cinema-moment,
-  .lobby-feature-grid .cinema-moment-inner{
-    height:100%;
-  }
-
-  .selection-proof{
-    max-width:760px;
-    margin:0 auto 10px;
-    padding:9px 12px;
-    border-radius:999px;
-    background:${C.navyMid};
-    border:1px solid rgba(255,184,0,0.42);
-    color:${C.white};
+  .footer-frame{
+    max-width:860px;
+    margin:0 auto;
+    padding:34px 26px 20px;
+    border:1px solid rgba(255,184,0,0.48);
+    border-radius:24px;
+    background:
+      radial-gradient(circle at 50% 0%,rgba(255,184,0,0.09),transparent 44%),
+      linear-gradient(145deg,${C.navyMid},${C.navy});
+    box-shadow:0 20px 48px rgba(11,31,74,0.45);
     text-align:center;
-    font-size:10px;
   }
-  .selection-proof strong{
-    color:${C.goldBright};
-  }
-
-  .public-error{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    background:${C.navyMid};
-    border:1px solid rgba(255,184,0,0.55);
-    border-radius:12px;
-    padding:14px 16px;
-    color:${C.white};
-    font-size:12px;
-    margin-bottom:14px;
-  }
-  .public-error strong{
+  .footer-marquee{
     color:${C.goldBright};
     font-family:Georgia,serif;
-    font-size:15px;
-  }
-  .public-error details{
-    margin-top:4px;
-    color:rgba(255,255,255,0.62);
-    font-size:10px;
-  }
-  .public-error summary{
-    cursor:pointer;
-    color:${C.goldBright};
-  }
-  .public-error code{
-    display:block;
-    margin-top:6px;
-    white-space:normal;
-    line-height:1.5;
-  }
-
-  .mycine-footer{
-    position:relative;
-    overflow:hidden;
-    padding:72px 20px 28px;
-    background:
-      radial-gradient(circle at 50% -10%,rgba(255,184,0,0.2),transparent 36%),
-      linear-gradient(180deg,${C.redDark} 0%,${C.navyMid} 48%,${C.navy} 100%);
-    border-top:2px solid ${C.goldBright};
-    text-align:center;
-  }
-  .footer-glow{
-    position:absolute;
-    top:-90px;
-    left:50%;
-    width:620px;
-    height:240px;
-    transform:translateX(-50%);
-    background:radial-gradient(ellipse,rgba(255,184,0,0.26),transparent 70%);
-    filter:blur(14px);
-    pointer-events:none;
-  }
-  .footer-content{
-    position:relative;
-    z-index:2;
-    max-width:980px;
-    margin:0 auto;
-  }
-  .footer-eyebrow{
-    color:${C.goldBright};
-    font-size:10px;
+    font-size:13px;
     font-weight:900;
     letter-spacing:0.22em;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
-  .mycine-footer .closing-promise{
-    margin:0 auto 18px;
-    max-width:900px;
-    font-size:clamp(34px,5.5vw,64px);
-    line-height:1.03;
+  .footer-rule{
+    width:92px;
+    height:3px;
+    margin:18px auto;
+    background:linear-gradient(90deg,transparent,${C.goldBright},transparent);
   }
   .footer-subtitle{
     color:${C.goldBright};
     font-family:Georgia,serif;
     font-style:italic;
-    font-size:clamp(16px,2vw,21px);
-    margin:0 0 34px;
+    font-size:16px;
+    margin:0 0 24px;
   }
-  .footer-signature-line{
+  .footer-signature{
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:4px;
+    color:${C.white};
   }
-  .footer-signature-line > span{
-    color:rgba(255,255,255,0.58);
+  .footer-signature > span{
     font-size:9px;
     text-transform:uppercase;
-    letter-spacing:0.14em;
+    letter-spacing:0.12em;
+    opacity:0.7;
   }
-  .footer-signature-line a{
+  .footer-signature a{
     color:${C.white};
     font-family:Georgia,serif;
-    font-size:25px;
+    font-size:23px;
     font-weight:900;
     text-decoration:none;
   }
-  .footer-signature-line small{
+  .footer-signature small{
     color:${C.goldBright};
     font-size:10px;
   }
-  .footer-meta{
+  .footer-bottom{
     display:flex;
     justify-content:space-between;
-    gap:18px;
-    margin-top:34px;
-    padding-top:16px;
-    border-top:1px solid rgba(255,184,0,0.25);
-    color:rgba(255,255,255,0.55);
+    gap:16px;
+    margin-top:26px;
+    padding-top:14px;
+    border-top:1px solid rgba(255,184,0,0.22);
+    color:rgba(255,255,255,0.58);
     font-size:9px;
   }
 
-  @media (max-width:980px){
-    .lobby-feature-grid{
-      grid-template-columns:1fr;
-      max-width:760px;
-    }
+
+  .curator-name{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    margin:8px 0 6px;
+    font-family:Georgia,serif;
+    font-size:clamp(42px,6vw,66px);
+    line-height:0.9;
+    color:${C.white};
+  }
+  .curator-name span:last-child{
+    color:${C.goldBright};
+  }
+  .curator-tagline{
+    color:${C.goldBright}!important;
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:16px;
+    margin:0 0 24px;
+  }
+  .legacy-copy a{
+    color:${C.goldBright};
+    font-weight:800;
+    text-decoration:underline;
+  }
+  .project-title-small{
+    font-size:17px;
+    line-height:1.45;
+  }
+  .contact-armelle{
+    display:inline-block;
+    margin-left:4px;
+    padding:6px 11px;
+    border-radius:999px;
+    background:${C.red};
+    color:${C.white}!important;
+    border:1px solid ${C.goldBright};
+    text-decoration:none!important;
+    font-weight:900!important;
+  }
+  .contact-armelle:hover{
+    background:${C.goldBright};
+    color:${C.navy}!important;
+  }
+  .letter-signature{
+    margin-top:28px;
+    color:${C.white};
+    font-family:Georgia,serif;
+    font-size:18px;
+    line-height:1.5;
+  }
+  .letter-signature span{
+    display:block;
+    margin-top:12px;
+    color:${C.goldBright};
+    font-size:32px;
+    font-style:italic;
   }
 
   @media (max-width:760px){
@@ -2812,12 +2652,12 @@ const run = async (excludeIds = []) => {
     .format-selector-options{gap:5px;}
     .format-option{min-height:56px;padding:6px 2px;}
     .format-option-text{font-size:8px;}
+    .footer-frame{padding:28px 16px 18px;}
+    .footer-bottom{flex-direction:column;gap:6px;}
     .legacy-card{text-align:center;}
     .curator-name{align-items:center;text-align:center;}
     .curator-tagline{text-align:center;}
     .letter-signature{text-align:left;}
-    .footer-meta{flex-direction:column;gap:6px;}
-    .mycine-footer{padding:56px 16px 24px;}
     .top-nav-inner{padding-left:8px;padding-right:8px;}
   }
 
@@ -2912,7 +2752,6 @@ const run = async (excludeIds = []) => {
         <p className="tagline">The Art of Choosing Tonight's Movie</p>
       </section>
 
-      <div className="lobby-feature-grid">
       <section className="moment-strip">
         <CinemaMomentCard moment={CINEMA_MOMENTS[momentIndex]} compact/>
       </section>
@@ -3016,40 +2855,18 @@ const run = async (excludeIds = []) => {
 
       </section>
       </div>
-      </div>
 
       {generated&&total>0&&(
-        <div style={{padding:"0 18px 14px"}}>
-          <div className="selection-proof">
-            Because you chose:{" "}
-            <strong>
-              {tab==="mood"
-                ? MOODS.find(m=>m.id===selMood)?.label
-                : selGenres.map(id=>GENRES.find(g=>g.id===id)?.label).filter(Boolean).join(" + ")}
-            </strong>
-            {" "}· {MEDIA_OPTIONS.find(option=>option.id===contentMode)?.label}
-            {" "}· {REGIONS.find(region=>region.code===watchRegion)?.label}
-          </div>
-          <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
+        <div style={{padding:"0 18px 14px",display:"flex",alignItems:"center",gap:"10px"}}>
           <span style={{fontSize:"11px",color:C.goldBright,fontWeight:"700",whiteSpace:"nowrap"}}>7 Picks • Celebrating the Seventh Art 🎬</span>
           <div style={{flex:1,height:"3px",background:"rgba(255,255,255,0.2)",borderRadius:"3px",overflow:"hidden"}}>
             <div style={{height:"100%",width:`${total?(watchedCount/total)*100:0}%`,background:`linear-gradient(90deg,${C.redDark},${C.goldBright})`,borderRadius:"3px",transition:"width 0.4s"}}/>
-          </div>
           </div>
         </div>
       )}
 
       <div className="app-content">
-        {error&&(
-          <div className="public-error">
-            <strong>🎬 The projector needs a quick reset.</strong>
-            <span>Recommendations are temporarily unavailable. Please try again shortly.</span>
-            <details>
-              <summary>Technical details</summary>
-              <code>{error}</code>
-            </details>
-          </div>
-        )}
+        {error&&<div style={{background:"rgba(80,0,0,0.9)",border:`1px solid ${C.goldBright}66`,borderRadius:"10px",padding:"14px",color:C.goldBright,fontSize:"13px",marginBottom:"14px"}}>{error}</div>}
         {loading&&<Skeleton/>}
 
         {!loading&&generated&&hero&&(
@@ -3093,26 +2910,29 @@ const run = async (excludeIds = []) => {
 
       {page === "home" && (
       <footer className="mycine-footer">
-        <div className="footer-glow"/>
-        <div className="footer-content">
-          <div className="footer-eyebrow">MY CINÉ · THE SEVENTH ART</div>
+        <div className="footer-frame">
+          <div className="footer-marquee">MY CINÉ</div>
+
           <h2 className="closing-promise">
             Never waste 45 minutes choosing a movie again.
           </h2>
+
+          <div className="footer-rule"/>
+
           <p className="footer-subtitle">
             Seven thoughtful choices. One unforgettable night.
           </p>
 
-          <div className="footer-signature-line">
+          <div className="footer-signature">
             <span>Created by</span>
             <a href="https://www.armelle.com/screenplays" target="_blank" rel="noopener noreferrer">
               Armelle Cloche
             </a>
-            <small>Screenwriter · Film lover · Creator</small>
+            <small>Screenwriter · Film Lover · Creator of My Ciné</small>
           </div>
 
-          <div className="footer-meta">
-            <span>Celebrating cinema, seven picks at a time.</span>
+          <div className="footer-bottom">
+            <span>Celebrating the Seventh Art, seven picks at a time.</span>
             <span>My Ciné © 2026</span>
           </div>
         </div>
