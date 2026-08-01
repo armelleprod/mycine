@@ -2075,14 +2075,7 @@ const run = async (excludeIds = []) => {
   }, []);
 
   return (
-    <div
-      className={[
-        "cinematic-app",
-        page==="home" && !generated && !loading ? "home-before-results" : "",
-        page==="home" && generated ? "home-with-results" : ""
-      ].filter(Boolean).join(" ")}
-      style={{minHeight:"100vh",fontFamily:"'Helvetica Neue',Arial,sans-serif"}}
-    >
+    <div className="cinematic-app" style={{minHeight:"100vh",fontFamily:"'Helvetica Neue',Arial,sans-serif"}}>
       <style>{`
   *{box-sizing:border-box;}
   body{margin:0;background:#B0001A;}
@@ -2718,168 +2711,82 @@ const run = async (excludeIds = []) => {
   .mycine-footer{
     position:relative;
     overflow:hidden;
-    padding:20px 18px 12px;
+    padding:72px 20px 28px;
     background:
-      linear-gradient(180deg,${C.redDark} 0%,${C.navyMid} 42%,${C.navy} 100%);
+      radial-gradient(circle at 50% -10%,rgba(255,184,0,0.2),transparent 36%),
+      linear-gradient(180deg,${C.redDark} 0%,${C.navyMid} 48%,${C.navy} 100%);
     border-top:2px solid ${C.goldBright};
     text-align:center;
   }
+  .footer-glow{
+    position:absolute;
+    top:-90px;
+    left:50%;
+    width:620px;
+    height:240px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse,rgba(255,184,0,0.26),transparent 70%);
+    filter:blur(14px);
+    pointer-events:none;
+  }
   .footer-content{
+    position:relative;
+    z-index:2;
     max-width:980px;
     margin:0 auto;
   }
-  .mycine-footer .closing-promise{
-    max-width:760px;
-    margin:0 auto 6px;
-    color:${C.white};
-    font-family:Georgia,serif;
-    font-size:clamp(22px,2.8vw,34px);
-    line-height:1.08;
+  .footer-eyebrow{
+    color:${C.goldBright};
+    font-size:10px;
     font-weight:900;
+    letter-spacing:0.22em;
+    margin-bottom:18px;
+  }
+  .mycine-footer .closing-promise{
+    margin:0 auto 18px;
+    max-width:900px;
+    font-size:clamp(34px,5.5vw,64px);
+    line-height:1.03;
   }
   .footer-subtitle{
     color:${C.goldBright};
     font-family:Georgia,serif;
     font-style:italic;
-    font-size:clamp(12px,1.4vw,16px);
-    margin:0 0 10px;
+    font-size:clamp(16px,2vw,21px);
+    margin:0 0 34px;
   }
   .footer-signature-line{
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:1px;
+    gap:4px;
   }
   .footer-signature-line > span{
     color:rgba(255,255,255,0.58);
-    font-size:7px;
+    font-size:9px;
     text-transform:uppercase;
     letter-spacing:0.14em;
   }
   .footer-signature-line a{
     color:${C.white};
     font-family:Georgia,serif;
-    font-size:17px;
+    font-size:25px;
     font-weight:900;
     text-decoration:none;
   }
   .footer-signature-line small{
     color:${C.goldBright};
-    font-size:8px;
+    font-size:10px;
   }
   .footer-meta{
     display:flex;
     justify-content:space-between;
     gap:18px;
-    margin-top:9px;
-    padding-top:7px;
+    margin-top:34px;
+    padding-top:16px;
     border-top:1px solid rgba(255,184,0,0.25);
     color:rgba(255,255,255,0.55);
-    font-size:7px;
-  }
-
-  /* Laptop homepage: no scrolling before recommendations are generated. */
-  @media (min-width:981px) and (min-height:700px){
-    .home-before-results{
-      height:100vh;
-      min-height:100vh!important;
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-    }
-    .home-before-results .top-nav{
-      flex:0 0 auto;
-    }
-    .home-before-results .lobby-wrap{
-      flex:1 1 auto;
-      min-height:0;
-      width:min(1000px,calc(100% - 24px));
-      padding:2px 0 5px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-    .home-before-results .home-hero{
-      padding:3px 14px 3px;
-      flex:0 0 auto;
-    }
-    .home-before-results .home-hero .logo{
-      font-size:clamp(34px,4.2vw,54px);
-    }
-    .home-before-results .home-hero .tagline{
-      margin:3px 0 6px;
-      font-size:9px;
-    }
-    .home-before-results .lobby-feature-grid{
-      flex:1 1 auto;
-      min-height:0;
-      width:100%;
-      max-height:510px;
-      margin-bottom:5px;
-      gap:14px;
-      align-items:stretch;
-    }
-    .home-before-results .cinema-moment{
-      padding:9px;
-    }
-    .home-before-results .cinema-moment-inner{
-      min-height:0;
-      padding:20px 28px;
-    }
-    .home-before-results .cinema-moment h3{
-      font-size:clamp(22px,2.4vw,32px);
-    }
-    .home-before-results .cinema-moment blockquote{
-      font-size:clamp(16px,1.7vw,21px);
-      margin-bottom:8px;
-    }
-    .home-before-results .moment-note,
-    .home-before-results .moment-credit{
-      font-size:10px;
-      margin-bottom:4px;
-    }
-    .home-before-results .moment-ribbon{
-      margin-top:8px;
-      padding-top:7px;
-      font-size:7px;
-    }
-    .home-before-results .concierge-panel{
-      padding:15px 14px 0;
-    }
-    .home-before-results .concierge-title{
-      font-size:20px;
-      margin-bottom:10px;
-    }
-    .home-before-results .format-selector{
-      margin-bottom:10px;
-      padding:8px;
-    }
-    .home-before-results .format-option{
-      min-height:51px;
-    }
-    .home-before-results .mycine-footer{
-      flex:0 0 auto;
-      padding:10px 18px 7px;
-    }
-    .home-before-results .mycine-footer .closing-promise{
-      font-size:20px;
-      margin-bottom:2px;
-    }
-    .home-before-results .footer-subtitle{
-      font-size:11px;
-      margin-bottom:4px;
-    }
-    .home-before-results .footer-signature-line a{
-      font-size:14px;
-    }
-    .home-before-results .footer-meta{
-      margin-top:4px;
-      padding-top:4px;
-      font-size:6px;
-    }
-    .home-before-results > div:last-child{
-      flex:0 0 3px;
-    }
+    font-size:9px;
   }
 
   @media (max-width:980px){
@@ -2909,9 +2816,8 @@ const run = async (excludeIds = []) => {
     .curator-name{align-items:center;text-align:center;}
     .curator-tagline{text-align:center;}
     .letter-signature{text-align:left;}
-    .mycine-footer{padding:22px 14px 12px;}
-    .mycine-footer .closing-promise{font-size:25px;}
-    .footer-meta{flex-direction:column;gap:4px;}
+    .footer-meta{flex-direction:column;gap:6px;}
+    .mycine-footer{padding:56px 16px 24px;}
     .top-nav-inner{padding-left:8px;padding-right:8px;}
   }
 
@@ -3122,7 +3028,7 @@ const run = async (excludeIds = []) => {
                 : selGenres.map(id=>GENRES.find(g=>g.id===id)?.label).filter(Boolean).join(" + ")}
             </strong>
             {" "}· {MEDIA_OPTIONS.find(option=>option.id===contentMode)?.label}
-            {" "}· {WATCH_REGIONS.find(region=>region.code===watchRegion)?.label}
+            {" "}· {REGIONS.find(region=>region.code===watchRegion)?.label}
           </div>
           <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
           <span style={{fontSize:"11px",color:C.goldBright,fontWeight:"700",whiteSpace:"nowrap"}}>7 Picks • Celebrating the Seventh Art 🎬</span>
@@ -3187,11 +3093,12 @@ const run = async (excludeIds = []) => {
 
       {page === "home" && (
       <footer className="mycine-footer">
+        <div className="footer-glow"/>
         <div className="footer-content">
+          <div className="footer-eyebrow">MY CINÉ · THE SEVENTH ART</div>
           <h2 className="closing-promise">
             Never waste 45 minutes choosing a movie again.
           </h2>
-
           <p className="footer-subtitle">
             Seven thoughtful choices. One unforgettable night.
           </p>
