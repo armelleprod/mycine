@@ -1,0 +1,5 @@
+My Ciné V18 Clean
+- Centered and enlarged the 7 Picks title
+- Renamed the exploration button to Keep Exploring X/7
+- Removed the period after the footer promise
+- Linked Where to Watch to the exact TMDB watch page for the selected country

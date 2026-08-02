@@ -2253,7 +2253,7 @@ function TopNav({page, setPage, savedCount}) {
 
   const items = [
     {id:"home", label:"MY CINÉ"},
-    {id:"standard", label:"Standard 🎞️"},
+    {id:"standard", label:"Standard 🎬"},
     {id:"saved", label:`💙 Watchlist${savedCount ? ` ${savedCount}` : ""}`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
@@ -4043,85 +4043,52 @@ const run = async (excludeIds = [], resetSession = false) => {
       margin:22px auto 16px;
     }
   }
-  /* V21: all textual links remain visibly gold in every browser state */
-  a,
-  a:link,
-  a:visited,
-  a:hover,
-  a:active,
-  a:focus-visible,
-  .text-link,
-  .text-link:link,
-  .text-link:visited,
-  .text-link:hover,
-  .text-link:active,
-  .legacy-copy a,
-  .legacy-copy a:visited,
-  .project-representation a,
-  .project-representation a:visited,
-  .project-title a,
-  .project-title a:visited,
-  .contact-armelle,
-  .contact-armelle:visited,
-  .footer-curator-link{
-    color:${C.goldBright};
+
+  /* V20: visible link treatment throughout the app */
+  a{
     text-decoration:underline;
     text-underline-offset:3px;
     text-decoration-thickness:1.5px;
   }
-
-  a:hover,
-  a:focus-visible,
-  .text-link:hover,
-  .text-link:focus-visible,
-  .legacy-copy a:hover,
-  .project-representation a:hover,
-  .project-title a:hover,
-  .contact-armelle:hover,
-  .footer-curator-link:hover,
-  .footer-curator-link:focus-visible{
-    color:${C.white};
+  a:hover{
     text-decoration-thickness:2px;
   }
-
+  .text-link,
+  .legacy-copy a,
+  .project-representation a,
+  .contact-armelle,
+  .footer-curator-link{
+    text-decoration:underline;
+    text-underline-offset:3px;
+    text-decoration-thickness:1.5px;
+  }
   .footer-curator-link{
     appearance:none;
     border:0;
     padding:0;
     margin:0;
     background:transparent;
+    color:${C.white};
     font-family:Georgia,serif;
     font-size:18px;
     font-weight:900;
     cursor:pointer;
   }
-
+  .footer-curator-link:hover,
   .footer-curator-link:focus-visible{
-    outline:2px solid ${C.goldBright};
-    outline-offset:4px;
+    color:${C.goldBright};
+    text-decoration-thickness:2px;
+    outline:none;
   }
 
-  /* Buttons and pill-style links remain button-like, not underlined */
+  /* Button-style links remain button-like */
   .hero-action,
-  .hero-action:link,
-  .hero-action:visited,
   .provider-chip,
-  .provider-chip:link,
-  .provider-chip:visited,
   .nav-link,
   .mobile-menu-link,
   .mobile-brand,
   .mobile-menu-button{
     text-decoration:none;
-  }
-
-  .letter-signature{
-    margin-top:24px;
-  }
-  @media (max-width:760px){
-    .letter-signature{
-      margin-top:20px;
-    }
   }
 
 `}</style>
@@ -4330,6 +4297,7 @@ const run = async (excludeIds = [], resetSession = false) => {
       </>
       )}
 
+      {page === "home" && (
       <footer className="mycine-footer">
         <div className="footer-content">
           <h2 className="closing-promise">
@@ -4360,6 +4328,7 @@ const run = async (excludeIds = [], resetSession = false) => {
           </div>
         </div>
       </footer>
+      )}
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
     </div>
   );

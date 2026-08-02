@@ -1,0 +1,5 @@
+My Ciné V20 Link Clarity
+- Footer name Armelle Cloche opens Meet the Curator
+- 'and many more screenplays' links to armelle.com/screenplays
+- Text links throughout the app are visibly underlined
+- Button-style links remain visually button-like

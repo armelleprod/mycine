@@ -1,0 +1,4 @@
+My Ciné V22 Footer All Pages
+- Added breathing room between the curator quote box and 'Enjoy the show!'
+- Footer now appears on Home, Standard, Watchlist, and Meet the Curator
+- Updated top-menu label to Standard 🎞️

@@ -2253,7 +2253,7 @@ function TopNav({page, setPage, savedCount}) {
 
   const items = [
     {id:"home", label:"MY CINÉ"},
-    {id:"standard", label:"Standard 🎞️"},
+    {id:"standard", label:"Standard 🎬"},
     {id:"saved", label:`💙 Watchlist${savedCount ? ` ${savedCount}` : ""}`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
@@ -2500,15 +2500,7 @@ function CuratorPage() {
             <div className="project-credit">
               <div className="project-type">🎬 More Screenplays</div>
               <div className="project-title project-title-small">
-                The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine ·{" "}
-                <a
-                  href="https://www.armelle.com/screenplays"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-link"
-                >
-                  and many more screenplays
-                </a>
+                The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine · and more
               </div>
               <div className="project-representation">
                 Interested in a project?{" "}
@@ -4028,102 +4020,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     }
   }
 
-  .footer-signature-spaced{
-    padding-top:16px;
-  }
-  .alternatives-heading{
-    margin:26px auto 18px;
-    text-align:center;
-  }
-  @media (max-width:760px){
-    .footer-signature-spaced{
-      padding-top:14px;
-    }
-    .alternatives-heading{
-      margin:22px auto 16px;
-    }
-  }
-  /* V21: all textual links remain visibly gold in every browser state */
-  a,
-  a:link,
-  a:visited,
-  a:hover,
-  a:active,
-  a:focus-visible,
-  .text-link,
-  .text-link:link,
-  .text-link:visited,
-  .text-link:hover,
-  .text-link:active,
-  .legacy-copy a,
-  .legacy-copy a:visited,
-  .project-representation a,
-  .project-representation a:visited,
-  .project-title a,
-  .project-title a:visited,
-  .contact-armelle,
-  .contact-armelle:visited,
-  .footer-curator-link{
-    color:${C.goldBright};
-    text-decoration:underline;
-    text-underline-offset:3px;
-    text-decoration-thickness:1.5px;
-  }
-
-  a:hover,
-  a:focus-visible,
-  .text-link:hover,
-  .text-link:focus-visible,
-  .legacy-copy a:hover,
-  .project-representation a:hover,
-  .project-title a:hover,
-  .contact-armelle:hover,
-  .footer-curator-link:hover,
-  .footer-curator-link:focus-visible{
-    color:${C.white};
-    text-decoration-thickness:2px;
-  }
-
-  .footer-curator-link{
-    appearance:none;
-    border:0;
-    padding:0;
-    margin:0;
-    background:transparent;
-    font-family:Georgia,serif;
-    font-size:18px;
-    font-weight:900;
-    cursor:pointer;
-  }
-
-  .footer-curator-link:focus-visible{
-    outline:2px solid ${C.goldBright};
-    outline-offset:4px;
-  }
-
-  /* Buttons and pill-style links remain button-like, not underlined */
-  .hero-action,
-  .hero-action:link,
-  .hero-action:visited,
-  .provider-chip,
-  .provider-chip:link,
-  .provider-chip:visited,
-  .nav-link,
-  .mobile-menu-link,
-  .mobile-brand,
-  .mobile-menu-button{
-    text-decoration:none;
-  }
-
-  .letter-signature{
-    margin-top:24px;
-  }
-  @media (max-width:760px){
-    .letter-signature{
-      margin-top:20px;
-    }
-  }
-
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length}/>
@@ -4254,7 +4150,7 @@ const run = async (excludeIds = [], resetSession = false) => {
       {generated&&total>0&&(
         <div className="results-heading-wrap">
           <h2 className="results-heading">
-            7 Picks • Celebrating the Seventh Art 🎦
+            7 Picks • Celebrating the Seventh Art 🎬
           </h2>
         </div>
       )}
@@ -4282,9 +4178,9 @@ const run = async (excludeIds = [], resetSession = false) => {
 />
             {alts.length>0&&(
               <div style={{marginTop:"24px"}}>
-                <h2 className="results-heading alternatives-heading">
-                  {alts.length} Great Alternatives to Explore
-                </h2>
+                <p style={{color:C.goldBright,fontSize:"13px",fontWeight:"700",margin:"0 0 12px"}}>
+                  ✦ Not tonight? {alts.length} great alternatives
+                </p>
                 <div className="picks-grid">
                   {alts.map(film => (
                     <AltCard
@@ -4330,6 +4226,7 @@ const run = async (excludeIds = [], resetSession = false) => {
       </>
       )}
 
+      {page === "home" && (
       <footer className="mycine-footer">
         <div className="footer-content">
           <h2 className="closing-promise">
@@ -4340,17 +4237,9 @@ const run = async (excludeIds = [], resetSession = false) => {
             Seven thoughtful choices. One unforgettable night.
           </p>
 
-          <div className="footer-signature-line footer-signature-spaced">
-            <button
-              type="button"
-              className="footer-curator-link"
-              onClick={() => {
-                setPage("curator");
-                window.scrollTo({top:0, behavior:"smooth"});
-              }}
-            >
-              Armelle Cloche
-            </button>
+          <div className="footer-signature-line">
+            <span>Curated by</span>
+            <strong>Armelle Cloche</strong>
             <small>Screenwriter • Founder of My Ciné</small>
           </div>
 
@@ -4360,6 +4249,7 @@ const run = async (excludeIds = [], resetSession = false) => {
           </div>
         </div>
       </footer>
+      )}
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
     </div>
   );

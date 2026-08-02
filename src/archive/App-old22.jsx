@@ -1488,7 +1488,6 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
   const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
-  const tmdbWatchLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}/watch?locale=${watchRegion || "MX"}`;
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -1597,7 +1596,9 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
         </button>
 
         <a
-          href={tmdbWatchLink}
+          href={`https://www.google.com/search?q=${encodeURIComponent(
+            `${film.title} ${film.year} where to watch ${WATCH_REGIONS.find(region => region.code === watchRegion)?.country || watchRegion}`
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
           className="hero-action secondary"
@@ -2253,7 +2254,7 @@ function TopNav({page, setPage, savedCount}) {
 
   const items = [
     {id:"home", label:"MY CINÉ"},
-    {id:"standard", label:"Standard 🎞️"},
+    {id:"standard", label:"Standard 🎬"},
     {id:"saved", label:`💙 Watchlist${savedCount ? ` ${savedCount}` : ""}`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
@@ -2500,15 +2501,7 @@ function CuratorPage() {
             <div className="project-credit">
               <div className="project-type">🎬 More Screenplays</div>
               <div className="project-title project-title-small">
-                The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine ·{" "}
-                <a
-                  href="https://www.armelle.com/screenplays"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-link"
-                >
-                  and many more screenplays
-                </a>
+                The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine · and more
               </div>
               <div className="project-representation">
                 Interested in a project?{" "}
@@ -3544,11 +3537,12 @@ const run = async (excludeIds = [], resetSession = false) => {
     text-transform:uppercase;
     letter-spacing:0.12em;
   }
-  .footer-signature-line strong{
+  .footer-signature-line a{
     color:${C.white};
     font-family:Georgia,serif;
     font-size:18px;
     font-weight:900;
+    text-decoration:none;
   }
   .footer-signature-line small{
     color:${C.goldBright};
@@ -3556,21 +3550,13 @@ const run = async (excludeIds = [], resetSession = false) => {
   }
   .footer-meta{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:6px 18px;
+    justify-content:space-between;
+    gap:18px;
     margin-top:9px;
     padding-top:7px;
     border-top:1px solid rgba(255,184,0,0.25);
-    color:rgba(255,255,255,0.72);
-    font-family:Arial,sans-serif;
+    color:rgba(255,255,255,0.55);
     font-size:9px;
-    line-height:1.35;
-  }
-  .footer-legal{
-    color:rgba(255,255,255,0.86);
-    font-weight:700;
   }
 
   /* Laptop homepage: no scrolling before recommendations are generated. */
@@ -3715,15 +3701,13 @@ const run = async (excludeIds = [], resetSession = false) => {
       font-size:11px;
       margin-bottom:4px;
     }
-    .home-before-results .footer-signature-line strong{
+    .home-before-results .footer-signature-line a{
       font-size:14px;
     }
     .home-before-results .footer-meta{
       margin-top:4px;
       padding-top:4px;
-      gap:3px 14px;
-      font-size:8px;
-      line-height:1.2;
+      font-size:6px;
     }
     .home-before-results > div:last-child{
       flex:0 0 3px;
@@ -3887,7 +3871,7 @@ const run = async (excludeIds = [], resetSession = false) => {
     .letter-signature{text-align:left;}
     .mycine-footer{padding:22px 14px 12px;}
     .mycine-footer .closing-promise{font-size:22px;}
-    .footer-meta{flex-direction:column;gap:4px;font-size:9px;}
+    .footer-meta{flex-direction:column;gap:4px;}
 
   }
 
@@ -4004,126 +3988,6 @@ const run = async (excludeIds = [], resetSession = false) => {
       line-height:1.5;
     }
   }
-  .results-heading-wrap{
-    width:100%;
-    padding:22px 18px 18px;
-    text-align:center;
-  }
-  .results-heading{
-    margin:0 auto;
-    color:${C.goldBright};
-    font-family:Georgia,serif;
-    font-size:clamp(22px,2vw,32px);
-    font-weight:900;
-    line-height:1.15;
-    letter-spacing:0.03em;
-    text-align:center;
-  }
-  @media (max-width:760px){
-    .results-heading-wrap{
-      padding:18px 14px 14px;
-    }
-    .results-heading{
-      font-size:24px;
-    }
-  }
-
-  .footer-signature-spaced{
-    padding-top:16px;
-  }
-  .alternatives-heading{
-    margin:26px auto 18px;
-    text-align:center;
-  }
-  @media (max-width:760px){
-    .footer-signature-spaced{
-      padding-top:14px;
-    }
-    .alternatives-heading{
-      margin:22px auto 16px;
-    }
-  }
-  /* V21: all textual links remain visibly gold in every browser state */
-  a,
-  a:link,
-  a:visited,
-  a:hover,
-  a:active,
-  a:focus-visible,
-  .text-link,
-  .text-link:link,
-  .text-link:visited,
-  .text-link:hover,
-  .text-link:active,
-  .legacy-copy a,
-  .legacy-copy a:visited,
-  .project-representation a,
-  .project-representation a:visited,
-  .project-title a,
-  .project-title a:visited,
-  .contact-armelle,
-  .contact-armelle:visited,
-  .footer-curator-link{
-    color:${C.goldBright};
-    text-decoration:underline;
-    text-underline-offset:3px;
-    text-decoration-thickness:1.5px;
-  }
-
-  a:hover,
-  a:focus-visible,
-  .text-link:hover,
-  .text-link:focus-visible,
-  .legacy-copy a:hover,
-  .project-representation a:hover,
-  .project-title a:hover,
-  .contact-armelle:hover,
-  .footer-curator-link:hover,
-  .footer-curator-link:focus-visible{
-    color:${C.white};
-    text-decoration-thickness:2px;
-  }
-
-  .footer-curator-link{
-    appearance:none;
-    border:0;
-    padding:0;
-    margin:0;
-    background:transparent;
-    font-family:Georgia,serif;
-    font-size:18px;
-    font-weight:900;
-    cursor:pointer;
-  }
-
-  .footer-curator-link:focus-visible{
-    outline:2px solid ${C.goldBright};
-    outline-offset:4px;
-  }
-
-  /* Buttons and pill-style links remain button-like, not underlined */
-  .hero-action,
-  .hero-action:link,
-  .hero-action:visited,
-  .provider-chip,
-  .provider-chip:link,
-  .provider-chip:visited,
-  .nav-link,
-  .mobile-menu-link,
-  .mobile-brand,
-  .mobile-menu-button{
-    text-decoration:none;
-  }
-
-  .letter-signature{
-    margin-top:24px;
-  }
-  @media (max-width:760px){
-    .letter-signature{
-      margin-top:20px;
-    }
-  }
-
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length}/>
@@ -4252,10 +4116,13 @@ const run = async (excludeIds = [], resetSession = false) => {
       </div>
 
       {generated&&total>0&&(
-        <div className="results-heading-wrap">
-          <h2 className="results-heading">
-            7 Picks • Celebrating the Seventh Art 🎦
-          </h2>
+        <div style={{padding:"0 18px 14px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
+          <span style={{fontSize:"11px",color:C.goldBright,fontWeight:"700",whiteSpace:"nowrap"}}>7 Picks • Celebrating the Seventh Art 🎬</span>
+          <div style={{flex:1,height:"3px",background:"rgba(255,255,255,0.2)",borderRadius:"3px",overflow:"hidden"}}>
+            <div style={{height:"100%",width:`${total?(watchedCount/total)*100:0}%`,background:`linear-gradient(90deg,${C.redDark},${C.goldBright})`,borderRadius:"3px",transition:"width 0.4s"}}/>
+          </div>
+          </div>
         </div>
       )}
 
@@ -4282,9 +4149,9 @@ const run = async (excludeIds = [], resetSession = false) => {
 />
             {alts.length>0&&(
               <div style={{marginTop:"24px"}}>
-                <h2 className="results-heading alternatives-heading">
-                  {alts.length} Great Alternatives to Explore
-                </h2>
+                <p style={{color:C.goldBright,fontSize:"13px",fontWeight:"700",margin:"0 0 12px"}}>
+                  ✦ Not tonight? {alts.length} great alternatives
+                </p>
                 <div className="picks-grid">
                   {alts.map(film => (
                     <AltCard
@@ -4320,7 +4187,7 @@ const run = async (excludeIds = [], resetSession = false) => {
                   ? loadingMsg
                   : batchNumber >= 7
                     ? "🎦 Seven complete sets revealed"
-                    : `🎦 Keep Exploring ${batchNumber + 1}/7`}
+                    : `🎦 Show me 7 more · Set ${batchNumber + 1} of 7`}
               </button>
             </div>
           </div>
@@ -4330,36 +4197,32 @@ const run = async (excludeIds = [], resetSession = false) => {
       </>
       )}
 
+      {page === "home" && (
       <footer className="mycine-footer">
         <div className="footer-content">
           <h2 className="closing-promise">
-            Never waste 45 minutes choosing a movie again
+            Never waste 45 minutes choosing a movie again.
           </h2>
 
           <p className="footer-subtitle">
             Seven thoughtful choices. One unforgettable night.
           </p>
 
-          <div className="footer-signature-line footer-signature-spaced">
-            <button
-              type="button"
-              className="footer-curator-link"
-              onClick={() => {
-                setPage("curator");
-                window.scrollTo({top:0, behavior:"smooth"});
-              }}
-            >
+          <div className="footer-signature-line">
+            <span>Curated by</span>
+            <a href="https://www.armelle.com/screenplays" target="_blank" rel="noopener noreferrer">
               Armelle Cloche
-            </button>
-            <small>Screenwriter • Founder of My Ciné</small>
+            </a>
+            <small>Screenwriter · Founder of My Ciné</small>
           </div>
 
           <div className="footer-meta">
             <span>Celebrating cinema, seven picks at a time.</span>
-            <span className="footer-legal">© 2026 My Ciné by Armelle Cloche. All Rights Reserved.</span>
+            <span>© 2026 My Ciné by Armelle Cloche. All Rights Reserved.</span>
           </div>
         </div>
       </footer>
+      )}
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
     </div>
   );

@@ -1,0 +1,5 @@
+My Ciné V19 Refined
+- Removed 'Curated by' and retained breathing room before Armelle Cloche
+- Changed the 7 Picks title icon from 🎬 to 🎦
+- Replaced the alternatives heading with '6 Great Alternatives to Explore'
+- Matched the alternatives heading typography to the 7 Picks heading

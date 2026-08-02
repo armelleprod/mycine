@@ -1483,12 +1483,12 @@ function runtimeLabel(film) {
 
 // ── HERO CARD ─────────────────────────────────────────────────────────────────
 function HeroCard({film, watched, onToggle, watchRegion}) {
+  const [synOpen, setSynOpen] = useState(false);
   const platColor  = PROVIDER_COLORS[film.provider] || C.navy;
   const critScore  = film.rtCritics || 0;
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
   const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
-  const tmdbWatchLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}/watch?locale=${watchRegion || "MX"}`;
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -1539,7 +1539,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
           </div>
         )}
 
-        <p className="hero-story">{film.overview || "Story details are currently unavailable."}</p>
+        <p style={{fontFamily:"Georgia,serif",fontStyle:"italic",color:C.goldBright,fontSize:"14px",lineHeight:"1.55",margin:"0 0 12px"}}>"{film.whyWatch}"</p>
 
         <div style={{display:"flex",flexWrap:"wrap",gap:"7px",marginBottom:"13px"}}>
           {runtimeLabel(film)&&<span style={{color:C.white,fontSize:"10px",fontWeight:"700"}}>⏱ {runtimeLabel(film)}</span>}
@@ -1570,7 +1570,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
               </div>
               <div>
                 <div style={{fontSize:"9px",color:C.white,letterSpacing:"0.08em",textTransform:"uppercase",fontWeight:"800"}}>
-                  TMDB Community
+                  ⭐ TMDB Community Score
                 </div>
                 <div style={{fontSize:"9px",color:`${C.white}99`,marginTop:"3px"}}>
                   {film.vote_count ? `${film.vote_count.toLocaleString()} votes` : "Vote count unavailable"}
@@ -1579,33 +1579,94 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
             </div>
           </a>
         </div>
-      <div className="hero-actions">
-        <a
-          href={trailer}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hero-action secondary"
-        >
-          ▶ Trailer
-        </a>
+        {synOpen&&(
+  <p style={{
+    fontSize:"13px",
+    color:C.white,
+    lineHeight:"1.65",
+    margin:"0 0 14px",
+    borderLeft:`2px solid ${C.goldBright}44`,
+    paddingLeft:"12px",
+    opacity:0.85,
+    whiteSpace:"normal",
+    overflow:"visible",
+    display:"block"
+  }}>
+    {film.overview}
+  </p>
+)}
+      <div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>
+  <a
+    href={trailer}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      flex:1,
+      minWidth:"90px",
+      background:"transparent",
+      border:`1.5px solid ${C.white}44`,
+      borderRadius:"10px",
+      padding:"11px 8px",
+      color:C.white,
+      fontWeight:"700",
+      fontSize:"13px",
+      textDecoration:"underline",
+      display:"flex",
+      alignItems:"center",
+      justifyContent:"center"
+    }}
+  >
+    ▶ Trailer
+  </a>
 
-        <button
-          onClick={()=>onToggle(film.id)}
-          className={watched ? "hero-action watchlist saved" : "hero-action watchlist"}
-        >
-          {watched ? "✓ On Watchlist" : "🍿 Add to Watchlist"}
-        </button>
+  <button
+    onClick={()=>onToggle(film.id)}
+    style={{
+      flex:2,
+      minWidth:"130px",
+      background:watched?C.navyMid:C.goldBright,
+      border:"none",
+      borderRadius:"10px",
+      padding:"11px 8px",
+      color:watched?C.gold:C.navy,
+      fontWeight:"800",
+      fontSize:"13px",
+      cursor:"pointer",
+      fontFamily:"inherit",
+      display:"flex",
+      alignItems:"center",
+      justifyContent:"center"
+    }}
+  >
+    {watched?"✓ On My List":"🍿 Add to My List"}
+  </button>
 
-        <a
-          href={tmdbWatchLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hero-action secondary"
-        >
-          📺 Where to Watch
-        </a>
-      </div>
+  <button
+    onClick={()=>setSynOpen(!synOpen)}
+    style={{
+      flex:1,
+      minWidth:"70px",
+      background:"transparent",
+      border:`1.5px solid ${C.goldBright}44`,
+      borderRadius:"10px",
+      padding:"11px 8px",
+      color:C.goldBright,
+      fontWeight:"600",
+      fontSize:"12px",
+      cursor:"pointer",
+      fontFamily:"inherit"
+    }}
+  >
+    {synOpen?"Less ↑":"Story ↓"}
+  </button>
+</div>
 
+<WhereToWatch
+  titleId={film.id}
+  region={watchRegion}
+  title={film.title}
+  mediaType={film.media_type}
+/>
 
 </div>
 </div>
@@ -2253,8 +2314,8 @@ function TopNav({page, setPage, savedCount}) {
 
   const items = [
     {id:"home", label:"MY CINÉ"},
-    {id:"standard", label:"Standard 🎞️"},
-    {id:"saved", label:`💙 Watchlist${savedCount ? ` ${savedCount}` : ""}`},
+    {id:"standard", label:"Standard 🎬"},
+    {id:"saved", label:`❤️ Watchlist${savedCount ? ` ${savedCount}` : ""}`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
 
@@ -2351,14 +2412,14 @@ function StandardPage() {
   return (
     <main className="page-shell">
       <div className="page-heading">
-        <span>🎞️</span>
+        <span>🎬</span>
         <h1>My Ciné Standard</h1>
-        <p>The philosophy behind every recommendation</p>
+        <p>The philosophy behind every recommendation.</p>
       </div>
 
       <div className="standard-grid">
         <section className="standard-card">
-          <h2>🎞️ Cinema is the Seventh Art</h2>
+          <h2>🎬 Cinema is the Seventh Art</h2>
           <p>Cinema is more than entertainment. My Ciné exists to celebrate it as one of humanity’s greatest art forms.</p>
         </section>
 
@@ -2401,8 +2462,8 @@ function StandardPage() {
       </div>
 
       <div className="promise-card">
-        <h2 className="promise-title">Our Promise</h2>
-        <h3>My Ciné does not try to recommend every movie.</h3>
+        <span>Our Promise</span>
+        <h2>My Ciné does not try to recommend every movie.</h2>
         <p>It tries to recommend your next great one.</p>
       </div>
     </main>
@@ -2421,7 +2482,7 @@ function CuratorPage() {
               className="curator-photo"
             />
           </div>
-          <div className="curator-role"><span>Screenwriter</span><span>Founder of My Ciné</span></div>
+          <div className="curator-role">Screenwriter · Founder of My Ciné</div>
 
           <div className="legacy-card">
             <div className="legacy-kicker">A family legacy</div>
@@ -2435,8 +2496,8 @@ function CuratorPage() {
               >
                 <em>Monsieur Vincent</em>
               </a>
-              {" "}— winner of the first-ever Oscar for Best Foreign Film, 1948.
-              In our family, cinema was never just a passion. It was an inheritance.
+              {" "}— 1st Oscar for Best Foreign Film, 1948.
+              Cinema was never just a passion in our family. It was an inheritance.
             </div>
           </div>
         </div>
@@ -2444,7 +2505,10 @@ function CuratorPage() {
         <div className="curator-story">
           <div className="moment-kicker">🎬 Meet the Curator</div>
 
-          <h1 className="curator-name">Armelle Cloche</h1>
+          <h1 className="curator-name">
+            <span>Armelle</span>
+            <span>Cloche</span>
+          </h1>
 
           <p className="curator-tagline">
             Curating cinema from Guadalajara — seven films at a time.
@@ -2500,15 +2564,7 @@ function CuratorPage() {
             <div className="project-credit">
               <div className="project-type">🎬 More Screenplays</div>
               <div className="project-title project-title-small">
-                The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine ·{" "}
-                <a
-                  href="https://www.armelle.com/screenplays"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-link"
-                >
-                  and many more screenplays
-                </a>
+                The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine · and more
               </div>
               <div className="project-representation">
                 Interested in a project?{" "}
@@ -2542,7 +2598,7 @@ function SavedPage({savedTitles, onToggle}) {
   return (
     <main className="page-shell">
       <div className="page-heading">
-        <span>💙</span>
+        <span>❤️</span>
         <h1>My personal collection</h1>
       </div>
 
@@ -2558,9 +2614,6 @@ function SavedPage({savedTitles, onToggle}) {
             const googleLink = `https://www.google.com/search?q=${encodeURIComponent(
               `${title.title} ${title.year || ""} ${title.isTV ? "TV series" : "film"}`
             )}`;
-            const tmdbLink = `https://www.themoviedb.org/${title.isTV ? "tv" : "movie"}/${title.id}`;
-            const genres = (title.genres || []).filter(Boolean).slice(0, 3);
-            const score = title.rating ? Math.round(Number(title.rating) * 10) : null;
 
             return (
               <div key={`${title.media_type || "movie"}-${title.id}`} className="saved-card">
@@ -2584,26 +2637,7 @@ function SavedPage({savedTitles, onToggle}) {
                     {title.title}
                   </a>
 
-                  <p className="saved-meta">
-                    {title.year} · {title.format || (title.isTV ? "TV Series" : "Film")}
-                  </p>
-
-                  {genres.length > 0 && (
-                    <div className="saved-genres">
-                      {genres.map(genre => <span key={genre}>{genre}</span>)}
-                    </div>
-                  )}
-
-                  <a
-                    className="saved-rating"
-                    href={tmdbLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    ⭐ {score ? `${score}%` : "—"} TMDB Community
-                    {title.vote_count ? <small>{Number(title.vote_count).toLocaleString()} votes</small> : null}
-                  </a>
-
+                  <p>{title.year} · {title.format || (title.isTV ? "TV Series" : "Film")}</p>
                   <button onClick={() => onToggle(title.id)}>Remove</button>
                 </div>
               </div>
@@ -2637,15 +2671,7 @@ export default function App() {
   const [batchNumber, setBatchNumber] = useState(0);
   const [savedTitles, setSavedTitles] = useState(() => {
     try {
-      const permanent = JSON.parse(localStorage.getItem("mycine-watchlist") || "[]");
-      const legacy = JSON.parse(localStorage.getItem("mycine-saved") || "[]");
-      const merged = new Map();
-
-      [...legacy, ...permanent].forEach(item => {
-        if (item?.id) merged.set(`${item.isTV ? "tv" : "movie"}-${item.id}`, item);
-      });
-
-      return [...merged.values()];
+      return JSON.parse(localStorage.getItem("mycine-saved") || "[]");
     } catch {
       return [];
     }
@@ -2742,7 +2768,7 @@ const run = async (excludeIds = [], resetSession = false) => {
   const total = (hero?1:0) + alts.length;
 
   useEffect(() => {
-    localStorage.setItem("mycine-watchlist", JSON.stringify(savedTitles));
+    localStorage.setItem("mycine-saved", JSON.stringify(savedTitles));
   }, [savedTitles]);
 
 
@@ -2795,7 +2821,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     background:rgba(11,31,74,0.94);
     border-bottom:1px solid rgba(255,184,0,0.4);
     backdrop-filter:blur(14px);
-    box-shadow:0 6px 18px rgba(11,31,74,0.24);
   }
   .top-nav-inner{
     max-width:1180px;
@@ -2995,18 +3020,8 @@ const run = async (excludeIds = [], resetSession = false) => {
   .standard-card h2{font-family:Georgia,serif;color:${C.goldBright};margin-top:0;}
   .standard-card p{line-height:1.65;color:rgba(255,255,255,0.86);}
   .promise-card{text-align:center;margin-top:22px;}
-  .promise-title{
-    font-family:Georgia,serif;
-    color:${C.goldBright};
-    font-size:1.5em;
-    margin:0 0 12px;
-  }
-  .promise-card h3{
-    font-family:Georgia,serif;
-    font-size:30px;
-    margin:10px 0;
-    color:#fff;
-  }
+  .promise-card span{color:${C.goldBright};text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:0.12em;}
+  .promise-card h2{font-family:Georgia,serif;font-size:30px;margin:10px 0;color:#fff;}
   .curator-card{
     display:grid;
     grid-template-columns:150px 1fr;
@@ -3034,7 +3049,7 @@ const run = async (excludeIds = [], resetSession = false) => {
   }
 
   .curator-card h1{font-family:Georgia,serif;font-size:42px;margin:8px 0;color:#fff;}
-  .curator-card p{font-family:Arial,sans-serif;color:rgba(255,255,255,0.86);line-height:1.7;}
+  .curator-card p{color:rgba(255,255,255,0.86);line-height:1.7;}
   .curator-lead{color:${C.goldBright}!important;font-weight:800;}
   .curator-signature{font-family:Georgia,serif;font-size:22px;color:${C.goldBright};margin-top:18px;}
   .saved-grid{
@@ -3064,36 +3079,6 @@ const run = async (excludeIds = [], resetSession = false) => {
   }
   .saved-card-body h3{font-family:Georgia,serif;margin:0 0 6px;}
   .saved-card-body p{font-size:11px;color:${C.goldBright};}
-  .saved-meta{margin:0 0 8px;}
-  .saved-genres{
-    display:flex;
-    flex-wrap:wrap;
-    gap:5px;
-    margin-bottom:9px;
-  }
-  .saved-genres span{
-    border:1px solid rgba(255,184,0,0.42);
-    border-radius:999px;
-    padding:3px 7px;
-    color:${C.goldBright};
-    font-size:9px;
-    font-weight:800;
-  }
-  .saved-rating{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-    margin-bottom:10px;
-    color:${C.white};
-    font-size:10px;
-    font-weight:900;
-    text-decoration:none;
-  }
-  .saved-rating small{
-    color:rgba(255,255,255,0.62);
-    font-size:8px;
-    font-weight:600;
-  }
   .saved-card-body button{width:100%;border:1px solid rgba(255,184,0,0.5);background:transparent;color:${C.goldBright};border-radius:8px;padding:8px;cursor:pointer;}
   .empty-library{text-align:center;max-width:620px;margin:0 auto;}
   .empty-library > div{font-size:56px;}
@@ -3261,17 +3246,12 @@ const run = async (excludeIds = [], resetSession = false) => {
   }
   .curator-role{
     color:${C.goldBright};
-    font-family:Arial,sans-serif;
     font-size:11px;
-    line-height:1.45;
+    line-height:1.5;
     margin-top:12px;
     font-weight:800;
     text-transform:uppercase;
     letter-spacing:0.08em;
-  }
-  .curator-role span{
-    display:block;
-    white-space:nowrap;
   }
   .curator-story strong{color:#fff;}
   
@@ -3298,9 +3278,8 @@ const run = async (excludeIds = [], resetSession = false) => {
   }
   .curator-signature span{
     color:#fff;
-    font-family:Georgia,serif;
     font-size:16px;
-    font-style:normal;
+    font-style:italic;
   }
 
 
@@ -3376,7 +3355,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     margin:5px 0;
   }
   .legacy-copy{
-    font-family:Arial,sans-serif;
     color:rgba(255,255,255,0.78);
     font-size:10px;
     line-height:1.5;
@@ -3538,39 +3516,31 @@ const run = async (excludeIds = [], resetSession = false) => {
     gap:1px;
   }
   .footer-signature-line > span{
-    color:rgba(255,255,255,0.68);
-    font-family:Arial,sans-serif;
-    font-size:9px;
+    color:rgba(255,255,255,0.58);
+    font-size:7px;
     text-transform:uppercase;
-    letter-spacing:0.12em;
+    letter-spacing:0.14em;
   }
-  .footer-signature-line strong{
+  .footer-signature-line a{
     color:${C.white};
     font-family:Georgia,serif;
-    font-size:18px;
+    font-size:17px;
     font-weight:900;
+    text-decoration:none;
   }
   .footer-signature-line small{
     color:${C.goldBright};
-    font-size:10px;
+    font-size:8px;
   }
   .footer-meta{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:6px 18px;
+    justify-content:space-between;
+    gap:18px;
     margin-top:9px;
     padding-top:7px;
     border-top:1px solid rgba(255,184,0,0.25);
-    color:rgba(255,255,255,0.72);
-    font-family:Arial,sans-serif;
-    font-size:9px;
-    line-height:1.35;
-  }
-  .footer-legal{
-    color:rgba(255,255,255,0.86);
-    font-weight:700;
+    color:rgba(255,255,255,0.55);
+    font-size:7px;
   }
 
   /* Laptop homepage: no scrolling before recommendations are generated. */
@@ -3646,14 +3616,14 @@ const run = async (excludeIds = [], resetSession = false) => {
       justify-content:center;
     }
     .home-before-results .home-hero{
-      padding:10px 14px 18px;
+      padding:3px 14px 3px;
       flex:0 0 auto;
     }
     .home-before-results .home-hero .logo{
       font-size:clamp(34px,4.2vw,54px);
     }
     .home-before-results .home-hero .tagline{
-      margin:8px 0 0;
+      margin:3px 0 6px;
       font-size:9px;
     }
     .home-before-results .lobby-feature-grid{
@@ -3715,15 +3685,13 @@ const run = async (excludeIds = [], resetSession = false) => {
       font-size:11px;
       margin-bottom:4px;
     }
-    .home-before-results .footer-signature-line strong{
+    .home-before-results .footer-signature-line a{
       font-size:14px;
     }
     .home-before-results .footer-meta{
       margin-top:4px;
       padding-top:4px;
-      gap:3px 14px;
-      font-size:8px;
-      line-height:1.2;
+      font-size:6px;
     }
     .home-before-results > div:last-child{
       flex:0 0 3px;
@@ -3887,7 +3855,7 @@ const run = async (excludeIds = [], resetSession = false) => {
     .letter-signature{text-align:left;}
     .mycine-footer{padding:22px 14px 12px;}
     .mycine-footer .closing-promise{font-size:22px;}
-    .footer-meta{flex-direction:column;gap:4px;font-size:9px;}
+    .footer-meta{flex-direction:column;gap:4px;}
 
   }
 
@@ -3895,50 +3863,6 @@ const run = async (excludeIds = [], resetSession = false) => {
   @keyframes softGlow{
     0%,100%{box-shadow:0 4px 18px rgba(255,184,0,0.28);}
     50%{box-shadow:0 7px 30px rgba(255,184,0,0.52);}
-  }
-
-  .hero-story{
-    margin:0 0 14px;
-    color:${C.goldBright};
-    font-family:Georgia,serif;
-    font-size:14px;
-    line-height:1.58;
-    font-style:italic;
-  }
-  .hero-actions{
-    display:grid;
-    grid-template-columns:1fr 1.65fr 1fr;
-    gap:8px;
-  }
-  .hero-action{
-    min-width:0;
-    min-height:46px;
-    border-radius:10px;
-    padding:11px 8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-family:Arial,sans-serif;
-    font-size:13px;
-    font-weight:800;
-    text-decoration:none;
-    cursor:pointer;
-  }
-  .hero-action.secondary{
-    background:transparent;
-    border:1.5px solid rgba(255,255,255,0.28);
-    color:${C.white};
-  }
-  .hero-action.watchlist{
-    border:none;
-    background:${C.goldBright};
-    color:${C.navy};
-  }
-  .hero-action.watchlist.saved{
-    background:${C.navyMid};
-    color:${C.goldBright};
-    border:1px solid rgba(255,184,0,0.45);
   }
 
   .app-content{
@@ -4004,126 +3928,6 @@ const run = async (excludeIds = [], resetSession = false) => {
       line-height:1.5;
     }
   }
-  .results-heading-wrap{
-    width:100%;
-    padding:22px 18px 18px;
-    text-align:center;
-  }
-  .results-heading{
-    margin:0 auto;
-    color:${C.goldBright};
-    font-family:Georgia,serif;
-    font-size:clamp(22px,2vw,32px);
-    font-weight:900;
-    line-height:1.15;
-    letter-spacing:0.03em;
-    text-align:center;
-  }
-  @media (max-width:760px){
-    .results-heading-wrap{
-      padding:18px 14px 14px;
-    }
-    .results-heading{
-      font-size:24px;
-    }
-  }
-
-  .footer-signature-spaced{
-    padding-top:16px;
-  }
-  .alternatives-heading{
-    margin:26px auto 18px;
-    text-align:center;
-  }
-  @media (max-width:760px){
-    .footer-signature-spaced{
-      padding-top:14px;
-    }
-    .alternatives-heading{
-      margin:22px auto 16px;
-    }
-  }
-  /* V21: all textual links remain visibly gold in every browser state */
-  a,
-  a:link,
-  a:visited,
-  a:hover,
-  a:active,
-  a:focus-visible,
-  .text-link,
-  .text-link:link,
-  .text-link:visited,
-  .text-link:hover,
-  .text-link:active,
-  .legacy-copy a,
-  .legacy-copy a:visited,
-  .project-representation a,
-  .project-representation a:visited,
-  .project-title a,
-  .project-title a:visited,
-  .contact-armelle,
-  .contact-armelle:visited,
-  .footer-curator-link{
-    color:${C.goldBright};
-    text-decoration:underline;
-    text-underline-offset:3px;
-    text-decoration-thickness:1.5px;
-  }
-
-  a:hover,
-  a:focus-visible,
-  .text-link:hover,
-  .text-link:focus-visible,
-  .legacy-copy a:hover,
-  .project-representation a:hover,
-  .project-title a:hover,
-  .contact-armelle:hover,
-  .footer-curator-link:hover,
-  .footer-curator-link:focus-visible{
-    color:${C.white};
-    text-decoration-thickness:2px;
-  }
-
-  .footer-curator-link{
-    appearance:none;
-    border:0;
-    padding:0;
-    margin:0;
-    background:transparent;
-    font-family:Georgia,serif;
-    font-size:18px;
-    font-weight:900;
-    cursor:pointer;
-  }
-
-  .footer-curator-link:focus-visible{
-    outline:2px solid ${C.goldBright};
-    outline-offset:4px;
-  }
-
-  /* Buttons and pill-style links remain button-like, not underlined */
-  .hero-action,
-  .hero-action:link,
-  .hero-action:visited,
-  .provider-chip,
-  .provider-chip:link,
-  .provider-chip:visited,
-  .nav-link,
-  .mobile-menu-link,
-  .mobile-brand,
-  .mobile-menu-button{
-    text-decoration:none;
-  }
-
-  .letter-signature{
-    margin-top:24px;
-  }
-  @media (max-width:760px){
-    .letter-signature{
-      margin-top:20px;
-    }
-  }
-
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length}/>
@@ -4252,10 +4056,23 @@ const run = async (excludeIds = [], resetSession = false) => {
       </div>
 
       {generated&&total>0&&(
-        <div className="results-heading-wrap">
-          <h2 className="results-heading">
-            7 Picks • Celebrating the Seventh Art 🎦
-          </h2>
+        <div style={{padding:"0 18px 14px"}}>
+          <div className="selection-proof">
+            Because you chose:{" "}
+            <strong>
+              {tab==="mood"
+                ? MOODS.find(m=>m.id===selMood)?.label
+                : selGenres.map(id=>GENRES.find(g=>g.id===id)?.label).filter(Boolean).join(" + ")}
+            </strong>
+            {" "}· {MEDIA_OPTIONS.find(option=>option.id===contentMode)?.label}
+            {" "}· {WATCH_REGIONS.find(region=>region.code===watchRegion)?.label}
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
+          <span style={{fontSize:"11px",color:C.goldBright,fontWeight:"700",whiteSpace:"nowrap"}}>7 Picks • Celebrating the Seventh Art 🎬</span>
+          <div style={{flex:1,height:"3px",background:"rgba(255,255,255,0.2)",borderRadius:"3px",overflow:"hidden"}}>
+            <div style={{height:"100%",width:`${total?(watchedCount/total)*100:0}%`,background:`linear-gradient(90deg,${C.redDark},${C.goldBright})`,borderRadius:"3px",transition:"width 0.4s"}}/>
+          </div>
+          </div>
         </div>
       )}
 
@@ -4282,9 +4099,9 @@ const run = async (excludeIds = [], resetSession = false) => {
 />
             {alts.length>0&&(
               <div style={{marginTop:"24px"}}>
-                <h2 className="results-heading alternatives-heading">
-                  {alts.length} Great Alternatives to Explore
-                </h2>
+                <p style={{color:C.goldBright,fontSize:"13px",fontWeight:"700",margin:"0 0 12px"}}>
+                  ✦ Not tonight? {alts.length} great alternatives
+                </p>
                 <div className="picks-grid">
                   {alts.map(film => (
                     <AltCard
@@ -4319,9 +4136,12 @@ const run = async (excludeIds = [], resetSession = false) => {
                 {loading
                   ? loadingMsg
                   : batchNumber >= 7
-                    ? "🎦 Seven complete sets revealed"
-                    : `🎦 Keep Exploring ${batchNumber + 1}/7`}
+                    ? "🎬 Seven complete sets revealed"
+                    : `🎬 Show me 7 more · Set ${batchNumber + 1} of 7`}
               </button>
+              <p style={{color:`${C.goldBright}88`,fontSize:"11px",textAlign:"center",marginTop:"6px",fontStyle:"italic"}}>
+                Set {Math.max(batchNumber,1)} of 7 · fresh picks · no repeats · the 7th Art
+              </p>
             </div>
           </div>
         )}
@@ -4330,36 +4150,32 @@ const run = async (excludeIds = [], resetSession = false) => {
       </>
       )}
 
+      {page === "home" && (
       <footer className="mycine-footer">
         <div className="footer-content">
           <h2 className="closing-promise">
-            Never waste 45 minutes choosing a movie again
+            Never waste 45 minutes choosing a movie again.
           </h2>
 
           <p className="footer-subtitle">
             Seven thoughtful choices. One unforgettable night.
           </p>
 
-          <div className="footer-signature-line footer-signature-spaced">
-            <button
-              type="button"
-              className="footer-curator-link"
-              onClick={() => {
-                setPage("curator");
-                window.scrollTo({top:0, behavior:"smooth"});
-              }}
-            >
+          <div className="footer-signature-line">
+            <span>Created by</span>
+            <a href="https://www.armelle.com/screenplays" target="_blank" rel="noopener noreferrer">
               Armelle Cloche
-            </button>
-            <small>Screenwriter • Founder of My Ciné</small>
+            </a>
+            <small>Screenwriter · Film lover · Creator</small>
           </div>
 
           <div className="footer-meta">
             <span>Celebrating cinema, seven picks at a time.</span>
-            <span className="footer-legal">© 2026 My Ciné by Armelle Cloche. All Rights Reserved.</span>
+            <span>My Ciné © 2026</span>
           </div>
         </div>
       </footer>
+      )}
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
     </div>
   );
