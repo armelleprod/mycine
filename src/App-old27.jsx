@@ -4164,6 +4164,16 @@ const run = async (excludeIds = [], resetSession = false) => {
     .moment-card{
       order:2;
     }
+
+    .more-screenplays-copy{
+      font-size:clamp(24px,7vw,34px) !important;
+      line-height:1.18 !important;
+    }
+  }
+
+  .more-screenplays-copy{
+    font-size:clamp(26px,2.5vw,38px);
+    line-height:1.18;
   }
   @media (max-width:760px){
     .cinema-moment{order:2;}
@@ -4172,27 +4182,6 @@ const run = async (excludeIds = [], resetSession = false) => {
   @media (max-width:760px){
     .mobile-order-first{order:1;}
     .mobile-order-second{order:2;}
-  }
-
-  .more-screenplays-copy{
-    font-family:Arial,sans-serif;
-    font-size:16px !important;
-    line-height:1.7 !important;
-    font-weight:400 !important;
-  }
-
-  .more-screenplays-copy a{
-    font-family:inherit;
-    font-size:inherit;
-    line-height:inherit;
-    font-weight:700;
-  }
-
-  @media (max-width:760px){
-    .more-screenplays-copy{
-      font-size:15px !important;
-      line-height:1.65 !important;
-    }
   }
 
 `}</style>

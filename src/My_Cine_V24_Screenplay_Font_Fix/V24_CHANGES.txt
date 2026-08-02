@@ -1,0 +1,4 @@
+My Ciné V24 Screenplay Font Fix
+- Reduced the More Screenplays list to normal body-copy size
+- Matched the typography to the curator biography paragraphs
+- Preserved the gold underlined screenplay link and final period

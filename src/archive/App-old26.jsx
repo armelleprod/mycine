@@ -2499,7 +2499,7 @@ function CuratorPage() {
 
             <div className="project-credit">
               <div className="project-type">🎬 More Screenplays</div>
-              <div className="project-title project-title-small more-screenplays-copy">
+              <div className="project-title project-title-small">
                 The 11th Commandment · Michelangelo · October 3rd · Call Me Bruce or Josephine ·{" "}
                 <a
                   href="https://www.armelle.com/screenplays"
@@ -2508,7 +2508,7 @@ function CuratorPage() {
                   className="text-link"
                 >
                   and many more screenplays
-                </a>.
+                </a>
               </div>
               <div className="project-representation">
                 Interested in a project?{" "}
@@ -4121,77 +4121,6 @@ const run = async (excludeIds = [], resetSession = false) => {
   @media (max-width:760px){
     .letter-signature{
       margin-top:20px;
-    }
-  }
-
-  .top-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:9999;
-    width:100%;
-  }
-
-  body{
-    padding-top:58px;
-  }
-
-  @media (max-width:760px){
-    body{
-      padding-top:78px;
-    }
-  }
-
-  @media (max-width:760px){
-    .home-showcase,
-    .home-center-grid,
-    .home-feature-grid,
-    .hero-grid{
-      display:flex;
-      flex-direction:column;
-    }
-
-    .curation-panel,
-    .curate-panel,
-    .movie-night-panel,
-    .curator-panel{
-      order:1;
-    }
-
-    .cinema-moment,
-    .cinema-moment-card,
-    .moment-card{
-      order:2;
-    }
-  }
-  @media (max-width:760px){
-    .cinema-moment{order:2;}
-  }
-
-  @media (max-width:760px){
-    .mobile-order-first{order:1;}
-    .mobile-order-second{order:2;}
-  }
-
-  .more-screenplays-copy{
-    font-family:Arial,sans-serif;
-    font-size:16px !important;
-    line-height:1.7 !important;
-    font-weight:400 !important;
-  }
-
-  .more-screenplays-copy a{
-    font-family:inherit;
-    font-size:inherit;
-    line-height:inherit;
-    font-weight:700;
-  }
-
-  @media (max-width:760px){
-    .more-screenplays-copy{
-      font-size:15px !important;
-      line-height:1.65 !important;
     }
   }
 

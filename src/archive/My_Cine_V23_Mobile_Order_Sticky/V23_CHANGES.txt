@@ -1,0 +1,5 @@
+My Ciné V23 Mobile Order + Sticky Navigation
+- Reduced More Screenplays title size and added final period
+- Froze the top navigation on desktop and mobile
+- Added page offsets so content does not hide beneath the fixed navigation
+- On mobile, Curate My Movie Night appears before Cinema Moments
