@@ -1,0 +1,5 @@
+My Ciné V25 Mobile Header Fix
+- Removed the empty red area above the mobile navigation
+- Fixed the navigation to the viewport on desktop and mobile
+- Constrained the mobile navigation and cards to the viewport width
+- Curate My Movie Night now appears before Cinema Moments on mobile

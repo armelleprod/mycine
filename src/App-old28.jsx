@@ -4123,7 +4123,58 @@ const run = async (excludeIds = [], resetSession = false) => {
       margin-top:20px;
     }
   }
-.more-screenplays-copy{
+
+  .top-nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:9999;
+    width:100%;
+  }
+
+  body{
+    padding-top:58px;
+  }
+
+  @media (max-width:760px){
+    body{
+      padding-top:78px;
+    }
+  }
+
+  @media (max-width:760px){
+    .home-showcase,
+    .home-center-grid,
+    .home-feature-grid,
+    .hero-grid{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .curation-panel,
+    .curate-panel,
+    .movie-night-panel,
+    .curator-panel{
+      order:1;
+    }
+
+    .cinema-moment,
+    .cinema-moment-card,
+    .moment-card{
+      order:2;
+    }
+  }
+  @media (max-width:760px){
+    .cinema-moment{order:2;}
+  }
+
+  @media (max-width:760px){
+    .mobile-order-first{order:1;}
+    .mobile-order-second{order:2;}
+  }
+
+  .more-screenplays-copy{
     font-family:Arial,sans-serif;
     font-size:16px !important;
     line-height:1.7 !important;
@@ -4141,117 +4192,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     .more-screenplays-copy{
       font-size:15px !important;
       line-height:1.65 !important;
-    }
-  }
-
-  /* V25: corrected fixed navigation and mobile home order */
-  body{
-    margin:0;
-    padding:0 !important;
-    overflow-x:hidden;
-  }
-
-  .cinematic-app{
-    padding-top:58px;
-  }
-
-  .cinematic-app > .top-nav{
-    position:fixed !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    width:100% !important;
-    max-width:100vw !important;
-    margin:0 !important;
-    z-index:10000 !important;
-  }
-
-  .top-nav{
-    box-sizing:border-box;
-    overflow:visible;
-  }
-
-  @media (max-width:760px){
-    .cinematic-app{
-      padding-top:72px;
-    }
-
-    .cinematic-app > .top-nav{
-      min-height:72px;
-    }
-
-    .mobile-nav{
-      width:100%;
-      max-width:100%;
-      min-height:72px;
-      padding:8px 12px !important;
-      margin:0 !important;
-      box-sizing:border-box;
-      gap:10px;
-    }
-
-    .mobile-brand{
-      flex:0 1 auto;
-      max-width:58%;
-      padding:10px 18px !important;
-      font-size:18px !important;
-      white-space:nowrap;
-    }
-
-    .mobile-menu-button{
-      flex:0 0 auto;
-      max-width:40%;
-      padding:10px 16px !important;
-      font-size:16px !important;
-      white-space:nowrap;
-    }
-
-    .mobile-menu-panel{
-      position:absolute;
-      top:100%;
-      left:0;
-      right:0;
-      width:100%;
-      max-width:100vw;
-      margin:0;
-      box-sizing:border-box;
-      z-index:10001;
-    }
-
-    .lobby-wrap,
-    .home-hero,
-    .lobby-feature-grid,
-    .home-moment-card,
-    .home-curate-card{
-      width:100%;
-      max-width:100%;
-      box-sizing:border-box;
-    }
-
-    .lobby-feature-grid{
-      display:flex !important;
-      flex-direction:column !important;
-      gap:18px;
-      padding-left:12px !important;
-      padding-right:12px !important;
-    }
-
-    .home-curate-card{
-      order:1 !important;
-    }
-
-    .home-moment-card{
-      order:2 !important;
-    }
-
-    .home-curate-card,
-    .home-moment-card,
-    .home-moment-card .cinema-moment{
-      width:100% !important;
-      max-width:100% !important;
-      margin-left:0 !important;
-      margin-right:0 !important;
-      transform:none !important;
     }
   }
 
@@ -4277,11 +4217,11 @@ const run = async (excludeIds = [], resetSession = false) => {
       </section>
 
       <div className="lobby-feature-grid">
-      <section className="moment-strip home-moment-card">
+      <section className="moment-strip">
         <CinemaMomentCard moment={cinemaMoment} compact/>
       </section>
 
-      <section className="concierge-panel home-curate-card">
+      <section className="concierge-panel">
         <h2 className="concierge-title">🍿 Curate My Movie Night</h2>
 
       <div style={{padding:"0 0 0",textAlign:"center"}}>
