@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import curatorPhoto from "./assets/armelle-cloche.jpg";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // MY CINÉ — Clean Single Architecture
@@ -1488,7 +1487,6 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
   const critScore  = film.rtCritics || 0;
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
-  const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -1563,7 +1561,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
           <span style={{color:C.white,fontSize:"12px"}}>{film.year}</span>
         </div>
         <div style={{marginBottom:"16px",borderTop:`1px solid ${C.goldBright}22`,paddingTop:"14px"}}>
-          <a href={tmdbLink} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"inline-block"}}>
+          <a href={search} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"inline-block"}}>
             <div style={{display:"flex",alignItems:"baseline",gap:"9px"}}>
               <div style={{fontSize:"30px",fontWeight:"800",color:scoreColor,fontFamily:"Georgia,serif",lineHeight:1}}>
                 {film.rating ? Math.round(film.rating * 10) + "%" : "—"}
@@ -1680,7 +1678,6 @@ function AltCard({film, watched, onToggle, watchRegion}) {
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const eraColor   = ERA_COLORS[film.era] || C.gold;
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
-  const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -1740,7 +1737,7 @@ function AltCard({film, watched, onToggle, watchRegion}) {
             />
           ))}
         </div>
-        <a href={tmdbLink} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+        <a href={search} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
           <span style={{color:scoreColor,fontWeight:"800",fontSize:"11px",textDecoration:"underline"}}>
             ⭐ {film.rating ? Math.round(film.rating * 10) : "—"}% TMDB
           </span>
@@ -1850,165 +1847,51 @@ const CINEMA_MOMENTS = [
     title:"Casablanca (1942)",
     quote:"“Here’s looking at you, kid.”",
     credit:"Written by Julius J. Epstein, Philip G. Epstein and Howard Koch.",
-    note:"Ranked among AFI’s greatest American movie quotations.",
-    sourceLabel:"American Film Institute",
-    sourceLink:"https://www.afi.com/afis-100-years-100-movie-quotes/"
-  },
-  {
-    type:"🎬 Great Dialogue",
-    title:"The Godfather (1972)",
-    quote:"“I’m gonna make him an offer he can’t refuse.”",
-    credit:"Screenplay by Mario Puzo and Francis Ford Coppola.",
-    note:"AFI ranked it among the most memorable lines in American cinema.",
-    sourceLabel:"American Film Institute",
-    sourceLink:"https://www.afi.com/afis-100-years-100-movie-quotes/"
-  },
-  {
-    type:"🎬 Great Dialogue",
-    title:"The Wizard of Oz (1939)",
-    quote:"“Toto, I’ve a feeling we’re not in Kansas anymore.”",
-    credit:"Screenplay by Noel Langley, Florence Ryerson and Edgar Allan Woolf.",
-    note:"A line whose meaning escaped the film and entered everyday language.",
-    sourceLabel:"American Film Institute",
-    sourceLink:"https://www.afi.com/afis-100-years-100-movie-quotes/"
-  },
-  {
-    type:"🎨 Makeup History",
-    title:"The Wizard of Oz (1939)",
-    quote:"The original Tin Man had to leave the production after reacting to aluminum makeup.",
-    credit:"Buddy Ebsen was replaced by Jack Haley.",
-    note:"The production’s makeup methods became one of classic Hollywood’s cautionary tales.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"🏀 One-Take Wonder",
-    title:"Alien: Resurrection (1997)",
-    quote:"Sigourney Weaver really sank Ripley’s behind-the-back basketball shot.",
-    credit:"The ball briefly leaves frame, but the successful shot was real.",
-    note:"Sometimes the most convincing special effect is extraordinary skill.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"📼 Home Cinema History",
-    title:"E.T. the Extra-Terrestrial (1982)",
-    quote:"Universal released the film on green VHS cassettes to discourage counterfeiting.",
-    credit:"The unusual cassette made genuine copies instantly recognizable.",
-    note:"The release went on to break home-entertainment records.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"🎭 Beautiful Accident",
-    title:"Rocky (1976)",
-    quote:"A costume mistake in a fight poster became an improvised line in the finished film.",
-    credit:"The art department printed Rocky’s trunks in the wrong colors.",
-    note:"Sylvester Stallone turned the error into a character moment about being underestimated.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"👘 Costume Detail",
-    title:"Star Wars (1977)",
-    quote:"Alec Guinness weathered Obi-Wan’s robes by rolling in the Tunisian desert.",
-    credit:"The actor wanted the costume to feel genuinely lived-in before filming began.",
-    note:"A tiny preparation choice helped sell an entire galaxy’s history.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"⚾ Scene Detective",
-    title:"Ferris Bueller’s Day Off (1986)",
-    quote:"Fans identified the exact baseball game attended by Ferris, Cameron and Sloane.",
-    credit:"Clues in the broadcast point to a Cubs game played on June 5, 1985.",
-    note:"Cinema lovers can turn a few seconds of background audio into historical evidence.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"🐦 Lucky Collaborator",
-    title:"It’s a Wonderful Life (1946)",
-    quote:"Director Frank Capra placed his lucky raven Jimmy in George Bailey’s workshop.",
-    credit:"Capra had cast the bird in his films since 1938.",
-    note:"Even celebrated directors can carry a favorite collaborator from set to set.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"🎖️ Lived Experience",
-    title:"The Great Escape (1963)",
-    quote:"Donald Pleasence had actually been a prisoner of war during World War II.",
-    credit:"He was shot down, imprisoned for a year and performed in camp productions.",
-    note:"His real history brought an extraordinary layer of authenticity to the film.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
-  },
-  {
-    type:"🏢 Real Location",
-    title:"Die Hard (1988)",
-    quote:"Nakatomi Plaza was not a studio invention.",
-    credit:"The film used Fox Plaza, then the recently completed headquarters of 20th Century Fox.",
-    note:"The filmmakers staged spectacular destruction inside their own studio’s new home.",
-    sourceLabel:"GamesRadar+ Movie Trivia",
-    sourceLink:"https://www.gamesradar.com/60-greatest-movie-trivia-facts/"
+    note:"A line that became part of cinema history."
   },
   {
     type:"🏆 Historic Moment",
     title:"The First Academy Awards",
     quote:"May 16, 1929",
     credit:"Held at the Hollywood Roosevelt Hotel.",
-    note:"The ceremony lasted about 15 minutes.",
-    sourceLabel:"Academy history",
-    sourceLink:"https://www.oscars.org/oscars/ceremonies/1929"
+    note:"The ceremony lasted about 15 minutes."
   },
   {
     type:"🎼 Music That Changed Cinema",
     title:"Star Wars (1977)",
     quote:"A score heard around the world.",
     credit:"Composed by John Williams.",
-    note:"Its symphonic language helped reshape the sound of the modern blockbuster.",
-    sourceLabel:"My Ciné editorial",
-    sourceLink:"https://www.themoviedb.org/movie/11"
+    note:"The music helped restore the grand symphonic sound to modern blockbusters."
   },
   {
     type:"📷 Cinematography",
     title:"Blade Runner 2049 (2017)",
     quote:"Light, color and scale turned into atmosphere.",
     credit:"Cinematography by Roger Deakins.",
-    note:"The work earned Deakins his first Academy Award.",
-    sourceLabel:"My Ciné editorial",
-    sourceLink:"https://www.themoviedb.org/movie/335984"
+    note:"The work earned Deakins his first Academy Award."
   },
   {
     type:"✍️ Screenwriter Spotlight",
     title:"Nora Ephron",
     quote:"Romance can be witty, adult and unforgettable.",
     credit:"Screenwriter of When Harry Met Sally…",
-    note:"Her voice helped define a generation of romantic comedy.",
-    sourceLabel:"My Ciné editorial",
-    sourceLink:"https://www.imdb.com/name/nm0001188/"
+    note:"Her voice shaped a generation of romantic comedy."
   },
   {
     type:"🎞️ Editing Magic",
     title:"Thelma Schoonmaker",
     quote:"Rhythm is one of cinema’s invisible superpowers.",
-    credit:"Editor and longtime collaborator of Martin Scorsese.",
-    note:"Her cuts helped shape some of modern cinema’s most kinetic storytelling.",
-    sourceLabel:"My Ciné editorial",
-    sourceLink:"https://www.imdb.com/name/nm0774817/"
+    credit:"Film editor and longtime collaborator of Martin Scorsese.",
+    note:"Her cuts helped define some of modern cinema’s most kinetic storytelling."
   },
   {
     type:"🎭 Cinema Quote",
     title:"Martin Scorsese (director)",
-    quote:"Cinema is a matter of what’s in the frame and what’s out.",
-    credit:"Director, producer and film-preservation advocate.",
-    note:"A reminder that every image is also a choice.",
-    sourceLabel:"My Ciné editorial",
-    sourceLink:"https://www.imdb.com/name/nm0000217/"
+    quote:"“Cinema is a matter of what’s in the frame and what’s out.”",
+    credit:"Director, producer and film preservation advocate.",
+    note:"A reminder that every image is also a choice."
   }
 ];
-
 const CURATED_CINEMA_MOMENTS = CINEMA_MOMENTS.map((moment, index) => ({
   ...moment,
   key:`curated-${index}`
@@ -2310,8 +2193,6 @@ function LobbyDecor() {
 }
 
 function TopNav({page, setPage, savedCount}) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const items = [
     {id:"home", label:"MY CINÉ"},
     {id:"standard", label:"Standard 🎬"},
@@ -2319,54 +2200,19 @@ function TopNav({page, setPage, savedCount}) {
     {id:"curator", label:"Meet the Curator 👋"}
   ];
 
-  const goTo = id => {
-    setPage(id);
-    setMenuOpen(false);
-    window.scrollTo({top:0, behavior:"smooth"});
-  };
-
   return (
     <nav className="top-nav">
-      <div className="top-nav-inner desktop-nav">
+      <div className="top-nav-inner">
         {items.map(item => (
           <button
             key={item.id}
-            onClick={() => goTo(item.id)}
+            onClick={() => setPage(item.id)}
             className={page === item.id ? "nav-link active" : "nav-link"}
           >
             {item.label}
           </button>
         ))}
       </div>
-
-      <div className="mobile-nav">
-        <button onClick={() => goTo("home")} className="mobile-brand">
-          MY CINÉ
-        </button>
-
-        <button
-          className="mobile-menu-button"
-          onClick={() => setMenuOpen(open => !open)}
-          aria-expanded={menuOpen}
-          aria-label="Open My Ciné menu"
-        >
-          {menuOpen ? "✕" : "☰"} Menu
-        </button>
-      </div>
-
-      {menuOpen && (
-        <div className="mobile-menu-panel">
-          {items.map(item => (
-            <button
-              key={item.id}
-              onClick={() => goTo(item.id)}
-              className={page === item.id ? "mobile-menu-link active" : "mobile-menu-link"}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }
@@ -2376,7 +2222,6 @@ function CinemaMomentCard({moment, compact=false}) {
     <article className={compact ? "cinema-moment compact" : "cinema-moment"}>
       <div className="marquee-lights marquee-top"/>
       <div className="cinema-moment-inner">
-        <div className="cinema-moments-title">🎞️ Cinema Moments</div>
         <div className="moment-kicker">{moment.type}</div>
         <h3>{moment.title}</h3>
         <blockquote>{moment.quote}</blockquote>
@@ -2419,7 +2264,7 @@ function StandardPage() {
 
       <div className="standard-grid">
         <section className="standard-card">
-          <h2>🎬 Cinema is the Seventh Art</h2>
+          <h2>🎭 Cinema is the Seventh Art</h2>
           <p>Cinema is more than entertainment. My Ciné exists to celebrate it as one of humanity’s greatest art forms.</p>
         </section>
 
@@ -2475,14 +2320,8 @@ function CuratorPage() {
     <main className="page-shell">
       <div className="curator-card cinematic-biography">
         <div className="curator-identity">
-          <div className="curator-photo-frame">
-            <img
-              src={curatorPhoto}
-              alt="Armelle Cloche, screenwriter and creator of My Ciné"
-              className="curator-photo"
-            />
-          </div>
-          <div className="curator-role">Screenwriter · Founder of My Ciné</div>
+          <div className="curator-monogram">AC</div>
+          <div className="curator-role">Screenwriter · Film lover · Creator</div>
 
           <div className="legacy-card">
             <div className="legacy-kicker">A family legacy</div>
@@ -2605,8 +2444,8 @@ function SavedPage({savedTitles, onToggle}) {
       {savedTitles.length === 0 ? (
         <div className="empty-library">
           <div>🎞️</div>
-          <h2>Your collection is waiting</h2>
-          <p>Save a film or series and begin building your personal collection.</p>
+          <h2>Your shelf is waiting</h2>
+          <p>Save any recommendation and it will appear here.</p>
         </div>
       ) : (
         <div className="saved-grid">
@@ -2667,6 +2506,7 @@ export default function App() {
   const [page, setPage] = useState("home");
   const [momentIndex, setMomentIndex] = useState(0);
   const [cinemaMoment, setCinemaMoment] = useState(CURATED_CINEMA_MOMENTS[0]);
+  const [cinemaMomentCandidates, setCinemaMomentCandidates] = useState([]);
   const [seenPickIds, setSeenPickIds] = useState([]);
   const [batchNumber, setBatchNumber] = useState(0);
   const [savedTitles, setSavedTitles] = useState(() => {
@@ -2771,23 +2611,86 @@ const run = async (excludeIds = [], resetSession = false) => {
     localStorage.setItem("mycine-saved", JSON.stringify(savedTitles));
   }, [savedTitles]);
 
+  useEffect(() => {
+    let cancelled = false;
 
+    fetchCinemaMomentCandidates().then(candidates => {
+      if (!cancelled) setCinemaMomentCandidates(candidates);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
-    const showNextMoment = () => {
-      const moment = pickUnseenMoment(CURATED_CINEMA_MOMENTS);
+    let cancelled = false;
 
-      if (moment) {
+    const showNextMoment = async () => {
+      const curatedOptions = CURATED_CINEMA_MOMENTS.filter(moment =>
+        !new Set(readMomentHistory().map(item => item.key)).has(moment.key)
+      );
+
+      const useCurated = curatedOptions.length > 0 && Math.random() < 0.45;
+
+      if (useCurated) {
+        const moment = pickUnseenMoment(curatedOptions);
+        if (moment && !cancelled) {
+          saveMomentSeen(moment.key);
+          setCinemaMoment(moment);
+        }
+        return;
+      }
+
+      const seenMovieIds = new Set(
+        readMomentHistory()
+          .map(item => String(item.key).split("-").pop())
+      );
+
+      const availableMovies = cinemaMomentCandidates.filter(movie =>
+        !seenMovieIds.has(String(movie.id))
+      );
+
+      const moviePool = availableMovies.length
+        ? availableMovies
+        : cinemaMomentCandidates;
+
+      if (!moviePool.length) {
+        const fallback = pickUnseenMoment(CURATED_CINEMA_MOMENTS);
+        if (fallback && !cancelled) {
+          saveMomentSeen(fallback.key);
+          setCinemaMoment(fallback);
+        }
+        return;
+      }
+
+      const movie = moviePool[Math.floor(Math.random() * moviePool.length)];
+      const details = await fetchCinemaMomentDetail(movie.id);
+      const options = buildDynamicCinemaMoment(movie, details);
+      const moment = pickUnseenMoment(options);
+
+      if (moment && !cancelled) {
         saveMomentSeen(moment.key);
         setCinemaMoment(moment);
+        return;
+      }
+
+      const fallback = pickUnseenMoment(CURATED_CINEMA_MOMENTS);
+
+      if (fallback && !cancelled) {
+        saveMomentSeen(fallback.key);
+        setCinemaMoment(fallback);
       }
     };
 
     showNextMoment();
     const timer = setInterval(showNextMoment, 16000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [cinemaMomentCandidates]);
 
   return (
     <div
@@ -2833,11 +2736,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     padding:8px 12px;
     scrollbar-width:none;
   }
-  .mobile-nav,
-  .mobile-menu-panel{
-    display:none;
-  }
-
   .top-nav-inner::-webkit-scrollbar{display:none;}
   .nav-link{
     flex:0 0 auto;
@@ -3030,24 +2928,19 @@ const run = async (excludeIds = [], resetSession = false) => {
     max-width:820px;
     margin:0 auto;
   }
-  .curator-photo-frame{
-    width:160px;
+  .curator-monogram{
+    width:140px;
     aspect-ratio:1;
-    margin:0 auto;
     border-radius:50%;
-    overflow:hidden;
-    border:6px solid ${C.goldBright};
-    box-shadow:0 12px 28px rgba(11,31,74,0.48);
-    background:${C.navyMid};
+    display:grid;
+    place-items:center;
+    background:linear-gradient(145deg,${C.goldBright},#ffe39b);
+    color:${C.navy};
+    font-family:Georgia,serif;
+    font-size:48px;
+    font-weight:900;
+    border:6px solid rgba(255,255,255,0.12);
   }
-  .curator-photo{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    object-position:50% 30%;
-  }
-
   .curator-card h1{font-family:Georgia,serif;font-size:42px;margin:8px 0;color:#fff;}
   .curator-card p{color:rgba(255,255,255,0.86);line-height:1.7;}
   .curator-lead{color:${C.goldBright}!important;font-weight:800;}
@@ -3172,17 +3065,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     padding-top:28px;
     padding-bottom:28px;
   }
-  .cinema-moments-title{
-    color:${C.white};
-    font-family:Georgia,serif;
-    font-size:clamp(13px,1.4vw,17px);
-    font-weight:900;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    margin-bottom:14px;
-    padding-bottom:9px;
-    border-bottom:1px solid rgba(255,184,0,0.28);
-  }
   .cinema-moment .moment-kicker{
     color:${C.goldBright};
   }
@@ -3207,8 +3089,6 @@ const run = async (excludeIds = [], resetSession = false) => {
   .cinema-moment .moment-note{
     color:rgba(255,255,255,0.82);
   }
-
-
   .cinema-moment .moment-ribbon{
     color:rgba(255,255,255,0.78);
     border-top-color:rgba(255,184,0,0.28);
@@ -3336,7 +3216,7 @@ const run = async (excludeIds = [], resetSession = false) => {
     margin-top:20px;
     padding:14px;
     border-radius:14px;
-    background:linear-gradient(145deg,rgba(176,0,26,0.56),rgba(22,45,96,0.88));
+    background:rgba(229,9,20,0.18);
     border:1px solid rgba(255,184,0,0.34);
     text-align:left;
   }
@@ -3358,14 +3238,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     color:rgba(255,255,255,0.78);
     font-size:10px;
     line-height:1.5;
-  }
-  .legacy-copy a,
-  .legacy-copy a:visited{
-    color:${C.goldBright};
-    font-weight:900;
-    text-decoration:underline;
-    text-decoration-thickness:2px;
-    text-underline-offset:2px;
   }
   .project-slate{
     margin:26px 0;
@@ -3705,135 +3577,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     }
   }
 
-
-  .page-heading{
-    padding-top:0;
-  }
-  .page-heading h1{
-    line-height:1.02;
-  }
-
-  @media (max-width:760px){
-    .desktop-nav{
-      display:none;
-    }
-    .mobile-nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:9px 14px;
-    }
-    .mobile-brand{
-      background:${C.goldBright};
-      border:1px solid ${C.white};
-      border-radius:999px;
-      padding:10px 15px;
-      color:${C.navy};
-      font-family:Georgia,serif;
-      font-size:15px;
-      font-weight:900;
-      letter-spacing:0.08em;
-      cursor:pointer;
-    }
-    .mobile-menu-button{
-      background:${C.navyMid};
-      border:1px solid rgba(255,184,0,0.55);
-      border-radius:999px;
-      padding:10px 15px;
-      color:${C.white};
-      font-size:13px;
-      font-weight:900;
-      cursor:pointer;
-    }
-    .mobile-menu-panel{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:6px;
-      padding:8px 14px 14px;
-      background:${C.navy};
-      border-top:1px solid rgba(255,184,0,0.25);
-    }
-    .mobile-menu-link{
-      width:100%;
-      border:1px solid rgba(255,184,0,0.3);
-      border-radius:10px;
-      padding:11px 12px;
-      background:${C.navyMid};
-      color:${C.white};
-      font-size:13px;
-      font-weight:800;
-      text-align:left;
-      cursor:pointer;
-    }
-    .mobile-menu-link.active{
-      background:${C.goldBright};
-      color:${C.navy};
-    }
-
-    .home-hero{
-      padding-top:16px;
-      padding-bottom:22px;
-    }
-    .home-hero .logo{
-      font-size:clamp(42px,12vw,58px);
-    }
-    .home-hero .tagline{
-      margin-top:12px;
-      line-height:1.45;
-    }
-
-    .page-shell{
-      padding-top:26px;
-    }
-    .page-heading{
-      margin-bottom:22px;
-    }
-    .page-heading > span{
-      font-size:38px;
-    }
-    .page-heading h1{
-      font-size:clamp(38px,11vw,54px);
-    }
-    .page-heading p{
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .standard-card{
-      padding:22px 20px;
-    }
-    .standard-card h2{
-      font-size:clamp(28px,8vw,40px);
-      line-height:1.05;
-    }
-
-    .curator-card{
-      padding-top:24px;
-    }
-    .curator-name{
-      align-items:flex-start;
-      text-align:left;
-      font-size:clamp(48px,14vw,68px);
-      line-height:0.92;
-    }
-    .curator-tagline{
-      text-align:left;
-      font-size:15px;
-      line-height:1.5;
-    }
-    .curator-photo-frame{
-      width:190px;
-    }
-    .curator-role{
-      font-size:10px;
-      line-height:1.45;
-    }
-    .legacy-card{
-      text-align:center;
-    }
-  }
-
   @media (max-width:760px){
     .curtain{width:38px;opacity:0.38;}
     .cinema-prop{display:none;}
@@ -3841,6 +3584,7 @@ const run = async (excludeIds = [], resetSession = false) => {
     .saved-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
     .curator-card{grid-template-columns:1fr;text-align:left;padding:22px;}
     .curator-identity{position:static;text-align:center;}
+    .curator-monogram{margin:0 auto;}
     .curator-credentials{grid-template-columns:1fr;}
     .curator-signature{align-items:center;}
     .curtain{width:28px;opacity:0.48;}
@@ -3854,9 +3598,13 @@ const run = async (excludeIds = [], resetSession = false) => {
     .curator-tagline{text-align:center;}
     .letter-signature{text-align:left;}
     .mycine-footer{padding:22px 14px 12px;}
-    .mycine-footer .closing-promise{font-size:22px;}
+    .mycine-footer .closing-promise{font-size:25px;}
     .footer-meta{flex-direction:column;gap:4px;}
-
+    .top-nav-inner{
+      justify-content:flex-start;
+      padding-left:8px;
+      padding-right:8px;
+    }
   }
 
   @keyframes shimmer{0%,100%{opacity:1;}50%{opacity:0.4;}}

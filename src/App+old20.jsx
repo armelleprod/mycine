@@ -2310,8 +2310,6 @@ function LobbyDecor() {
 }
 
 function TopNav({page, setPage, savedCount}) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const items = [
     {id:"home", label:"MY CINÉ"},
     {id:"standard", label:"Standard 🎬"},
@@ -2319,54 +2317,19 @@ function TopNav({page, setPage, savedCount}) {
     {id:"curator", label:"Meet the Curator 👋"}
   ];
 
-  const goTo = id => {
-    setPage(id);
-    setMenuOpen(false);
-    window.scrollTo({top:0, behavior:"smooth"});
-  };
-
   return (
     <nav className="top-nav">
-      <div className="top-nav-inner desktop-nav">
+      <div className="top-nav-inner">
         {items.map(item => (
           <button
             key={item.id}
-            onClick={() => goTo(item.id)}
+            onClick={() => setPage(item.id)}
             className={page === item.id ? "nav-link active" : "nav-link"}
           >
             {item.label}
           </button>
         ))}
       </div>
-
-      <div className="mobile-nav">
-        <button onClick={() => goTo("home")} className="mobile-brand">
-          MY CINÉ
-        </button>
-
-        <button
-          className="mobile-menu-button"
-          onClick={() => setMenuOpen(open => !open)}
-          aria-expanded={menuOpen}
-          aria-label="Open My Ciné menu"
-        >
-          {menuOpen ? "✕" : "☰"} Menu
-        </button>
-      </div>
-
-      {menuOpen && (
-        <div className="mobile-menu-panel">
-          {items.map(item => (
-            <button
-              key={item.id}
-              onClick={() => goTo(item.id)}
-              className={page === item.id ? "mobile-menu-link active" : "mobile-menu-link"}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }
@@ -2382,6 +2345,16 @@ function CinemaMomentCard({moment, compact=false}) {
         <blockquote>{moment.quote}</blockquote>
         <p className="moment-credit">{moment.credit}</p>
         <p className="moment-note">{moment.note}</p>
+        {moment.sourceLink && (
+          <a
+            className="moment-source"
+            href={moment.sourceLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Source: {moment.sourceLabel || "Learn more"} ↗
+          </a>
+        )}
         <div className="moment-ribbon">
           ✨ Celebrating the people behind the Seventh Art
         </div>
@@ -2419,7 +2392,7 @@ function StandardPage() {
 
       <div className="standard-grid">
         <section className="standard-card">
-          <h2>🎬 Cinema is the Seventh Art</h2>
+          <h2>🎭 Cinema is the Seventh Art</h2>
           <p>Cinema is more than entertainment. My Ciné exists to celebrate it as one of humanity’s greatest art forms.</p>
         </section>
 
@@ -2482,7 +2455,7 @@ function CuratorPage() {
               className="curator-photo"
             />
           </div>
-          <div className="curator-role">Screenwriter · Founder of My Ciné</div>
+          <div className="curator-role">Screenwriter · Film lover · Creator</div>
 
           <div className="legacy-card">
             <div className="legacy-kicker">A family legacy</div>
@@ -2605,8 +2578,8 @@ function SavedPage({savedTitles, onToggle}) {
       {savedTitles.length === 0 ? (
         <div className="empty-library">
           <div>🎞️</div>
-          <h2>Your collection is waiting</h2>
-          <p>Save a film or series and begin building your personal collection.</p>
+          <h2>Your shelf is waiting</h2>
+          <p>Save any recommendation and it will appear here.</p>
         </div>
       ) : (
         <div className="saved-grid">
@@ -2833,11 +2806,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     padding:8px 12px;
     scrollbar-width:none;
   }
-  .mobile-nav,
-  .mobile-menu-panel{
-    display:none;
-  }
-
   .top-nav-inner::-webkit-scrollbar{display:none;}
   .nav-link{
     flex:0 0 auto;
@@ -3207,8 +3175,17 @@ const run = async (excludeIds = [], resetSession = false) => {
   .cinema-moment .moment-note{
     color:rgba(255,255,255,0.82);
   }
-
-
+  .moment-source{
+    display:inline-block;
+    margin-top:12px;
+    color:${C.goldBright};
+    font-size:9px;
+    font-weight:800;
+    text-decoration:underline;
+  }
+  .moment-source:hover{
+    color:${C.white};
+  }
   .cinema-moment .moment-ribbon{
     color:rgba(255,255,255,0.78);
     border-top-color:rgba(255,184,0,0.28);
@@ -3336,7 +3313,7 @@ const run = async (excludeIds = [], resetSession = false) => {
     margin-top:20px;
     padding:14px;
     border-radius:14px;
-    background:linear-gradient(145deg,rgba(176,0,26,0.56),rgba(22,45,96,0.88));
+    background:rgba(229,9,20,0.18);
     border:1px solid rgba(255,184,0,0.34);
     text-align:left;
   }
@@ -3705,135 +3682,6 @@ const run = async (excludeIds = [], resetSession = false) => {
     }
   }
 
-
-  .page-heading{
-    padding-top:0;
-  }
-  .page-heading h1{
-    line-height:1.02;
-  }
-
-  @media (max-width:760px){
-    .desktop-nav{
-      display:none;
-    }
-    .mobile-nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:9px 14px;
-    }
-    .mobile-brand{
-      background:${C.goldBright};
-      border:1px solid ${C.white};
-      border-radius:999px;
-      padding:10px 15px;
-      color:${C.navy};
-      font-family:Georgia,serif;
-      font-size:15px;
-      font-weight:900;
-      letter-spacing:0.08em;
-      cursor:pointer;
-    }
-    .mobile-menu-button{
-      background:${C.navyMid};
-      border:1px solid rgba(255,184,0,0.55);
-      border-radius:999px;
-      padding:10px 15px;
-      color:${C.white};
-      font-size:13px;
-      font-weight:900;
-      cursor:pointer;
-    }
-    .mobile-menu-panel{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:6px;
-      padding:8px 14px 14px;
-      background:${C.navy};
-      border-top:1px solid rgba(255,184,0,0.25);
-    }
-    .mobile-menu-link{
-      width:100%;
-      border:1px solid rgba(255,184,0,0.3);
-      border-radius:10px;
-      padding:11px 12px;
-      background:${C.navyMid};
-      color:${C.white};
-      font-size:13px;
-      font-weight:800;
-      text-align:left;
-      cursor:pointer;
-    }
-    .mobile-menu-link.active{
-      background:${C.goldBright};
-      color:${C.navy};
-    }
-
-    .home-hero{
-      padding-top:16px;
-      padding-bottom:22px;
-    }
-    .home-hero .logo{
-      font-size:clamp(42px,12vw,58px);
-    }
-    .home-hero .tagline{
-      margin-top:12px;
-      line-height:1.45;
-    }
-
-    .page-shell{
-      padding-top:26px;
-    }
-    .page-heading{
-      margin-bottom:22px;
-    }
-    .page-heading > span{
-      font-size:38px;
-    }
-    .page-heading h1{
-      font-size:clamp(38px,11vw,54px);
-    }
-    .page-heading p{
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .standard-card{
-      padding:22px 20px;
-    }
-    .standard-card h2{
-      font-size:clamp(28px,8vw,40px);
-      line-height:1.05;
-    }
-
-    .curator-card{
-      padding-top:24px;
-    }
-    .curator-name{
-      align-items:flex-start;
-      text-align:left;
-      font-size:clamp(48px,14vw,68px);
-      line-height:0.92;
-    }
-    .curator-tagline{
-      text-align:left;
-      font-size:15px;
-      line-height:1.5;
-    }
-    .curator-photo-frame{
-      width:190px;
-    }
-    .curator-role{
-      font-size:10px;
-      line-height:1.45;
-    }
-    .legacy-card{
-      text-align:center;
-    }
-  }
-
   @media (max-width:760px){
     .curtain{width:38px;opacity:0.38;}
     .cinema-prop{display:none;}
@@ -3854,9 +3702,13 @@ const run = async (excludeIds = [], resetSession = false) => {
     .curator-tagline{text-align:center;}
     .letter-signature{text-align:left;}
     .mycine-footer{padding:22px 14px 12px;}
-    .mycine-footer .closing-promise{font-size:22px;}
+    .mycine-footer .closing-promise{font-size:25px;}
     .footer-meta{flex-direction:column;gap:4px;}
-
+    .top-nav-inner{
+      justify-content:flex-start;
+      padding-left:8px;
+      padding-right:8px;
+    }
   }
 
   @keyframes shimmer{0%,100%{opacity:1;}50%{opacity:0.4;}}
