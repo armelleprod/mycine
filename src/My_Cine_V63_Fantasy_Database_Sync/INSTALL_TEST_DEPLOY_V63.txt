@@ -1,0 +1,23 @@
+MY CINÉ V63 — FANTASY
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/fantasyBatches.js → existing project/src/data/fantasyBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+
+LOCAL BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+Open:
+http://localhost:5173
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add .
+git commit -m "Release MY CINE V63 Fantasy"
+git push

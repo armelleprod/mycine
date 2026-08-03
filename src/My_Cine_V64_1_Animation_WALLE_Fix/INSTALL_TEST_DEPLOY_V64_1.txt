@@ -1,0 +1,37 @@
+MY CINÉ V64.1 — ANIMATION BATCH 2 FIX
+
+CAUSE
+TMDB resolved the plain-text title "WALL-E" to an unrelated short film.
+The prepared title is now written using TMDB's exact title: "WALL·E".
+
+COPY ONLY
+src/data/animationBatches.js
+into:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine\src\data
+
+Replace the existing animationBatches.js file.
+
+DO NOT replace the src folder.
+DO NOT replace App.jsx.
+DO NOT rename, move or delete any other file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+Choose Animation, Movies and Mexico.
+Batch 1: Hoppers
+Click Keep Exploring 2/7.
+Batch 2 should open with Toy Story 5 and WALL·E among the alternatives.
+Continue through 7/7 and confirm the wrap screen.
+
+LIVE DEPLOY AFTER THE FULL TEST PASSES
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/data/animationBatches.js
+git commit -m "Fix MY CINE V64 Animation WALL-E match"
+git push

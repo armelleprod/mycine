@@ -1,0 +1,28 @@
+MY CINÉ V65 — MUSICAL
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/musicalBatches.js → existing project/src/data/musicalBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST:
+Choose 🎵 Musical, Movies and Mexico.
+Confirm exactly 7 picks, 6 alternatives, posters, trailers, ratings,
+streaming providers, Keep Exploring 2/7 through 7/7 and the wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add .
+git commit -m "Release MY CINE V65 Musical"
+git push

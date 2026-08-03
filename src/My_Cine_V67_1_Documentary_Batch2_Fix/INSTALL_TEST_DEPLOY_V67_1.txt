@@ -1,0 +1,43 @@
+MY CINÉ V67.1 — DOCUMENTARY BATCH 2 FIX
+
+CAUSE
+Night and Fog is a short documentary of roughly 32 minutes.
+MY CINÉ's runtime protection correctly rejected it as implausibly short,
+which prevented Documentary Batch 2 from resolving all seven titles.
+
+CHANGE
+Night and Fog (1956)
+→ Chronicle of a Summer (1961)
+
+COPY ONLY
+src/data/documentaryBatches.js
+into:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine\src\data
+
+Replace the existing documentaryBatches.js file.
+
+DO NOT replace the src folder.
+DO NOT replace App.jsx.
+DO NOT rename, move or delete any other file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+Choose Documentary, Movies and Mexico.
+Batch 1 should open normally.
+Click Keep Exploring 2/7.
+Batch 2 should open with Everybody to Kenmure Street.
+Chronicle of a Summer should appear as the Classic pick.
+Continue through 7/7 and confirm the wrap screen.
+
+LIVE DEPLOY AFTER THE FULL TEST PASSES
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/data/documentaryBatches.js
+git commit -m "Fix MY CINE V67 Documentary batch 2"
+git push

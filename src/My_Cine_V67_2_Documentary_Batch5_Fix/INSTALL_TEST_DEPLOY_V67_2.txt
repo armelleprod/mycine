@@ -1,0 +1,41 @@
+MY CINÉ V67.2 — DOCUMENTARY BATCH 5 FIX
+
+CAUSE
+The Alabama Solution is a 2025 documentary, not a 2026 documentary.
+MY CINÉ sends the prepared title and year to TMDB. The incorrect year prevented
+TMDB from matching the otherwise valid film.
+
+CHANGE
+The Alabama Solution (2026)
+→ The Alabama Solution (2025)
+
+COPY ONLY
+src/data/documentaryBatches.js
+into:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine\src\data
+
+Replace the existing documentaryBatches.js file.
+
+DO NOT replace the src folder.
+DO NOT replace App.jsx.
+DO NOT rename, move or delete any other file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+Choose Documentary, Movies and Mexico.
+Continue through the batches.
+Batch 5 should now open with The Alabama Solution.
+Continue through 7/7 and confirm the wrap screen.
+
+LIVE DEPLOY AFTER THE FULL TEST PASSES
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/data/documentaryBatches.js
+git commit -m "Fix MY CINE V67 Documentary Alabama Solution year"
+git push

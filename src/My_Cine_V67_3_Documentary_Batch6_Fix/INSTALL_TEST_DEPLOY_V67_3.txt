@@ -1,0 +1,42 @@
+MY CINÉ V67.3 — DOCUMENTARY BATCH 6 FIX
+
+CAUSE
+The Last Dance is a documentary series, not a feature film.
+The Documentary genre is currently testing movie-only prepared batches,
+so TMDB could not resolve it as a valid feature-length movie.
+
+CHANGE
+The Last Dance (2020 series)
+→ The Redeem Team (2022 feature documentary)
+
+COPY ONLY
+src/data/documentaryBatches.js
+into:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine\src\data
+
+Replace the existing documentaryBatches.js file.
+
+DO NOT replace the src folder.
+DO NOT replace App.jsx.
+DO NOT rename, move or delete any other file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+Choose Documentary, Movies and Mexico.
+Continue to Batch 6.
+Batch 6 should open with Rafa.
+The Redeem Team should appear as the Crowd Favorite.
+Continue through 7/7 and confirm the wrap screen.
+
+LIVE DEPLOY AFTER THE FULL TEST PASSES
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/data/documentaryBatches.js
+git commit -m "Fix MY CINE V67 Documentary batch 6"
+git push

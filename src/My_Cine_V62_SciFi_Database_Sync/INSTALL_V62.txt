@@ -1,0 +1,13 @@
+MY CINÉ V62 — SCI-FI
+NON-DESTRUCTIVE UPDATE
+
+Copy only:
+• src/App.jsx into the existing project/src folder
+• src/data/sciFiBatches.js into the existing project/src/data folder
+
+Do not replace the src folder.
+Do not rename, move or delete any existing file.
+
+Test:
+npm run build
+npm run dev

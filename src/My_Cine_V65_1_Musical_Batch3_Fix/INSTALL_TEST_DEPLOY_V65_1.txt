@@ -1,0 +1,41 @@
+MY CINÉ V65.1 — MUSICAL BATCH 3 FIX
+
+CAUSE
+Schmigadoon! is a TV series, while the prepared Musical batches currently resolve movie titles.
+TMDB therefore rejected the Batch 3 title.
+
+CHANGE
+Schmigadoon! (2021) → The Producers (2005)
+
+COPY ONLY
+src/data/musicalBatches.js
+into:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine\src\data
+
+Replace the existing musicalBatches.js file.
+
+DO NOT replace the src folder.
+DO NOT replace App.jsx.
+DO NOT rename, move or delete any other file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+Choose Musical, Movies and Mexico.
+Batch 1: Moana
+Batch 2: The Bride!
+Batch 3: Hadestown: The Musical
+Confirm The Producers loads as the Surprise pick.
+Continue through 7/7 and confirm the wrap screen.
+
+LIVE DEPLOY AFTER THE FULL TEST PASSES
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/data/musicalBatches.js
+git commit -m "Fix MY CINE V65 Musical batch 3"
+git push

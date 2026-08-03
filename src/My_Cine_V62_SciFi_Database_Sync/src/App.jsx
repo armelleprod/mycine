@@ -9,13 +9,6 @@ import { MYSTERY_EDITORIAL_BATCHES } from "./data/mysteryBatches";
 import { ACTION_ADVENTURE_EDITORIAL_BATCHES } from "./data/actionAdventureBatches";
 import { HORROR_EDITORIAL_BATCHES } from "./data/horrorBatches";
 import { SCIFI_EDITORIAL_BATCHES } from "./data/sciFiBatches";
-import { FANTASY_EDITORIAL_BATCHES } from "./data/fantasyBatches";
-import { ANIMATION_EDITORIAL_BATCHES } from "./data/animationBatches";
-import { MUSICAL_EDITORIAL_BATCHES } from "./data/musicalBatches";
-import { BIOPIC_EDITORIAL_BATCHES } from "./data/biopicBatches";
-import { DOCUMENTARY_EDITORIAL_BATCHES } from "./data/documentaryBatches";
-import { INTERNATIONAL_EDITORIAL_BATCHES } from "./data/internationalBatches";
-import { HIDDEN_GEMS_EDITORIAL_BATCHES } from "./data/hiddenGemsBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -3667,21 +3660,7 @@ export default function App() {
                       ? HORROR_EDITORIAL_BATCHES
                       : selGenres[0] === "scifi"
                         ? SCIFI_EDITORIAL_BATCHES
-                        : selGenres[0] === "fantasy"
-                          ? FANTASY_EDITORIAL_BATCHES
-                          : selGenres[0] === "animation"
-                            ? ANIMATION_EDITORIAL_BATCHES
-                            : selGenres[0] === "musical"
-                              ? MUSICAL_EDITORIAL_BATCHES
-                              : selGenres[0] === "biopic"
-                                ? BIOPIC_EDITORIAL_BATCHES
-                                : selGenres[0] === "documentary"
-                                  ? DOCUMENTARY_EDITORIAL_BATCHES
-                                  : selGenres[0] === "international"
-                                    ? INTERNATIONAL_EDITORIAL_BATCHES
-                                    : selGenres[0] === "hiddengems"
-                                      ? HIDDEN_GEMS_EDITORIAL_BATCHES
-                                      : null
+                        : null
       : null;
 
   // My Ciné Rule of Seven:
