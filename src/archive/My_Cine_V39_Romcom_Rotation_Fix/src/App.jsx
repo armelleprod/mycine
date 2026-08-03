@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 import curatorPhoto from "./assets/armelle-cloche.jpg";
-import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
-import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
-import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
-import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
-import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -39,15 +34,6 @@ const PROVIDER_COLORS = {
   "ViX":"#5B21B6"
 };
 const ERA_COLORS      = {classic:C.goldBright,modern:"#5B8DEF",current:C.red};
-const ROLE_BADGE_COLORS = {
-  "🍿 Tonight\'s Pick": C.goldBright,
-  "❤️ Crowd Favorite": "#E91E8C",
-  "🎞️ Classic": C.goldBright,
-  "🌍 Passport": "#1A73E8",
-  "💎 Discovery": "#7C3AED",
-  "🏆 Critics": "#16A34A",
-  "✨ Surprise": "#9333EA"
-};
 const CURRENT_YEAR    = new Date().getFullYear();
 
 const LOADING_MSGS = [
@@ -1523,161 +1509,6 @@ async function mapWithConcurrency(items, worker, concurrency = 5) {
   return results;
 }
 
-
-async function buildPrebuiltEditorialBatch(
-  editorialBatches,
-  genreKey,
-  watchRegion,
-  batchNumber = 1
-) {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-  if (!token) {
-    throw new Error(`TMDB token is required to enrich the prepared ${genreKey} batch.`);
-  }
-
-  const safeIndex = Math.max(
-    0,
-    Math.min(editorialBatches.length - 1, Number(batchNumber || 1) - 1)
-  );
-  const editorialBatch = editorialBatches[safeIndex];
-
-  if (!editorialBatch || editorialBatch.length !== 7) {
-    throw new Error(`Prepared ${genreKey} batch ${safeIndex + 1} is incomplete.`);
-  }
-
-  const enrichPreparedTitle = async editorial => {
-    const editorialBadge =
-      editorial.badge ||
-      editorial.role ||
-      "✨ Surprise";
-
-    const entry = {
-      ...editorial,
-      badge:editorialBadge,
-      key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
-    };
-
-    const candidate = await fetchCanonTitleCandidate(entry, token);
-    if (!candidate) {
-      throw new Error(`${editorial.title} could not be matched on TMDB.`);
-    }
-
-    const normalized = {
-      ...candidate,
-      title:candidate.title || candidate.name || editorial.title,
-      year:String(
-        candidate.release_date || candidate.first_air_date || editorial.year
-      ).slice(0,4),
-      media_type:"movie",
-      isTV:false,
-      format:"Film",
-      rating:Number(candidate.vote_average || 0),
-      vote_count:Number(candidate.vote_count || 0),
-      popularity:Number(candidate.popularity || 0),
-      poster_path:candidate.poster_path || null,
-      overview:candidate.overview || editorial.curatorNote || "Synopsis unavailable.",
-      original_language:candidate.original_language || "",
-      genre_ids:candidate.genre_ids || [],
-      era:Number(editorial.year) < 1990
-        ? "classic"
-        : Number(editorial.year) < 2020
-          ? "modern"
-          : "current"
-    };
-
-    const details = await fetchTitleDetails(normalized);
-
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
-    if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
-    ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
-    }
-
-    // Prepared Romcom batches are approved editorially before runtime.
-    // TMDB enriches the title with live metadata, but does not veto it.
-    // The live community score remains visible to the user.
-    const liveTmdbRating = Number(details.rating || 0);
-    const displayedTmdbPercent = Math.round(liveTmdbRating * 10);
-
-    let availability = {
-      stream:[], free:[], ads:[], rent:[], buy:[], link:null
-    };
-
-    try {
-      availability = await fetchWatchProviders(
-        details.id,
-        watchRegion,
-        "movie"
-      );
-    } catch (error) {
-      console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, error);
-    }
-
-    const providers = [
-      ...(availability.stream || []),
-      ...(availability.free || []),
-      ...(availability.ads || []),
-      ...(availability.rent || []),
-      ...(availability.buy || [])
-    ];
-
-    const providerNames = [...new Set(
-      providers
-        .map(item => canonicalProviderName(item.provider_name))
-        .filter(Boolean)
-    )];
-
-    return {
-      ...details,
-      editorialBatch:safeIndex + 1,
-      editorialSlot:editorial.slot,
-      roleBadge:editorialBadge,
-      editoriallyApproved:true,
-      displayedTmdbPercent,
-      canonTier:editorial.tier,
-      curatorNote:editorial.curatorNote,
-      countryEditorial:editorial.country,
-      languageEditorial:editorial.language,
-      providerNames,
-      provider:providerNames.length
-        ? providerNames.slice(0,3).join(" • ")
-        : "Check availability",
-      watchLink:availability.link ||
-        `https://www.themoviedb.org/movie/${details.id}/watch?locale=${watchRegion}`,
-      watchRegionCode:watchRegion,
-      highlight:{
-        icon:String(editorialBadge).split(" ")[0],
-        label:String(editorialBadge).replace(/^\S+\s*/, ""),
-        text:editorial.curatorNote
-      },
-      whyWatch:editorial.curatorNote || details.overview
-    };
-  };
-
-  const resolved = await mapWithConcurrency(
-    editorialBatch,
-    enrichPreparedTitle,
-    4
-  );
-
-  const titles = resolved.filter(Boolean);
-  if (titles.length !== 7) {
-    throw new Error(
-      `Prepared ${genreKey} batch ${safeIndex + 1} could not resolve all seven titles.`
-    );
-  }
-
-  return {
-    hero:titles[0],
-    alts:titles.slice(1)
-  };
-}
-
 async function buildPicks(
   tab,
   selGenres,
@@ -2461,7 +2292,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
         <Poster path={film.poster_path} title={film.title} size="w500"/>
         <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(to top,rgba(11,20,48,1),transparent)"}}/>
         <div style={{position:"absolute",top:"12px",left:"12px"}}>
-          <span style={{background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.08em"}}>{film.roleBadge || "🍿 Tonight's Pick"}</span>
+          <span style={{background:C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.1em"}}>🍿 Tonight's Pick</span>
         </div>
         {Number(film.year) === CURRENT_YEAR && (
           <div style={{position:"absolute",top:"12px",right:"12px"}}>
@@ -2598,23 +2429,24 @@ function AltCard({film, watched, onToggle, watchRegion}) {
 >
   <Poster path={film.poster_path} title={film.title} size="w342"/>
 
-{film.roleBadge && (
+{(Number(film.year) === CURRENT_YEAR || film.era === "classic" || film.era === "modern") && (
   <div style={{position:"absolute",top:"7px",left:"7px"}}>
     <span
       style={{
-        background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,
-        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic")
-          ? C.navy
-          : C.white,
+        background:Number(film.year) === CURRENT_YEAR ? C.red : eraColor,
+        color:C.white,
         fontSize:"8px",
-        fontWeight:"900",
-        padding:"3px 7px",
-        borderRadius:"5px",
-        textTransform:"uppercase",
-        boxShadow:"0 2px 8px rgba(0,0,0,.35)"
+        fontWeight:"800",
+        padding:"2px 7px",
+        borderRadius:"4px",
+        textTransform:"uppercase"
       }}
     >
-      {film.roleBadge}
+      {Number(film.year) === CURRENT_YEAR
+        ? "New"
+        : film.era === "classic"
+          ? "Classic"
+          : "Modern"}
     </span>
   </div>
 )}
@@ -3329,7 +3161,7 @@ function StandardPage() {
 
         <section className="standard-card">
           <h2>⭐ A Quality Standard</h2>
-          <p>Every recommendation must reach at least 75% in the live TMDB community rating. Romcom now serves precomposed editorial batches from the My Ciné Database. TMDB supplies posters, ratings, trailers and availability, but never chooses or rearranges the seven films.</p>
+          <p>Every recommendation must reach at least 75% in the live TMDB community rating. Romcom runs from the My Ciné Database. Recent Tonight’s Picks must now pass rating, vote-confidence and confirmed-availability gates; the 100-title Canon supplies the balanced alternatives and fallback hero.</p>
           <p>My Ciné displays the source transparently. It does not present TMDB scores as Rotten Tomatoes, IMDb, Google, or a fabricated average.</p>
           <p>Future versions may integrate additional verified rating sources, but each source will remain clearly identified.</p>
         </section>
@@ -3633,30 +3465,6 @@ export default function App() {
 
   const canFetch =
     tab === "genre" ? selGenres.length > 0 : !!selMood;
-
-  const activePreparedBatches =
-    tab === "genre" &&
-    selGenres.length === 1 &&
-    contentMode !== "tv"
-      ? selGenres[0] === "romcom"
-        ? ROMCOM_EDITORIAL_BATCHES
-        : selGenres[0] === "comedy"
-          ? COMEDY_EDITORIAL_BATCHES
-          : selGenres[0] === "romance"
-            ? ROMANCE_EDITORIAL_BATCHES
-            : selGenres[0] === "drama"
-              ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : null
-      : null;
-
-  // My Ciné Rule of Seven:
-  // exactly seven recommendations per set and a maximum of seven sets
-  // during one genre session, even when the editorial database stores more.
-  const activeBatchCount = activePreparedBatches
-    ? Math.min(7, activePreparedBatches.length)
-    : 7;
   const cycleMsg = () => {
   let i = 0;
 
@@ -3677,35 +3485,19 @@ const run = async (
 
   const timer = cycleMsg();
   const targetBatch = requestedBatch ?? (
-    resetSession ? 1 : Math.min(activeBatchCount, batchNumber + 1)
+    resetSession ? 1 : Math.min(7, batchNumber + 1)
   );
 
   try {
-    const preparedGenre =
-      tab === "genre" &&
-      selGenres.length === 1 &&
-      contentMode !== "tv"
-        ? selGenres[0]
-        : null;
-
-    const preparedBatches = activePreparedBatches;
-
-    const result = preparedBatches
-      ? await buildPrebuiltEditorialBatch(
-          preparedBatches,
-          preparedGenre,
-          watchRegion,
-          targetBatch
-        )
-      : await buildPicks(
-          tab,
-          selGenres,
-          selMood,
-          watchRegion,
-          contentMode,
-          excludeIds,
-          targetBatch
-        );
+    const result = await buildPicks(
+      tab,
+      selGenres,
+      selMood,
+      watchRegion,
+      contentMode,
+      excludeIds,
+      targetBatch
+    );
 
     const newIds = [result.hero?.id, ...result.alts.map(item => item.id)].filter(Boolean);
     const previousBatchIds = new Set(
@@ -3730,6 +3522,20 @@ const run = async (
     setAlts(result.alts);
     setGenerated(true);
 
+    const activeSelectionKey = recommendationSelectionKey(
+      tab,
+      selGenres,
+      selMood,
+      contentMode
+    );
+
+    if (
+      tab === "genre" &&
+      selGenres.includes("romcom")
+    ) {
+      advanceRomcomRotation(activeSelectionKey);
+    }
+
     setSeenPickIds(previous =>
       [...new Set([...previous, ...newIds])]
     );
@@ -3748,21 +3554,10 @@ const run = async (
   const doFetch = () => {
     if (loading) return;
 
-    const isPreparedEditorialGenre = Boolean(activePreparedBatches);
-
     const previousIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
 
-    if (isPreparedEditorialGenre) {
-      // Prepared editorial journeys end at set 7.
-      // They never wrap back to set 1 inside the same session.
-      if (batchNumber >= activeBatchCount) return;
-
-      const nextBatch = batchNumber + 1;
-      run([...new Set(previousIds)], false, nextBatch);
-      return;
-    }
-
+    // Start Fresh means a different batch within the same rotation.
     run([...new Set(previousIds)], true, 1);
   };
 
@@ -3774,6 +3569,9 @@ const run = async (
       contentMode
     );
 
+    if (tab === "genre" && selGenres.includes("romcom")) {
+      resetRomcomRotation(key);
+    }
 
     setSeenPickIds([]);
     setBatchNumber(0);
@@ -3781,9 +3579,9 @@ const run = async (
   };
 
   const doMore = () => {
-    if (loading || batchNumber >= activeBatchCount) return;
+    if (loading || batchNumber >= 7) return;
 
-    const nextBatch = Math.min(activeBatchCount, batchNumber + 1);
+    const nextBatch = Math.min(7, batchNumber + 1);
     const currentIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
 
@@ -5622,7 +5420,7 @@ const run = async (
       <div className="app-content">
         {error&&(
           <div className="public-error">
-            <strong>🎬 My Ciné could not load the next prepared editorial collection.</strong>
+            <strong>🎬 My Ciné could not complete the next rotation.</strong>
             <span>Please tap the button again. The current seven remain safely in place.</span>
           </div>
         )}
@@ -5661,92 +5459,31 @@ const run = async (
               </div>
             )}
             <div style={{marginTop:"28px"}}>
-              {batchNumber < activeBatchCount ? (
-                <button
-                  onClick={doMore}
-                  disabled={loading}
-                  style={{
-                    width:"100%",
-                    background:"transparent",
-                    border:`1.5px solid ${C.goldBright}88`,
-                    borderRadius:"10px",
-                    padding:"13px",
-                    color:C.goldBright,
-                    fontWeight:"800",
-                    fontSize:"14px",
-                    cursor:loading?"not-allowed":"pointer",
-                    fontFamily:"Georgia,serif",
-                    opacity:loading?0.65:1
-                  }}
-                >
-                  {loading
-                    ? loadingMsg
-                    : `🎦 Keep Exploring ${Math.min(
-                        activeBatchCount,
-                        batchNumber + 1
-                      )}/${activeBatchCount}`}
-                </button>
-              ) : (
-                <div style={{
-                  background:C.navy,
-                  border:`2px solid ${C.goldBright}`,
-                  borderRadius:"14px",
-                  padding:"22px 20px",
-                  boxShadow:"0 12px 30px rgba(0,0,0,0.28)",
-                  textAlign:"center"
-                }}>
-                  <div style={{
-                    color:C.goldBright,
-                    fontFamily:"Georgia,serif",
-                    fontWeight:"900",
-                    fontSize:"20px",
-                    lineHeight:"1.25",
-                    marginBottom:"8px"
-                  }}>
-                    🎬 That's a wrap for this genre!
-                  </div>
-                  <div style={{
-                    color:C.white,
-                    fontFamily:"Georgia,serif",
-                    fontSize:"16px",
-                    lineHeight:"1.4"
-                  }}>
-                    Ready for another cinematic adventure?
-                  </div>
-                </div>
-              )}
-
-              {batchNumber >= activeBatchCount&&(
-                <div style={{marginTop:"16px",textAlign:"center"}}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGenerated(false);
-                      setHero(null);
-                      setAlts([]);
-                      setSeenPickIds([]);
-                      setBatchNumber(0);
-                      setSelGenres([]);
-                      setError(null);
-                      window.scrollTo({top:0,behavior:"smooth"});
-                    }}
-                    style={{
-                      background:C.goldBright,
-                      color:C.navy,
-                      border:"none",
-                      borderRadius:"10px",
-                      padding:"13px 18px",
-                      fontWeight:"900",
-                      fontSize:"14px",
-                      cursor:"pointer",
-                      fontFamily:"Georgia,serif",
-                      boxShadow:"0 8px 20px rgba(0,0,0,0.22)"
-                    }}
-                  >
-                    🍿 Explore another genre
-                  </button>
-                </div>
-              )}
+              <button
+                onClick={doMore}
+                disabled={loading || batchNumber >= 7}
+                style={{
+                  width:"100%",
+                  background:"transparent",
+                  border:`1.5px solid ${C.goldBright}88`,
+                  borderRadius:"10px",
+                  padding:"13px",
+                  color:C.goldBright,
+                  fontWeight:"800",
+                  fontSize:"14px",
+                  cursor:(loading || batchNumber >= 7)?"not-allowed":"pointer",
+                  fontFamily:"Georgia,serif",
+                  opacity:(loading || batchNumber >= 7)?0.5:1
+                }}
+              >
+                {loading
+                  ? loadingMsg
+                  : batchNumber >= 7
+                    ? "🎦 Seven complete sets revealed"
+                    : batchNumber >= 7
+      ? "🎦 Exploration Complete 7/7"
+      : `🎦 Keep Exploring ${Math.min(7, batchNumber + 1)}/7`}
+              </button>
             </div>
           </div>
         )}

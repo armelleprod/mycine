@@ -1,18 +1,5 @@
 import { useEffect, useState } from "react";
 import curatorPhoto from "./assets/armelle-cloche.jpg";
-import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
-import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
-import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
-import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
-import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
-import {
-  applyCanonMetadata,
-  canonViewerType,
-  getCanonEntriesForGenre,
-  getNewArrivalsForGenre,
-  isCanonApprovedFor,
-  isEditoriallyExcluded
-} from "./data/canon";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // MY CINÉ — Clean Single Architecture
@@ -39,15 +26,6 @@ const PROVIDER_COLORS = {
   "ViX":"#5B21B6"
 };
 const ERA_COLORS      = {classic:C.goldBright,modern:"#5B8DEF",current:C.red};
-const ROLE_BADGE_COLORS = {
-  "🍿 Tonight\'s Pick": C.goldBright,
-  "❤️ Crowd Favorite": "#E91E8C",
-  "🎞️ Classic": C.goldBright,
-  "🌍 Passport": "#1A73E8",
-  "💎 Discovery": "#7C3AED",
-  "🏆 Critics": "#16A34A",
-  "✨ Surprise": "#9333EA"
-};
 const CURRENT_YEAR    = new Date().getFullYear();
 
 const LOADING_MSGS = [
@@ -339,705 +317,6 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
   };
 }
 
-
-// ── MY CINÉ ENGINE 2.0 ───────────────────────────────────────────────────────
-const RECOMMENDATION_HISTORY_KEY = "mycine-recommendation-history-romcom-db-v3";
-const HISTORY_WINDOW_DAYS = 30;
-const HERO_HISTORY_WINDOW_DAYS = 60;
-
-function safeReadRecommendationHistory() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(RECOMMENDATION_HISTORY_KEY) || "[]");
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function recommendationSelectionKey(tab, selGenres, selMood, contentMode) {
-  const sortedGenres = [...selGenres].sort();
-  const selection = tab === "mood"
-    ? `mood:${selMood || ""}`
-    : `genres:${sortedGenres.join("+")}`;
-
-  const canonVersion =
-    tab === "genre" && sortedGenres.includes("romcom")
-      ? "|database:romcom-v1"
-      : "";
-
-  return `${selection}|format:${contentMode}${canonVersion}`;
-}
-
-function recentHistoryIds(selectionKey, days, heroOnly = false) {
-  const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
-
-  return new Set(
-    safeReadRecommendationHistory()
-      .filter(entry =>
-        entry &&
-        entry.selectionKey === selectionKey &&
-        Number(entry.shownAt || 0) >= cutoff &&
-        (!heroOnly || entry.hero)
-      )
-      .map(entry => `${entry.mediaType || "movie"}-${entry.id}`)
-  );
-}
-
-function saveRecommendationHistory(selectionKey, titles) {
-  const history = safeReadRecommendationHistory();
-  const additions = titles
-    .filter(Boolean)
-    .map((title, index) => ({
-      id: title.id,
-      mediaType: title.media_type || (title.isTV ? "tv" : "movie"),
-      selectionKey,
-      shownAt: Date.now(),
-      hero: index === 0
-    }));
-
-  const merged = [...history, ...additions]
-    .filter(entry => Number(entry.shownAt || 0) >= Date.now() - 180 * 24 * 60 * 60 * 1000)
-    .slice(-1400);
-
-  localStorage.setItem(RECOMMENDATION_HISTORY_KEY, JSON.stringify(merged));
-}
-
-function titleIdentity(title) {
-  return `${title.media_type || (title.isTV ? "tv" : "movie")}-${title.id}`;
-}
-
-function dedupeTitles(titles) {
-  const seen = new Set();
-
-  return titles.filter(title => {
-    const key = titleIdentity(title);
-    if (!title?.id || seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-}
-
-function engineAudienceType(title) {
-  const canonType = canonViewerType(title);
-  if (canonType) return canonType;
-
-  const votes = Number(title.vote_count || 0);
-  const popularity = Number(title.popularity || 0);
-  const year = Number(title.year || 0);
-  const language = String(title.languageCode || title.original_language || "").toLowerCase();
-  const country = String(title.countryCode || "").toUpperCase();
-
-  const classic = year > 0 && year < 1990;
-  const international = Boolean(language) && language !== "en";
-  const auteurLean =
-    Number(title.rating || 0) >= 7.5 &&
-    votes >= 50 &&
-    votes <= 4500 &&
-    popularity < 45;
-
-  if (classic || international || auteurLean || title.highlight?.label === "Auteur pick") {
-    return "cinephile";
-  }
-
-  if (votes >= 2500 || popularity >= 45 || Number(title.revenue || 0) >= 75000000) {
-    return "casual";
-  }
-
-  if (country && country !== "US" && votes < 2500) {
-    return "cinephile";
-  }
-
-  return "specialist";
-}
-
-function engineScore(title, selectedLabels, preferredType = null) {
-  const rating = Number(title.rating || 0);
-  const votes = Number(title.vote_count || 0);
-  const popularity = Number(title.popularity || 0);
-  const year = Number(title.year || 0);
-  const audienceType = engineAudienceType(title);
-  const genreText = (title.genres || []).join(" ").toLowerCase();
-  const keywordText = (title.keywords || []).join(" ").toLowerCase();
-  const overview = String(title.overview || "").toLowerCase();
-  const selectionText = selectedLabels.join(" ");
-
-  let relevance = 0;
-  selectedLabels.forEach(label => {
-    const words = label.split(/\s+/).filter(Boolean);
-    const haystack = `${genreText} ${keywordText} ${overview}`;
-    const matches = words.filter(word => haystack.includes(word)).length;
-    relevance += Math.min(18, matches * 7);
-  });
-
-  if (selectionText.includes("sci-fi") && /science fiction|space|future|robot|alien|time travel/.test(`${genreText} ${keywordText} ${overview}`)) relevance += 24;
-  if (selectionText.includes("romance") && /romance|love story|relationship/.test(`${genreText} ${keywordText} ${overview}`)) relevance += 24;
-  if (selectionText.includes("horror") && /horror|ghost|demon|slasher|zombie|haunted/.test(`${genreText} ${keywordText} ${overview}`)) relevance += 24;
-  if (selectionText.includes("comedy") && genreText.includes("comedy")) relevance += 24;
-
-  const ratingPoints = Math.max(0, rating - 7.5) * 22;
-  const confidencePoints = Math.min(22, Math.log10(Math.max(votes, 10)) * 6);
-  const popularityPoints = Math.min(12, popularity * 0.12);
-  const freshnessPoints = year >= CURRENT_YEAR - 2 ? 5 : 0;
-  const profilePoints = preferredType && audienceType === preferredType ? 18 : 0;
-
-  return relevance + ratingPoints + confidencePoints + popularityPoints + freshnessPoints + profilePoints;
-}
-
-function isKoreanTitle(title) {
-  return String(title.countryCode || "").toUpperCase() === "KR" ||
-    String(title.languageCode || title.original_language || "").toLowerCase() === "ko";
-}
-
-function canAddForDiversity(title, selected, {
-  contentMode,
-  targetMovies,
-  targetTV,
-  allowExtraCountry = false,
-  allowExtraLanguage = false,
-  allowSecondKoreanTV = false
-}) {
-  if (!title) return false;
-
-  const mediaType = title.media_type || (title.isTV ? "tv" : "movie");
-  const movieCount = selected.filter(item => !item.isTV).length;
-  const tvCount = selected.filter(item => item.isTV).length;
-
-  if (contentMode === "both") {
-    if (mediaType === "movie" && movieCount >= targetMovies) return false;
-    if (mediaType === "tv" && tvCount >= targetTV) return false;
-  }
-
-  const country = String(title.countryCode || "").toUpperCase();
-  if (country) {
-    const countryCount = selected.filter(item => String(item.countryCode || "").toUpperCase() === country).length;
-    if (countryCount >= (allowExtraCountry ? 3 : 2)) return false;
-  }
-
-  const language = String(title.languageCode || title.original_language || "").toLowerCase();
-  if (language && language !== "en") {
-    const languageCount = selected.filter(item =>
-      String(item.languageCode || item.original_language || "").toLowerCase() === language
-    ).length;
-    if (languageCount >= (allowExtraLanguage ? 3 : 2)) return false;
-  }
-
-  if (title.isTV && isKoreanTitle(title) && !allowSecondKoreanTV) {
-    const koreanTVCount = selected.filter(item => item.isTV && isKoreanTitle(item)).length;
-    if (koreanTVCount >= 1) return false;
-  }
-
-  return true;
-}
-
-
-function isEastAsianTitle(title) {
-  return ["KR","JP","CN","TW","HK"].includes(
-    String(title.countryCode || title.canon?.country || "").toUpperCase()
-  ) || ["ko","ja","zh"].includes(
-    String(title.languageCode || title.original_language || title.canon?.language || "").toLowerCase()
-  );
-}
-
-function canonRoleMatch(title, role) {
-  const roles = title.canon?.roles || [];
-
-  if (roles.includes(role)) return true;
-  if (role === "crowd-favorite") {
-    return title.canonTier === "essential" ||
-      engineAudienceType(title) === "casual";
-  }
-  if (role === "classic-choice") {
-    return Number(title.year || 0) < 1990;
-  }
-  if (role === "passport-pick") {
-    return String(title.original_language || "").toLowerCase() !== "en";
-  }
-  if (role === "hidden-gem") {
-    return title.canonTier === "outstanding" ||
-      Number(title.vote_count || 0) < 4000;
-  }
-  if (role === "critics-choice") {
-    return title.canonTier === "masterpiece" ||
-      engineAudienceType(title) === "cinephile";
-  }
-  if (role === "curators-surprise") {
-    return roles.includes("curators-surprise") ||
-      title.canonTier === "outstanding";
-  }
-
-  return false;
-}
-
-function assembleRomcomDatabaseBatch(
-  hero,
-  candidates,
-  contentMode,
-  batchNumber
-) {
-  const selected = [];
-  const used = new Set([titleIdentity(hero)]);
-
-  const targetMovies = contentMode === "both"
-    ? (batchNumber % 2 === 0 ? 3 : 4)
-    : contentMode === "movie" ? 7 : 0;
-  const targetTV = contentMode === "both"
-    ? 7 - targetMovies
-    : contentMode === "tv" ? 7 : 0;
-
-  const rolePlan = [
-    ["crowd-favorite","casual"],
-    ["classic-choice","cinephile"],
-    ["passport-pick","specialist"],
-    ["hidden-gem","specialist"],
-    ["critics-choice","cinephile"],
-    ["curators-surprise","casual"]
-  ];
-
-  const countryCount = new Map();
-  const decadeCount = new Map();
-  let classicCount = Number(hero.year || 0) < 1990 ? 1 : 0;
-  let eastAsianCount = isEastAsianTitle(hero) ? 1 : 0;
-
-  const selectedMovieCount = () =>
-    selected.filter(title => !title.isTV).length + (hero.isTV ? 0 : 1);
-  const selectedTVCount = () =>
-    selected.filter(title => title.isTV).length + (hero.isTV ? 1 : 0);
-
-  const register = title => {
-    const country = String(title.countryCode || title.canon?.country || "").toUpperCase();
-    const decade = Math.floor(Number(title.year || 0) / 10) * 10;
-    if (country) countryCount.set(country, (countryCount.get(country) || 0) + 1);
-    if (decade) decadeCount.set(decade, (decadeCount.get(decade) || 0) + 1);
-    if (Number(title.year || 0) < 1990) classicCount += 1;
-    if (isEastAsianTitle(title)) eastAsianCount += 1;
-  };
-
-  const heroCountry = String(hero.countryCode || hero.canon?.country || "").toUpperCase();
-  const heroDecade = Math.floor(Number(hero.year || 0) / 10) * 10;
-  if (heroCountry) countryCount.set(heroCountry, 1);
-  if (heroDecade) decadeCount.set(heroDecade, 1);
-
-  const canAdd = (title, relax = 0) => {
-    if (!title || used.has(titleIdentity(title))) return false;
-
-    if (contentMode === "both") {
-      if (!title.isTV && selectedMovieCount() >= targetMovies) return false;
-      if (title.isTV && selectedTVCount() >= targetTV) return false;
-    }
-
-    const country = String(title.countryCode || title.canon?.country || "").toUpperCase();
-    const decade = Math.floor(Number(title.year || 0) / 10) * 10;
-
-    if (country && (countryCount.get(country) || 0) >= (relax >= 2 ? 3 : 2)) {
-      return false;
-    }
-
-    if (decade && (decadeCount.get(decade) || 0) >= (relax >= 2 ? 3 : 2)) {
-      return false;
-    }
-
-    if (Number(title.year || 0) < 1990 && classicCount >= 2 && relax < 2) {
-      return false;
-    }
-
-    if (isEastAsianTitle(title) && eastAsianCount >= 1 && relax < 3) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const ranked = [...candidates].sort(
-    (a,b) => engineScore(b, ["romcom"]) - engineScore(a, ["romcom"])
-  );
-
-  for (const [role, profile] of rolePlan) {
-    let chosen = null;
-
-    for (let relax = 0; relax <= 3 && !chosen; relax += 1) {
-      chosen = ranked
-        .filter(title => canonRoleMatch(title, role))
-        .filter(title => engineAudienceType(title) === profile || relax >= 1)
-        .find(title => canAdd(title, relax));
-    }
-
-    if (!chosen) {
-      for (let relax = 0; relax <= 3 && !chosen; relax += 1) {
-        chosen = ranked.find(title => canAdd(title, relax));
-      }
-    }
-
-    if (chosen) {
-      chosen.curationRole = role;
-      selected.push(chosen);
-      used.add(titleIdentity(chosen));
-      register(chosen);
-    }
-  }
-
-  if (selected.length < 6) {
-    for (let relax = 0; relax <= 3 && selected.length < 6; relax += 1) {
-      for (const title of ranked) {
-        if (selected.length >= 6) break;
-        if (!canAdd(title, relax)) continue;
-        selected.push(title);
-        used.add(titleIdentity(title));
-        register(title);
-      }
-    }
-  }
-
-  if (selected.length < 6) {
-    throw new Error("The Romcom Database could not compose six balanced alternatives.");
-  }
-
-  return selected.slice(0,6);
-}
-
-function assembleEngineBatch(hero, candidates, selectedLabels, contentMode, batchNumber) {
-  const remainingSlots = 6;
-  const selected = [];
-  const used = new Set([titleIdentity(hero)]);
-
-  const targetMovies = contentMode === "both"
-    ? (batchNumber % 2 === 0 ? 3 : 4)
-    : contentMode === "movie" ? 7 : 0;
-
-  const targetTV = contentMode === "both"
-    ? 7 - targetMovies
-    : contentMode === "tv" ? 7 : 0;
-
-  const heroMovies = hero.isTV ? 0 : 1;
-  const heroTV = hero.isTV ? 1 : 0;
-
-  const altTargetMovies = Math.max(0, targetMovies - heroMovies);
-  const altTargetTV = Math.max(0, targetTV - heroTV);
-
-  const sortedByProfile = profile =>
-    [...candidates]
-      .filter(title => engineAudienceType(title) === profile)
-      .sort((a, b) => engineScore(b, selectedLabels, profile) - engineScore(a, selectedLabels, profile));
-
-  const profiles = [
-    ["casual", 2],
-    ["specialist", 2],
-    ["cinephile", 2]
-  ];
-
-  const tryAdd = (title, relax = 0) => {
-    if (!title || selected.length >= remainingSlots || used.has(titleIdentity(title))) return false;
-
-    const allowed = canAddForDiversity(title, selected, {
-      contentMode,
-      targetMovies: altTargetMovies,
-      targetTV: altTargetTV,
-      allowExtraCountry: relax >= 1,
-      allowExtraLanguage: relax >= 2,
-      allowSecondKoreanTV: relax >= 3
-    });
-
-    if (!allowed) return false;
-
-    selected.push(title);
-    used.add(titleIdentity(title));
-    return true;
-  };
-
-  profiles.forEach(([profile, target]) => {
-    let added = 0;
-    for (const title of sortedByProfile(profile)) {
-      if (added >= target || selected.length >= remainingSlots) break;
-      if (tryAdd(title, 0)) {
-        title.curationRole = profile;
-        added += 1;
-      }
-    }
-  });
-
-  const allSorted = [...candidates].sort(
-    (a, b) => engineScore(b, selectedLabels) - engineScore(a, selectedLabels)
-  );
-
-  for (let relax = 0; relax <= 3 && selected.length < remainingSlots; relax += 1) {
-    for (const title of allSorted) {
-      if (selected.length >= remainingSlots) break;
-      tryAdd(title, relax);
-    }
-  }
-
-  // Final safety net: preserve the 75% floor and relevance, but do not return
-  // zero merely because the ideal diversity distribution was unavailable.
-  if (selected.length < remainingSlots) {
-    for (const title of allSorted) {
-      if (selected.length >= remainingSlots) break;
-      if (!title || used.has(titleIdentity(title))) continue;
-
-      selected.push(title);
-      used.add(titleIdentity(title));
-    }
-  }
-
-  if (selected.length < remainingSlots) {
-    throw new Error(
-      `Only ${selected.length + 1} qualified titles remained after the live TMDB checks.`
-    );
-  }
-
-  const cinephileOrSpecialist = selected
-    .filter(title => ["cinephile", "specialist"].includes(engineAudienceType(title)))
-    .sort((a, b) => engineScore(b, selectedLabels) - engineScore(a, selectedLabels))[0];
-
-  if (cinephileOrSpecialist) {
-    cinephileOrSpecialist.curatorSurprise = true;
-  }
-
-  return selected.slice(0, remainingSlots);
-}
-
-
-const CANON_TMDB_CACHE_KEY = "mycine-romcom-database-cache-v1";
-
-function readCanonTmdbCache() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(CANON_TMDB_CACHE_KEY) || "{}");
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-function writeCanonTmdbCache(cache) {
-  localStorage.setItem(CANON_TMDB_CACHE_KEY, JSON.stringify(cache));
-}
-
-async function fetchCanonTitleCandidate(entry, token) {
-  const cache = readCanonTmdbCache();
-  const cacheKey = entry.key;
-
-  if (cache[cacheKey]) {
-    return cache[cacheKey];
-  }
-
-  const endpoint = entry.type === "tv" ? "tv" : "movie";
-  const params = new URLSearchParams({
-    query: entry.title,
-    language: "en-US",
-    include_adult: "false",
-    page: "1"
-  });
-
-  if (entry.type !== "tv") {
-    params.set("year", String(entry.year));
-  }
-
-  const response = await fetch(
-    `https://api.themoviedb.org/3/search/${endpoint}?${params.toString()}`,
-    {
-      headers:{
-        Authorization:`Bearer ${token}`,
-        accept:"application/json"
-      }
-    }
-  );
-
-  if (!response.ok) return null;
-
-  const data = await response.json();
-  const exact = (data.results || []).find(item => {
-    const itemTitle = entry.type === "tv" ? item.name : item.title;
-    const itemYear = String(
-      (entry.type === "tv" ? item.first_air_date : item.release_date) || ""
-    ).slice(0,4);
-
-    return normalizeFilterLabel(itemTitle) === normalizeFilterLabel(entry.title) &&
-      (!itemYear || Number(itemYear) === Number(entry.year));
-  }) || (data.results || [])[0];
-
-  if (!exact) return null;
-
-  const candidate = {
-    ...exact,
-    media_type:endpoint
-  };
-
-  cache[cacheKey] = candidate;
-  writeCanonTmdbCache(cache);
-
-  return candidate;
-}
-
-async function fetchCanonCandidates(genre, contentMode, excludeIds = []) {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-  if (!token) return [];
-
-  const excluded = new Set(excludeIds.map(String));
-  const entries = getCanonEntriesForGenre(genre)
-    .filter(entry =>
-      contentMode === "both" ||
-      (contentMode === "movie" && entry.type === "movie") ||
-      (contentMode === "tv" && entry.type === "tv")
-    );
-
-  const resolved = await mapWithConcurrency(
-    entries,
-    entry => fetchCanonTitleCandidate(entry, token),
-    5
-  );
-
-  return dedupeTitles(
-    resolved
-      .filter(Boolean)
-      .filter(item => !excluded.has(String(item.id)))
-  );
-}
-
-
-async function fetchNewArrivalCandidates(genre, contentMode, excludeIds = []) {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-  if (!token) return [];
-
-  const excluded = new Set(excludeIds.map(String));
-  const entries = getNewArrivalsForGenre(genre, contentMode);
-
-  const resolved = await mapWithConcurrency(
-    entries,
-    async entry => {
-      const candidate = await fetchCanonTitleCandidate({
-        ...entry,
-        key:`arrival:${entry.title}|${entry.year}`
-      }, token);
-
-      if (!candidate) return null;
-
-      return {
-        ...candidate,
-        myCineArrival:{
-          status:entry.status,
-          priority:Number(entry.priority || 0),
-          marketEvidence:entry.marketEvidence,
-          editorialNote:entry.editorialNote
-        }
-      };
-    },
-    4
-  );
-
-  return dedupeTitles(
-    resolved
-      .filter(Boolean)
-      .filter(item => !excluded.has(String(item.id)))
-  );
-}
-
-
-const ENRICHED_TITLE_CACHE_KEY = "mycine-enriched-title-cache-v1";
-const ENRICHED_TITLE_CACHE_TTL = 24 * 60 * 60 * 1000;
-
-function readEnrichedTitleCache() {
-  try {
-    const parsed = JSON.parse(
-      localStorage.getItem(ENRICHED_TITLE_CACHE_KEY) || "{}"
-    );
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-function enrichedTitleCacheKey(title, watchRegion) {
-  return [
-    title.media_type || (title.isTV ? "tv" : "movie"),
-    title.id,
-    watchRegion
-  ].join(":");
-}
-
-function getCachedEnrichedTitle(title, watchRegion) {
-  const cache = readEnrichedTitleCache();
-  const key = enrichedTitleCacheKey(title, watchRegion);
-  const entry = cache[key];
-
-  if (
-    !entry ||
-    Date.now() - Number(entry.cachedAt || 0) > ENRICHED_TITLE_CACHE_TTL
-  ) {
-    return null;
-  }
-
-  return entry.value || null;
-}
-
-function saveCachedEnrichedTitle(title, watchRegion, value) {
-  const cache = readEnrichedTitleCache();
-  const key = enrichedTitleCacheKey(title, watchRegion);
-
-  cache[key] = {
-    cachedAt:Date.now(),
-    value
-  };
-
-  const trimmed = Object.fromEntries(
-    Object.entries(cache)
-      .sort((a,b) => Number(b[1]?.cachedAt || 0) - Number(a[1]?.cachedAt || 0))
-      .slice(0, 500)
-  );
-
-  localStorage.setItem(
-    ENRICHED_TITLE_CACHE_KEY,
-    JSON.stringify(trimmed)
-  );
-}
-
-
-const ROMCOM_SESSION_ROTATION_KEY = "mycine-romcom-session-rotation-v1";
-
-function readRomcomRotation() {
-  try {
-    const parsed = JSON.parse(
-      sessionStorage.getItem(ROMCOM_SESSION_ROTATION_KEY) || "{}"
-    );
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-function writeRomcomRotation(value) {
-  sessionStorage.setItem(
-    ROMCOM_SESSION_ROTATION_KEY,
-    JSON.stringify(value)
-  );
-}
-
-function romcomRotationIndex(selectionKey) {
-  const rotation = readRomcomRotation();
-  return Number(rotation[selectionKey] || 0);
-}
-
-function advanceRomcomRotation(selectionKey) {
-  const rotation = readRomcomRotation();
-  rotation[selectionKey] = Number(rotation[selectionKey] || 0) + 1;
-  writeRomcomRotation(rotation);
-}
-
-function resetRomcomRotation(selectionKey) {
-  const rotation = readRomcomRotation();
-  rotation[selectionKey] = 0;
-  writeRomcomRotation(rotation);
-}
-
-function rotateCandidates(titles, offset) {
-  if (!titles.length) return [];
-
-  const normalizedOffset =
-    ((Number(offset || 0) % titles.length) + titles.length) % titles.length;
-
-  return [
-    ...titles.slice(normalizedOffset),
-    ...titles.slice(0, normalizedOffset)
-  ];
-}
-
 // ── TMDB LIVE FETCH ──────────────────────────────────────────────────────────
 // Pull fresh candidates matching the selected genre or mood.
 
@@ -1058,23 +337,55 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
   }
 
   const MOVIE_FILTERS = {
-    romcom: "10749|35", comedy: "35", romance: "10749", drama: "18",
-    thriller: "53", mystery: "9648", "action & adventure": "28,12",
-    horror: "27", "sci-fi": "878", fantasy: "14", animation: "16",
-    musical: "10402", "true stories / biopic": "18,36", documentary: "99",
-    "mind blown": "878,9648,53", "make me laugh": "35", "date night": "10749,35",
-    "travel somewhere": "12", "ugly cry": "18,10749", "adrenaline rush": "28,53",
-    "family night": "10751,16", "inspire me": "18,36", "luxury vibes": "18,10749"
+    romcom: "10749,35",
+    comedy: "35",
+    romance: "10749",
+    drama: "18",
+    thriller: "53",
+    mystery: "9648",
+    "action & adventure": "28,12",
+    horror: "27",
+    "sci-fi": "878",
+    fantasy: "14",
+    animation: "16",
+    musical: "10402",
+    "true stories / biopic": "18,36",
+    documentary: "99",
+    "mind blown": "878,9648,53",
+    "make me laugh": "35",
+    "date night": "10749,35",
+    "travel somewhere": "12",
+    "ugly cry": "18,10749",
+    "adrenaline rush": "28,53",
+    "family night": "10751,16",
+    "inspire me": "18,36",
+    "luxury vibes": "18,10749"
   };
 
   const TV_FILTERS = {
-    romcom: "35|18", comedy: "35", romance: "18", drama: "18",
-    thriller: "9648,10759", mystery: "9648", "action & adventure": "10759",
-    horror: "9648", "sci-fi": "10765", fantasy: "10765", animation: "16",
-    musical: "18", "true stories / biopic": "18", documentary: "99",
-    "mind blown": "10765,9648", "make me laugh": "35", "date night": "35,18",
-    "travel somewhere": "10759", "ugly cry": "18", "adrenaline rush": "10759",
-    "family night": "10751,16", "inspire me": "18", "luxury vibes": "18"
+    romcom: "35,18",
+    comedy: "35",
+    romance: "18",
+    drama: "18",
+    thriller: "9648,10759",
+    mystery: "9648",
+    "action & adventure": "10759",
+    horror: "9648",
+    "sci-fi": "10765",
+    fantasy: "10765",
+    animation: "16",
+    musical: "18",
+    "true stories / biopic": "18",
+    documentary: "99",
+    "mind blown": "10765,9648",
+    "make me laugh": "35",
+    "date night": "35,18",
+    "travel somewhere": "10759",
+    "ugly cry": "18",
+    "adrenaline rush": "10759",
+    "family night": "10751,16",
+    "inspire me": "18",
+    "luxury vibes": "18"
   };
 
   const labels = String(queryLabel || "")
@@ -1084,7 +395,11 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
 
   const genreIdsFor = mediaType => {
     const filters = mediaType === "tv" ? TV_FILTERS : MOVIE_FILTERS;
-    return labels.map(label => filters[label]).filter(Boolean).join(",");
+
+    return labels
+      .map(label => filters[label])
+      .filter(Boolean)
+      .join(",");
   };
 
   const textMatches = (value, pattern) => pattern.test(value);
@@ -1097,54 +412,175 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     const popularity = Number(item.popularity || 0);
     const votes = Number(item.vote_count || 0);
 
-    const romanceWords = /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/i;
-    const sciFiWords = /\b(alien|android|artificial intelligence|astronaut|clone|cyber|cyborg|dystopi|experiment|extraterrestrial|future|galaxy|genetic|interstellar|mars|moon|parallel universe|planet|robot|science|space|spaceship|technology|time travel|virtual reality)\b/i;
-    const fantasyWords = /\b(curse|demon|dragon|fairy|fantasy|god|goddess|immortal|kingdom|magic|myth|prophecy|sorcer|spell|spirit|supernatural|vampire|werewolf|witch|wizard)\b/i;
-    const horrorWords = /\b(blood|demonic|evil|ghost|haunted|horror|killer|murder|nightmare|possession|serial killer|slasher|survival|terror|undead|zombie)\b/i;
-    const thrillerWords = /\b(conspiracy|danger|detective|hostage|investigation|kidnap|manhunt|murder|pursuit|secret agent|serial killer|spy|suspense|terrorist|thriller)\b/i;
-    const musicalWords = /\b(band|concert|dance|dancer|music|musical|singer|singing|song|stage performer)\b/i;
-    const trueStoryWords = /\b(based on a true story|biograph|historical figure|real-life|true events|true story)\b/i;
-    const travelWords = /\b(adventure|across the world|expedition|foreign country|journey|road trip|travel|voyage)\b/i;
-    const emotionalWords = /\b(death|dying|farewell|grief|heartbreak|illness|loss|mourning|terminal|tragedy)\b/i;
-    const inspiringWords = /\b(against the odds|courage|dream|fight for|inspir|overcome|pioneer|resilience|survive|triumph)\b/i;
-    const luxuryWords = /\b(billionaire|couture|elite|fashion|glamour|high society|hotel|luxury|mansion|palace|privilege|rich|royal|wealth)\b/i;
-    const mindBlownWords = /\b(alternate reality|consciousness|dream|memory|mind|paradox|parallel universe|reality|simulation|time loop|time travel|twist)\b/i;
+    const romanceWords =
+      /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/i;
+
+    const sciFiWords =
+      /\b(alien|android|artificial intelligence|astronaut|clone|cyber|cyborg|dystopi|experiment|extraterrestrial|future|futuristic|galaxy|genetic|interstellar|laboratory|mars|moon|parallel universe|planet|robot|science|scientist|space|spaceship|technology|time travel|virtual reality)\b/i;
+
+    const fantasyWords =
+      /\b(curse|demon|dragon|fairy|fantasy|god|goddess|immortal|kingdom|magic|magical|myth|mythology|prophecy|sorcer|spell|spirit|supernatural|vampire|werewolf|witch|wizard)\b/i;
+
+    const horrorWords =
+      /\b(blood|demonic|evil|ghost|haunted|horror|killer|murder|nightmare|possession|serial killer|slasher|survival|terror|undead|zombie)\b/i;
+
+    const thrillerWords =
+      /\b(conspiracy|danger|detective|hostage|investigation|kidnap|manhunt|murder|pursuit|secret agent|serial killer|spy|suspense|terrorist|thriller)\b/i;
+
+    const musicalWords =
+      /\b(band|concert|dance|dancer|music|musical|singer|singing|song|stage performer)\b/i;
+
+    const trueStoryWords =
+      /\b(based on a true story|biograph|historical figure|real-life|true events|true story)\b/i;
+
+    const travelWords =
+      /\b(adventure|across the world|expedition|foreign country|journey|road trip|travel|voyage)\b/i;
+
+    const emotionalWords =
+      /\b(death|dying|farewell|grief|heartbreak|illness|loss|mourning|terminal|tragedy)\b/i;
+
+    const inspiringWords =
+      /\b(against the odds|courage|dream|fight for|inspir|overcome|pioneer|resilience|survive|triumph)\b/i;
+
+    const luxuryWords =
+      /\b(billionaire|couture|elite|fashion|glamour|high society|hotel|luxury|mansion|palace|privilege|rich|royal|wealth)\b/i;
+
+    const mindBlownWords =
+      /\b(alternate reality|consciousness|dream|memory|mind|paradox|parallel universe|reality|simulation|time loop|time travel|twist)\b/i;
 
     switch (label) {
       case "romcom":
-        return isMovie
-          ? genreIds.has(35) && genreIds.has(10749)
-          : genreIds.has(35) && textMatches(titleText, romanceWords);
+        return genreIds.has(35) &&
+          (isMovie ? genreIds.has(10749) : textMatches(titleText, romanceWords));
+
       case "comedy":
-      case "make me laugh": return genreIds.has(35);
-      case "romance": return isMovie ? genreIds.has(10749) : textMatches(titleText, romanceWords);
-      case "drama": return genreIds.has(18);
-      case "thriller": return isMovie ? genreIds.has(53) : (genreIds.has(9648) || genreIds.has(10759)) && textMatches(titleText, thrillerWords);
-      case "mystery": return genreIds.has(9648);
-      case "action & adventure": return isMovie ? genreIds.has(28) || genreIds.has(12) : genreIds.has(10759);
-      case "horror": return isMovie ? genreIds.has(27) : textMatches(titleText, horrorWords);
-      case "sci-fi": return isMovie ? genreIds.has(878) : genreIds.has(10765) && textMatches(titleText, sciFiWords);
-      case "fantasy": return isMovie ? genreIds.has(14) : genreIds.has(10765) && textMatches(titleText, fantasyWords);
-      case "animation": return genreIds.has(16);
-      case "musical": return isMovie ? genreIds.has(10402) : textMatches(titleText, musicalWords);
-      case "true stories / biopic": return genreIds.has(36) || textMatches(titleText, trueStoryWords);
-      case "documentary": return genreIds.has(99);
-      case "international": return Boolean(originalLanguage) && originalLanguage !== "en";
-      case "hidden gems": return Number(item.vote_average || 0) >= 7.5 && votes >= 80 && votes <= 3500 && popularity < 45;
-      case "mind blown": return (genreIds.has(878) || genreIds.has(9648) || genreIds.has(53) || genreIds.has(10765)) && textMatches(titleText, mindBlownWords);
-      case "date night": return ((isMovie && genreIds.has(10749)) || textMatches(titleText, romanceWords)) && !genreIds.has(27);
-      case "travel somewhere": return (genreIds.has(12) || genreIds.has(10759) || originalLanguage !== "en") && textMatches(titleText, travelWords);
-      case "ugly cry": return genreIds.has(18) && textMatches(titleText, emotionalWords);
-      case "adrenaline rush": return (genreIds.has(28) || genreIds.has(53) || genreIds.has(10759)) && popularity >= 15;
-      case "family night": return genreIds.has(10751) || genreIds.has(16);
-      case "inspire me": return (genreIds.has(18) || genreIds.has(36) || genreIds.has(99)) && textMatches(titleText, inspiringWords);
-      case "luxury vibes": return textMatches(titleText, luxuryWords);
-      default: return true;
+      case "make me laugh":
+        return genreIds.has(35);
+
+      case "romance": {
+        if (isMovie) return genreIds.has(10749);
+
+        const matches = titleText.match(
+          /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/gi
+        ) || [];
+
+        const uniqueSignals = new Set(matches.map(value => value.toLowerCase()));
+        const romanticTitle = /\b(love|heart|romance|wedding|dating)\b/i
+          .test(item.name || item.title || "");
+
+        return romanticTitle || uniqueSignals.size >= 2;
+      }
+
+      case "drama":
+        return genreIds.has(18);
+
+      case "thriller":
+        return isMovie
+          ? genreIds.has(53)
+          : (genreIds.has(9648) || genreIds.has(10759)) &&
+            textMatches(titleText, thrillerWords);
+
+      case "mystery":
+        return genreIds.has(9648);
+
+      case "action & adventure":
+        return isMovie
+          ? genreIds.has(28) || genreIds.has(12)
+          : genreIds.has(10759);
+
+      case "horror":
+        return isMovie
+          ? genreIds.has(27)
+          : textMatches(titleText, horrorWords);
+
+      case "sci-fi":
+        return isMovie
+          ? genreIds.has(878)
+          : genreIds.has(10765) && textMatches(titleText, sciFiWords);
+
+      case "fantasy":
+        return isMovie
+          ? genreIds.has(14)
+          : genreIds.has(10765) && textMatches(titleText, fantasyWords);
+
+      case "animation":
+        return genreIds.has(16);
+
+      case "musical":
+        return isMovie
+          ? genreIds.has(10402)
+          : textMatches(titleText, musicalWords);
+
+      case "true stories / biopic":
+        return genreIds.has(36) || textMatches(titleText, trueStoryWords);
+
+      case "documentary":
+        return genreIds.has(99);
+
+      case "international":
+        return Boolean(originalLanguage) && originalLanguage !== "en";
+
+      case "hidden gems":
+        return Number(item.vote_average || 0) >= 7.5 &&
+          votes >= 100 &&
+          votes <= 3000 &&
+          popularity < 45;
+
+      case "mind blown":
+        return (
+          genreIds.has(878) ||
+          genreIds.has(9648) ||
+          genreIds.has(53) ||
+          genreIds.has(10765)
+        ) && textMatches(titleText, mindBlownWords);
+
+      case "date night":
+        return (
+          (isMovie && genreIds.has(10749)) ||
+          textMatches(titleText, romanceWords)
+        ) && !genreIds.has(27);
+
+      case "travel somewhere":
+        return (
+          genreIds.has(12) ||
+          genreIds.has(10759) ||
+          originalLanguage !== "en"
+        ) && textMatches(titleText, travelWords);
+
+      case "ugly cry":
+        return genreIds.has(18) && textMatches(titleText, emotionalWords);
+
+      case "adrenaline rush":
+        return (
+          genreIds.has(28) ||
+          genreIds.has(53) ||
+          genreIds.has(10759)
+        ) && popularity >= 20;
+
+      case "family night":
+        return genreIds.has(10751) || genreIds.has(16);
+
+      case "inspire me":
+        return (
+          genreIds.has(18) ||
+          genreIds.has(36) ||
+          genreIds.has(99)
+        ) && textMatches(titleText, inspiringWords);
+
+      case "luxury vibes":
+        return textMatches(titleText, luxuryWords);
+
+      default:
+        return true;
     }
   };
 
   const titleFitsSelection = (item, mediaType) => {
+    // My Ciné quality standard: a recommendation must reach at least 75%.
     if (Number(item.vote_average || 0) < 7.5) return false;
+
+    // Every selected genre must match. Moods are eligibility rules too,
+    // rather than loose suggestions used only for ranking.
     return labels.every(label => matchesLabel(label, item, mediaType));
   };
 
@@ -1152,35 +588,45 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     mediaType,
     year = null,
     page = 1,
-    minimumVotes = 75,
+    minimumVotes = 100,
     maximumVotes = null,
     dateLte = null,
     dateGte = null,
     sortBy = "vote_average.desc"
   }) => {
+    const genreIds = genreIdsFor(mediaType);
     const params = new URLSearchParams({
       language: "en-US",
       sort_by: sortBy,
       include_adult: "false",
-      "vote_average.gte": "7.5",
       "vote_count.gte": String(minimumVotes),
       watch_region: watchRegion,
       with_watch_monetization_types: "flatrate|free|ads",
       page: String(page)
     });
 
-    const genreIds = genreIdsFor(mediaType);
     if (genreIds) params.set("with_genres", genreIds);
     if (maximumVotes) params.set("vote_count.lte", String(maximumVotes));
 
-    if (year) {
-      params.set(mediaType === "tv" ? "first_air_date_year" : "primary_release_year", String(year));
-    }
     if (dateLte) {
-      params.set(mediaType === "tv" ? "first_air_date.lte" : "primary_release_date.lte", dateLte);
+      params.set(
+        mediaType === "tv" ? "first_air_date.lte" : "primary_release_date.lte",
+        dateLte
+      );
     }
+
     if (dateGte) {
-      params.set(mediaType === "tv" ? "first_air_date.gte" : "primary_release_date.gte", dateGte);
+      params.set(
+        mediaType === "tv" ? "first_air_date.gte" : "primary_release_date.gte",
+        dateGte
+      );
+    }
+
+    if (year) {
+      params.set(
+        mediaType === "tv" ? "first_air_date_year" : "primary_release_year",
+        String(year)
+      );
     }
 
     const response = await fetch(
@@ -1206,81 +652,91 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
         (mediaType === "tv" ? item.first_air_date : item.release_date) &&
         titleFitsSelection(item, mediaType)
       )
-      .map(item => ({...item, media_type: mediaType}));
+      .map(item => ({
+        ...item,
+        media_type: mediaType
+      }));
   };
 
-  const mediaTypes = contentMode === "both" ? ["movie", "tv"] : [contentMode];
+  const mediaTypes =
+    contentMode === "both" ? ["movie", "tv"] : [contentMode];
 
-  const heroCurrentRequests = mediaTypes.flatMap(mediaType =>
-    [1, 2, 3, 4].map(page =>
-      requestDiscover({
-        mediaType,
-        year: CURRENT_YEAR,
-        page,
-        minimumVotes: mediaType === "tv" ? 5 : 8,
-        sortBy: page % 2 === 0 ? "popularity.desc" : "vote_average.desc"
-      })
-    )
-  );
+  const fetchCurrent = async mediaType => {
+    let results = await requestDiscover({
+      mediaType,
+      year: CURRENT_YEAR,
+      page: 1,
+      minimumVotes: mediaType === "tv" ? 10 : 5
+    });
 
-  const heroPreviousRequests = mediaTypes.flatMap(mediaType =>
-    [1, 2, 3, 4, 5].map(page =>
-      requestDiscover({
+    if (!results.length) {
+      results = await requestDiscover({
         mediaType,
         year: CURRENT_YEAR - 1,
-        page,
-        minimumVotes: mediaType === "tv" ? 10 : 15,
-        sortBy: page % 2 === 0 ? "popularity.desc" : "vote_average.desc"
-      })
-    )
-  );
-
-  const altRequests = mediaTypes.flatMap(mediaType => {
-    const requests = [];
-    for (let page = 1; page <= 10; page += 1) {
-      requests.push(
-        requestDiscover({
-          mediaType,
-          page,
-          minimumVotes: mediaType === "tv" ? 50 : 75,
-          sortBy: page % 2 === 0 ? "popularity.desc" : "vote_average.desc"
-        })
-      );
+        page: 1,
+        minimumVotes: mediaType === "tv" ? 20 : 20
+      });
     }
 
-    requests.push(
-      requestDiscover({
-        mediaType,
-        page: 1,
-        minimumVotes: 50,
-        maximumVotes: 3500,
-        sortBy: "vote_average.desc"
-      })
-    );
+    return results;
+  };
 
-    requests.push(
-      requestDiscover({
-        mediaType,
-        page: 1,
-        minimumVotes: 75,
-        dateLte: "1989-12-31",
-        sortBy: "vote_average.desc"
-      })
-    );
+  const dailyPage = (new Date().getDate() % 4) + 1;
 
-    return requests;
-  });
+  const heroGroups = await Promise.all(mediaTypes.map(fetchCurrent));
 
-  const [currentGroups, previousGroups, altGroups] = await Promise.all([
-    Promise.all(heroCurrentRequests),
-    Promise.all(heroPreviousRequests),
-    Promise.all(altRequests)
+  const standardAltRequests = mediaTypes.flatMap(mediaType => [
+    requestDiscover({mediaType, page:dailyPage, minimumVotes:100}),
+    requestDiscover({mediaType, page:dailyPage + 1, minimumVotes:100}),
+    requestDiscover({mediaType, page:dailyPage + 2, minimumVotes:75}),
+    requestDiscover({mediaType, page:dailyPage + 3, minimumVotes:75})
+  ]);
+
+  const sciFiRequests = labels.includes("sci-fi")
+    ? [
+        // Classic cinema: intentionally search before 1990.
+        requestDiscover({
+          mediaType:"movie",
+          page:1,
+          minimumVotes:100,
+          dateLte:"1989-12-31",
+          sortBy:"vote_average.desc"
+        }),
+        requestDiscover({
+          mediaType:"movie",
+          page:2,
+          minimumVotes:75,
+          dateLte:"1989-12-31",
+          sortBy:"vote_average.desc"
+        }),
+        // Auteur / independent leaning: fewer votes and lower popularity.
+        requestDiscover({
+          mediaType:"movie",
+          page:1,
+          minimumVotes:80,
+          maximumVotes:3500,
+          dateGte:"1990-01-01",
+          sortBy:"vote_average.desc"
+        }),
+        requestDiscover({
+          mediaType:"movie",
+          page:2,
+          minimumVotes:50,
+          maximumVotes:2500,
+          dateGte:"1990-01-01",
+          sortBy:"vote_average.desc"
+        })
+      ]
+    : [];
+
+  const altGroups = await Promise.all([
+    ...standardAltRequests,
+    ...sciFiRequests
   ]);
 
   return {
-    currentHeroTitles: dedupeTitles(currentGroups.flat()),
-    previousHeroTitles: dedupeTitles(previousGroups.flat()),
-    altTitles: dedupeTitles(altGroups.flat())
+    heroTitles: heroGroups.flat(),
+    altTitles: altGroups.flat()
   };
 }
 // ── MAIN PIPELINE ─────────────────────────────────────────────────────────────
@@ -1350,76 +806,38 @@ async function fetchTitleDetails(title) {
 
 function passesDetailedIntent(title, selectedLabels) {
   const labels = selectedLabels.map(normalizeFilterLabel);
-
-  for (const label of labels) {
-    if (isEditoriallyExcluded(title.title, title.year, label)) {
-      return false;
-    }
-  }
-
-  if (
-    labels.length === 1 &&
-    isCanonApprovedFor(title.title, title.year, labels[0])
-  ) {
-    return true;
-  }
   const genreNames = new Set((title.genres || []).map(genre => genre.toLowerCase()));
   const keywordText = (title.keywords || []).join(" ").toLowerCase();
   const titleText = `${title.title || ""} ${title.overview || ""}`.toLowerCase();
 
-  const romcomRequested = labels.includes("romcom");
-
   const romanceRequested = labels.some(label =>
-    ["romance", "date night"].includes(label)
+    ["romance", "romcom", "date night"].includes(label)
   );
 
   const comedyRequested = labels.some(label =>
-    ["comedy", "make me laugh"].includes(label)
+    ["comedy", "romcom", "make me laugh"].includes(label)
   );
-
-  const strongRomanceKeyword =
-    /\b(romance|romantic comedy|love story|first love|romantic relationship|teen romance|lgbtq romance|marriage|wedding|dating)\b/i
-      .test(keywordText);
-
-  const romanceMatches = titleText.match(
-    /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story|relationship)\b/gi
-  ) || [];
-
-  const uniqueRomanceSignals = new Set(
-    romanceMatches.map(value => value.toLowerCase())
-  );
-
-  const romanticTitle =
-    /\b(love|heart|romance|wedding|dating|bride|groom|marry|married)\b/i
-      .test(title.title || "");
-
-  const hasStrongRomance =
-    genreNames.has("romance") ||
-    strongRomanceKeyword ||
-    romanticTitle ||
-    uniqueRomanceSignals.size >= 2;
-
-  if (romcomRequested) {
-    if (!genreNames.has("comedy")) {
-      return false;
-    }
-
-    if (!title.isTV && !genreNames.has("romance")) {
-      return false;
-    }
-
-    if (title.isTV && !hasStrongRomance) {
-      return false;
-    }
-  }
 
   if (romanceRequested) {
     if (!title.isTV && !genreNames.has("romance")) {
       return false;
     }
 
-    if (title.isTV && !hasStrongRomance) {
-      return false;
+    if (title.isTV) {
+      const strongKeyword =
+        /\b(romance|romantic comedy|love story|first love|romantic relationship|teen romance|lgbtq romance)\b/i
+          .test(keywordText);
+
+      const matches = titleText.match(
+        /\b(love|romance|romantic|couple|marriage|wedding|dating|boyfriend|girlfriend|soulmate|bride|groom|first love|fall in love|love story)\b/gi
+      ) || [];
+
+      const uniqueSignals = new Set(matches.map(value => value.toLowerCase()));
+      const romanticTitle = /\b(love|heart|romance|wedding|dating)\b/i.test(title.title || "");
+
+      if (!strongKeyword && !romanticTitle && uniqueSignals.size < 2) {
+        return false;
+      }
     }
   }
 
@@ -1494,198 +912,13 @@ function buildHighlight(title) {
   };
 }
 
-
-async function mapWithConcurrency(items, worker, concurrency = 5) {
-  const results = new Array(items.length);
-  let cursor = 0;
-
-  async function runWorker() {
-    while (cursor < items.length) {
-      const index = cursor;
-      cursor += 1;
-
-      try {
-        results[index] = await worker(items[index], index);
-      } catch (error) {
-        console.warn("My Ciné candidate skipped:", error);
-        results[index] = null;
-      }
-    }
-  }
-
-  await Promise.all(
-    Array.from(
-      {length: Math.min(concurrency, Math.max(1, items.length))},
-      () => runWorker()
-    )
-  );
-
-  return results;
-}
-
-
-async function buildPrebuiltEditorialBatch(
-  editorialBatches,
-  genreKey,
-  watchRegion,
-  batchNumber = 1
-) {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-  if (!token) {
-    throw new Error(`TMDB token is required to enrich the prepared ${genreKey} batch.`);
-  }
-
-  const safeIndex = Math.max(
-    0,
-    Math.min(editorialBatches.length - 1, Number(batchNumber || 1) - 1)
-  );
-  const editorialBatch = editorialBatches[safeIndex];
-
-  if (!editorialBatch || editorialBatch.length !== 7) {
-    throw new Error(`Prepared ${genreKey} batch ${safeIndex + 1} is incomplete.`);
-  }
-
-  const enrichPreparedTitle = async editorial => {
-    const editorialBadge =
-      editorial.badge ||
-      editorial.role ||
-      "✨ Surprise";
-
-    const entry = {
-      ...editorial,
-      badge:editorialBadge,
-      key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
-    };
-
-    const candidate = await fetchCanonTitleCandidate(entry, token);
-    if (!candidate) {
-      throw new Error(`${editorial.title} could not be matched on TMDB.`);
-    }
-
-    const normalized = {
-      ...candidate,
-      title:candidate.title || candidate.name || editorial.title,
-      year:String(
-        candidate.release_date || candidate.first_air_date || editorial.year
-      ).slice(0,4),
-      media_type:"movie",
-      isTV:false,
-      format:"Film",
-      rating:Number(candidate.vote_average || 0),
-      vote_count:Number(candidate.vote_count || 0),
-      popularity:Number(candidate.popularity || 0),
-      poster_path:candidate.poster_path || null,
-      overview:candidate.overview || editorial.curatorNote || "Synopsis unavailable.",
-      original_language:candidate.original_language || "",
-      genre_ids:candidate.genre_ids || [],
-      era:Number(editorial.year) < 1990
-        ? "classic"
-        : Number(editorial.year) < 2020
-          ? "modern"
-          : "current"
-    };
-
-    const details = await fetchTitleDetails(normalized);
-
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
-    if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
-    ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
-    }
-
-    // Prepared Romcom batches are approved editorially before runtime.
-    // TMDB enriches the title with live metadata, but does not veto it.
-    // The live community score remains visible to the user.
-    const liveTmdbRating = Number(details.rating || 0);
-    const displayedTmdbPercent = Math.round(liveTmdbRating * 10);
-
-    let availability = {
-      stream:[], free:[], ads:[], rent:[], buy:[], link:null
-    };
-
-    try {
-      availability = await fetchWatchProviders(
-        details.id,
-        watchRegion,
-        "movie"
-      );
-    } catch (error) {
-      console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, error);
-    }
-
-    const providers = [
-      ...(availability.stream || []),
-      ...(availability.free || []),
-      ...(availability.ads || []),
-      ...(availability.rent || []),
-      ...(availability.buy || [])
-    ];
-
-    const providerNames = [...new Set(
-      providers
-        .map(item => canonicalProviderName(item.provider_name))
-        .filter(Boolean)
-    )];
-
-    return {
-      ...details,
-      editorialBatch:safeIndex + 1,
-      editorialSlot:editorial.slot,
-      roleBadge:editorialBadge,
-      editoriallyApproved:true,
-      displayedTmdbPercent,
-      canonTier:editorial.tier,
-      curatorNote:editorial.curatorNote,
-      countryEditorial:editorial.country,
-      languageEditorial:editorial.language,
-      providerNames,
-      provider:providerNames.length
-        ? providerNames.slice(0,3).join(" • ")
-        : "Check availability",
-      watchLink:availability.link ||
-        `https://www.themoviedb.org/movie/${details.id}/watch?locale=${watchRegion}`,
-      watchRegionCode:watchRegion,
-      highlight:{
-        icon:String(editorialBadge).split(" ")[0],
-        label:String(editorialBadge).replace(/^\S+\s*/, ""),
-        text:editorial.curatorNote
-      },
-      whyWatch:editorial.curatorNote || details.overview
-    };
-  };
-
-  const resolved = await mapWithConcurrency(
-    editorialBatch,
-    enrichPreparedTitle,
-    4
-  );
-
-  const titles = resolved.filter(Boolean);
-  if (titles.length !== 7) {
-    throw new Error(
-      `Prepared ${genreKey} batch ${safeIndex + 1} could not resolve all seven titles.`
-    );
-  }
-
-  return {
-    hero:titles[0],
-    alts:titles.slice(1)
-  };
-}
-
 async function buildPicks(
   tab,
   selGenres,
   selMood,
   watchRegion,
   contentMode,
-  excludeIds = [],
-  batchNumber = 1
+  excludeIds = []
 ) {
   const queryLabel = tab === "mood"
     ? (MOODS.find(m => m.id === selMood)?.label || selMood)
@@ -1694,24 +927,20 @@ async function buildPicks(
         .filter(Boolean)
         .join(", ");
 
-  const selectionKey = recommendationSelectionKey(tab, selGenres, selMood, contentMode);
-  const recentIds = recentHistoryIds(selectionKey, HISTORY_WINDOW_DAYS, false);
-  const recentHeroIds = recentHistoryIds(selectionKey, HERO_HISTORY_WINDOW_DAYS, true);
-  const sessionIds = new Set(excludeIds.map(id => String(id)));
+  let tmdbResult;
 
-  const tmdbResult = await fetchTMDBTitles(queryLabel, watchRegion, contentMode);
-  const selectedLabels = String(queryLabel || "")
-    .split(",")
-    .map(normalizeFilterLabel)
-    .filter(Boolean);
-
-  const canonCandidates = selectedLabels.includes("romcom")
-    ? await fetchCanonCandidates("romcom", contentMode, excludeIds)
-    : [];
-
-  const editorialNewArrivals = selectedLabels.includes("romcom")
-    ? await fetchNewArrivalCandidates("romcom", contentMode, excludeIds)
-    : [];
+  try {
+    tmdbResult = await fetchTMDBTitles(
+      queryLabel,
+      watchRegion,
+      contentMode
+    );
+  } catch (error) {
+    console.error("TMDB live request failed:", error);
+    throw new Error(
+      `Live TMDB request failed: ${error.message}. Check the VITE_TMDB_TOKEN in your .env file.`
+    );
+  }
 
   const normalizeTitle = item => {
     const isTV = item.media_type === "tv";
@@ -1725,384 +954,199 @@ async function buildPicks(
       year,
       poster_path: item.poster_path,
       provider: "Where to Watch",
-      rating: Number(item.vote_average || 0),
-      vote_count: Number(item.vote_count || 0),
-      popularity: Number(item.popularity || 0),
+      rating: item.vote_average || 0,
+      vote_count: item.vote_count || 0,
+      popularity: item.popularity || 0,
       overview: item.overview || "Synopsis unavailable.",
       original_language: item.original_language || "",
       genre_ids: item.genre_ids || [],
       media_type: item.media_type,
       isTV,
       format: isTV ? "TV Series" : "Film",
-      era: numericYear < 1990 ? "classic" : numericYear < 2020 ? "modern" : "current",
-      myCineArrival:item.myCineArrival || null
+      era:
+        numericYear < 1990
+          ? "classic"
+          : numericYear < 2020
+            ? "modern"
+            : "current"
     };
   };
 
-  const notShownInSession = title => !sessionIds.has(String(title.id));
-  const notRecentlyShown = title => !recentIds.has(titleIdentity(title));
-  const notRecentHero = title => !recentHeroIds.has(titleIdentity(title));
+  let heroes = (tmdbResult.heroTitles || [])
+    .filter(item =>
+      item.poster_path &&
+      item.overview &&
+      !excludeIds.includes(item.id)
+    )
+    .map(normalizeTitle);
 
-  const rawHeroPool = selectedLabels.includes("romcom")
-    ? editorialNewArrivals
-    : [
-        ...(tmdbResult.currentHeroTitles || []),
-        ...(tmdbResult.previousHeroTitles || [])
-      ];
+  const heroIds = new Set(heroes.map(item => item.id));
 
-  const normalizedHeroPool = rawHeroPool
-    .map(normalizeTitle)
-    .filter(title =>
-      title.rating >= 7.5 &&
-      notShownInSession(title) &&
-      notRecentHero(title)
+  let alts = (tmdbResult.altTitles || [])
+    .filter(item =>
+      item.poster_path &&
+      item.overview &&
+      !excludeIds.includes(item.id) &&
+      !heroIds.has(item.id)
+    )
+    .map(normalizeTitle);
+
+  if (!heroes.length && alts.length) {
+    heroes = [...alts]
+      .sort((a, b) => titleScore(b) - titleScore(a))
+      .slice(0, Math.min(12, alts.length));
+
+    const fallbackHeroIds = new Set(heroes.map(item => item.id));
+    alts = alts.filter(item => !fallbackHeroIds.has(item.id));
+  }
+
+  if (!heroes.length) {
+    throw new Error(
+      `No fresh titles remain for "${queryLabel}" in this seven-set session.`
     );
-
-  const currentHeroes = normalizedHeroPool
-    .filter(title => Number(title.year) === CURRENT_YEAR);
-
-  const previousHeroes = normalizedHeroPool
-    .filter(title => Number(title.year) === CURRENT_YEAR - 1);
-
-  let heroCandidates = currentHeroes.length
-    ? currentHeroes
-    : previousHeroes.length
-      ? previousHeroes
-      : normalizedHeroPool
-          .filter(title => Number(title.year) === CURRENT_YEAR - 2);
-
-  if (!heroCandidates.length && !selectedLabels.includes("romcom")) {
-    heroCandidates = (tmdbResult.currentHeroTitles || [])
-      .map(normalizeTitle)
-      .filter(title => title.rating >= 7.5 && notShownInSession(title));
-
-    if (!heroCandidates.length) {
-      heroCandidates = (tmdbResult.previousHeroTitles || [])
-        .map(normalizeTitle)
-        .filter(title => title.rating >= 7.5 && notShownInSession(title));
-    }
   }
 
-  const rawAlternativePool = selectedLabels.includes("romcom")
-    ? canonCandidates
-    : (tmdbResult.altTitles || []);
-
-  const normalizedAlternativePool = rawAlternativePool
-    .map(normalizeTitle)
-    .filter(title => title.rating >= 7.5 && notShownInSession(title));
-
-  let altCandidates = normalizedAlternativePool
-    .filter(notRecentlyShown);
-
-  // Recovery ladder:
-  // 1. Prefer the 30-day history cooldown.
-  // 2. If the pool is too small, relax only old cross-session history.
-  // 3. Current-session exclusions remain absolute.
-  if (selectedLabels.includes("romcom") && altCandidates.length < 18) {
-    altCandidates = normalizedAlternativePool;
+  if (alts.length < 6) {
+    throw new Error(
+      `TMDB returned only ${alts.length} alternatives for "${queryLabel}". Try again or adjust the filters.`
+    );
   }
 
-  if (!selectedLabels.includes("romcom") && altCandidates.length < 28) {
-    altCandidates = normalizedAlternativePool;
+  const ranked = rankLocally(
+    heroes,
+    alts,
+    queryLabel,
+    contentMode
+  );
+
+  const heroRaw = heroes[ranked.hero?.i ?? 0] || heroes[0];
+
+  const hero = {
+    ...heroRaw,
+    whyWatch: ranked.hero?.whyWatch || whyTonight(heroRaw),
+    format: ranked.hero?.format || heroRaw.format,
+    genres: ranked.hero?.genres || [],
+    rtCritics:
+      ranked.hero?.rtCritics ||
+      Math.round((heroRaw.rating || 0) * 10),
+    rtAudience:
+      ranked.hero?.rtAudience ||
+      Math.max(0, Math.round((heroRaw.rating || 0) * 10 - 3))
+  };
+
+  const result = [];
+  const usedIds = new Set([hero.id]);
+
+  for (const alternative of ranked.alts || []) {
+    if (result.length >= 20) break;
+
+    const raw = alts[alternative.i];
+    if (!raw || usedIds.has(raw.id)) continue;
+
+    usedIds.add(raw.id);
+
+    result.push({
+      ...raw,
+      whyWatch: alternative.whyWatch || whyTonight(raw),
+      format: alternative.format || raw.format,
+      genres: alternative.genres || [],
+      rtCritics:
+        alternative.rtCritics ||
+        Math.round((raw.rating || 0) * 10),
+      rtAudience:
+        alternative.rtAudience ||
+        Math.max(0, Math.round((raw.rating || 0) * 10 - 3))
+    });
   }
 
-  // An empty recent hero pool is allowed.
-  // The final hero selector will fall back to an unused modern Canon title.
-  if (altCandidates.length < 6) {
-    throw new Error(`The "${queryLabel}" alternative pool needs another refresh.`);
+  for (const raw of alts) {
+    if (result.length >= 20) break;
+    if (usedIds.has(raw.id)) continue;
+
+    usedIds.add(raw.id);
+
+    result.push({
+      ...raw,
+      whyWatch: whyTonight(raw),
+      format: raw.format,
+      genres: [],
+      rtCritics: Math.round((raw.rating || 0) * 10),
+      rtAudience: Math.max(0, Math.round((raw.rating || 0) * 10 - 3))
+    });
   }
-
-  const preRankedHero = [...heroCandidates]
-    .sort((a, b) => {
-      const arrivalPriority =
-        Number(b.myCineArrival?.priority || 0) -
-        Number(a.myCineArrival?.priority || 0);
-
-      return arrivalPriority ||
-        engineScore(b, selectedLabels, "casual") -
-        engineScore(a, selectedLabels, "casual");
-    })
-    .slice(0, 24);
-
-  const preRankedAlts = [...altCandidates]
-    .sort((a, b) => engineScore(b, selectedLabels) - engineScore(a, selectedLabels))
-    .slice(0, selectedLabels.includes("romcom") ? 60 : 48);
 
   const enrichTitle = async title => {
-    const cached = getCachedEnrichedTitle(title, watchRegion);
-    if (cached) {
-      return applyCanonMetadata({
-        ...cached,
-        myCineArrival:title.myCineArrival || cached.myCineArrival || null
-      });
-    }
+    const [details, availability] = await Promise.all([
+      fetchTitleDetails(title),
+      fetchWatchProviders(title.id, watchRegion, title.media_type)
+    ]);
 
-    let details;
-
-    try {
-      details = await fetchTitleDetails(title);
-    } catch (error) {
-      console.warn("TMDB detail request failed for", title.title, error);
-      return null;
-    }
-
-    if (Number(details.rating || 0) < 7.5) return null;
-    if (!passesDetailedIntent(details, selectedLabels)) return null;
-
-    let availability = {
-      stream: [],
-      free: [],
-      ads: [],
-      rent: [],
-      buy: [],
-      link: null
-    };
-
-    try {
-      availability = await fetchWatchProviders(
-        title.id,
-        watchRegion,
-        title.media_type
-      );
-    } catch (error) {
-      console.warn("Watch providers unavailable for", title.title, error);
-    }
-
-    const providers = [
+    const streamingProviders = [
       ...(availability.stream || []),
       ...(availability.free || []),
-      ...(availability.ads || []),
-      ...(availability.rent || []),
-      ...(availability.buy || [])
+      ...(availability.ads || [])
     ];
 
     const providerNames = [...new Set(
-      providers
-        .map(item => canonicalProviderName(item.provider_name))
-        .filter(Boolean)
+      streamingProviders.map(item => canonicalProviderName(item.provider_name))
     )];
 
-    const tmdbWatchFallback =
-      `https://www.themoviedb.org/${title.media_type}/${title.id}/watch?locale=${watchRegion}`;
+    if (!providerNames.length) return null;
+
+    const selectedLabels = String(queryLabel || "")
+      .split(",")
+      .map(normalizeFilterLabel);
+
+    if (!passesDetailedIntent(details, selectedLabels)) {
+      return null;
+    }
+
+    const inferredGenres = [...(details.genres || [])];
+
+    if (
+      selectedLabels.some(label => ["romance", "romcom", "date night"].includes(label)) &&
+      !inferredGenres.some(genre => genre.toLowerCase() === "romance")
+    ) {
+      inferredGenres.unshift("Romance");
+    }
+
+    if (
+      selectedLabels.some(label => ["comedy", "romcom", "make me laugh"].includes(label)) &&
+      !inferredGenres.some(genre => genre.toLowerCase() === "comedy")
+    ) {
+      inferredGenres.push("Comedy");
+    }
 
     const enriched = {
       ...details,
+      genres: inferredGenres.slice(0, 3),
       providerNames,
-      provider: providerNames.length
-        ? providerNames.slice(0, 3).join(" • ")
-        : "Check availability",
-      watchLink: availability.link || tmdbWatchFallback,
-      watchRegionCode: watchRegion
+      provider: providerNames.slice(0, 3).join(" • "),
+      watchLink: availability.link || null
     };
 
-    const canonEnriched = applyCanonMetadata({
+    return {
       ...enriched,
       highlight: buildHighlight(enriched),
-      whyWatch: enriched.overview
-    });
-
-    if (
-      canonEnriched.canon &&
-      Number(canonEnriched.year) < CURRENT_YEAR - 1
-    ) {
-      canonEnriched.highlight = {
-        icon:"🍿",
-        label:"My Ciné favorite",
-        text:"A trusted romantic-comedy choice selected from the My Ciné Canon."
-      };
-    }
-
-    saveCachedEnrichedTitle(title, watchRegion, canonEnriched);
-    return canonEnriched;
+      whyWatch: whyTonight(enriched)
+    };
   };
 
-  const enrichedHeroes = preRankedHero.length
-    ? (
-        await mapWithConcurrency(preRankedHero, enrichTitle, 4)
-      ).filter(Boolean)
-    : [];
-
-  const enrichedAlts = (
-    await mapWithConcurrency(
-      preRankedAlts,
-      enrichTitle,
-      selectedLabels.includes("romcom") ? 4 : 5
-    )
-  ).filter(Boolean);
-
-  const isConfidentRecentHero = title => {
-    const votes = Number(title.vote_count || 0);
-    const hasConfirmedProvider = Array.isArray(title.providerNames) &&
-      title.providerNames.length > 0;
-    const status = String(title.myCineArrival?.status || "").toLowerCase();
-
-    const minimumVotes = status === "approved" ? 15 : 40;
-
-    return votes >= minimumVotes && hasConfirmedProvider;
-  };
-
-  const rankRecentHeroes = titles =>
-    [...titles].sort((a, b) => {
-      const editorialPriority =
-        Number(b.myCineArrival?.priority || 0) -
-        Number(a.myCineArrival?.priority || 0);
-
-      return editorialPriority ||
-        engineScore(b, selectedLabels, "casual") -
-        engineScore(a, selectedLabels, "casual");
-    });
-
-  const rankedCurrentHeroes = rankRecentHeroes(
-    enrichedHeroes.filter(title =>
-      Number(title.year) === CURRENT_YEAR &&
-      isConfidentRecentHero(title)
-    )
+  const enriched = await Promise.all(
+    [hero, ...result].map(enrichTitle)
   );
 
-  const rankedPreviousHeroes = rankRecentHeroes(
-    enrichedHeroes.filter(title =>
-      Number(title.year) === CURRENT_YEAR - 1 &&
-      isConfidentRecentHero(title)
-    )
-  );
+  const availableTitles = enriched.filter(Boolean);
 
-  const rankedTwoYearHeroes = rankRecentHeroes(
-    enrichedHeroes.filter(title =>
-      Number(title.year) === CURRENT_YEAR - 2 &&
-      isConfidentRecentHero(title)
-    )
-  );
-
-  const canonAlternativeCandidates = dedupeTitles(enrichedAlts)
-    .filter(title =>
-      !selectedLabels.includes("romcom") ||
-      isCanonApprovedFor(title.title, title.year, "romcom")
-    );
-
-  const rankedModernCanonHeroes = canonAlternativeCandidates
-    .filter(title => Number(title.year) >= 2010)
-    .sort((a, b) =>
-      engineScore(b, selectedLabels, "casual") -
-      engineScore(a, selectedLabels, "casual")
-    );
-
-  const rankedAnyCanonHeroes = [...canonAlternativeCandidates]
-    .sort((a, b) =>
-      engineScore(b, selectedLabels, "casual") -
-      engineScore(a, selectedLabels, "casual")
-    );
-
-  // Tonight's Pick hierarchy:
-  // 1. Current year
-  // 2. Previous year
-  // 3. Strongest unused modern Canon title
-  // 4. Strongest unused Canon title
-  const hero =
-    rankedCurrentHeroes[0] ||
-    rankedPreviousHeroes[0] ||
-    rankedTwoYearHeroes[0] ||
-    rankedModernCanonHeroes[0] ||
-    rankedAnyCanonHeroes[0] ||
-    enrichedHeroes.sort(
-      (a, b) => engineScore(b, selectedLabels) - engineScore(a, selectedLabels)
-    )[0];
-
-  if (!hero) {
-    throw new Error("No unused Tonight’s Pick remains in the current Canon pool.");
-  }
-
-  const unrotatedCandidates = canonAlternativeCandidates
-    .filter(title => titleIdentity(title) !== titleIdentity(hero));
-
-  const candidates = selectedLabels.includes("romcom")
-    ? rotateCandidates(
-        unrotatedCandidates,
-        romcomRotationIndex(selectionKey) * 7
-      )
-    : unrotatedCandidates;
-
-  let alternatives;
-
-  if (selectedLabels.includes("romcom")) {
-    try {
-      alternatives = assembleRomcomDatabaseBatch(
-        hero,
-        candidates,
-        contentMode,
-        batchNumber
-      );
-    } catch (strictError) {
-      console.warn(
-        "Strict Romcom composition failed; using balanced recovery.",
-        strictError
-      );
-
-      const recovery = [];
-      const recoveryIds = new Set([titleIdentity(hero)]);
-
-      for (const title of candidates) {
-        if (recovery.length >= 6) break;
-
-        const key = titleIdentity(title);
-        if (recoveryIds.has(key)) continue;
-
-        recovery.push(title);
-        recoveryIds.add(key);
-      }
-
-      if (recovery.length < 6) {
-        throw strictError;
-      }
-
-      alternatives = recovery;
-    }
-  } else {
-    alternatives = assembleEngineBatch(
-      hero,
-      candidates,
-      selectedLabels,
-      contentMode,
-      batchNumber
+  if (availableTitles.length < 7) {
+    throw new Error(
+      `Only ${availableTitles.length} of the selected titles are currently streamable in ${watchRegion}. Please try “Show me 7 more”.`
     );
   }
-
-  const finalTitles = [hero, ...alternatives];
-
-  if (selectedLabels.includes("romcom")) {
-    const invalidRomcom = finalTitles.find(title => {
-      if (isEditoriallyExcluded(title.title, title.year, "romcom")) {
-        return true;
-      }
-
-      if (isCanonApprovedFor(title.title, title.year, "romcom")) {
-        return false;
-      }
-
-      const genres = new Set(
-        (title.genres || []).map(genre => String(genre).toLowerCase())
-      );
-
-      if (!genres.has("comedy")) return true;
-      if (!title.isTV && !genres.has("romance")) return true;
-      return false;
-    });
-
-    if (invalidRomcom) {
-      throw new Error(
-        `${invalidRomcom.title} did not pass the My Ciné Romcom Canon audit.`
-      );
-    }
-  }
-
-  if (finalTitles.some(title => Number(title.rating || 0) < 7.5)) {
-    throw new Error("A title below the 75% TMDB standard was rejected before display.");
-  }
-
-  saveRecommendationHistory(selectionKey, finalTitles);
 
   return {
-    hero,
-    alts: alternatives
+    hero: availableTitles[0],
+    alts: availableTitles.slice(1, 7)
   };
 }
 // ── POSTER COMPONENT ──────────────────────────────────────────────────────────
@@ -2461,7 +1505,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
         <Poster path={film.poster_path} title={film.title} size="w500"/>
         <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(to top,rgba(11,20,48,1),transparent)"}}/>
         <div style={{position:"absolute",top:"12px",left:"12px"}}>
-          <span style={{background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.08em"}}>{film.roleBadge || "🍿 Tonight's Pick"}</span>
+          <span style={{background:C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.1em"}}>🍿 Tonight's Pick</span>
         </div>
         {Number(film.year) === CURRENT_YEAR && (
           <div style={{position:"absolute",top:"12px",right:"12px"}}>
@@ -2598,23 +1642,24 @@ function AltCard({film, watched, onToggle, watchRegion}) {
 >
   <Poster path={film.poster_path} title={film.title} size="w342"/>
 
-{film.roleBadge && (
+{(Number(film.year) === CURRENT_YEAR || film.era === "classic" || film.era === "modern") && (
   <div style={{position:"absolute",top:"7px",left:"7px"}}>
     <span
       style={{
-        background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,
-        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic")
-          ? C.navy
-          : C.white,
+        background:Number(film.year) === CURRENT_YEAR ? C.red : eraColor,
+        color:C.white,
         fontSize:"8px",
-        fontWeight:"900",
-        padding:"3px 7px",
-        borderRadius:"5px",
-        textTransform:"uppercase",
-        boxShadow:"0 2px 8px rgba(0,0,0,.35)"
+        fontWeight:"800",
+        padding:"2px 7px",
+        borderRadius:"4px",
+        textTransform:"uppercase"
       }}
     >
-      {film.roleBadge}
+      {Number(film.year) === CURRENT_YEAR
+        ? "New"
+        : film.era === "classic"
+          ? "Classic"
+          : "Modern"}
     </span>
   </div>
 )}
@@ -3329,7 +2374,7 @@ function StandardPage() {
 
         <section className="standard-card">
           <h2>⭐ A Quality Standard</h2>
-          <p>Every recommendation must reach at least 75% in the live TMDB community rating. Romcom now serves precomposed editorial batches from the My Ciné Database. TMDB supplies posters, ratings, trailers and availability, but never chooses or rearranges the seven films.</p>
+          <p>Every recommendation must currently reach at least 75% in the TMDB community rating, with a meaningful number of votes.</p>
           <p>My Ciné displays the source transparently. It does not present TMDB scores as Rotten Tomatoes, IMDb, Google, or a fabricated average.</p>
           <p>Future versions may integrate additional verified rating sources, but each source will remain clearly identified.</p>
         </section>
@@ -3633,30 +2678,6 @@ export default function App() {
 
   const canFetch =
     tab === "genre" ? selGenres.length > 0 : !!selMood;
-
-  const activePreparedBatches =
-    tab === "genre" &&
-    selGenres.length === 1 &&
-    contentMode !== "tv"
-      ? selGenres[0] === "romcom"
-        ? ROMCOM_EDITORIAL_BATCHES
-        : selGenres[0] === "comedy"
-          ? COMEDY_EDITORIAL_BATCHES
-          : selGenres[0] === "romance"
-            ? ROMANCE_EDITORIAL_BATCHES
-            : selGenres[0] === "drama"
-              ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : null
-      : null;
-
-  // My Ciné Rule of Seven:
-  // exactly seven recommendations per set and a maximum of seven sets
-  // during one genre session, even when the editorial database stores more.
-  const activeBatchCount = activePreparedBatches
-    ? Math.min(7, activePreparedBatches.length)
-    : 7;
   const cycleMsg = () => {
   let i = 0;
 
@@ -3666,79 +2687,38 @@ export default function App() {
   }, 3000);
 };
 
-const run = async (
-  excludeIds = [],
-  resetSession = false,
-  requestedBatch = null
-) => {
+const run = async (excludeIds = [], resetSession = false) => {
   setLoading(true);
   setError(null);
   setLoadingMsg(LOADING_MSGS[0]);
 
   const timer = cycleMsg();
-  const targetBatch = requestedBatch ?? (
-    resetSession ? 1 : Math.min(activeBatchCount, batchNumber + 1)
-  );
 
   try {
-    const preparedGenre =
-      tab === "genre" &&
-      selGenres.length === 1 &&
-      contentMode !== "tv"
-        ? selGenres[0]
-        : null;
-
-    const preparedBatches = activePreparedBatches;
-
-    const result = preparedBatches
-      ? await buildPrebuiltEditorialBatch(
-          preparedBatches,
-          preparedGenre,
-          watchRegion,
-          targetBatch
-        )
-      : await buildPicks(
-          tab,
-          selGenres,
-          selMood,
-          watchRegion,
-          contentMode,
-          excludeIds,
-          targetBatch
-        );
+    const result = await buildPicks(
+      tab,
+      selGenres,
+      selMood,
+      watchRegion,
+      contentMode,
+      excludeIds
+    );
 
     const newIds = [result.hero?.id, ...result.alts.map(item => item.id)].filter(Boolean);
-    const previousBatchIds = new Set(
-      [hero?.id, ...alts.map(item => item.id)].filter(Boolean).map(String)
-    );
-
-    const repeatedFromPreviousBatch = newIds.filter(
-      id => previousBatchIds.has(String(id))
-    );
-
-    if (newIds.length > 0 && repeatedFromPreviousBatch.length > 0) {
-      throw new Error(
-        `Fresh batch contained ${repeatedFromPreviousBatch.length} repeated title(s).`
-      );
-    }
-
-    if (newIds.length !== 7 || new Set(newIds.map(String)).size !== 7) {
-      throw new Error("My Ciné did not receive seven distinct recommendations.");
-    }
 
     setHero(result.hero);
     setAlts(result.alts);
     setGenerated(true);
 
-    setSeenPickIds(previous =>
-      [...new Set([...previous, ...newIds])]
-    );
+    setSeenPickIds(previous => {
+      const base = resetSession ? [] : previous;
+      return [...new Set([...base, ...newIds])];
+    });
 
-    setBatchNumber(targetBatch);
+    setBatchNumber(previous => resetSession ? 1 : Math.min(7, previous + 1));
   } catch (error) {
-    // Preserve the current seven if the next batch cannot be assembled.
     console.error("MY CINÉ recommendation error:", error);
-    setError("fresh-set-unavailable");
+    setError(error.message || "Unable to load movie recommendations.");
   } finally {
     setLoading(false);
     clearInterval(timer);
@@ -3746,48 +2726,16 @@ const run = async (
 };
 
   const doFetch = () => {
-    if (loading) return;
-
-    const isPreparedEditorialGenre = Boolean(activePreparedBatches);
-
-    const previousIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
-      .filter(Boolean);
-
-    if (isPreparedEditorialGenre) {
-      // Prepared editorial journeys end at set 7.
-      // They never wrap back to set 1 inside the same session.
-      if (batchNumber >= activeBatchCount) return;
-
-      const nextBatch = batchNumber + 1;
-      run([...new Set(previousIds)], false, nextBatch);
-      return;
-    }
-
-    run([...new Set(previousIds)], true, 1);
-  };
-
-  const startNewRecommendationSession = () => {
-    const key = recommendationSelectionKey(
-      tab,
-      selGenres,
-      selMood,
-      contentMode
-    );
-
-
+    setHero(null);
+    setAlts([]);
     setSeenPickIds([]);
     setBatchNumber(0);
-    run([], true, 1);
+    run([], true);
   };
 
   const doMore = () => {
-    if (loading || batchNumber >= activeBatchCount) return;
-
-    const nextBatch = Math.min(activeBatchCount, batchNumber + 1);
-    const currentIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
-      .filter(Boolean);
-
-    run([...new Set(currentIds)], false, nextBatch);
+    if (batchNumber >= 7) return;
+    run(seenPickIds, false);
   };
 
   const watchedCount = Object.values(watched).filter(Boolean).length;
@@ -5307,183 +4255,6 @@ const run = async (
     }
   }
 
-  /* V26: lock the application to the viewport and eliminate horizontal drift */
-  html,
-  body,
-  #root{
-    width:100%;
-    max-width:100%;
-    margin:0;
-    padding:0;
-    overflow-x:hidden !important;
-  }
-
-  .cinematic-app{
-    width:100%;
-    max-width:100vw;
-    overflow-x:hidden !important;
-  }
-
-  .cinematic-app *,
-  .cinematic-app *::before,
-  .cinematic-app *::after{
-    min-width:0;
-  }
-
-  .cinematic-app > .top-nav{
-    width:auto !important;
-    max-width:none !important;
-    inset:0 0 auto 0 !important;
-    overflow:hidden;
-  }
-
-  @media (max-width:760px){
-    .mobile-nav{
-      display:grid !important;
-      grid-template-columns:minmax(0,1fr) auto;
-      align-items:center;
-      width:100%;
-      max-width:100%;
-      padding:8px 12px !important;
-      gap:10px;
-      overflow:hidden;
-    }
-
-    .mobile-brand{
-      justify-self:start;
-      width:auto;
-      max-width:100%;
-      margin:0;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .mobile-menu-button{
-      justify-self:end;
-      width:auto;
-      max-width:none;
-      margin:0;
-    }
-
-    .mobile-menu-panel{
-      width:100% !important;
-      max-width:100% !important;
-      left:0 !important;
-      right:0 !important;
-      overflow:hidden;
-    }
-
-    .lobby-wrap{
-      width:100% !important;
-      max-width:100% !important;
-      margin:0 auto !important;
-      padding-left:12px !important;
-      padding-right:12px !important;
-      overflow:hidden;
-    }
-
-    .home-hero{
-      width:100%;
-      max-width:100%;
-      margin:0 auto;
-      padding-left:8px !important;
-      padding-right:8px !important;
-      overflow:hidden;
-    }
-
-    .home-hero .logo{
-      max-width:100%;
-      margin:0 auto;
-      text-align:center;
-      letter-spacing:0.05em;
-      white-space:normal;
-      overflow-wrap:anywhere;
-    }
-
-    .home-hero .tagline{
-      width:100%;
-      max-width:100%;
-      margin-left:auto;
-      margin-right:auto;
-      padding:0 8px;
-      text-align:center;
-      white-space:normal !important;
-      overflow-wrap:anywhere;
-      word-break:normal;
-      letter-spacing:0.11em;
-      line-height:1.45;
-    }
-
-    .lobby-feature-grid{
-      width:100% !important;
-      max-width:100% !important;
-      margin:0 auto 18px !important;
-      padding-left:0 !important;
-      padding-right:0 !important;
-      align-items:stretch;
-      overflow:hidden;
-    }
-
-    .home-curate-card,
-    .home-moment-card,
-    .concierge-panel,
-    .moment-strip,
-    .cinema-moment,
-    .cinema-moment-inner{
-      width:100% !important;
-      max-width:100% !important;
-      min-width:0 !important;
-      margin-left:auto !important;
-      margin-right:auto !important;
-      overflow:hidden;
-    }
-
-    .concierge-panel{
-      padding-left:14px !important;
-      padding-right:14px !important;
-    }
-
-    .format-selector,
-    .format-selector-options{
-      width:100%;
-      max-width:100%;
-      min-width:0;
-    }
-
-    .format-selector-options{
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-
-    .format-option{
-      width:100%;
-      min-width:0;
-      padding-left:2px;
-      padding-right:2px;
-    }
-
-    .format-option-text{
-      max-width:100%;
-      white-space:normal;
-      overflow-wrap:anywhere;
-      text-align:center;
-    }
-
-    .concierge-panel button,
-    .concierge-panel select{
-      max-width:100%;
-    }
-
-    .page-shell,
-    .standard-grid,
-    .curator-card,
-    .saved-grid,
-    .mycine-footer{
-      width:100%;
-      max-width:100%;
-      overflow-x:hidden;
-    }
-  }
-
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length}/>
@@ -5591,7 +4362,7 @@ const run = async (
           }
         </div>
 
-        <button className="primary-cta" onClick={generated ? doFetch : startNewRecommendationSession} disabled={loading||!canFetch} style={{
+        <button className="primary-cta" onClick={doFetch} disabled={loading||!canFetch} style={{
           width:"100%",maxWidth:"400px",
           background:loading?C.navyMid:C.goldBright,
           color:loading?C.goldBright:C.navy,
@@ -5622,17 +4393,15 @@ const run = async (
       <div className="app-content">
         {error&&(
           <div className="public-error">
-            <strong>🎬 My Ciné could not load the next prepared editorial collection.</strong>
-            <span>Please tap the button again. The current seven remain safely in place.</span>
+            <strong>🎬 The projector needs a quick reset.</strong>
+            <span>Recommendations are temporarily unavailable. Please try again shortly.</span>
+            <details>
+              <summary>Technical details</summary>
+              <code>{error}</code>
+            </details>
           </div>
         )}
-        {loading&&generated&&(
-          <div className="public-error">
-            <strong>🎦 Curating seven completely different choices…</strong>
-            <span>The current set remains visible until the new one is ready.</span>
-          </div>
-        )}
-        {loading&&!generated&&<Skeleton/>}
+        {loading&&<Skeleton/>}
 
         {!loading&&generated&&hero&&(
           <div>
@@ -5661,92 +4430,29 @@ const run = async (
               </div>
             )}
             <div style={{marginTop:"28px"}}>
-              {batchNumber < activeBatchCount ? (
-                <button
-                  onClick={doMore}
-                  disabled={loading}
-                  style={{
-                    width:"100%",
-                    background:"transparent",
-                    border:`1.5px solid ${C.goldBright}88`,
-                    borderRadius:"10px",
-                    padding:"13px",
-                    color:C.goldBright,
-                    fontWeight:"800",
-                    fontSize:"14px",
-                    cursor:loading?"not-allowed":"pointer",
-                    fontFamily:"Georgia,serif",
-                    opacity:loading?0.65:1
-                  }}
-                >
-                  {loading
-                    ? loadingMsg
-                    : `🎦 Keep Exploring ${Math.min(
-                        activeBatchCount,
-                        batchNumber + 1
-                      )}/${activeBatchCount}`}
-                </button>
-              ) : (
-                <div style={{
-                  background:C.navy,
-                  border:`2px solid ${C.goldBright}`,
-                  borderRadius:"14px",
-                  padding:"22px 20px",
-                  boxShadow:"0 12px 30px rgba(0,0,0,0.28)",
-                  textAlign:"center"
-                }}>
-                  <div style={{
-                    color:C.goldBright,
-                    fontFamily:"Georgia,serif",
-                    fontWeight:"900",
-                    fontSize:"20px",
-                    lineHeight:"1.25",
-                    marginBottom:"8px"
-                  }}>
-                    🎬 That's a wrap for this genre!
-                  </div>
-                  <div style={{
-                    color:C.white,
-                    fontFamily:"Georgia,serif",
-                    fontSize:"16px",
-                    lineHeight:"1.4"
-                  }}>
-                    Ready for another cinematic adventure?
-                  </div>
-                </div>
-              )}
-
-              {batchNumber >= activeBatchCount&&(
-                <div style={{marginTop:"16px",textAlign:"center"}}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGenerated(false);
-                      setHero(null);
-                      setAlts([]);
-                      setSeenPickIds([]);
-                      setBatchNumber(0);
-                      setSelGenres([]);
-                      setError(null);
-                      window.scrollTo({top:0,behavior:"smooth"});
-                    }}
-                    style={{
-                      background:C.goldBright,
-                      color:C.navy,
-                      border:"none",
-                      borderRadius:"10px",
-                      padding:"13px 18px",
-                      fontWeight:"900",
-                      fontSize:"14px",
-                      cursor:"pointer",
-                      fontFamily:"Georgia,serif",
-                      boxShadow:"0 8px 20px rgba(0,0,0,0.22)"
-                    }}
-                  >
-                    🍿 Explore another genre
-                  </button>
-                </div>
-              )}
+              <button
+                onClick={doMore}
+                disabled={loading || batchNumber >= 7}
+                style={{
+                  width:"100%",
+                  background:"transparent",
+                  border:`1.5px solid ${C.goldBright}88`,
+                  borderRadius:"10px",
+                  padding:"13px",
+                  color:C.goldBright,
+                  fontWeight:"800",
+                  fontSize:"14px",
+                  cursor:(loading || batchNumber >= 7)?"not-allowed":"pointer",
+                  fontFamily:"Georgia,serif",
+                  opacity:(loading || batchNumber >= 7)?0.5:1
+                }}
+              >
+                {loading
+                  ? loadingMsg
+                  : batchNumber >= 7
+                    ? "🎦 Seven complete sets revealed"
+                    : `🎦 Keep Exploring ${batchNumber + 1}/7`}
+              </button>
             </div>
           </div>
         )}

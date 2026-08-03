@@ -3,8 +3,6 @@ import curatorPhoto from "./assets/armelle-cloche.jpg";
 import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
 import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
 import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
-import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
-import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -1586,17 +1584,6 @@ async function buildPrebuiltEditorialBatch(
     };
 
     const details = await fetchTitleDetails(normalized);
-
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
-    if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
-    ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
-    }
 
     // Prepared Romcom batches are approved editorially before runtime.
     // TMDB enriches the title with live metadata, but does not veto it.
@@ -3644,11 +3631,7 @@ export default function App() {
           ? COMEDY_EDITORIAL_BATCHES
           : selGenres[0] === "romance"
             ? ROMANCE_EDITORIAL_BATCHES
-            : selGenres[0] === "drama"
-              ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : null
+            : null
       : null;
 
   // My Ciné Rule of Seven:
@@ -5661,63 +5644,42 @@ const run = async (
               </div>
             )}
             <div style={{marginTop:"28px"}}>
-              {batchNumber < activeBatchCount ? (
-                <button
-                  onClick={doMore}
-                  disabled={loading}
-                  style={{
-                    width:"100%",
-                    background:"transparent",
-                    border:`1.5px solid ${C.goldBright}88`,
-                    borderRadius:"10px",
-                    padding:"13px",
-                    color:C.goldBright,
-                    fontWeight:"800",
-                    fontSize:"14px",
-                    cursor:loading?"not-allowed":"pointer",
-                    fontFamily:"Georgia,serif",
-                    opacity:loading?0.65:1
-                  }}
-                >
-                  {loading
-                    ? loadingMsg
+              <button
+                onClick={doMore}
+                disabled={loading || batchNumber >= activeBatchCount}
+                style={{
+                  width:"100%",
+                  background:"transparent",
+                  border:`1.5px solid ${C.goldBright}88`,
+                  borderRadius:"10px",
+                  padding:"13px",
+                  color:C.goldBright,
+                  fontWeight:"800",
+                  fontSize:"14px",
+                  cursor:(loading || batchNumber >= activeBatchCount)?"not-allowed":"pointer",
+                  fontFamily:"Georgia,serif",
+                  opacity:(loading || batchNumber >= activeBatchCount)?0.5:1
+                }}
+              >
+                {loading
+                  ? loadingMsg
+                  : batchNumber >= activeBatchCount
+                    ? "🎬 That's a wrap for this genre!"
                     : `🎦 Keep Exploring ${Math.min(
                         activeBatchCount,
                         batchNumber + 1
                       )}/${activeBatchCount}`}
-                </button>
-              ) : (
-                <div style={{
-                  background:C.navy,
-                  border:`2px solid ${C.goldBright}`,
-                  borderRadius:"14px",
-                  padding:"22px 20px",
-                  boxShadow:"0 12px 30px rgba(0,0,0,0.28)",
-                  textAlign:"center"
-                }}>
-                  <div style={{
-                    color:C.goldBright,
+              </button>
+              {batchNumber >= activeBatchCount&&(
+                <div style={{marginTop:"14px",textAlign:"center"}}>
+                  <p style={{
+                    color:"rgba(255,255,255,0.82)",
                     fontFamily:"Georgia,serif",
-                    fontWeight:"900",
-                    fontSize:"20px",
-                    lineHeight:"1.25",
-                    marginBottom:"8px"
-                  }}>
-                    🎬 That's a wrap for this genre!
-                  </div>
-                  <div style={{
-                    color:C.white,
-                    fontFamily:"Georgia,serif",
-                    fontSize:"16px",
-                    lineHeight:"1.4"
+                    fontSize:"15px",
+                    margin:"0 0 12px"
                   }}>
                     Ready for another cinematic adventure?
-                  </div>
-                </div>
-              )}
-
-              {batchNumber >= activeBatchCount&&(
-                <div style={{marginTop:"16px",textAlign:"center"}}>
+                  </p>
                   <button
                     type="button"
                     onClick={() => {
@@ -5739,8 +5701,7 @@ const run = async (
                       fontWeight:"900",
                       fontSize:"14px",
                       cursor:"pointer",
-                      fontFamily:"Georgia,serif",
-                      boxShadow:"0 8px 20px rgba(0,0,0,0.22)"
+                      fontFamily:"Georgia,serif"
                     }}
                   >
                     🍿 Explore another genre

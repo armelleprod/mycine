@@ -1,0 +1,8 @@
+My Ciné V29 Engine 2.0 Stability Fix
+
+- Replaced the large simultaneous TMDB request burst with controlled concurrency
+- One failed candidate request now skips one title instead of collapsing all results
+- Missing watch-provider metadata falls back to the exact TMDB watch page
+- Reduced enrichment volume while keeping a broad pool
+- Added a final diversity relaxation step while preserving rating and relevance
+- Preserved the live TMDB 7.5/10 minimum

@@ -1,0 +1,7 @@
+My Ciné V30 Strict Romcom Filter
+
+- Films must be classified by TMDB as BOTH Comedy and Romance
+- A romantic subplot or a romantic word in the synopsis is no longer enough
+- TV must be Comedy plus strong romantic keywords/title/synopsis signals
+- Added a final seven-title Romcom audit before display
+- Preserved the live TMDB 7.5/10 minimum

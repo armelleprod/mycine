@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 import curatorPhoto from "./assets/armelle-cloche.jpg";
-import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
-import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
-import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
-import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
-import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -39,15 +34,6 @@ const PROVIDER_COLORS = {
   "ViX":"#5B21B6"
 };
 const ERA_COLORS      = {classic:C.goldBright,modern:"#5B8DEF",current:C.red};
-const ROLE_BADGE_COLORS = {
-  "🍿 Tonight\'s Pick": C.goldBright,
-  "❤️ Crowd Favorite": "#E91E8C",
-  "🎞️ Classic": C.goldBright,
-  "🌍 Passport": "#1A73E8",
-  "💎 Discovery": "#7C3AED",
-  "🏆 Critics": "#16A34A",
-  "✨ Surprise": "#9333EA"
-};
 const CURRENT_YEAR    = new Date().getFullYear();
 
 const LOADING_MSGS = [
@@ -341,7 +327,7 @@ function rankLocally(heroes, alts, queryLabel, contentMode) {
 
 
 // ── MY CINÉ ENGINE 2.0 ───────────────────────────────────────────────────────
-const RECOMMENDATION_HISTORY_KEY = "mycine-recommendation-history-romcom-db-v3";
+const RECOMMENDATION_HISTORY_KEY = "mycine-recommendation-history-romcom-db-v5";
 const HISTORY_WINDOW_DAYS = 30;
 const HERO_HISTORY_WINDOW_DAYS = 60;
 
@@ -636,7 +622,7 @@ function assembleRomcomDatabaseBatch(
       return false;
     }
 
-    if (Number(title.year || 0) < 1990 && classicCount >= 2 && relax < 2) {
+    if (Number(title.year || 0) < 1990 && classicCount >= 1) {
       return false;
     }
 
@@ -654,8 +640,19 @@ function assembleRomcomDatabaseBatch(
   for (const [role, profile] of rolePlan) {
     let chosen = null;
 
+    const roleCandidates = ranked.filter(title => {
+      const year = Number(title.year || 0);
+
+      if (role === "classic-choice") {
+        return year > 0 && year < 1990;
+      }
+
+      // All other roles should feel more contemporary.
+      return year >= 1990;
+    });
+
     for (let relax = 0; relax <= 3 && !chosen; relax += 1) {
-      chosen = ranked
+      chosen = roleCandidates
         .filter(title => canonRoleMatch(title, role))
         .filter(title => engineAudienceType(title) === profile || relax >= 1)
         .find(title => canAdd(title, relax));
@@ -989,7 +986,7 @@ function saveCachedEnrichedTitle(title, watchRegion, value) {
 }
 
 
-const ROMCOM_SESSION_ROTATION_KEY = "mycine-romcom-session-rotation-v1";
+const ROMCOM_SESSION_ROTATION_KEY = "mycine-romcom-session-rotation-v2";
 
 function readRomcomRotation() {
   try {
@@ -1524,158 +1521,380 @@ async function mapWithConcurrency(items, worker, concurrency = 5) {
 }
 
 
-async function buildPrebuiltEditorialBatch(
-  editorialBatches,
-  genreKey,
-  watchRegion,
-  batchNumber = 1
-) {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-  if (!token) {
-    throw new Error(`TMDB token is required to enrich the prepared ${genreKey} batch.`);
-  }
+const ROMCOM_BATCH_PLAN_CACHE_KEY = "mycine-romcom-batch-plan-v1";
 
-  const safeIndex = Math.max(
-    0,
-    Math.min(editorialBatches.length - 1, Number(batchNumber || 1) - 1)
-  );
-  const editorialBatch = editorialBatches[safeIndex];
+function romcomBatchPlanKey(watchRegion, contentMode) {
+  return `${watchRegion}|${contentMode}|romcom-db-v1`;
+}
 
-  if (!editorialBatch || editorialBatch.length !== 7) {
-    throw new Error(`Prepared ${genreKey} batch ${safeIndex + 1} is incomplete.`);
-  }
+function readRomcomBatchPlan(key) {
+  try {
+    const parsed = JSON.parse(
+      sessionStorage.getItem(`${ROMCOM_BATCH_PLAN_CACHE_KEY}:${key}`) || "null"
+    );
 
-  const enrichPreparedTitle = async editorial => {
-    const editorialBadge =
-      editorial.badge ||
-      editorial.role ||
-      "✨ Surprise";
-
-    const entry = {
-      ...editorial,
-      badge:editorialBadge,
-      key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
-    };
-
-    const candidate = await fetchCanonTitleCandidate(entry, token);
-    if (!candidate) {
-      throw new Error(`${editorial.title} could not be matched on TMDB.`);
-    }
-
-    const normalized = {
-      ...candidate,
-      title:candidate.title || candidate.name || editorial.title,
-      year:String(
-        candidate.release_date || candidate.first_air_date || editorial.year
-      ).slice(0,4),
-      media_type:"movie",
-      isTV:false,
-      format:"Film",
-      rating:Number(candidate.vote_average || 0),
-      vote_count:Number(candidate.vote_count || 0),
-      popularity:Number(candidate.popularity || 0),
-      poster_path:candidate.poster_path || null,
-      overview:candidate.overview || editorial.curatorNote || "Synopsis unavailable.",
-      original_language:candidate.original_language || "",
-      genre_ids:candidate.genre_ids || [],
-      era:Number(editorial.year) < 1990
-        ? "classic"
-        : Number(editorial.year) < 2020
-          ? "modern"
-          : "current"
-    };
-
-    const details = await fetchTitleDetails(normalized);
-
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
     if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
+      !parsed ||
+      !Array.isArray(parsed.batches) ||
+      parsed.batches.length < 2
     ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
+      return null;
     }
 
-    // Prepared Romcom batches are approved editorially before runtime.
-    // TMDB enriches the title with live metadata, but does not veto it.
-    // The live community score remains visible to the user.
-    const liveTmdbRating = Number(details.rating || 0);
-    const displayedTmdbPercent = Math.round(liveTmdbRating * 10);
+    return parsed;
+  } catch {
+    return null;
+  }
+}
 
-    let availability = {
-      stream:[], free:[], ads:[], rent:[], buy:[], link:null
-    };
+function saveRomcomBatchPlan(key, batches) {
+  sessionStorage.setItem(
+    `${ROMCOM_BATCH_PLAN_CACHE_KEY}:${key}`,
+    JSON.stringify({
+      createdAt:Date.now(),
+      batches
+    })
+  );
+}
 
-    try {
-      availability = await fetchWatchProviders(
-        details.id,
-        watchRegion,
-        "movie"
-      );
-    } catch (error) {
-      console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, error);
-    }
+function clearRomcomBatchPlan(key) {
+  sessionStorage.removeItem(`${ROMCOM_BATCH_PLAN_CACHE_KEY}:${key}`);
+}
 
-    const providers = [
-      ...(availability.stream || []),
-      ...(availability.free || []),
-      ...(availability.ads || []),
-      ...(availability.rent || []),
-      ...(availability.buy || [])
-    ];
+function normalizeDatabaseCandidate(item) {
+  const isTV = item.media_type === "tv";
+  const date = isTV ? item.first_air_date : item.release_date;
+  const year = String(date || "").slice(0,4);
+  const numericYear = Number(year);
 
-    const providerNames = [...new Set(
-      providers
-        .map(item => canonicalProviderName(item.provider_name))
-        .filter(Boolean)
-    )];
+  return {
+    id:item.id,
+    title:isTV ? item.name : item.title,
+    year,
+    poster_path:item.poster_path,
+    provider:"Where to Watch",
+    rating:Number(item.vote_average || 0),
+    vote_count:Number(item.vote_count || 0),
+    popularity:Number(item.popularity || 0),
+    overview:item.overview || "Synopsis unavailable.",
+    original_language:item.original_language || "",
+    genre_ids:item.genre_ids || [],
+    media_type:item.media_type,
+    isTV,
+    format:isTV ? "TV Series" : "Film",
+    era:numericYear < 1990
+      ? "classic"
+      : numericYear < 2020
+        ? "modern"
+        : "current",
+    myCineArrival:item.myCineArrival || null
+  };
+}
 
-    return {
-      ...details,
-      editorialBatch:safeIndex + 1,
-      editorialSlot:editorial.slot,
-      roleBadge:editorialBadge,
-      editoriallyApproved:true,
-      displayedTmdbPercent,
-      canonTier:editorial.tier,
-      curatorNote:editorial.curatorNote,
-      countryEditorial:editorial.country,
-      languageEditorial:editorial.language,
-      providerNames,
-      provider:providerNames.length
-        ? providerNames.slice(0,3).join(" • ")
-        : "Check availability",
-      watchLink:availability.link ||
-        `https://www.themoviedb.org/movie/${details.id}/watch?locale=${watchRegion}`,
-      watchRegionCode:watchRegion,
-      highlight:{
-        icon:String(editorialBadge).split(" ")[0],
-        label:String(editorialBadge).replace(/^\S+\s*/, ""),
-        text:editorial.curatorNote
-      },
-      whyWatch:editorial.curatorNote || details.overview
-    };
+async function enrichRomcomDatabaseTitle(title, watchRegion) {
+  const cached = getCachedEnrichedTitle(title, watchRegion);
+
+  if (cached) {
+    return applyCanonMetadata({
+      ...cached,
+      myCineArrival:title.myCineArrival || cached.myCineArrival || null
+    });
+  }
+
+  let details;
+
+  try {
+    details = await fetchTitleDetails(title);
+  } catch (error) {
+    console.warn("Romcom database detail request failed:", title.title, error);
+    return null;
+  }
+
+  if (Number(details.rating || 0) < 7.5) return null;
+  if (!passesDetailedIntent(details, ["romcom"])) return null;
+
+  let availability = {
+    stream:[],
+    free:[],
+    ads:[],
+    rent:[],
+    buy:[],
+    link:null
   };
 
-  const resolved = await mapWithConcurrency(
-    editorialBatch,
-    enrichPreparedTitle,
-    4
+  try {
+    availability = await fetchWatchProviders(
+      title.id,
+      watchRegion,
+      title.media_type
+    );
+  } catch (error) {
+    console.warn("Romcom provider request failed:", title.title, error);
+  }
+
+  const providers = [
+    ...(availability.stream || []),
+    ...(availability.free || []),
+    ...(availability.ads || []),
+    ...(availability.rent || []),
+    ...(availability.buy || [])
+  ];
+
+  const providerNames = [...new Set(
+    providers
+      .map(item => canonicalProviderName(item.provider_name))
+      .filter(Boolean)
+  )];
+
+  const tmdbWatchFallback =
+    `https://www.themoviedb.org/${title.media_type}/${title.id}/watch?locale=${watchRegion}`;
+
+  const enriched = applyCanonMetadata({
+    ...details,
+    myCineArrival:title.myCineArrival || null,
+    providerNames,
+    provider:providerNames.length
+      ? providerNames.slice(0,3).join(" • ")
+      : "Check availability",
+    watchLink:availability.link || tmdbWatchFallback,
+    watchRegionCode:watchRegion,
+    highlight:buildHighlight(details),
+    whyWatch:details.overview
+  });
+
+  if (
+    enriched.canon &&
+    Number(enriched.year) < CURRENT_YEAR - 1
+  ) {
+    enriched.highlight = {
+      icon:"🍿",
+      label:"My Ciné favorite",
+      text:"A trusted romantic-comedy choice selected from the My Ciné Canon."
+    };
+  }
+
+  saveCachedEnrichedTitle(title, watchRegion, enriched);
+  return enriched;
+}
+
+function isConfidentDatabaseHero(title) {
+  const votes = Number(title.vote_count || 0);
+  const status = String(title.myCineArrival?.status || "").toLowerCase();
+  const hasProvider = Array.isArray(title.providerNames) &&
+    title.providerNames.length > 0;
+
+  const minimumVotes = status === "approved" ? 15 : 40;
+  return votes >= minimumVotes && hasProvider;
+}
+
+function chooseRomcomPlanHero(recentPool, canonPool, usedIds) {
+  const unusedRecent = recentPool.filter(
+    title => !usedIds.has(titleIdentity(title))
   );
 
-  const titles = resolved.filter(Boolean);
-  if (titles.length !== 7) {
+  const rankRecent = titles => [...titles].sort((a,b) => {
+    const editorialPriority =
+      Number(b.myCineArrival?.priority || 0) -
+      Number(a.myCineArrival?.priority || 0);
+
+    return editorialPriority ||
+      engineScore(b, ["romcom"], "casual") -
+      engineScore(a, ["romcom"], "casual");
+  });
+
+  for (const year of [CURRENT_YEAR, CURRENT_YEAR - 1, CURRENT_YEAR - 2]) {
+    const hero = rankRecent(
+      unusedRecent.filter(title =>
+        Number(title.year) === year &&
+        isConfidentDatabaseHero(title)
+      )
+    )[0];
+
+    if (hero) return hero;
+  }
+
+  const unusedCanon = canonPool
+    .filter(title => !usedIds.has(titleIdentity(title)))
+    .sort(
+      (a,b) =>
+        engineScore(b, ["romcom"], "casual") -
+        engineScore(a, ["romcom"], "casual")
+    );
+
+  return (
+    unusedCanon.find(title => Number(title.year || 0) >= 2010) ||
+    unusedCanon[0] ||
+    null
+  );
+}
+
+function composeRomcomPlanAlternatives(
+  hero,
+  canonPool,
+  usedIds,
+  contentMode,
+  batchNumber
+) {
+  const unused = canonPool.filter(title =>
+    !usedIds.has(titleIdentity(title)) &&
+    titleIdentity(title) !== titleIdentity(hero)
+  );
+
+  try {
+    return assembleRomcomDatabaseBatch(
+      hero,
+      unused,
+      contentMode,
+      batchNumber
+    );
+  } catch (error) {
+    console.warn("Plan composition recovery used:", error);
+
+    const selected = [];
+    const countries = new Map();
+    const decades = new Map();
+    let classicCount = Number(hero.year || 0) < 1990 ? 1 : 0;
+    let eastAsianCount = isEastAsianTitle(hero) ? 1 : 0;
+
+    const heroCountry = String(
+      hero.countryCode || hero.canon?.country || ""
+    ).toUpperCase();
+
+    if (heroCountry) countries.set(heroCountry, 1);
+
+    const modernFirst = [
+      ...unused.filter(title => Number(title.year || 0) >= 1990),
+      ...unused.filter(title => Number(title.year || 0) < 1990)
+    ];
+
+    for (const title of modernFirst) {
+      if (selected.length >= 6) break;
+
+      const country = String(
+        title.countryCode || title.canon?.country || ""
+      ).toUpperCase();
+      const decade = Math.floor(Number(title.year || 0) / 10) * 10;
+      const isClassic = Number(title.year || 0) < 1990;
+      const eastAsian = isEastAsianTitle(title);
+
+      if (country && (countries.get(country) || 0) >= 2) continue;
+      if (decade && (decades.get(decade) || 0) >= 2) continue;
+      if (isClassic && classicCount >= 1) continue;
+      if (eastAsian && eastAsianCount >= 1) continue;
+
+      selected.push(title);
+
+      if (country) {
+        countries.set(country, (countries.get(country) || 0) + 1);
+      }
+      if (decade) {
+        decades.set(decade, (decades.get(decade) || 0) + 1);
+      }
+      if (isClassic) classicCount += 1;
+      if (eastAsian) eastAsianCount += 1;
+    }
+
+    if (selected.length < 6) {
+      for (const title of modernFirst) {
+        if (selected.length >= 6) break;
+        if (selected.some(item => titleIdentity(item) === titleIdentity(title))) {
+          continue;
+        }
+        if (Number(title.year || 0) < 1990 && classicCount >= 1) continue;
+
+        selected.push(title);
+        if (Number(title.year || 0) < 1990) classicCount += 1;
+      }
+    }
+
+    if (selected.length < 6) {
+      throw new Error("The Romcom plan could not build six alternatives.");
+    }
+
+    return selected.slice(0,6);
+  }
+}
+
+async function buildRomcomBatchPlan(watchRegion, contentMode) {
+  const key = romcomBatchPlanKey(watchRegion, contentMode);
+  const cached = readRomcomBatchPlan(key);
+
+  if (cached) return cached.batches;
+
+  const [rawCanon, rawArrivals] = await Promise.all([
+    fetchCanonCandidates("romcom", contentMode, []),
+    fetchNewArrivalCandidates("romcom", contentMode, [])
+  ]);
+
+  const canonNormalized = rawCanon.map(normalizeDatabaseCandidate);
+  const arrivalsNormalized = rawArrivals.map(normalizeDatabaseCandidate);
+
+  const [canonResolved, arrivalResolved] = await Promise.all([
+    mapWithConcurrency(
+      canonNormalized,
+      title => enrichRomcomDatabaseTitle(title, watchRegion),
+      5
+    ),
+    mapWithConcurrency(
+      arrivalsNormalized,
+      title => enrichRomcomDatabaseTitle(title, watchRegion),
+      4
+    )
+  ]);
+
+  const canonPool = dedupeTitles(canonResolved.filter(Boolean));
+  const recentPool = dedupeTitles(arrivalResolved.filter(Boolean));
+
+  if (canonPool.length < 42) {
     throw new Error(
-      `Prepared ${genreKey} batch ${safeIndex + 1} could not resolve all seven titles.`
+      `Only ${canonPool.length} eligible Romcom Canon titles were resolved.`
     );
   }
 
-  return {
-    hero:titles[0],
-    alts:titles.slice(1)
-  };
+  const usedIds = new Set();
+  const batches = [];
+
+  for (let batch = 1; batch <= 7; batch += 1) {
+    const hero = chooseRomcomPlanHero(
+      recentPool,
+      canonPool,
+      usedIds
+    );
+
+    if (!hero) break;
+
+    const alternatives = composeRomcomPlanAlternatives(
+      hero,
+      canonPool,
+      usedIds,
+      contentMode,
+      batch
+    );
+
+    const titles = [hero, ...alternatives];
+
+    if (
+      titles.length !== 7 ||
+      new Set(titles.map(titleIdentity)).size !== 7
+    ) {
+      throw new Error(`Romcom batch ${batch} was not seven unique titles.`);
+    }
+
+    titles.forEach(title => usedIds.add(titleIdentity(title)));
+    batches.push({
+      hero,
+      alts:alternatives
+    });
+  }
+
+  if (batches.length < 4) {
+    throw new Error(
+      `The Romcom Database produced only ${batches.length} complete batches.`
+    );
+  }
+
+  saveRomcomBatchPlan(key, batches);
+  return batches;
 }
 
 async function buildPicks(
@@ -1798,7 +2017,7 @@ async function buildPicks(
   // 1. Prefer the 30-day history cooldown.
   // 2. If the pool is too small, relax only old cross-session history.
   // 3. Current-session exclusions remain absolute.
-  if (selectedLabels.includes("romcom") && altCandidates.length < 18) {
+  if (selectedLabels.includes("romcom") && altCandidates.length < 30) {
     altCandidates = normalizedAlternativePool;
   }
 
@@ -2017,7 +2236,7 @@ async function buildPicks(
   const candidates = selectedLabels.includes("romcom")
     ? rotateCandidates(
         unrotatedCandidates,
-        romcomRotationIndex(selectionKey) * 7
+        romcomRotationIndex(selectionKey) * 11
       )
     : unrotatedCandidates;
 
@@ -2039,15 +2258,26 @@ async function buildPicks(
 
       const recovery = [];
       const recoveryIds = new Set([titleIdentity(hero)]);
+      let recoveryClassicCount = Number(hero.year || 0) < 1990 ? 1 : 0;
 
-      for (const title of candidates) {
+      const recoveryPool = [
+        ...candidates.filter(title => Number(title.year || 0) >= 1990),
+        ...candidates.filter(title => Number(title.year || 0) < 1990)
+      ];
+
+      for (const title of recoveryPool) {
         if (recovery.length >= 6) break;
 
         const key = titleIdentity(title);
         if (recoveryIds.has(key)) continue;
 
+        const isClassic = Number(title.year || 0) < 1990;
+        if (isClassic && recoveryClassicCount >= 1) continue;
+
         recovery.push(title);
         recoveryIds.add(key);
+
+        if (isClassic) recoveryClassicCount += 1;
       }
 
       if (recovery.length < 6) {
@@ -2461,7 +2691,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
         <Poster path={film.poster_path} title={film.title} size="w500"/>
         <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(to top,rgba(11,20,48,1),transparent)"}}/>
         <div style={{position:"absolute",top:"12px",left:"12px"}}>
-          <span style={{background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.08em"}}>{film.roleBadge || "🍿 Tonight's Pick"}</span>
+          <span style={{background:C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.1em"}}>🍿 Tonight's Pick</span>
         </div>
         {Number(film.year) === CURRENT_YEAR && (
           <div style={{position:"absolute",top:"12px",right:"12px"}}>
@@ -2598,23 +2828,24 @@ function AltCard({film, watched, onToggle, watchRegion}) {
 >
   <Poster path={film.poster_path} title={film.title} size="w342"/>
 
-{film.roleBadge && (
+{(Number(film.year) === CURRENT_YEAR || film.era === "classic" || film.era === "modern") && (
   <div style={{position:"absolute",top:"7px",left:"7px"}}>
     <span
       style={{
-        background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,
-        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic")
-          ? C.navy
-          : C.white,
+        background:Number(film.year) === CURRENT_YEAR ? C.red : eraColor,
+        color:C.white,
         fontSize:"8px",
-        fontWeight:"900",
-        padding:"3px 7px",
-        borderRadius:"5px",
-        textTransform:"uppercase",
-        boxShadow:"0 2px 8px rgba(0,0,0,.35)"
+        fontWeight:"800",
+        padding:"2px 7px",
+        borderRadius:"4px",
+        textTransform:"uppercase"
       }}
     >
-      {film.roleBadge}
+      {Number(film.year) === CURRENT_YEAR
+        ? "New"
+        : film.era === "classic"
+          ? "Classic"
+          : "Modern"}
     </span>
   </div>
 )}
@@ -3329,7 +3560,7 @@ function StandardPage() {
 
         <section className="standard-card">
           <h2>⭐ A Quality Standard</h2>
-          <p>Every recommendation must reach at least 75% in the live TMDB community rating. Romcom now serves precomposed editorial batches from the My Ciné Database. TMDB supplies posters, ratings, trailers and availability, but never chooses or rearranges the seven films.</p>
+          <p>Every recommendation must reach at least 75% in the live TMDB community rating. Romcom runs from the My Ciné Database. Recent Tonight’s Picks must now pass rating, vote-confidence and confirmed-availability gates; the 100-title Canon supplies the balanced alternatives and fallback hero.</p>
           <p>My Ciné displays the source transparently. It does not present TMDB scores as Rotten Tomatoes, IMDb, Google, or a fabricated average.</p>
           <p>Future versions may integrate additional verified rating sources, but each source will remain clearly identified.</p>
         </section>
@@ -3590,6 +3821,7 @@ export default function App() {
   const [cinemaMoment, setCinemaMoment] = useState(CURATED_CINEMA_MOMENTS[0]);
   const [seenPickIds, setSeenPickIds] = useState([]);
   const [batchNumber, setBatchNumber] = useState(0);
+  const [romcomBatchCursor, setRomcomBatchCursor] = useState(0);
   const [savedTitles, setSavedTitles] = useState(() => {
     try {
       const permanent = JSON.parse(localStorage.getItem("mycine-watchlist") || "[]");
@@ -3633,30 +3865,6 @@ export default function App() {
 
   const canFetch =
     tab === "genre" ? selGenres.length > 0 : !!selMood;
-
-  const activePreparedBatches =
-    tab === "genre" &&
-    selGenres.length === 1 &&
-    contentMode !== "tv"
-      ? selGenres[0] === "romcom"
-        ? ROMCOM_EDITORIAL_BATCHES
-        : selGenres[0] === "comedy"
-          ? COMEDY_EDITORIAL_BATCHES
-          : selGenres[0] === "romance"
-            ? ROMANCE_EDITORIAL_BATCHES
-            : selGenres[0] === "drama"
-              ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : null
-      : null;
-
-  // My Ciné Rule of Seven:
-  // exactly seven recommendations per set and a maximum of seven sets
-  // during one genre session, even when the editorial database stores more.
-  const activeBatchCount = activePreparedBatches
-    ? Math.min(7, activePreparedBatches.length)
-    : 7;
   const cycleMsg = () => {
   let i = 0;
 
@@ -3677,35 +3885,50 @@ const run = async (
 
   const timer = cycleMsg();
   const targetBatch = requestedBatch ?? (
-    resetSession ? 1 : Math.min(activeBatchCount, batchNumber + 1)
+    resetSession ? 1 : Math.min(7, batchNumber + 1)
   );
 
   try {
-    const preparedGenre =
+    const isRomcomDatabaseSearch =
       tab === "genre" &&
       selGenres.length === 1 &&
-      contentMode !== "tv"
-        ? selGenres[0]
-        : null;
+      selGenres.includes("romcom");
 
-    const preparedBatches = activePreparedBatches;
+    let result;
+    let resolvedRomcomCursor = romcomBatchCursor;
 
-    const result = preparedBatches
-      ? await buildPrebuiltEditorialBatch(
-          preparedBatches,
-          preparedGenre,
-          watchRegion,
-          targetBatch
+    if (isRomcomDatabaseSearch) {
+      const plan = await buildRomcomBatchPlan(
+        watchRegion,
+        contentMode
+      );
+
+      resolvedRomcomCursor = Math.max(
+        0,
+        Math.min(
+          plan.length - 1,
+          Number(requestedBatch ?? romcomBatchCursor)
         )
-      : await buildPicks(
-          tab,
-          selGenres,
-          selMood,
-          watchRegion,
-          contentMode,
-          excludeIds,
-          targetBatch
+      );
+
+      result = plan[resolvedRomcomCursor];
+
+      if (!result) {
+        throw new Error(
+          `Romcom batch ${resolvedRomcomCursor + 1} is unavailable.`
         );
+      }
+    } else {
+      result = await buildPicks(
+        tab,
+        selGenres,
+        selMood,
+        watchRegion,
+        contentMode,
+        excludeIds,
+        targetBatch
+      );
+    }
 
     const newIds = [result.hero?.id, ...result.alts.map(item => item.id)].filter(Boolean);
     const previousBatchIds = new Set(
@@ -3730,11 +3953,28 @@ const run = async (
     setAlts(result.alts);
     setGenerated(true);
 
+    if (
+      tab === "genre" &&
+      selGenres.length === 1 &&
+      selGenres.includes("romcom")
+    ) {
+      setRomcomBatchCursor(resolvedRomcomCursor);
+    }
+
     setSeenPickIds(previous =>
       [...new Set([...previous, ...newIds])]
     );
 
-    setBatchNumber(targetBatch);
+    const isRomcomDatabaseSearchForBatch =
+      tab === "genre" &&
+      selGenres.length === 1 &&
+      selGenres.includes("romcom");
+
+    setBatchNumber(
+      isRomcomDatabaseSearchForBatch
+        ? resolvedRomcomCursor + 1
+        : targetBatch
+    );
   } catch (error) {
     // Preserve the current seven if the next batch cannot be assembled.
     console.error("MY CINÉ recommendation error:", error);
@@ -3748,42 +3988,54 @@ const run = async (
   const doFetch = () => {
     if (loading) return;
 
-    const isPreparedEditorialGenre = Boolean(activePreparedBatches);
+    const isRomcomDatabaseSearch =
+      tab === "genre" &&
+      selGenres.length === 1 &&
+      selGenres.includes("romcom");
+
+    if (isRomcomDatabaseSearch) {
+      run([], true, romcomBatchCursor + 1);
+      return;
+    }
 
     const previousIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
-
-    if (isPreparedEditorialGenre) {
-      // Prepared editorial journeys end at set 7.
-      // They never wrap back to set 1 inside the same session.
-      if (batchNumber >= activeBatchCount) return;
-
-      const nextBatch = batchNumber + 1;
-      run([...new Set(previousIds)], false, nextBatch);
-      return;
-    }
 
     run([...new Set(previousIds)], true, 1);
   };
 
   const startNewRecommendationSession = () => {
-    const key = recommendationSelectionKey(
-      tab,
-      selGenres,
-      selMood,
-      contentMode
-    );
-
+    const isRomcomDatabaseSearch =
+      tab === "genre" &&
+      selGenres.length === 1 &&
+      selGenres.includes("romcom");
 
     setSeenPickIds([]);
     setBatchNumber(0);
+
+    if (isRomcomDatabaseSearch) {
+      setRomcomBatchCursor(0);
+      run([], true, 0);
+      return;
+    }
+
     run([], true, 1);
   };
 
   const doMore = () => {
-    if (loading || batchNumber >= activeBatchCount) return;
+    if (loading || batchNumber >= 7) return;
 
-    const nextBatch = Math.min(activeBatchCount, batchNumber + 1);
+    const isRomcomDatabaseSearch =
+      tab === "genre" &&
+      selGenres.length === 1 &&
+      selGenres.includes("romcom");
+
+    if (isRomcomDatabaseSearch) {
+      run([], false, romcomBatchCursor + 1);
+      return;
+    }
+
+    const nextBatch = Math.min(7, batchNumber + 1);
     const currentIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
 
@@ -5622,7 +5874,7 @@ const run = async (
       <div className="app-content">
         {error&&(
           <div className="public-error">
-            <strong>🎬 My Ciné could not load the next prepared editorial collection.</strong>
+            <strong>🎬 My Ciné could not load the next prepared Romcom batch.</strong>
             <span>Please tap the button again. The current seven remain safely in place.</span>
           </div>
         )}
@@ -5661,92 +5913,31 @@ const run = async (
               </div>
             )}
             <div style={{marginTop:"28px"}}>
-              {batchNumber < activeBatchCount ? (
-                <button
-                  onClick={doMore}
-                  disabled={loading}
-                  style={{
-                    width:"100%",
-                    background:"transparent",
-                    border:`1.5px solid ${C.goldBright}88`,
-                    borderRadius:"10px",
-                    padding:"13px",
-                    color:C.goldBright,
-                    fontWeight:"800",
-                    fontSize:"14px",
-                    cursor:loading?"not-allowed":"pointer",
-                    fontFamily:"Georgia,serif",
-                    opacity:loading?0.65:1
-                  }}
-                >
-                  {loading
-                    ? loadingMsg
-                    : `🎦 Keep Exploring ${Math.min(
-                        activeBatchCount,
-                        batchNumber + 1
-                      )}/${activeBatchCount}`}
-                </button>
-              ) : (
-                <div style={{
-                  background:C.navy,
-                  border:`2px solid ${C.goldBright}`,
-                  borderRadius:"14px",
-                  padding:"22px 20px",
-                  boxShadow:"0 12px 30px rgba(0,0,0,0.28)",
-                  textAlign:"center"
-                }}>
-                  <div style={{
-                    color:C.goldBright,
-                    fontFamily:"Georgia,serif",
-                    fontWeight:"900",
-                    fontSize:"20px",
-                    lineHeight:"1.25",
-                    marginBottom:"8px"
-                  }}>
-                    🎬 That's a wrap for this genre!
-                  </div>
-                  <div style={{
-                    color:C.white,
-                    fontFamily:"Georgia,serif",
-                    fontSize:"16px",
-                    lineHeight:"1.4"
-                  }}>
-                    Ready for another cinematic adventure?
-                  </div>
-                </div>
-              )}
-
-              {batchNumber >= activeBatchCount&&(
-                <div style={{marginTop:"16px",textAlign:"center"}}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGenerated(false);
-                      setHero(null);
-                      setAlts([]);
-                      setSeenPickIds([]);
-                      setBatchNumber(0);
-                      setSelGenres([]);
-                      setError(null);
-                      window.scrollTo({top:0,behavior:"smooth"});
-                    }}
-                    style={{
-                      background:C.goldBright,
-                      color:C.navy,
-                      border:"none",
-                      borderRadius:"10px",
-                      padding:"13px 18px",
-                      fontWeight:"900",
-                      fontSize:"14px",
-                      cursor:"pointer",
-                      fontFamily:"Georgia,serif",
-                      boxShadow:"0 8px 20px rgba(0,0,0,0.22)"
-                    }}
-                  >
-                    🍿 Explore another genre
-                  </button>
-                </div>
-              )}
+              <button
+                onClick={doMore}
+                disabled={loading || batchNumber >= 7}
+                style={{
+                  width:"100%",
+                  background:"transparent",
+                  border:`1.5px solid ${C.goldBright}88`,
+                  borderRadius:"10px",
+                  padding:"13px",
+                  color:C.goldBright,
+                  fontWeight:"800",
+                  fontSize:"14px",
+                  cursor:(loading || batchNumber >= 7)?"not-allowed":"pointer",
+                  fontFamily:"Georgia,serif",
+                  opacity:(loading || batchNumber >= 7)?0.5:1
+                }}
+              >
+                {loading
+                  ? loadingMsg
+                  : batchNumber >= 7
+                    ? "🎦 Seven complete sets revealed"
+                    : batchNumber >= 7
+      ? "🎦 Exploration Complete 7/7"
+      : `🎦 Keep Exploring ${Math.min(7, batchNumber + 1)}/7`}
+              </button>
             </div>
           </div>
         )}

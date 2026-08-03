@@ -4,7 +4,6 @@ import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
 import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
 import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
 import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
-import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -1586,17 +1585,6 @@ async function buildPrebuiltEditorialBatch(
     };
 
     const details = await fetchTitleDetails(normalized);
-
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
-    if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
-    ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
-    }
 
     // Prepared Romcom batches are approved editorially before runtime.
     // TMDB enriches the title with live metadata, but does not veto it.
@@ -3646,9 +3634,7 @@ export default function App() {
             ? ROMANCE_EDITORIAL_BATCHES
             : selGenres[0] === "drama"
               ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : null
+              : null
       : null;
 
   // My Ciné Rule of Seven:

@@ -1,0 +1,9 @@
+My Ciné V28 Engine 2.0 Romcom Hotfix
+
+- Broadened Romcom discovery without weakening final relevance checks
+- Kept Comedy mandatory and required a real Romance genre or romantic signal
+- Searched more current-year and previous-year pages
+- Increased the alternative candidate pool and enrichment pool
+- Allowed rent/buy availability in addition to subscription/free/ads
+- Retained the live TMDB 7.5/10 minimum for every displayed title
+- Added a clearer technical failure message for future filter testing

@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import curatorPhoto from "./assets/armelle-cloche.jpg";
 import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
-import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
-import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
-import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
-import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -1524,37 +1520,29 @@ async function mapWithConcurrency(items, worker, concurrency = 5) {
 }
 
 
-async function buildPrebuiltEditorialBatch(
-  editorialBatches,
-  genreKey,
+async function buildPrebuiltRomcomBatch(
   watchRegion,
   batchNumber = 1
 ) {
   const token = import.meta.env.VITE_TMDB_TOKEN;
   if (!token) {
-    throw new Error(`TMDB token is required to enrich the prepared ${genreKey} batch.`);
+    throw new Error("TMDB token is required to enrich the prepared Romcom batch.");
   }
 
   const safeIndex = Math.max(
     0,
-    Math.min(editorialBatches.length - 1, Number(batchNumber || 1) - 1)
+    Math.min(ROMCOM_EDITORIAL_BATCHES.length - 1, Number(batchNumber || 1) - 1)
   );
-  const editorialBatch = editorialBatches[safeIndex];
+  const editorialBatch = ROMCOM_EDITORIAL_BATCHES[safeIndex];
 
   if (!editorialBatch || editorialBatch.length !== 7) {
-    throw new Error(`Prepared ${genreKey} batch ${safeIndex + 1} is incomplete.`);
+    throw new Error(`Prepared Romcom batch ${safeIndex + 1} is incomplete.`);
   }
 
   const enrichPreparedTitle = async editorial => {
-    const editorialBadge =
-      editorial.badge ||
-      editorial.role ||
-      "✨ Surprise";
-
     const entry = {
       ...editorial,
-      badge:editorialBadge,
-      key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
+      key:`prepared-romcom:${editorial.title}|${editorial.year}`
     };
 
     const candidate = await fetchCanonTitleCandidate(entry, token);
@@ -1587,17 +1575,6 @@ async function buildPrebuiltEditorialBatch(
 
     const details = await fetchTitleDetails(normalized);
 
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
-    if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
-    ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
-    }
-
     // Prepared Romcom batches are approved editorially before runtime.
     // TMDB enriches the title with live metadata, but does not veto it.
     // The live community score remains visible to the user.
@@ -1615,7 +1592,7 @@ async function buildPrebuiltEditorialBatch(
         "movie"
       );
     } catch (error) {
-      console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, error);
+      console.warn("Prepared Romcom providers unavailable:", editorial.title, error);
     }
 
     const providers = [
@@ -1636,7 +1613,7 @@ async function buildPrebuiltEditorialBatch(
       ...details,
       editorialBatch:safeIndex + 1,
       editorialSlot:editorial.slot,
-      roleBadge:editorialBadge,
+      roleBadge:editorial.badge,
       editoriallyApproved:true,
       displayedTmdbPercent,
       canonTier:editorial.tier,
@@ -1651,8 +1628,8 @@ async function buildPrebuiltEditorialBatch(
         `https://www.themoviedb.org/movie/${details.id}/watch?locale=${watchRegion}`,
       watchRegionCode:watchRegion,
       highlight:{
-        icon:String(editorialBadge).split(" ")[0],
-        label:String(editorialBadge).replace(/^\S+\s*/, ""),
+        icon:editorial.badge.split(" ")[0],
+        label:editorial.badge.replace(/^\\S+\\s*/, ""),
         text:editorial.curatorNote
       },
       whyWatch:editorial.curatorNote || details.overview
@@ -1668,7 +1645,7 @@ async function buildPrebuiltEditorialBatch(
   const titles = resolved.filter(Boolean);
   if (titles.length !== 7) {
     throw new Error(
-      `Prepared ${genreKey} batch ${safeIndex + 1} could not resolve all seven titles.`
+      `Prepared Romcom batch ${safeIndex + 1} could not resolve all seven titles.`
     );
   }
 
@@ -3633,30 +3610,6 @@ export default function App() {
 
   const canFetch =
     tab === "genre" ? selGenres.length > 0 : !!selMood;
-
-  const activePreparedBatches =
-    tab === "genre" &&
-    selGenres.length === 1 &&
-    contentMode !== "tv"
-      ? selGenres[0] === "romcom"
-        ? ROMCOM_EDITORIAL_BATCHES
-        : selGenres[0] === "comedy"
-          ? COMEDY_EDITORIAL_BATCHES
-          : selGenres[0] === "romance"
-            ? ROMANCE_EDITORIAL_BATCHES
-            : selGenres[0] === "drama"
-              ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : null
-      : null;
-
-  // My Ciné Rule of Seven:
-  // exactly seven recommendations per set and a maximum of seven sets
-  // during one genre session, even when the editorial database stores more.
-  const activeBatchCount = activePreparedBatches
-    ? Math.min(7, activePreparedBatches.length)
-    : 7;
   const cycleMsg = () => {
   let i = 0;
 
@@ -3677,26 +3630,18 @@ const run = async (
 
   const timer = cycleMsg();
   const targetBatch = requestedBatch ?? (
-    resetSession ? 1 : Math.min(activeBatchCount, batchNumber + 1)
+    resetSession ? 1 : Math.min(7, batchNumber + 1)
   );
 
   try {
-    const preparedGenre =
+    const isPreparedRomcom =
       tab === "genre" &&
       selGenres.length === 1 &&
-      contentMode !== "tv"
-        ? selGenres[0]
-        : null;
+      selGenres.includes("romcom") &&
+      contentMode !== "tv";
 
-    const preparedBatches = activePreparedBatches;
-
-    const result = preparedBatches
-      ? await buildPrebuiltEditorialBatch(
-          preparedBatches,
-          preparedGenre,
-          watchRegion,
-          targetBatch
-        )
+    const result = isPreparedRomcom
+      ? await buildPrebuiltRomcomBatch(watchRegion, targetBatch)
       : await buildPicks(
           tab,
           selGenres,
@@ -3748,17 +3693,17 @@ const run = async (
   const doFetch = () => {
     if (loading) return;
 
-    const isPreparedEditorialGenre = Boolean(activePreparedBatches);
+    const isPreparedRomcom =
+      tab === "genre" &&
+      selGenres.length === 1 &&
+      selGenres.includes("romcom") &&
+      contentMode !== "tv";
 
     const previousIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
 
-    if (isPreparedEditorialGenre) {
-      // Prepared editorial journeys end at set 7.
-      // They never wrap back to set 1 inside the same session.
-      if (batchNumber >= activeBatchCount) return;
-
-      const nextBatch = batchNumber + 1;
+    if (isPreparedRomcom) {
+      const nextBatch = batchNumber >= 7 ? 1 : batchNumber + 1;
       run([...new Set(previousIds)], false, nextBatch);
       return;
     }
@@ -3781,9 +3726,9 @@ const run = async (
   };
 
   const doMore = () => {
-    if (loading || batchNumber >= activeBatchCount) return;
+    if (loading || batchNumber >= 7) return;
 
-    const nextBatch = Math.min(activeBatchCount, batchNumber + 1);
+    const nextBatch = Math.min(7, batchNumber + 1);
     const currentIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
 
@@ -5622,7 +5567,7 @@ const run = async (
       <div className="app-content">
         {error&&(
           <div className="public-error">
-            <strong>🎬 My Ciné could not load the next prepared editorial collection.</strong>
+            <strong>🎬 My Ciné could not load the prepared Romcom batch.</strong>
             <span>Please tap the button again. The current seven remain safely in place.</span>
           </div>
         )}
@@ -5661,92 +5606,31 @@ const run = async (
               </div>
             )}
             <div style={{marginTop:"28px"}}>
-              {batchNumber < activeBatchCount ? (
-                <button
-                  onClick={doMore}
-                  disabled={loading}
-                  style={{
-                    width:"100%",
-                    background:"transparent",
-                    border:`1.5px solid ${C.goldBright}88`,
-                    borderRadius:"10px",
-                    padding:"13px",
-                    color:C.goldBright,
-                    fontWeight:"800",
-                    fontSize:"14px",
-                    cursor:loading?"not-allowed":"pointer",
-                    fontFamily:"Georgia,serif",
-                    opacity:loading?0.65:1
-                  }}
-                >
-                  {loading
-                    ? loadingMsg
-                    : `🎦 Keep Exploring ${Math.min(
-                        activeBatchCount,
-                        batchNumber + 1
-                      )}/${activeBatchCount}`}
-                </button>
-              ) : (
-                <div style={{
-                  background:C.navy,
-                  border:`2px solid ${C.goldBright}`,
-                  borderRadius:"14px",
-                  padding:"22px 20px",
-                  boxShadow:"0 12px 30px rgba(0,0,0,0.28)",
-                  textAlign:"center"
-                }}>
-                  <div style={{
-                    color:C.goldBright,
-                    fontFamily:"Georgia,serif",
-                    fontWeight:"900",
-                    fontSize:"20px",
-                    lineHeight:"1.25",
-                    marginBottom:"8px"
-                  }}>
-                    🎬 That's a wrap for this genre!
-                  </div>
-                  <div style={{
-                    color:C.white,
-                    fontFamily:"Georgia,serif",
-                    fontSize:"16px",
-                    lineHeight:"1.4"
-                  }}>
-                    Ready for another cinematic adventure?
-                  </div>
-                </div>
-              )}
-
-              {batchNumber >= activeBatchCount&&(
-                <div style={{marginTop:"16px",textAlign:"center"}}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGenerated(false);
-                      setHero(null);
-                      setAlts([]);
-                      setSeenPickIds([]);
-                      setBatchNumber(0);
-                      setSelGenres([]);
-                      setError(null);
-                      window.scrollTo({top:0,behavior:"smooth"});
-                    }}
-                    style={{
-                      background:C.goldBright,
-                      color:C.navy,
-                      border:"none",
-                      borderRadius:"10px",
-                      padding:"13px 18px",
-                      fontWeight:"900",
-                      fontSize:"14px",
-                      cursor:"pointer",
-                      fontFamily:"Georgia,serif",
-                      boxShadow:"0 8px 20px rgba(0,0,0,0.22)"
-                    }}
-                  >
-                    🍿 Explore another genre
-                  </button>
-                </div>
-              )}
+              <button
+                onClick={doMore}
+                disabled={loading || batchNumber >= 7}
+                style={{
+                  width:"100%",
+                  background:"transparent",
+                  border:`1.5px solid ${C.goldBright}88`,
+                  borderRadius:"10px",
+                  padding:"13px",
+                  color:C.goldBright,
+                  fontWeight:"800",
+                  fontSize:"14px",
+                  cursor:(loading || batchNumber >= 7)?"not-allowed":"pointer",
+                  fontFamily:"Georgia,serif",
+                  opacity:(loading || batchNumber >= 7)?0.5:1
+                }}
+              >
+                {loading
+                  ? loadingMsg
+                  : batchNumber >= 7
+                    ? "🎦 Seven complete sets revealed"
+                    : batchNumber >= 7
+      ? "🎦 Exploration Complete 7/7"
+      : `🎦 Keep Exploring ${Math.min(7, batchNumber + 1)}/7`}
+              </button>
             </div>
           </div>
         )}
