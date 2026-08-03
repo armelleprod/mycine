@@ -7,7 +7,6 @@ import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
 import { THRILLER_EDITORIAL_BATCHES } from "./data/thrillerBatches";
 import { MYSTERY_EDITORIAL_BATCHES } from "./data/mysteryBatches";
 import { ACTION_ADVENTURE_EDITORIAL_BATCHES } from "./data/actionAdventureBatches";
-import { HORROR_EDITORIAL_BATCHES } from "./data/horrorBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -3655,9 +3654,7 @@ export default function App() {
                   ? MYSTERY_EDITORIAL_BATCHES
                   : selGenres[0] === "action"
                     ? ACTION_ADVENTURE_EDITORIAL_BATCHES
-                    : selGenres[0] === "horror"
-                      ? HORROR_EDITORIAL_BATCHES
-                      : null
+                    : null
       : null;
 
   // My Ciné Rule of Seven:
