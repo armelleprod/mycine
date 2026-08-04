@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react";
 import curatorPhoto from "./assets/armelle-cloche.jpg";
 import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
+import { ROMCOM_SERIES_EDITORIAL_BATCHES } from "./data/romcomSeriesBatches";
+import { COMEDY_SERIES_EDITORIAL_BATCHES } from "./data/comedySeriesBatches";
+import { ROMANCE_SERIES_EDITORIAL_BATCHES } from "./data/romanceSeriesBatches";
+import { DRAMA_SERIES_EDITORIAL_BATCHES } from "./data/dramaSeriesBatches";
+import { THRILLER_SERIES_EDITORIAL_BATCHES } from "./data/thrillerSeriesBatches";
+import { MYSTERY_SERIES_EDITORIAL_BATCHES } from "./data/mysterySeriesBatches";
+import { ACTION_ADVENTURE_SERIES_EDITORIAL_BATCHES } from "./data/actionAdventureSeriesBatches";
+import { HORROR_SERIES_EDITORIAL_BATCHES } from "./data/horrorSeriesBatches";
+import { SCIFI_SERIES_EDITORIAL_BATCHES } from "./data/sciFiSeriesBatches";
+import { FANTASY_SERIES_EDITORIAL_BATCHES } from "./data/fantasySeriesBatches";
+import { ANIMATION_SERIES_EDITORIAL_BATCHES } from "./data/animationSeriesBatches";
+import { MUSICAL_SERIES_EDITORIAL_BATCHES } from "./data/musicalSeriesBatches";
+import { BIOPIC_SERIES_EDITORIAL_BATCHES } from "./data/biopicSeriesBatches";
+import { INTERNATIONAL_SERIES_EDITORIAL_BATCHES } from "./data/internationalSeriesBatches";
 import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
 import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
 import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
@@ -16,6 +30,7 @@ import { BIOPIC_EDITORIAL_BATCHES } from "./data/biopicBatches";
 import { DOCUMENTARY_EDITORIAL_BATCHES } from "./data/documentaryBatches";
 import { INTERNATIONAL_EDITORIAL_BATCHES } from "./data/internationalBatches";
 import { HIDDEN_GEMS_EDITORIAL_BATCHES } from "./data/hiddenGemsBatches";
+import { LGBTQ_EDITORIAL_BATCHES } from "./data/lgbtqBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -85,6 +100,7 @@ const GENRES = [
   {id:"documentary",label:"Documentary",emoji:"🎙️"},
   {id:"international",label:"International",emoji:"🌍"},
   {id:"hiddengems",label:"Hidden Gems",emoji:"💎"},
+  {id:"lgbtq",label:"LGBTQ+",emoji:"🏳️‍🌈"},
 ];
 
 const MOODS = [
@@ -1535,6 +1551,34 @@ async function mapWithConcurrency(items, worker, concurrency = 5) {
 }
 
 
+
+function composeBalancedEditorialBatches(movieBatches, seriesBatches) {
+  const batchCount = Math.min(movieBatches.length, seriesBatches.length);
+
+  return Array.from({length:batchCount}, (_, batchIndex) => {
+    const movieBatch = movieBatches[batchIndex];
+    const seriesBatch = seriesBatches[batchIndex];
+    const movieLeads = batchIndex % 2 === 0;
+
+    // Preserve the seven editorial badge slots while alternating format balance:
+    // odd sets: 4 movies + 3 series; even sets: 3 movies + 4 series.
+    return movieBatch.map((movieEntry, slotIndex) => {
+      const useMovie = movieLeads
+        ? slotIndex % 2 === 0
+        : slotIndex % 2 === 1;
+      const selected = useMovie ? movieEntry : seriesBatch[slotIndex];
+
+      return {
+        ...selected,
+        badge:movieEntry.badge || selected.badge,
+        role:movieEntry.role || selected.role,
+        slot:movieEntry.slot || slotIndex + 1,
+        balancedBoth:true
+      };
+    });
+  });
+}
+
 async function buildPrebuiltEditorialBatch(
   editorialBatches,
   genreKey,
@@ -1573,15 +1617,17 @@ async function buildPrebuiltEditorialBatch(
       throw new Error(`${editorial.title} could not be matched on TMDB.`);
     }
 
+    const mediaType = editorial.type === "tv" ? "tv" : "movie";
+
     const normalized = {
       ...candidate,
       title:candidate.title || candidate.name || editorial.title,
       year:String(
         candidate.release_date || candidate.first_air_date || editorial.year
       ).slice(0,4),
-      media_type:"movie",
-      isTV:false,
-      format:"Film",
+      media_type:mediaType,
+      isTV:mediaType === "tv",
+      format:mediaType === "tv" ? "TV Series" : "Film",
       rating:Number(candidate.vote_average || 0),
       vote_count:Number(candidate.vote_count || 0),
       popularity:Number(candidate.popularity || 0),
@@ -1598,15 +1644,14 @@ async function buildPrebuiltEditorialBatch(
 
     const details = await fetchTitleDetails(normalized);
 
-    // Prepared editorial movie batches must resolve to a feature-length film.
-    // This prevents ambiguous titles from silently matching unrelated shorts.
-    if (
-      Number(details.runtime || 0) > 0 &&
-      Number(details.runtime || 0) < 40
-    ) {
-      throw new Error(
-        `${editorial.title} matched an implausibly short TMDB result.`
-      );
+    // Prepared movie batches must resolve to a feature film.
+    // Prepared TV batches must resolve to a released television series.
+    if (mediaType === "movie" && Number(details.runtime || 0) > 0 && Number(details.runtime || 0) < 40) {
+      throw new Error(`${editorial.title} matched an implausibly short TMDB result.`);
+    }
+
+    if (mediaType === "tv" && !details.isTV) {
+      throw new Error(`${editorial.title} did not resolve as a TV series.`);
     }
 
     // Prepared Romcom batches are approved editorially before runtime.
@@ -1623,7 +1668,7 @@ async function buildPrebuiltEditorialBatch(
       availability = await fetchWatchProviders(
         details.id,
         watchRegion,
-        "movie"
+        mediaType
       );
     } catch (error) {
       console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, error);
@@ -1659,13 +1704,14 @@ async function buildPrebuiltEditorialBatch(
         ? providerNames.slice(0,3).join(" • ")
         : "Check availability",
       watchLink:availability.link ||
-        `https://www.themoviedb.org/movie/${details.id}/watch?locale=${watchRegion}`,
+        `https://www.themoviedb.org/${mediaType}/${details.id}/watch?locale=${watchRegion}`,
       watchRegionCode:watchRegion,
       highlight:{
         icon:String(editorialBadge).split(" ")[0],
         label:String(editorialBadge).replace(/^\S+\s*/, ""),
         text:editorial.curatorNote
       },
+      moodTags:editorial.moodTags || [],
       whyWatch:editorial.curatorNote || details.overview
     };
   };
@@ -2448,6 +2494,29 @@ function runtimeLabel(film) {
     : `${minutes} min`;
 }
 
+function formatBadgeLabel(title) {
+  const isTV = title?.media_type === "tv" || title?.isTV;
+  if (!isTV) return "🎬 Film";
+  return title?.format === "Limited Series" ? "📺 Limited Series" : "📺 TV Series";
+}
+
+function formatBadgeStyle(title, compact = false) {
+  const isTV = title?.media_type === "tv" || title?.isTV;
+  return {
+    display: "inline-flex",
+    alignItems: "center",
+    whiteSpace: "nowrap",
+    background: isTV ? "rgba(124,58,237,0.25)" : "rgba(59,130,246,0.25)",
+    border: `1px solid ${isTV ? "rgba(167,139,250,0.7)" : "rgba(96,165,250,0.7)"}`,
+    color: "#FFFFFF",
+    fontSize: compact ? "8px" : "10px",
+    fontWeight: "800",
+    padding: compact ? "2px 6px" : "3px 10px",
+    borderRadius: "999px",
+    lineHeight: 1.2
+  };
+}
+
 // ── HERO CARD ─────────────────────────────────────────────────────────────────
 function HeroCard({film, watched, onToggle, watchRegion}) {
   const platColor  = PROVIDER_COLORS[film.provider] || C.navy;
@@ -2464,7 +2533,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
 
       <a
   href={`https://www.google.com/search?q=${encodeURIComponent(
-    `${film.title} ${film.year} movie`
+    `${film.title} ${film.year} ${film.isTV ? "TV series" : "movie"}`
   )}`}
   target="_blank"
   rel="noopener noreferrer"
@@ -2486,7 +2555,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
       <div style={{padding:"16px 18px 20px"}}>
         <h2 style={{fontFamily:"Georgia,serif",fontWeight:"800",fontSize:"28px",color:C.white,margin:"0 0 6px",lineHeight:1.1,textDecoration:watched?"line-through":"none"}}>{film.title}</h2>
         <div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginBottom:"12px"}}>
-          {film.format&&<span style={{background:`${C.red}55`,border:`1px solid ${C.red}99`,color:C.white,fontSize:"10px",fontWeight:"800",padding:"3px 10px",borderRadius:"999px"}}>{film.format}</span>}
+          <span style={formatBadgeStyle(film)}>{formatBadgeLabel(film)}</span>
           {(film.genres||[]).map(g=><span key={g} style={{background:`${C.goldBright}22`,border:`1px solid ${C.goldBright}55`,color:C.goldBright,fontSize:"10px",fontWeight:"700",padding:"3px 10px",borderRadius:"999px"}}>{g}</span>)}
         </div>
 
@@ -2593,7 +2662,7 @@ function AltCard({film, watched, onToggle, watchRegion}) {
     <div style={{width:"100%",background:C.navyMid,border:`1px solid ${C.goldBright}33`,borderRadius:"14px",overflow:"hidden",opacity:watched?0.5:1,flexShrink:0}}>
       <a
   href={`https://www.google.com/search?q=${encodeURIComponent(
-    `${film.title} ${film.year} movie`
+    `${film.title} ${film.year} ${film.isTV ? "TV series" : "movie"}`
   )}`}
   target="_blank"
   rel="noopener noreferrer"
@@ -2632,7 +2701,10 @@ function AltCard({film, watched, onToggle, watchRegion}) {
 
 </a>
       <div style={{padding:"10px 10px 12px"}}>
-        <p style={{fontFamily:"Georgia,serif",fontWeight:"800",fontSize:"12px",color:watched?`${C.gold}66`:C.white,margin:"0 0 4px",lineHeight:1.2,textDecoration:watched?"line-through":"none"}}>{film.title}</p>
+        <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:"6px",marginBottom:"4px"}}>
+          <p style={{fontFamily:"Georgia,serif",fontWeight:"800",fontSize:"12px",color:watched?`${C.gold}66`:C.white,margin:0,lineHeight:1.2,textDecoration:watched?"line-through":"none",minWidth:0}}>{film.title}</p>
+          <span style={formatBadgeStyle(film, true)}>{formatBadgeLabel(film)}</span>
+        </div>
         <p style={{fontSize:"10px",color:C.white,margin:"0 0 4px",opacity:0.7}}>{film.year}</p>
         <div style={{display:"flex",flexWrap:"wrap",gap:"4px",marginBottom:"5px"}}>
           {(film.providerNames || [film.provider]).map(providerName => (
@@ -3646,42 +3718,146 @@ export default function App() {
     tab === "genre" ? selGenres.length > 0 : !!selMood;
 
   const activePreparedBatches =
-    tab === "genre" &&
-    selGenres.length === 1 &&
-    contentMode !== "tv"
-      ? selGenres[0] === "romcom"
-        ? ROMCOM_EDITORIAL_BATCHES
-        : selGenres[0] === "comedy"
-          ? COMEDY_EDITORIAL_BATCHES
-          : selGenres[0] === "romance"
-            ? ROMANCE_EDITORIAL_BATCHES
-            : selGenres[0] === "drama"
-              ? DRAMA_EDITORIAL_BATCHES
-              : selGenres[0] === "thriller"
-                ? THRILLER_EDITORIAL_BATCHES
-                : selGenres[0] === "mystery"
-                  ? MYSTERY_EDITORIAL_BATCHES
-                  : selGenres[0] === "action"
-                    ? ACTION_ADVENTURE_EDITORIAL_BATCHES
-                    : selGenres[0] === "horror"
-                      ? HORROR_EDITORIAL_BATCHES
-                      : selGenres[0] === "scifi"
-                        ? SCIFI_EDITORIAL_BATCHES
-                        : selGenres[0] === "fantasy"
-                          ? FANTASY_EDITORIAL_BATCHES
-                          : selGenres[0] === "animation"
-                            ? ANIMATION_EDITORIAL_BATCHES
-                            : selGenres[0] === "musical"
-                              ? MUSICAL_EDITORIAL_BATCHES
-                              : selGenres[0] === "biopic"
-                                ? BIOPIC_EDITORIAL_BATCHES
-                                : selGenres[0] === "documentary"
-                                  ? DOCUMENTARY_EDITORIAL_BATCHES
-                                  : selGenres[0] === "international"
-                                    ? INTERNATIONAL_EDITORIAL_BATCHES
-                                    : selGenres[0] === "hiddengems"
-                                      ? HIDDEN_GEMS_EDITORIAL_BATCHES
+    tab === "genre" && selGenres.length === 1
+      ? contentMode === "movie"
+        ? selGenres[0] === "romcom"
+          ? ROMCOM_EDITORIAL_BATCHES
+          : selGenres[0] === "comedy"
+            ? COMEDY_EDITORIAL_BATCHES
+            : selGenres[0] === "romance"
+              ? ROMANCE_EDITORIAL_BATCHES
+              : selGenres[0] === "drama"
+                ? DRAMA_EDITORIAL_BATCHES
+                : selGenres[0] === "thriller"
+                  ? THRILLER_EDITORIAL_BATCHES
+                  : selGenres[0] === "mystery"
+                    ? MYSTERY_EDITORIAL_BATCHES
+                    : selGenres[0] === "action"
+                      ? ACTION_ADVENTURE_EDITORIAL_BATCHES
+                      : selGenres[0] === "horror"
+                        ? HORROR_EDITORIAL_BATCHES
+                        : selGenres[0] === "scifi"
+                          ? SCIFI_EDITORIAL_BATCHES
+                          : selGenres[0] === "fantasy"
+                            ? FANTASY_EDITORIAL_BATCHES
+                            : selGenres[0] === "animation"
+                              ? ANIMATION_EDITORIAL_BATCHES
+                              : selGenres[0] === "musical"
+                                ? MUSICAL_EDITORIAL_BATCHES
+                                : selGenres[0] === "biopic"
+                                  ? BIOPIC_EDITORIAL_BATCHES
+                                  : selGenres[0] === "documentary"
+                                    ? DOCUMENTARY_EDITORIAL_BATCHES
+                                    : selGenres[0] === "international"
+                                      ? INTERNATIONAL_EDITORIAL_BATCHES
+                                      : selGenres[0] === "hiddengems"
+                                        ? HIDDEN_GEMS_EDITORIAL_BATCHES
+                                        : selGenres[0] === "lgbtq"
+                                          ? LGBTQ_EDITORIAL_BATCHES
+                                          : null
+        : contentMode === "tv"
+          ? selGenres[0] === "romcom"
+            ? ROMCOM_SERIES_EDITORIAL_BATCHES
+            : selGenres[0] === "comedy"
+              ? COMEDY_SERIES_EDITORIAL_BATCHES
+              : selGenres[0] === "romance"
+                ? ROMANCE_SERIES_EDITORIAL_BATCHES
+                : selGenres[0] === "drama"
+                  ? DRAMA_SERIES_EDITORIAL_BATCHES
+                  : selGenres[0] === "thriller"
+                    ? THRILLER_SERIES_EDITORIAL_BATCHES
+                    : selGenres[0] === "mystery"
+                      ? MYSTERY_SERIES_EDITORIAL_BATCHES
+                      : selGenres[0] === "action"
+                        ? ACTION_ADVENTURE_SERIES_EDITORIAL_BATCHES
+                        : selGenres[0] === "horror"
+                          ? HORROR_SERIES_EDITORIAL_BATCHES
+                          : selGenres[0] === "scifi"
+                            ? SCIFI_SERIES_EDITORIAL_BATCHES
+                            : selGenres[0] === "fantasy"
+                              ? FANTASY_SERIES_EDITORIAL_BATCHES
+                              : selGenres[0] === "animation"
+                                ? ANIMATION_SERIES_EDITORIAL_BATCHES
+                                : selGenres[0] === "musical"
+                                  ? MUSICAL_SERIES_EDITORIAL_BATCHES
+                                  : selGenres[0] === "biopic"
+                                    ? BIOPIC_SERIES_EDITORIAL_BATCHES
+                                    : selGenres[0] === "international"
+                                      ? INTERNATIONAL_SERIES_EDITORIAL_BATCHES
                                       : null
+          : contentMode === "both"
+            ? selGenres[0] === "romcom"
+              ? composeBalancedEditorialBatches(
+                  ROMCOM_EDITORIAL_BATCHES,
+                  ROMCOM_SERIES_EDITORIAL_BATCHES
+                )
+              : selGenres[0] === "comedy"
+                ? composeBalancedEditorialBatches(
+                    COMEDY_EDITORIAL_BATCHES,
+                    COMEDY_SERIES_EDITORIAL_BATCHES
+                  )
+                : selGenres[0] === "romance"
+                  ? composeBalancedEditorialBatches(
+                      ROMANCE_EDITORIAL_BATCHES,
+                      ROMANCE_SERIES_EDITORIAL_BATCHES
+                    )
+                  : selGenres[0] === "drama"
+                    ? composeBalancedEditorialBatches(
+                        DRAMA_EDITORIAL_BATCHES,
+                        DRAMA_SERIES_EDITORIAL_BATCHES
+                      )
+                    : selGenres[0] === "thriller"
+                      ? composeBalancedEditorialBatches(
+                          THRILLER_EDITORIAL_BATCHES,
+                          THRILLER_SERIES_EDITORIAL_BATCHES
+                        )
+                      : selGenres[0] === "mystery"
+                        ? composeBalancedEditorialBatches(
+                            MYSTERY_EDITORIAL_BATCHES,
+                            MYSTERY_SERIES_EDITORIAL_BATCHES
+                          )
+                        : selGenres[0] === "action"
+                          ? composeBalancedEditorialBatches(
+                              ACTION_ADVENTURE_EDITORIAL_BATCHES,
+                              ACTION_ADVENTURE_SERIES_EDITORIAL_BATCHES
+                            )
+                          : selGenres[0] === "horror"
+                            ? composeBalancedEditorialBatches(
+                                HORROR_EDITORIAL_BATCHES,
+                                HORROR_SERIES_EDITORIAL_BATCHES
+                              )
+                            : selGenres[0] === "scifi"
+                              ? composeBalancedEditorialBatches(
+                                  SCIFI_EDITORIAL_BATCHES,
+                                  SCIFI_SERIES_EDITORIAL_BATCHES
+                                )
+                              : selGenres[0] === "fantasy"
+                                ? composeBalancedEditorialBatches(
+                                    FANTASY_EDITORIAL_BATCHES,
+                                    FANTASY_SERIES_EDITORIAL_BATCHES
+                                  )
+                                : selGenres[0] === "animation"
+                                  ? composeBalancedEditorialBatches(
+                                      ANIMATION_EDITORIAL_BATCHES,
+                                      ANIMATION_SERIES_EDITORIAL_BATCHES
+                                    )
+                                  : selGenres[0] === "musical"
+                                    ? composeBalancedEditorialBatches(
+                                        MUSICAL_EDITORIAL_BATCHES,
+                                        MUSICAL_SERIES_EDITORIAL_BATCHES
+                                      )
+                                    : selGenres[0] === "biopic"
+                                      ? composeBalancedEditorialBatches(
+                                          BIOPIC_EDITORIAL_BATCHES,
+                                          BIOPIC_SERIES_EDITORIAL_BATCHES
+                                        )
+                                      : selGenres[0] === "international"
+                                        ? composeBalancedEditorialBatches(
+                                            INTERNATIONAL_EDITORIAL_BATCHES,
+                                            INTERNATIONAL_SERIES_EDITORIAL_BATCHES
+                                          )
+                                        : null
+            : null
       : null;
 
   // My Ciné Rule of Seven:
@@ -3717,7 +3893,7 @@ const run = async (
     const preparedGenre =
       tab === "genre" &&
       selGenres.length === 1 &&
-      contentMode !== "tv"
+      Boolean(activePreparedBatches)
         ? selGenres[0]
         : null;
 
@@ -5680,6 +5856,13 @@ const run = async (
                 <h2 className="results-heading alternatives-heading">
                   {alts.length} Great Alternatives to Explore
                 </h2>
+                {contentMode === "both" && (
+                  <div style={{textAlign:"center",color:C.goldBright,fontSize:"11px",fontWeight:"800",margin:"-6px 0 12px"}}>
+                    🎬 {[hero, ...alts].filter(item => !(item?.media_type === "tv" || item?.isTV)).length} Films
+                    {" • "}
+                    📺 {[hero, ...alts].filter(item => item?.media_type === "tv" || item?.isTV).length} Series
+                  </div>
+                )}
                 <div className="picks-grid">
                   {alts.map(film => (
                     <AltCard
