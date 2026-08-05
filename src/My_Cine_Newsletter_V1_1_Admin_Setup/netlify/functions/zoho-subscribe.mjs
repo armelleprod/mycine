@@ -113,19 +113,13 @@ async function subscribeContact({accessToken, apiDomain, listKey, email, source}
     payload = {message:text};
   }
 
- if (!response.ok) {
-  const errorText = await response.text();
-
-  console.error("Zoho subscribe HTTP error", {
-    status: response.status,
-    payload,
-    error: errorText
-  });
-
-  throw new Error(
-    `ZOHO_SUBSCRIBE_FAILED (${response.status}): ${errorText}`
-  );
-}
+  if (!response.ok) {
+    console.error("Zoho subscribe HTTP error", {
+      status:response.status,
+      payload
+    });
+    throw new Error("ZOHO_SUBSCRIBE_FAILED");
+  }
 
   const success =
     String(payload.code) === "0" ||

@@ -1,0 +1,68 @@
+MY CINÉ — LAUNCH POLISH V4
+REQUIRES THE WORKING ARCHITECTURE POLISH V3.2 BASE
+
+COPY ONLY:
+src/App.jsx → existing project/src/App.jsx
+
+DO NOT replace the complete src folder.
+DO NOT modify or rename Genre, TV or Mood batch files.
+
+INCLUDED:
+1. HIGHER-RESOLUTION POSTERS
+   • Responsive TMDB w342 / w500 / w780 srcSet.
+   • Hero posters load at w780.
+   • Alternative posters load at w500.
+   • Watchlist posters load at w780 with object-fit: contain to preserve full artwork.
+   • Lazy loading and async decoding are retained for performance.
+
+2. WATCHLIST BUTTON
+   • The complete "📺 Where to Watch" label is forced visible in Deep Navy.
+   • Button remains linked to the exact TMDB watch page.
+
+3. CURATOR SIGNATURE
+   • "Armelle" appears in bold Cinema Gold after "Enjoy your movie night! 🍿"
+
+4. END-OF-SESSION MY CINÉ LETTER INVITATION
+   • Appears 2.2 seconds after the final 7/7 set.
+   • Fully branded My Ciné design.
+   • Posts the email directly to the published Zoho Campaigns My Ciné list.
+   • No API key is included.
+   • Zoho remains invisible in a hidden iframe.
+
+5. "MAYBE NEXT TIME"
+   • Dismisses the invitation for 30 days on that browser.
+
+6. SUCCESSFUL SUBSCRIPTION
+   • Permanently hides future invitations on that browser.
+   • Displays the branded "Your seat is saved" success message.
+
+IMPORTANT TEST NOTE:
+The app can confirm that the browser submitted the form to Zoho, but Zoho is
+cross-origin. After your first test signup, confirm the address appears in:
+Zoho Campaigns → Contacts → Manage Lists → My Ciné.
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+TEST:
+• Open My Watchlist and confirm full posters are no longer aggressively cropped.
+• Confirm "📺 Where to Watch" text is visible.
+• Open Meet the Curator and confirm gold Armelle signature.
+• Complete a prepared journey through 7/7.
+• Wait approximately 2 seconds for the invitation.
+• Submit a test email.
+• Confirm branded success state.
+• Confirm the email reaches the My Ciné list in Zoho.
+• Refresh: the invitation should remain permanently hidden.
+• To repeat the subscription test in DevTools Console:
+  localStorage.removeItem("mycine-letter-subscribed")
+• To repeat the "Maybe next time" test:
+  localStorage.removeItem("mycine-letter-dismissed-at")
+
+PUSH LIVE:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Add launch posters Zoho letter invitation and curator signature"
+git push

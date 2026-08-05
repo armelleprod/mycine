@@ -1,0 +1,104 @@
+MY CINÉ NEWSLETTER V1
+REAL NETLIFY FUNCTION + ZOHO CAMPAIGNS API
+
+FILES TO COPY INTO YOUR EXISTING PROJECT:
+1. src/App.jsx
+2. netlify/functions/zoho-subscribe.mjs
+3. scripts/get-zoho-refresh-token.mjs
+
+DO NOT REPLACE THE COMPLETE src FOLDER.
+DO NOT MODIFY ANY GENRE, TV OR MOOD DATABASE FILE.
+
+WHAT CHANGED:
+• Invitation appears after Batch 3.
+• Hidden Zoho iframe removed completely.
+• App calls /.netlify/functions/zoho-subscribe.
+• Function refreshes a Zoho access token securely.
+• Function submits the contact using Zoho Campaigns listsubscribe API.
+• Success appears only after Zoho accepts the request.
+• "Maybe next time" pauses the invitation for 30 days.
+• A successful Zoho response hides it permanently on that browser.
+• Zoho credentials stay in Netlify environment variables.
+
+REQUIRED NETLIFY ENVIRONMENT VARIABLES
+Scope: Functions
+Mark secret values.
+
+ZOHO_CLIENT_ID
+ZOHO_CLIENT_SECRET
+ZOHO_REFRESH_TOKEN
+ZOHO_MYCINE_LIST_KEY
+
+Optional:
+MYCINE_ALLOWED_ORIGIN=https://mycine.netlify.app
+ZOHO_ACCOUNTS_DOMAIN=https://accounts.zoho.com
+ZOHO_CAMPAIGNS_DOMAIN=https://campaigns.zoho.com
+
+IMPORTANT SECURITY
+The Client Secret and authorization code previously pasted into chat must not
+be used. Rotate/regenerate the Client Secret and generate a fresh authorization
+code. Never put secrets in App.jsx, GitHub, .env committed to Git, or chat.
+
+GET THE REFRESH TOKEN
+1. Generate a FRESH Zoho authorization code using the exact Redirect URI
+   registered in the Zoho API Console.
+
+Recommended authorization URL pattern:
+https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCampaigns.contact.UPDATE&client_id=YOUR_CLIENT_ID&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Fmycine.netlify.app&prompt=consent
+
+2. In the VS Code terminal, from the project root, run:
+
+node scripts/get-zoho-refresh-token.mjs
+
+3. Enter the Client ID, NEW Client Secret, fresh authorization code and exact
+   Redirect URI when asked.
+
+4. Copy only the returned refresh token into Netlify:
+   ZOHO_REFRESH_TOKEN
+
+5. Trigger a new Netlify deploy after changing environment variables.
+
+BUILD CHECK:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+
+LOCAL FUNCTION TEST:
+Vite alone does not run Netlify Functions.
+After installing/logging into Netlify CLI, use:
+npx netlify dev
+
+Then open the URL printed by Netlify CLI, commonly:
+http://localhost:8888
+
+EASIEST TEST:
+Push the package live after all four variables exist, then complete Batch 3.
+
+PUSH LIVE:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx netlify/functions/zoho-subscribe.mjs scripts/get-zoho-refresh-token.mjs
+git commit -m "Add My Cine Newsletter V1 with Zoho API"
+git push
+
+TEST:
+1. Select one Genre and format.
+2. Reach Batch 3.
+3. Wait about 2 seconds.
+4. Enter a test email.
+5. Confirm the app reports success only after the function succeeds.
+6. Check for Zoho's confirmation email.
+7. Click the confirmation link.
+8. Verify the contact appears in Zoho Campaigns → My Ciné.
+
+RESET THE INVITATION FOR TESTING:
+Open Chrome DevTools → Application → Local storage → https://mycine.netlify.app
+Delete:
+mycine-letter-subscribed
+mycine-letter-dismissed-at
+
+This method avoids the Console paste restriction and does not erase the Watchlist.
+
+TROUBLESHOOTING:
+• "connection needs attention": refresh token/client credentials mismatch.
+• "could not complete signup": Zoho rejected the list or contact request.
+• No popup: delete the two local-storage keys above and refresh.
+• Confirmation email missing: check Zoho pending contacts and Spam/Promotions.

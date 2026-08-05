@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Ciné • Newsletter Setup</title>
+  <style>
+    :root{
+      color-scheme:dark;
+      --red:#E50914;
+      --dark-red:#B0001A;
+      --gold:#FFB800;
+      --navy:#0B1F4A;
+      --card:#162D60;
+      --white:#FFFFFF;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      font-family:Inter,Arial,sans-serif;
+      color:var(--white);
+      background:
+        radial-gradient(circle at 50% 0%,rgba(255,184,0,.20),transparent 34%),
+        linear-gradient(145deg,var(--dark-red),var(--red));
+    }
+    main{
+      width:min(760px,100%);
+      padding:clamp(28px,6vw,58px);
+      text-align:center;
+      background:linear-gradient(150deg,var(--card),var(--navy));
+      border:2px solid var(--gold);
+      border-radius:28px;
+      box-shadow:0 34px 90px rgba(0,0,0,.48);
+    }
+    .icon{font-size:48px}
+    .kicker{
+      margin-top:12px;
+      color:var(--gold);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.15em;
+    }
+    h1{
+      margin:12px 0 18px;
+      font-family:Georgia,serif;
+      font-size:clamp(30px,6vw,48px);
+      line-height:1.08;
+    }
+    p,li{
+      color:rgba(255,255,255,.84);
+      font-size:16px;
+      line-height:1.65;
+    }
+    ol{
+      max-width:620px;
+      margin:24px auto;
+      padding-left:28px;
+      text-align:left;
+    }
+    code{
+      color:var(--gold);
+      font-family:Consolas,monospace;
+    }
+    a.button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 24px;
+      border-radius:12px;
+      color:var(--navy);
+      background:var(--gold);
+      font-weight:900;
+      text-decoration:none;
+      box-shadow:0 12px 26px rgba(255,184,0,.20);
+    }
+    .warning{
+      margin-top:22px;
+      padding:14px;
+      border-radius:12px;
+      background:rgba(229,9,20,.18);
+      color:#FFD7D7;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="icon">🎬</div>
+    <div class="kicker">PRIVATE SETUP PAGE</div>
+    <h1>Connect The My Ciné Letter</h1>
+    <p>
+      This one-time setup authorizes the Netlify Function to add confirmed
+      subscribers to your Zoho Campaigns mailing list.
+    </p>
+
+    <ol>
+      <li>
+        In Zoho API Console, add this exact redirect URI:
+        <br>
+        <code>https://mycine.netlify.app/.netlify/functions/zoho-auth</code>
+      </li>
+      <li>
+        In Netlify, add <code>ZOHO_CLIENT_ID</code> and
+        <code>ZOHO_CLIENT_SECRET</code> with Functions scope.
+      </li>
+      <li>Click the gold button and approve access in Zoho.</li>
+      <li>
+        Copy the refresh token shown after authorization into Netlify as
+        <code>ZOHO_REFRESH_TOKEN</code>.
+      </li>
+      <li>Trigger a new Netlify deployment.</li>
+    </ol>
+
+    <a class="button" href="/.netlify/functions/zoho-auth">
+      Connect Zoho Campaigns
+    </a>
+
+    <div class="warning">
+      Rotate any Client Secret that has appeared in chat or a screenshot before
+      using this setup.
+    </div>
+  </main>
+</body>
+</html>

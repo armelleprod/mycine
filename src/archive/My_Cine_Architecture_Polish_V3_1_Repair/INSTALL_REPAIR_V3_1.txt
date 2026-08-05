@@ -1,0 +1,16 @@
+MY CINÉ — ARCHITECTURE POLISH V3.1 REPAIR
+
+This repairs the Babel error caused by `export default` being separated from `function App()`.
+
+COPY ONLY:
+src/App.jsx → your existing project/src/App.jsx
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+PUSH LIVE AFTER TESTING:
+git add src/App.jsx
+git commit -m "Repair My Cine architecture polish export"
+git push

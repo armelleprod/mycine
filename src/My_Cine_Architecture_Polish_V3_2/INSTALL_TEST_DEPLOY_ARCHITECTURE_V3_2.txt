@@ -1,0 +1,48 @@
+MY CINÉ — ARCHITECTURE POLISH V3.2
+REQUIRES THE WORKING V3.1 REPAIR BASE
+
+COPY ONLY:
+src/App.jsx → existing project/src/App.jsx
+
+DO NOT replace the complete src folder.
+DO NOT rename or modify any Genre, TV or Mood batch file.
+
+CHANGES:
+1. My Watchlist:
+   • Every saved title now has a direct 📺 Where to Watch button.
+   • The button opens the exact TMDB watch page for the selected Mexico region.
+
+2. Ratings:
+   • "TMDB Community" is removed everywhere.
+   • Ratings now display simply as "64% TMDB".
+   • The vote count remains below when available.
+
+3. Mobile branding:
+   • "The Art of Choosing Tonight's Movie" is larger and bold.
+   • It remains on one responsive line.
+
+4. Meet the Curator:
+   • "great stories could change the world"
+   • New cinematic concierge paragraph
+   • "My Current Screen Projects"
+   • "Interested in creating a project with me? Contact Armelle"
+   • "Enjoy your movie night! 🍿"
+   • "Creator of My Ciné"
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+TEST:
+• Open My Watchlist and test each 📺 Where to Watch button.
+• Confirm ratings show only "% TMDB" and never "TMDB Community".
+• Check the mobile subtitle remains large, bold and on one line.
+• Open Meet the Curator and verify every requested copy change.
+• Re-test one Genre in Movies, TV Series and Both.
+
+PUSH LIVE:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Polish watchlist ratings mobile title and curator copy"
+git push

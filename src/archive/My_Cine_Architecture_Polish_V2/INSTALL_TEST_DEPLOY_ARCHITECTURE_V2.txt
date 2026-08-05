@@ -1,0 +1,29 @@
+MY CINÉ — ARCHITECTURE POLISH V2
+REQUIRES THE CURRENT WORKING LIVE PROJECT
+
+COPY ONLY:
+src/App.jsx → existing project/src/App.jsx
+
+DO NOT replace the complete src folder.
+DO NOT rename, move or delete any batch file.
+DO NOT modify Genre or Mood data.
+
+CHANGES:
+• Manifesto copy polished exactly as requested
+• "Our Promise" renamed "My Ciné Promise"
+• Quality Standard shortened
+• Watchlist synchronization explanation added
+• Cinema Moments transition now blooms from the card center
+• Clicking MY CINÉ resets recommendations and restores the original lobby
+• Desktop MY CINÉ title centered and tagline made bold
+
+BUILD + RUN LOCALLY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+LIVE DEPLOY AFTER TESTING:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Polish My Cine Manifesto and home architecture"
+git push

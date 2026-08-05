@@ -1,0 +1,36 @@
+MY CINÉ — LAUNCH POLISH V4.1
+
+COPY ONLY:
+src/App.jsx → existing project/src/App.jsx
+
+CHANGES:
+• Curator line becomes:
+  "Along the way, I learned that loving movies means more than binge-watching."
+• Gold Armelle signature is smaller and matches the preceding line.
+• Newsletter success message now accurately asks the subscriber to confirm by email.
+• Added the remaining hidden fields from the published Zoho signup form.
+
+IMPORTANT:
+Zoho signup-form lists can use double opt-in. A contact may not appear as an
+active subscriber until the confirmation email is clicked.
+
+CHECK:
+1. Search your inbox and Spam/Promotions for Zoho's confirmation email.
+2. In Zoho Campaigns, check pending/unconfirmed contacts for the My Ciné list.
+3. After confirming, refresh the list.
+
+The localStorage commands only reset whether this browser shows the invitation:
+localStorage.removeItem("mycine-letter-subscribed")
+localStorage.removeItem("mycine-letter-dismissed-at")
+
+They do not add or remove anyone in Zoho.
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+PUSH LIVE:
+git add src/App.jsx
+git commit -m "Refine curator signature and Zoho confirmation flow"
+git push

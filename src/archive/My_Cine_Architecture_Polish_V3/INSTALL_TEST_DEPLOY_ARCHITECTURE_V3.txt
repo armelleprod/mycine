@@ -1,0 +1,64 @@
+MY CINÉ — ARCHITECTURE POLISH V3
+NON-DESTRUCTIVE APP.JSX UPDATE
+
+COPY ONLY:
+src/App.jsx → your existing project/src/App.jsx
+
+DO NOT replace the complete src folder.
+DO NOT rename or modify any Genre, TV or Mood batch file.
+
+FIXES:
+1. Consistent top-menu labels and icon placement:
+   MY CINÉ
+   Manifesto 🎞️
+   Watchlist [count] 🩵
+   Meet the Curator 👋
+
+2. Manifesto:
+   Exact paragraph rhythm requested.
+   "screenwriter" links internally to Meet the Curator.
+   "Only what deserves your evening." is bold.
+
+3. Phone subtitle:
+   Bold and kept on one line with responsive sizing.
+
+4. Where to Watch:
+   Hero and alternative buttons open the exact TMDB watch page directly.
+
+5. Streaming links:
+   Provider badges now open the same exact TMDB watch page.
+   This avoids broken or unsupported direct-search URLs from individual services.
+   TMDB/JustWatch remains the current country-specific source of truth.
+
+6. Watchlist:
+   "My personal collection" → "My Watchlist"
+   Adds: "Your phone, desktop and tablet each maintain their own separate list."
+
+7. Recommendation variety:
+   Every fresh recommendation session receives a shuffled seven-set deck.
+   The first set will differ from the previous first set.
+   No set repeats until all seven prepared sets have been shown.
+   The shuffled order is remembered per Genre/Mood + format in localStorage.
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+TEST:
+• Check all top-menu labels on desktop and phone.
+• Open Manifesto and click "screenwriter".
+• Open Watchlist and verify title + device explanation.
+• Check phone subtitle on one line.
+• Generate a genre in Both mode.
+• Open provider badges and Where to Watch buttons.
+• Confirm all lead to the correct TMDB title watch page.
+• Return home and request the same genre/format again.
+• Confirm a different prepared set appears first.
+• Keep Exploring through 7/7 and confirm no set repeats.
+
+PUSH LIVE:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Polish navigation watch links watchlist and set rotation"
+git push
