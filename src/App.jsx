@@ -2257,39 +2257,29 @@ function canonicalProviderName(name = "") {
   return name;
 }
 
-function providerSearchUrl(providerName, title, region) {
-  const query = encodeURIComponent(title);
-  const provider = canonicalProviderName(providerName);
-
-  const urls = {
-    "Netflix": `https://www.netflix.com/search?q=${query}`,
-    "Prime Video": `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${query}`,
-    "HBO Max": `https://www.max.com/search?q=${query}`,
-    "Apple TV+": `https://tv.apple.com/search?term=${query}`,
-    "Disney+": `https://www.disneyplus.com/search?q=${query}`,
-    "Claro video": region === "MX"
-      ? "https://www.clarovideo.com/mexico/home"
-      : "https://www.clarovideo.com/",
-    "ViX": region === "MX"
-      ? "https://vix.com/es-es"
-      : "https://vix.com/"
-  };
-
-  return urls[provider] ||
-    `https://www.google.com/search?q=${encodeURIComponent(`${title} ${provider} streaming`)}`;
+function tmdbWatchUrl(titleId, mediaType = "movie", region = "MX") {
+  const normalizedType = mediaType === "tv" ? "tv" : "movie";
+  return `https://www.themoviedb.org/${normalizedType}/${titleId}/watch?locale=${region || "MX"}`;
 }
 
-function ProviderPill({ providerName, title, region, compact = false }) {
+function ProviderPill({
+  providerName,
+  title,
+  region,
+  titleId,
+  mediaType = "movie",
+  compact = false
+}) {
   const canonicalName = canonicalProviderName(providerName);
   const background = PROVIDER_COLORS[canonicalName] || C.navyMid;
   const isLight = canonicalName === "Apple TV+";
 
   return (
     <a
-      href={providerSearchUrl(canonicalName, title, region)}
+      href={tmdbWatchUrl(titleId, mediaType, region)}
       target="_blank"
       rel="noopener noreferrer"
-      title={`Search for ${title} on ${canonicalName}`}
+      title={`See where ${title} is available in ${region || "your region"}`}
       style={{
         display:"inline-flex",
         alignItems:"center",
@@ -2417,6 +2407,8 @@ function WhereToWatch({ titleId, region, title, mediaType = "movie" }) {
                     providerName={provider.canonicalName}
                     title={title}
                     region={region}
+                    titleId={titleId}
+                    mediaType={mediaType}
                   />
                 ))}
               </div>
@@ -2526,7 +2518,11 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
   const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
-  const tmdbWatchLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}/watch?locale=${watchRegion || "MX"}`;
+  const tmdbWatchLink = tmdbWatchUrl(
+    film.id,
+    film.isTV ? "tv" : "movie",
+    watchRegion
+  );
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -2594,6 +2590,8 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
                 providerName={providerName}
                 title={film.title}
                 region={watchRegion}
+                titleId={film.id}
+                mediaType={film.isTV ? "tv" : "movie"}
               />
             ))}
           </div>
@@ -2715,6 +2713,8 @@ function AltCard({film, watched, onToggle, watchRegion}) {
               providerName={providerName}
               title={film.title}
               region={watchRegion}
+              titleId={film.id}
+              mediaType={film.isTV ? "tv" : "movie"}
               compact
             />
           ))}
@@ -2766,12 +2766,32 @@ function AltCard({film, watched, onToggle, watchRegion}) {
   </button>
 </div>
 
-<WhereToWatch
-  titleId={film.id}
-  region={watchRegion}
-  title={film.title}
-  mediaType={film.media_type}
-/>
+<a
+  href={tmdbWatchUrl(
+    film.id,
+    film.isTV ? "tv" : "movie",
+    watchRegion
+  )}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    width:"100%",
+    marginTop:"8px",
+    background:"transparent",
+    border:`1px solid ${C.goldBright}55`,
+    borderRadius:"8px",
+    padding:"8px",
+    color:C.goldBright,
+    fontSize:"11px",
+    fontWeight:"700",
+    textDecoration:"none"
+  }}
+>
+  📺 Where to Watch
+</a>
 
 </div>
 </div>
@@ -3304,7 +3324,7 @@ function TopNav({page, setPage, savedCount, onHomeReset}) {
   const items = [
     {id:"home", label:"MY CINÉ"},
     {id:"standard", label:"Manifesto 🎞️"},
-    {id:"saved", label:`💙 Watchlist${savedCount ? ` ${savedCount}` : ""}`},
+    {id:"saved", label:`Watchlist${savedCount ? ` ${savedCount}` : ""} 🩵`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
 
@@ -3403,7 +3423,7 @@ function CinemaMomentsPage() {
   );
 }
 
-function ManifestoPage() {
+function ManifestoPage({onMeetCurator}) {
   return (
     <main className="page-shell">
       <div className="page-heading">
@@ -3414,11 +3434,31 @@ function ManifestoPage() {
 
       <section className="manifesto-intro">
         <h2>Why My Ciné Exists</h2>
-        <p>Streaming gave us an ocean of choice, but somewhere in the race for more content, finding something truly worth watching only got harder.</p>
-        <p>Too many evenings now turn into forty-five minutes of scrolling through titles no one will remember next week. That's not a movie night. That's a time robbery.</p>
-        <p>My Ciné was created by a screenwriter who got tired of spending more time searching for a good film than the film itself lasts — for people who know the difference between content and cinema, and refuse to settle for background noise when they came for an experience.</p>
-        <p>We don't curate everything.</p>
-        <p><strong>Only what deserves your evening.</strong></p>
+
+        <p>
+          Streaming gave us an ocean of choice, but somewhere in the race for more content,
+          finding something truly worth watching only got harder. Too many evenings now turn
+          into forty-five minutes of scrolling through titles no one will remember next week.
+          That's not a movie night. That's a time robbery.
+        </p>
+
+        <p>
+          My Ciné was created by a{" "}
+          <button
+            type="button"
+            className="manifesto-creator-link"
+            onClick={onMeetCurator}
+          >
+            screenwriter
+          </button>{" "}
+          who got tired of spending more time searching for a good film than the film itself
+          lasts — for people who know the difference between content and cinema, and refuse
+          to settle for background noise when they came for an experience.
+        </p>
+
+        <p>
+          We don't curate everything. <strong>Only what deserves your evening.</strong>
+        </p>
       </section>
 
       <section className="pillars-section">
@@ -3628,8 +3668,9 @@ function SavedPage({savedTitles, onToggle}) {
   return (
     <main className="page-shell">
       <div className="page-heading">
-        <span>💙</span>
-        <h1>My personal collection</h1>
+        <span>🩵</span>
+        <h1>My Watchlist</h1>
+        <p>Your phone, desktop and tablet each maintain their own separate list.</p>
       </div>
 
       {savedTitles.length === 0 ? (
@@ -3702,6 +3743,47 @@ function SavedPage({savedTitles, onToggle}) {
 }
 
 // ── APP ───────────────────────────────────────────────────────────────────────
+const BATCH_ROTATION_KEY = "mycine-prepared-batch-rotation-v1";
+
+function readBatchRotationState() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(BATCH_ROTATION_KEY) || "{}");
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function shuffledBatchOrder(batchCount, previousFirst = null) {
+  const order = Array.from({length:batchCount}, (_, index) => index + 1);
+
+  for (let index = order.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [order[index], order[randomIndex]] = [order[randomIndex], order[index]];
+  }
+
+  if (order.length > 1 && order[0] === previousFirst) {
+    [order[0], order[1]] = [order[1], order[0]];
+  }
+
+  return order;
+}
+
+function nextPreparedBatchOrder(selectionKey, batchCount) {
+  const state = readBatchRotationState();
+  const previous = state[selectionKey] || {};
+  const order = shuffledBatchOrder(batchCount, previous.first || null);
+
+  state[selectionKey] = {
+    first:order[0],
+    order,
+    updatedAt:Date.now()
+  };
+
+  localStorage.setItem(BATCH_ROTATION_KEY, JSON.stringify(state));
+  return order;
+}
+
 export default function App() {
   const [tab, setTab]               = useState("genre");
   const [selGenres, setSelGenres]   = useState([]);
@@ -3722,6 +3804,7 @@ export default function App() {
   const resultsRef = useRef(null);
   const [seenPickIds, setSeenPickIds] = useState([]);
   const [batchNumber, setBatchNumber] = useState(0);
+  const [preparedBatchOrder, setPreparedBatchOrder] = useState([]);
   const [savedTitles, setSavedTitles] = useState(() => {
     try {
       const permanent = JSON.parse(localStorage.getItem("mycine-watchlist") || "[]");
@@ -3746,6 +3829,7 @@ export default function App() {
     setError(null);
     setLoading(false);
     setBatchNumber(0);
+    setPreparedBatchOrder([]);
     setSeenPickIds([]);
     window.scrollTo({top:0, behavior:"smooth"});
   };
@@ -3953,7 +4037,8 @@ export default function App() {
 const run = async (
   excludeIds = [],
   resetSession = false,
-  requestedBatch = null
+  requestedBatch = null,
+  journeyPosition = null
 ) => {
   setLoading(true);
   setError(null);
@@ -3963,6 +4048,7 @@ const run = async (
   const targetBatch = requestedBatch ?? (
     resetSession ? 1 : Math.min(activeBatchCount, batchNumber + 1)
   );
+  const targetJourneyPosition = journeyPosition ?? targetBatch;
 
   try {
     const preparedGenre =
@@ -4018,7 +4104,7 @@ const run = async (
       [...new Set([...previous, ...newIds])]
     );
 
-    setBatchNumber(targetBatch);
+    setBatchNumber(targetJourneyPosition);
   } catch (error) {
     // Preserve the current seven if the next batch cannot be assembled.
     console.error("MY CINÉ recommendation error:", error);
@@ -4042,8 +4128,16 @@ const run = async (
       // They never wrap back to set 1 inside the same session.
       if (batchNumber >= activeBatchCount) return;
 
-      const nextBatch = batchNumber + 1;
-      run([...new Set(previousIds)], false, nextBatch);
+      const nextJourneyPosition = batchNumber + 1;
+      const nextPreparedBatch =
+        preparedBatchOrder[nextJourneyPosition - 1] || nextJourneyPosition;
+
+      run(
+        [...new Set(previousIds)],
+        false,
+        nextPreparedBatch,
+        nextJourneyPosition
+      );
       return;
     }
 
@@ -4058,20 +4152,41 @@ const run = async (
       contentMode
     );
 
+    const nextOrder = activePreparedBatches
+      ? nextPreparedBatchOrder(key, activeBatchCount)
+      : Array.from({length:activeBatchCount}, (_, index) => index + 1);
 
+    setPreparedBatchOrder(nextOrder);
     setSeenPickIds([]);
     setBatchNumber(0);
-    run([], true, 1);
+
+    run(
+      [],
+      true,
+      nextOrder[0] || 1,
+      1
+    );
   };
 
   const doMore = () => {
     if (loading || batchNumber >= activeBatchCount) return;
 
-    const nextBatch = Math.min(activeBatchCount, batchNumber + 1);
+    const nextJourneyPosition = Math.min(
+      activeBatchCount,
+      batchNumber + 1
+    );
+    const nextPreparedBatch =
+      preparedBatchOrder[nextJourneyPosition - 1] || nextJourneyPosition;
+
     const currentIds = [hero?.id, ...alts.map(item => item.id), ...seenPickIds]
       .filter(Boolean);
 
-    run([...new Set(currentIds)], false, nextBatch);
+    run(
+      [...new Set(currentIds)],
+      false,
+      nextPreparedBatch,
+      nextJourneyPosition
+    );
   };
 
   const watchedCount = Object.values(watched).filter(Boolean).length;
@@ -4397,6 +4512,23 @@ const run = async (
     margin:0 auto;
     padding:46px 0 90px;
   }
+  .manifesto-creator-link{
+    appearance:none;
+    border:0;
+    padding:0;
+    margin:0;
+    background:transparent;
+    color:${C.goldBright};
+    font:inherit;
+    font-weight:900;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  .manifesto-creator-link:hover,
+  .manifesto-creator-link:focus-visible{
+    color:#FFFFFF;
+  }
+
   .page-heading{text-align:center;margin-bottom:28px;color:#fff;}
   .page-heading > span{font-size:46px;}
   .page-heading h1{font-family:Georgia,serif;font-size:clamp(32px,6vw,58px);margin:8px 0;}
@@ -5775,13 +5907,16 @@ const run = async (
       max-width:100%;
       margin-left:auto;
       margin-right:auto;
-      padding:0 8px;
+      padding:0 2px;
       text-align:center;
-      white-space:normal !important;
-      overflow-wrap:anywhere;
+      white-space:nowrap !important;
+      overflow:visible;
+      overflow-wrap:normal;
       word-break:normal;
-      letter-spacing:0.11em;
-      line-height:1.45;
+      font-size:clamp(7px,2.45vw,11px) !important;
+      font-weight:900 !important;
+      letter-spacing:0.07em;
+      line-height:1.25;
     }
 
     .lobby-feature-grid{
@@ -5911,7 +6046,14 @@ const run = async (
 
       {showAbout && <AboutModal onClose={()=>setShowAbout(false)}/>}
 
-      {page === "standard" && <ManifestoPage/>}
+      {page === "standard" && (
+        <ManifestoPage
+          onMeetCurator={() => {
+            setPage("curator");
+            window.scrollTo({top:0, behavior:"smooth"});
+          }}
+        />
+      )}
       {page === "saved" && <SavedPage savedTitles={savedTitles} onToggle={toggleWatched}/>}
       {page === "curator" && <CuratorPage/>}
 
@@ -6153,6 +6295,7 @@ const run = async (
                       setAlts([]);
                       setSeenPickIds([]);
                       setBatchNumber(0);
+                      setPreparedBatchOrder([]);
                       setSelGenres([]);
                       setError(null);
                       window.scrollTo({top:0,behavior:"smooth"});
