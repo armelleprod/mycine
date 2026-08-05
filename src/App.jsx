@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import curatorPhoto from "./assets/armelle-cloche.jpg";
 import { ROMCOM_EDITORIAL_BATCHES } from "./data/romcomBatches";
 import { ROMCOM_SERIES_EDITORIAL_BATCHES } from "./data/romcomSeriesBatches";
@@ -15,6 +15,8 @@ import { ANIMATION_SERIES_EDITORIAL_BATCHES } from "./data/animationSeriesBatche
 import { MUSICAL_SERIES_EDITORIAL_BATCHES } from "./data/musicalSeriesBatches";
 import { BIOPIC_SERIES_EDITORIAL_BATCHES } from "./data/biopicSeriesBatches";
 import { INTERNATIONAL_SERIES_EDITORIAL_BATCHES } from "./data/internationalSeriesBatches";
+import { HIDDEN_GEMS_SERIES_EDITORIAL_BATCHES } from "./data/hiddenGemsSeriesBatches";
+import { LGBTQ_SERIES_EDITORIAL_BATCHES } from "./data/lgbtqSeriesBatches";
 import { COMEDY_EDITORIAL_BATCHES } from "./data/comedyBatches";
 import { ROMANCE_EDITORIAL_BATCHES } from "./data/romanceBatches";
 import { DRAMA_EDITORIAL_BATCHES } from "./data/dramaBatches";
@@ -3242,30 +3244,40 @@ function buildDynamicCinemaMoment(movie, details) {
   });
 }
 
-function readMomentHistory() {
-  try {
-    const raw = JSON.parse(localStorage.getItem("mycine-moment-history") || "[]");
-    const cutoff = Date.now() - (30 * 24 * 60 * 60 * 1000);
-    return raw.filter(item => item?.key && item?.seenAt >= cutoff);
-  } catch {
-    return [];
+const MOMENT_CYCLE_KEY = "mycine-moment-cycle-v2";
+
+function shuffleMomentKeys(keys) {
+  const shuffled = [...keys];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
   }
+  return shuffled;
 }
 
-function saveMomentSeen(key) {
-  const history = readMomentHistory().filter(item => item.key !== key);
-  history.push({key, seenAt:Date.now()});
-  localStorage.setItem("mycine-moment-history", JSON.stringify(history.slice(-500)));
-}
+function pickNextMoment(momentOptions) {
+  if (!momentOptions.length) return null;
+  const byKey = new Map(momentOptions.map(moment => [moment.key, moment]));
+  let cycle = {remaining:[], lastKey:null};
 
-function pickUnseenMoment(momentOptions) {
-  const seen = new Set(readMomentHistory().map(item => item.key));
-  const unseen = momentOptions.filter(moment => !seen.has(moment.key));
+  try {
+    const stored = JSON.parse(localStorage.getItem(MOMENT_CYCLE_KEY) || "null");
+    if (stored && Array.isArray(stored.remaining)) cycle = stored;
+  } catch {}
 
-  const pool = unseen.length ? unseen : momentOptions;
-  if (!pool.length) return null;
+  cycle.remaining = cycle.remaining.filter(key => byKey.has(key));
 
-  return pool[Math.floor(Math.random() * pool.length)];
+  if (!cycle.remaining.length) {
+    cycle.remaining = shuffleMomentKeys([...byKey.keys()]);
+    if (cycle.remaining.length > 1 && cycle.remaining[0] === cycle.lastKey) {
+      [cycle.remaining[0], cycle.remaining[1]] = [cycle.remaining[1], cycle.remaining[0]];
+    }
+  }
+
+  const nextKey = cycle.remaining.shift();
+  cycle.lastKey = nextKey;
+  localStorage.setItem(MOMENT_CYCLE_KEY, JSON.stringify(cycle));
+  return byKey.get(nextKey) || momentOptions[0];
 }
 
 function LobbyDecor() {
@@ -3291,7 +3303,7 @@ function TopNav({page, setPage, savedCount}) {
 
   const items = [
     {id:"home", label:"MY CINÉ"},
-    {id:"standard", label:"Standard 🎞️"},
+    {id:"standard", label:"Manifesto 🎞️"},
     {id:"saved", label:`💙 Watchlist${savedCount ? ` ${savedCount}` : ""}`},
     {id:"curator", label:"Meet the Curator 👋"}
   ];
@@ -3322,17 +3334,19 @@ function TopNav({page, setPage, savedCount}) {
         </button>
 
         <button
+          type="button"
           className="mobile-menu-button"
           onClick={() => setMenuOpen(open => !open)}
           aria-expanded={menuOpen}
           aria-label="Open My Ciné menu"
+          aria-controls="mycine-mobile-menu"
         >
           {menuOpen ? "✕" : "☰"} Menu
         </button>
       </div>
 
       {menuOpen && (
-        <div className="mobile-menu-panel">
+        <div id="mycine-mobile-menu" className="mobile-menu-panel">
           {items.map(item => (
             <button
               key={item.id}
@@ -3350,7 +3364,7 @@ function TopNav({page, setPage, savedCount}) {
 
 function CinemaMomentCard({moment, compact=false}) {
   return (
-    <article className={compact ? "cinema-moment compact" : "cinema-moment"}>
+    <article className={compact ? "cinema-moment compact moment-enter" : "cinema-moment moment-enter"}>
       <div className="marquee-lights marquee-top"/>
       <div className="cinema-moment-inner">
         <div className="cinema-moments-title">🎞️ Cinema Moments</div>
@@ -3385,14 +3399,34 @@ function CinemaMomentsPage() {
   );
 }
 
-function StandardPage() {
+function ManifestoPage() {
   return (
     <main className="page-shell">
       <div className="page-heading">
         <span>🎞️</span>
-        <h1>My Ciné Standard</h1>
-        <p>The philosophy behind every recommendation</p>
+        <h1>My Ciné Manifesto</h1>
+        <p className="manifesto-signature">The App That Celebrates Cinema.</p>
       </div>
+
+      <section className="manifesto-intro">
+        <h2>Why My Ciné Exists</h2>
+        <p>Streaming gave film lovers an extraordinary ocean of choice, but somewhere in the race for more content, choosing a truly good film became harder. Too many evenings disappear into forty-five minutes of scrolling through quickly produced, disposable titles.</p>
+        <p><strong>Enough.</strong> My Ciné was created by a screenwriter and lifelong film lover for people who still believe a great movie can transform an evening.</p>
+        <p>Not everything. Only what is worth your time.</p>
+      </section>
+
+      <section className="pillars-section">
+        <div className="pillars-heading">
+          <span>✨</span>
+          <h2>My Ciné Pillars</h2>
+        </div>
+        <div className="pillars-grid">
+          <article className="pillar-card"><h3>🎬 1. We Celebrate Cinema</h3><p>Cinema is the Seventh Art. Every recommendation is an invitation to discover remarkable storytelling and the artists behind it.</p></article>
+          <article className="pillar-card"><h3>❤️ 2. We Celebrate Emotion</h3><p>Movies are remembered because of how they make us feel. Every recommendation must deliver its emotional promise.</p></article>
+          <article className="pillar-card"><h3>🍿 3. We Celebrate Great Movie Nights</h3><p>Less scrolling. More unforgettable evenings. Every recommendation exists to create a memorable movie night.</p></article>
+          <article className="pillar-card"><h3>👩‍💻 4. We Celebrate Human Curation</h3><p>Algorithms predict. Editors recommend. My Ciné combines trusted data with thoughtful editorial judgment.</p></article>
+        </div>
+      </section>
 
       <div className="standard-grid">
         <section className="standard-card">
@@ -3671,6 +3705,7 @@ export default function App() {
   const [page, setPage] = useState("home");
   const [momentIndex, setMomentIndex] = useState(0);
   const [cinemaMoment, setCinemaMoment] = useState(CURATED_CINEMA_MOMENTS[0]);
+  const resultsRef = useRef(null);
   const [seenPickIds, setSeenPickIds] = useState([]);
   const [batchNumber, setBatchNumber] = useState(0);
   const [savedTitles, setSavedTitles] = useState(() => {
@@ -3784,7 +3819,11 @@ export default function App() {
                                     ? BIOPIC_SERIES_EDITORIAL_BATCHES
                                     : selGenres[0] === "international"
                                       ? INTERNATIONAL_SERIES_EDITORIAL_BATCHES
-                                      : null
+                                      : selGenres[0] === "hiddengems"
+                                        ? HIDDEN_GEMS_SERIES_EDITORIAL_BATCHES
+                                        : selGenres[0] === "lgbtq"
+                                          ? LGBTQ_SERIES_EDITORIAL_BATCHES
+                                          : null
           : contentMode === "both"
             ? selGenres[0] === "romcom"
               ? composeBalancedEditorialBatches(
@@ -3856,7 +3895,17 @@ export default function App() {
                                             INTERNATIONAL_EDITORIAL_BATCHES,
                                             INTERNATIONAL_SERIES_EDITORIAL_BATCHES
                                           )
-                                        : null
+                                        : selGenres[0] === "hiddengems"
+                                          ? composeBalancedEditorialBatches(
+                                              HIDDEN_GEMS_EDITORIAL_BATCHES,
+                                              HIDDEN_GEMS_SERIES_EDITORIAL_BATCHES
+                                            )
+                                          : selGenres[0] === "lgbtq"
+                                            ? composeBalancedEditorialBatches(
+                                                LGBTQ_EDITORIAL_BATCHES,
+                                                LGBTQ_SERIES_EDITORIAL_BATCHES
+                                              )
+                                            : null
             : null
       : null;
 
@@ -4010,19 +4059,22 @@ const run = async (
 
   useEffect(() => {
     const showNextMoment = () => {
-      const moment = pickUnseenMoment(CURATED_CINEMA_MOMENTS);
-
-      if (moment) {
-        saveMomentSeen(moment.key);
-        setCinemaMoment(moment);
-      }
+      const moment = pickNextMoment(CURATED_CINEMA_MOMENTS);
+      if (moment) setCinemaMoment(moment);
     };
 
     showNextMoment();
-    const timer = setInterval(showNextMoment, 16000);
-
+    const timer = setInterval(showNextMoment, 10000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!generated || !hero || !resultsRef.current) return;
+    const timer = window.setTimeout(() => {
+      resultsRef.current?.scrollIntoView({behavior:"smooth", block:"start"});
+    }, 760);
+    return () => window.clearTimeout(timer);
+  }, [generated, hero?.id]);
 
   return (
     <div
@@ -4231,6 +4283,57 @@ const run = async (
     margin:0 0 18px;
     font-size:24px;
   }
+  .manifesto-signature{
+    color:${C.goldBright}!important;
+    font-family:Georgia,serif;
+    font-size:clamp(18px,2.5vw,28px)!important;
+    font-weight:900;
+  }
+  .manifesto-intro,
+  .pillars-section{
+    background:rgba(11,31,74,0.95);
+    border:1px solid rgba(255,184,0,0.42);
+    border-radius:24px;
+    padding:clamp(22px,4vw,38px);
+    margin-bottom:22px;
+    color:#fff;
+    box-shadow:0 18px 44px rgba(11,31,74,0.32);
+  }
+  .manifesto-intro h2,
+  .pillars-heading h2{
+    color:${C.goldBright};
+    font-family:Georgia,serif;
+    margin:0 0 14px;
+  }
+  .manifesto-intro p{font-size:16px;line-height:1.75;margin:0 0 12px;}
+  .pillars-heading{text-align:center;margin-bottom:18px;}
+  .pillars-heading span{font-size:34px;}
+  .pillars-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+  .pillar-card{background:${C.navyMid};border:1px solid rgba(255,184,0,0.32);border-radius:18px;padding:20px;}
+  .pillar-card h3{color:${C.goldBright};font-family:Georgia,serif;margin:0 0 9px;font-size:18px;}
+  .pillar-card p{color:#fff;line-height:1.6;margin:0;}
+
+  @keyframes momentCinemaIn{
+    0%{opacity:0;transform:scale(0.965) translateY(12px);filter:blur(8px) brightness(1.8);}
+    42%{opacity:1;filter:blur(0) brightness(1.25);}
+    100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0) brightness(1);}
+  }
+  @keyframes filmFlash{
+    0%,100%{opacity:0;transform:translateX(-120%) skewX(-18deg);}
+    28%{opacity:.72;}
+    62%{opacity:0;transform:translateX(160%) skewX(-18deg);}
+  }
+  .moment-enter{animation:momentCinemaIn .8s cubic-bezier(.2,.75,.2,1) both;position:relative;overflow:hidden;}
+  .moment-enter::after{content:"";position:absolute;inset:-20%;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(255,248,231,.42) 50%,transparent 65%);animation:filmFlash .9s ease-out both;z-index:8;}
+
+  @keyframes lobbyCardLeft{to{opacity:0;transform:translateX(-38vw) scale(.88);filter:blur(5px);}}
+  @keyframes lobbyCardRight{to{opacity:0;transform:translateX(38vw) scale(.88);filter:blur(5px);}}
+  .home-with-results .lobby-wrap{max-height:0!important;opacity:0;margin:0 auto!important;padding:0!important;overflow:hidden;transition:max-height .8s ease .1s,opacity .35s ease .35s,padding .8s ease;}
+  .home-with-results .home-hero{opacity:0;transform:translateY(-18px);transition:all .35s ease;}
+  .home-with-results .home-moment-card{animation:lobbyCardLeft .72s cubic-bezier(.55,0,.45,1) both;}
+  .home-with-results .home-curate-card{animation:lobbyCardRight .72s cubic-bezier(.55,0,.45,1) both;}
+  .results-heading-wrap{scroll-margin-top:78px;}
+
   .page-shell{
     width:min(1040px,calc(100% - 32px));
     margin:0 auto;
@@ -5543,7 +5646,7 @@ const run = async (
     width:auto !important;
     max-width:none !important;
     inset:0 0 auto 0 !important;
-    overflow:hidden;
+    overflow:visible!important;
   }
 
   @media (max-width:760px){
@@ -5693,6 +5796,32 @@ const run = async (
     }
   }
 
+
+  @media (min-width:981px){
+    .home-before-results .home-hero .logo{font-size:clamp(66px,6vw,92px)!important;line-height:1!important;}
+    .home-before-results .home-hero .tagline{font-size:13px!important;letter-spacing:.22em!important;}
+  }
+  @media (max-width:760px){
+    .mobile-menu-panel{
+      position:fixed!important;
+      top:72px!important;
+      left:10px!important;
+      right:10px!important;
+      width:auto!important;
+      max-width:none!important;
+      display:flex!important;
+      flex-direction:column;
+      z-index:100000!important;
+      overflow:visible!important;
+      border-radius:0 0 18px 18px;
+      box-shadow:0 18px 42px rgba(0,0,0,.48);
+    }
+    .concierge-title{font-size:clamp(18px,5.4vw,23px)!important;white-space:nowrap!important;letter-spacing:-.02em;}
+    .pillars-grid{grid-template-columns:1fr;}
+    .home-with-results .home-moment-card,
+    .home-with-results .home-curate-card{animation:none!important;}
+    .home-with-results .lobby-wrap{max-height:0!important;}
+  }
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length}/>
@@ -5700,7 +5829,7 @@ const run = async (
 
       {showAbout && <AboutModal onClose={()=>setShowAbout(false)}/>}
 
-      {page === "standard" && <StandardPage/>}
+      {page === "standard" && <ManifestoPage/>}
       {page === "saved" && <SavedPage savedTitles={savedTitles} onToggle={toggleWatched}/>}
       {page === "curator" && <CuratorPage/>}
 
@@ -5716,7 +5845,7 @@ const run = async (
 
       <div className="lobby-feature-grid">
       <section className="moment-strip home-moment-card">
-        <CinemaMomentCard moment={cinemaMoment} compact/>
+        <CinemaMomentCard key={cinemaMoment.key} moment={cinemaMoment} compact/>
       </section>
 
       <section className="concierge-panel home-curate-card">
@@ -5821,7 +5950,7 @@ const run = async (
       </div>
 
       {generated&&total>0&&(
-        <div className="results-heading-wrap">
+        <div ref={resultsRef} className="results-heading-wrap">
           <h2 className="results-heading">
             7 Picks • Celebrating the Seventh Art 🎦
           </h2>
