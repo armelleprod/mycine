@@ -1,0 +1,36 @@
+MY CINÉ V71 — TV ENGINE FOUNDATION + ROMCOM SERIES
+
+WHAT THIS RELEASE DOES
+• Leaves every approved film batch file untouched.
+• Adds the first parallel TV editorial file: romcomSeriesBatches.js.
+• Makes the prepared-batch resolver media-aware.
+• Routes Movies → existing Romcom film batches.
+• Routes TV Series → new Romcom series batches.
+• Leaves Both on the existing generic mixed engine for now.
+• Adds moodTags to TV entries for the future Mood sync.
+
+COPY ONLY
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/romcomSeriesBatches.js → existing project/src/data/romcomSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename or delete any film file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST A — FILM REGRESSION
+Choose Romcom + Movies + Mexico. Confirm the existing film batches still work.
+
+TEST B — TV PILOT
+Choose Romcom + TV Series + Mexico. Confirm exactly 7 TV series, 6 alternatives, posters, ratings, providers, and Keep Exploring through 7/7.
+
+TEST C — BOTH
+Choose Romcom + Both. Confirm the existing mixed engine still returns seven picks.
+
+DO NOT DEPLOY LIVE UNTIL ALL THREE TESTS PASS.

@@ -1,0 +1,43 @@
+MY CINÉ V71.2.1 — WHITE SCREEN FIX
+
+CAUSE
+The V71.2 mixed-format balance indicator referenced a nonexistent variable:
+selFormat
+
+The app's actual format state is:
+contentMode
+
+CHANGE
+selFormat === "both"
+→ contentMode === "both"
+
+COPY ONLY
+src/App.jsx
+into:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine\src
+
+Replace the existing App.jsx file.
+
+DO NOT replace the src folder.
+DO NOT replace or rename any batch file.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+1. Choose Romcom + Movies and click Curate My Movie Night.
+2. Choose Romcom + TV Series and click Curate My Movie Night.
+3. Choose Romcom + Both and click Curate My Movie Night.
+4. Confirm the page no longer turns white.
+5. In Both mode, confirm the balance indicator and Film/TV badges display.
+
+LIVE DEPLOY AFTER TESTING
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Fix MY CINE V71.2 white screen"
+git push

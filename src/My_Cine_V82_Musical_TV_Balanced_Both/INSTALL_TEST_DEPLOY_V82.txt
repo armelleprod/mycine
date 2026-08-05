@@ -1,0 +1,44 @@
+MY CINÉ V82 — MUSICAL TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/musicalSeriesBatches.js → existing project/src/data/musicalSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify musicalBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Musical
+Format: Movies
+Region: Mexico
+
+TEST B — MUSICAL TV:
+Genre: Musical
+Format: TV Series
+Region: Mexico
+First batch:
+Schmigadoon! / Glee / The Monkees / The Sound of Magic /
+Julie and the Phantoms / Crazy Ex-Girlfriend / Galavant
+
+TEST C — BALANCED BOTH:
+Genre: Musical
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/musicalSeriesBatches.js
+git commit -m "Release MY CINE V82 Musical TV"
+git push

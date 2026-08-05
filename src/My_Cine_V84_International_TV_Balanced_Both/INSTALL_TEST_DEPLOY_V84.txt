@@ -1,0 +1,45 @@
+MY CINÉ V84 — INTERNATIONAL TV + BALANCED BOTH
+REQUIRES THE WORKING V83.1 BASE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/internationalSeriesBatches.js → existing project/src/data/internationalSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify internationalBatches.js or any approved film batch file.
+KEEP musicalSeriesBatches.js and biopicSeriesBatches.js from V83.1.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: International
+Format: Movies
+Region: Mexico
+
+TEST B — INTERNATIONAL TV:
+Genre: International
+Format: TV Series
+Region: Mexico
+First batch:
+Pachinko / Money Heist / Das Boot / Dark /
+My Brilliant Friend / Borgen / Extraordinary Attorney Woo
+
+TEST C — BALANCED BOTH:
+Genre: International
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/internationalSeriesBatches.js
+git commit -m "Release MY CINE V84 International TV"
+git push

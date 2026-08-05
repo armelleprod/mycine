@@ -1,0 +1,45 @@
+MY CINÉ V80 — FANTASY TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/fantasySeriesBatches.js → existing project/src/data/fantasySeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify fantasyBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Fantasy
+Format: Movies
+Region: Mexico
+
+TEST B — FANTASY TV:
+Genre: Fantasy
+Format: TV Series
+Region: Mexico
+First batch:
+House of the Dragon / Game of Thrones / The Adventures of Sir Lancelot /
+Alchemy of Souls / The Dark Crystal: Age of Resistance /
+Jonathan Strange & Mr Norrell / Galavant
+
+TEST C — BALANCED BOTH:
+Genre: Fantasy
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/fantasySeriesBatches.js
+git commit -m "Release MY CINE V80 Fantasy TV"
+git push

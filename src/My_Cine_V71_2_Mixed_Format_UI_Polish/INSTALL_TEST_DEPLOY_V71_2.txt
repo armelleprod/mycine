@@ -1,0 +1,35 @@
+MY CINÉ V71.2 — MIXED FORMAT UI POLISH
+
+ONE-FILE NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+src/App.jsx → existing project/src/App.jsx
+
+DO NOT replace the src folder.
+DO NOT replace or edit any movie or TV batch file.
+
+WHAT CHANGED
+• Every alternative card now shows 🎬 Film, 📺 TV Series, or 📺 Limited Series.
+• The hero format pill uses the same icon language.
+• Both mode displays its intentional balance: 4 Films • 3 Series or 3 Films • 4 Series.
+• Google title searches now distinguish movies from TV series.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST
+1. Romcom + Movies: every alternative shows 🎬 Film.
+2. Romcom + TV Series: alternatives show 📺 TV Series or 📺 Limited Series.
+3. Romcom + Both: set 1 shows 4 Films • 3 Series; set 2 shows 3 Films • 4 Series.
+4. Continue through 7/7 and confirm the wrap screen.
+
+LIVE DEPLOY AFTER TESTS PASS
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Release MY CINE V71.2 mixed format UI"
+git push

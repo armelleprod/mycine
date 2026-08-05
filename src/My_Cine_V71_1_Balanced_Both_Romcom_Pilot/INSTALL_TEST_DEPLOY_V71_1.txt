@@ -1,0 +1,48 @@
+MY CINÉ V71.1 — BALANCED BOTH ENGINE • ROMCOM PILOT
+
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+
+DO NOT replace the src folder.
+DO NOT replace or rename any film batch file.
+DO NOT replace romcomSeriesBatches.js if V71 is already installed.
+
+WHAT CHANGED
+• Movies still use romcomBatches.js unchanged.
+• TV Series still use romcomSeriesBatches.js unchanged.
+• Both now composes the two approved prepared batches.
+• Odd sets contain 4 Movies + 3 TV Series.
+• Even sets contain 3 Movies + 4 TV Series.
+• The Tonight's Pick alternates between Movie and TV Series.
+• All seven editorial badge slots are preserved.
+
+BUILD + RUN LOCALLY TOGETHER
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN
+http://localhost:5173
+
+TEST A — MOVIES
+Choose Romcom + Movies + Mexico.
+Confirm the approved film engine is unchanged.
+
+TEST B — TV SERIES
+Choose Romcom + TV Series + Mexico.
+Confirm the approved series engine is unchanged.
+
+TEST C — BALANCED BOTH
+Choose Romcom + Both + Mexico.
+For set 1 confirm exactly 4 Films + 3 TV Series.
+For set 2 confirm exactly 3 Films + 4 TV Series.
+Continue through 7/7.
+Confirm no set is dominated by one format and the wrap screen appears.
+
+LIVE DEPLOY AFTER ALL TESTS PASS
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Release MY CINE V71.1 balanced Both Romcom"
+git push

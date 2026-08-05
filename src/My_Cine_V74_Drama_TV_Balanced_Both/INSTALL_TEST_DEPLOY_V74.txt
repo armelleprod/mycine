@@ -1,0 +1,43 @@
+MY CINÉ V74 — DRAMA TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/dramaSeriesBatches.js → existing project/src/data/dramaSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify dramaBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Drama
+Format: Movies
+Region: Mexico
+
+TEST B — DRAMA TV:
+Genre: Drama
+Format: TV Series
+Region: Mexico
+First batch:
+Shōgun / Succession / Roots / My Mister / Maid / The Wire / Bad Sisters
+
+TEST C — BALANCED BOTH:
+Genre: Drama
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/dramaSeriesBatches.js
+git commit -m "Release MY CINE V74 Drama TV"
+git push

@@ -1,0 +1,45 @@
+MY CINÉ V77 — ACTION & ADVENTURE TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/actionAdventureSeriesBatches.js → existing project/src/data/actionAdventureSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify actionAdventureBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Action & Adventure
+Format: Movies
+Region: Mexico
+
+TEST B — ACTION & ADVENTURE TV:
+Genre: Action & Adventure
+Format: TV Series
+Region: Mexico
+First batch:
+Fallout / The Mandalorian / The Adventures of Robin Hood /
+Kingdom / The English / Shōgun /
+The Completely Made-Up Adventures of Dick Turpin
+
+TEST C — BALANCED BOTH:
+Genre: Action & Adventure
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/actionAdventureSeriesBatches.js
+git commit -m "Release MY CINE V77 Action Adventure TV"
+git push

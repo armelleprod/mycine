@@ -1,0 +1,37 @@
+MY CINÉ V83.1 — TRUE STORIES / BIOPIC REPAIR
+
+CAUSE
+The V83 package included App.jsx importing musicalSeriesBatches.js,
+but the package did not include that required existing file.
+
+COPY THESE THREE FILES:
+1. src/App.jsx
+2. src/data/musicalSeriesBatches.js
+3. src/data/biopicSeriesBatches.js
+
+COPY INTO:
+C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine
+
+Replace App.jsx.
+Add/replace the two files inside src\data.
+Do not replace the whole src folder.
+Do not rename any files.
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST:
+1. Musical + TV Series still works.
+2. True Stories / Biopic + TV Series works.
+3. True Stories / Biopic + Both shows balanced film/TV results.
+
+DEPLOY AFTER TESTING:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/musicalSeriesBatches.js src/data/biopicSeriesBatches.js
+git commit -m "Fix MY CINE V83 package and add Biopic TV"
+git push

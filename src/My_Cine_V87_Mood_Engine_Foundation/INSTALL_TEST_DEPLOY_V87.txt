@@ -1,0 +1,59 @@
+MY CINÉ V87 — MOOD ENGINE FOUNDATION
+REQUIRES THE WORKING V86 BASE
+
+THIS RELEASE MODIFIES ONLY:
+src/App.jsx
+
+NO film batch file changes.
+NO TV batch file changes.
+NO renaming.
+
+COPY:
+src/App.jsx → existing project/src/App.jsx
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+FIRST TEST:
+Mood: Mind Blown
+Format: Movies
+Region: Mexico
+
+SECOND TEST:
+Mood: Mind Blown
+Format: TV Series
+Region: Mexico
+
+THIRD TEST:
+Mood: Mind Blown
+Format: Both
+Region: Mexico
+
+CONFIRM:
+• Exactly 7 recommendations
+• All alternatives display Film / TV Series / Limited Series badges
+• Both Set 1 = 4 Films + 3 Series
+• Both Set 2 = 3 Films + 4 Series
+• Keep Exploring progresses through 7/7
+• Final wrap screen appears
+
+THEN SPOT-CHECK:
+Make Me Laugh / Date Night / Ugly Cry / Make Me Think /
+Travel Somewhere / Adrenaline Rush / Family Night /
+Solve the Mystery / Luxury Vibes
+
+IMPORTANT:
+Documentary films participate in Mood.
+Documentary TV does not yet participate because its dedicated TV engine
+has not been built.
+
+LIVE DEPLOY AFTER TESTS PASS:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx
+git commit -m "Release MY CINE V87 Mood Engine"
+git push

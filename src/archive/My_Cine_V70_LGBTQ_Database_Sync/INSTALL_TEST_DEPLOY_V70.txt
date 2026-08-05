@@ -1,0 +1,36 @@
+MY CINÉ V70 — LGBTQ+
+NON-DESTRUCTIVE UPDATE
+
+THIS RELEASE ALSO ADDS THE NEW GENRE MENU BUTTON:
+🏳️‍🌈 LGBTQ+
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/lgbtqBatches.js → existing project/src/data/lgbtqBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST:
+Choose 🏳️‍🌈 LGBTQ+, Movies and Mexico.
+Confirm:
+• The new LGBTQ+ button appears after Hidden Gems
+• Exactly 7 picks
+• 1 Tonight's Pick and 6 alternatives
+• Posters, trailers, ratings and providers load
+• Keep Exploring progresses 2/7 through 7/7
+• The final wrap screen appears
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add .
+git commit -m "Release MY CINE V70 LGBTQ Plus"
+git push

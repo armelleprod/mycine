@@ -1,0 +1,46 @@
+MY CINÉ V87.1 — CURATED MAKE ME LAUGH PILOT
+
+V87 FOUNDATION SHOULD NOT BE DEPLOYED.
+This release replaces its loose automatic mood scorer with dedicated,
+title-by-title curated Make Me Laugh batches.
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/moodBatches.js → existing project/src/data/moodBatches.js
+
+DO NOT replace the complete src folder.
+DO NOT modify or rename any existing film or TV genre batch file.
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+TEST:
+Mood: Make Me Laugh
+Format: Movies
+Format: TV Series
+Format: Both
+
+FIRST BOTH SET:
+Bridesmaids / Brooklyn Nine-Nine / Some Like It Hot / Derry Girls /
+What We Do in the Shadows / 30 Rock / School of Rock
+
+CONFIRM:
+• Exactly 7 recommendations
+• Set 1 = 4 films + 3 series
+• Set 2 = 3 films + 4 series
+• Every recommendation is genuinely comedy-led
+• Film / TV badges display
+• Keep Exploring reaches 7/7
+• Wrap screen appears
+
+DO NOT TEST OTHER MOODS YET.
+They remain on the old generic engine and are intentionally not enabled
+by this pilot.
+
+DEPLOY AFTER TEST:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/moodBatches.js
+git commit -m "Release MY CINE V87.1 curated Make Me Laugh mood"
+git push

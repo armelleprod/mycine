@@ -1,0 +1,39 @@
+MY CINÉ — ARCHITECTURE POLISH RELEASE
+Built from the working V86 LGBTQ+ TV foundation.
+
+COPY ONLY:
+src/App.jsx → existing project/src/App.jsx
+
+FIXES INCLUDED:
+1. Standard menu/page renamed Manifesto.
+2. Added “The App That Celebrates Cinema.”
+3. Added Why My Ciné Exists + four My Ciné Pillars.
+4. Larger centered desktop MY CINÉ title.
+5. Cinema Moments rotate every 10 seconds with cinematic flash/zoom transition.
+6. Cinema Moments use a persistent shuffle bag: no repeat until the complete list has played.
+7. After recommendations load, the two lobby cards slide away on desktop and results scroll below the fixed menu.
+8. Mobile MENU panel fixed so it opens above the page instead of being clipped.
+9. Mobile “🍿 Curate My Movie Night” is forced onto one line.
+
+NOT INCLUDED:
+Automatic cross-device Watchlist sync. The current Watchlist uses browser localStorage,
+which is device-specific. Proper phone/desktop/tablet sync requires a cloud identity and database.
+Recommended next architecture: Supabase magic-link login + watchlist table.
+
+BUILD + RUN:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+TEST:
+- Desktop title size and centering
+- Manifesto menu and page
+- Cinema Moments transition and no repeat during the complete cycle
+- Generate one genre set: lobby cards slide away and results move below menu
+- Mobile Menu opens and links work
+- Mobile Curate title remains one line
+
+DEPLOY:
+git add src/App.jsx
+git commit -m "Polish My Cine architecture and Manifesto"
+git push

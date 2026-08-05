@@ -1,0 +1,44 @@
+MY CINÉ V79 — SCI-FI TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/sciFiSeriesBatches.js → existing project/src/data/sciFiSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify sciFiBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Sci-Fi
+Format: Movies
+Region: Mexico
+
+TEST B — SCI-FI TV:
+Genre: Sci-Fi
+Format: TV Series
+Region: Mexico
+First batch:
+3 Body Problem / The Expanse / Doctor Who / Dark /
+Scavengers Reign / Severance / Future Man
+
+TEST C — BALANCED BOTH:
+Genre: Sci-Fi
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/sciFiSeriesBatches.js
+git commit -m "Release MY CINE V79 Sci-Fi TV"
+git push

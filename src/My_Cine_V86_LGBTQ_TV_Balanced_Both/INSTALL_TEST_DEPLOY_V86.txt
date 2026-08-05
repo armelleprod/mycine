@@ -1,0 +1,45 @@
+MY CINÉ V86 — LGBTQ+ TV + BALANCED BOTH
+REQUIRES THE WORKING V85 BASE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/lgbtqSeriesBatches.js → existing project/src/data/lgbtqSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify lgbtqBatches.js or any approved film batch file.
+KEEP every previous *SeriesBatches.js file already installed through V85.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: LGBTQ+
+Format: Movies
+Region: Mexico
+
+TEST B — LGBTQ+ TV:
+Genre: LGBTQ+
+Format: TV Series
+Region: Mexico
+First batch:
+Fellow Travelers / Heartstopper / Queer as Folk / Smiley /
+Sort Of / It's a Sin / Our Flag Means Death
+
+TEST C — BALANCED BOTH:
+Genre: LGBTQ+
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/lgbtqSeriesBatches.js
+git commit -m "Release MY CINE V86 LGBTQ TV"
+git push

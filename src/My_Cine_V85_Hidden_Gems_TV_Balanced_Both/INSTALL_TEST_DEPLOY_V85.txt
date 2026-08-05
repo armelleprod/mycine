@@ -1,0 +1,45 @@
+MY CINÉ V85 — HIDDEN GEMS TV + BALANCED BOTH
+REQUIRES THE WORKING V84 BASE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/hiddenGemsSeriesBatches.js → existing project/src/data/hiddenGemsSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify hiddenGemsBatches.js or any approved film batch file.
+KEEP every previous *SeriesBatches.js file already installed through V84.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Hidden Gems
+Format: Movies
+Region: Mexico
+
+TEST B — HIDDEN GEMS TV:
+Genre: Hidden Gems
+Format: TV Series
+Region: Mexico
+First batch:
+Somebody Somewhere / Detectorists / The Prisoner / My Mister /
+Rectify / Halt and Catch Fire / Lodge 49
+
+TEST C — BALANCED BOTH:
+Genre: Hidden Gems
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/hiddenGemsSeriesBatches.js
+git commit -m "Release MY CINE V85 Hidden Gems TV"
+git push

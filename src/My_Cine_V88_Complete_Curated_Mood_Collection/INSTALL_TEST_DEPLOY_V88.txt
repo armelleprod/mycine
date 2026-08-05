@@ -1,0 +1,39 @@
+MY CINÉ V88 — COMPLETE CURATED MOOD COLLECTION
+REQUIRES THE WORKING V86 / V87.1 PROJECT
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/moodBatches.js → existing project/src/data/moodBatches.js
+
+DO NOT replace the complete src folder.
+DO NOT rename, move or delete any genre batch file.
+
+BUILD + RUN LOCALLY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+TEST FIRST:
+1. Make Me Laugh • Both
+2. Date Night • Both
+3. Ugly Cry • Both
+4. Mind Blown • Both
+5. Family Night • Both
+6. Luxury Vibes • Both
+
+CONFIRM FOR EACH:
+• Exactly seven picks
+• Set 1 = 4 Films + 3 Series
+• Set 2 = 3 Films + 4 Series
+• Seven sets reach 7/7
+• Format badges display
+• Final wrap screen appears
+• Recommendations genuinely fit the selected mood
+
+THEN SPOT-CHECK MOVIES AND TV SERIES MODES FOR ALL 16 MOODS.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/moodBatches.js
+git commit -m "Release MY CINE V88 complete curated moods"
+git push

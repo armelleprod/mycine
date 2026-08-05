@@ -1,0 +1,60 @@
+MY CINÉ V72 — COMEDY TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+THIS RELEASE ADDS:
+• Comedy TV prepared editorial engine
+• 20 Comedy TV batches / 140 prepared series selections
+• Mood-ready metadata
+• Balanced Both routing for Comedy
+• Existing format badges and balance indicator inherited from V71.2.1
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/comedySeriesBatches.js → existing project/src/data/comedySeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify comedyBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Comedy
+Format: Movies
+Region: Mexico
+Confirm the existing Comedy film engine still works.
+
+TEST B — COMEDY TV:
+Genre: Comedy
+Format: TV Series
+Region: Mexico
+First batch should contain:
+The Studio / Hacks / I Love Lucy / Derry Girls /
+Somebody Somewhere / Atlanta / The Good Place
+
+Confirm exactly 7 series, format badges, posters, ratings, providers,
+Keep Exploring through 7/7, and the wrap screen.
+
+TEST C — BALANCED BOTH:
+Genre: Comedy
+Format: Both
+Region: Mexico
+Confirm:
+• Set 1 = 4 films + 3 series
+• Set 2 = 3 films + 4 series
+• Hero format alternates
+• Every alternative shows Film / TV Series / Limited Series
+• Keep Exploring through 7/7
+• Wrap screen appears
+
+LIVE DEPLOY AFTER ALL THREE TESTS PASS:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/comedySeriesBatches.js
+git commit -m "Release MY CINE V72 Comedy TV"
+git push

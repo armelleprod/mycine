@@ -1,0 +1,45 @@
+MY CINÉ V76 — MYSTERY TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/mysterySeriesBatches.js → existing project/src/data/mysterySeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify mysteryBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Mystery
+Format: Movies
+Region: Mexico
+
+TEST B — MYSTERY TV:
+Genre: Mystery
+Format: TV Series
+Region: Mexico
+First batch:
+Poker Face / Only Murders in the Building / Columbo /
+The Brokenwood Mysteries / The Afterparty / Broadchurch /
+A Man on the Inside
+
+TEST C — BALANCED BOTH:
+Genre: Mystery
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/mysterySeriesBatches.js
+git commit -m "Release MY CINE V76 Mystery TV"
+git push

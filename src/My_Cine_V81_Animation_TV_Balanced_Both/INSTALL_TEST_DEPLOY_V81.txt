@@ -1,0 +1,45 @@
+MY CINÉ V81 — ANIMATION TV + BALANCED BOTH
+NON-DESTRUCTIVE UPDATE
+
+COPY ONLY:
+1. src/App.jsx → existing project/src/App.jsx
+2. src/data/animationSeriesBatches.js → existing project/src/data/animationSeriesBatches.js
+
+DO NOT replace the src folder.
+DO NOT rename, move or delete existing files.
+DO NOT modify animationBatches.js or any approved film batch file.
+
+BUILD + RUN LOCALLY TOGETHER:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+npm run build
+npm run dev
+
+OPEN:
+http://localhost:5173
+
+TEST A — MOVIES UNCHANGED:
+Genre: Animation
+Format: Movies
+Region: Mexico
+
+TEST B — ANIMATION TV:
+Genre: Animation
+Format: TV Series
+Region: Mexico
+First batch:
+Blue Eye Samurai / Avatar: The Last Airbender / The Flintstones /
+Attack on Titan / Pantheon / BoJack Horseman /
+The Amazing World of Gumball
+
+TEST C — BALANCED BOTH:
+Genre: Animation
+Format: Both
+Region: Mexico
+Confirm Set 1 = 4 films + 3 series, Set 2 = 3 films + 4 series,
+format badges, hero alternation, Keep Exploring through 7/7, wrap screen.
+
+LIVE DEPLOY:
+cd "C:\Users\ac\Dropbox\MY CINE App\mycine-netlify\mycine"
+git add src/App.jsx src/data/animationSeriesBatches.js
+git commit -m "Release MY CINE V81 Animation TV"
+git push
