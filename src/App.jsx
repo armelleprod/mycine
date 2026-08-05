@@ -3896,14 +3896,13 @@ function NewsletterInvitation({onClose, onSubscribed}) {
           <div className="newsletter-success">
             <div className="newsletter-clapper">🎬</div>
             <div className="newsletter-kicker">WELCOME ABOARD</div>
-            <h2>One last step.</h2>
+            <h2>You're Almost In!</h2>
             <p>
-              Zoho accepted your subscription request. Please check your inbox
-              and confirm your subscription to
-              <strong> The My Ciné Letter</strong>.
+              We've sent a confirmation email to your inbox.
+              Please click the confirmation link to complete your subscription.
             </p>
             <p>
-              If the confirmation email is hiding, check Spam or Promotions.
+              If the email is hiding, check Spam or Promotions.
             </p>
             <div className="newsletter-signature">Armelle</div>
             <div className="newsletter-creator-credit">Creator of My Ciné</div>
@@ -3987,7 +3986,7 @@ function NewsletterInvitation({onClose, onSubscribed}) {
               className="newsletter-later"
               onClick={dismissForThirtyDays}
             >
-              Maybe next time
+              No thanks, keep exploring
             </button>
           </>
         )}
@@ -4090,11 +4089,13 @@ export default function App() {
     window.scrollTo({top:0, behavior:"smooth"});
   };
 
-  const toggleGenre = id => setSelGenres(prev =>
-    prev.includes(id)
-      ? (prev.length > 1 ? prev.filter(g => g !== id) : prev)
-      : [...prev, id]
-  );
+  const toggleGenre = id => {
+    setSelGenres(prev => prev.includes(id) ? [] : [id]);
+    setHero(null);
+    setAlts([]);
+    setGenerated(false);
+    setError(null);
+  };
 
   const toggleWatched = id => {
     const currentTitles = [hero, ...alts].filter(Boolean);
@@ -6697,7 +6698,7 @@ const run = async (
           boxShadow:loading?"none":`0 2px 20px ${C.goldBright}44`,
           marginBottom:"20px",
         }}>
-          {loading ? loadingMsg : generated ? "🔄 Start fresh" : "✨ Curate My Movie Night"}
+          {loading ? loadingMsg : generated ? "🔄 Start fresh" : "🍿 Let's find tonight's movie"}
         </button>
       </div>
 
