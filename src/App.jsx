@@ -2606,7 +2606,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
               </div>
               <div>
                 <div style={{fontSize:"9px",color:C.white,letterSpacing:"0.08em",textTransform:"uppercase",fontWeight:"800"}}>
-                  TMDB Community
+                  TMDB
                 </div>
                 <div style={{fontSize:"9px",color:`${C.white}99`,marginTop:"3px"}}>
                   {film.vote_count ? `${film.vote_count.toLocaleString()} votes` : "Vote count unavailable"}
@@ -2828,7 +2828,7 @@ function AboutModal({onClose}) {
         ].map((t,i)=><p key={i} style={{color:C.cream,fontSize:"13px",lineHeight:"1.7",margin:"0 0 14px"}}>{t}</p>)}
         <div style={{background:"rgba(0,0,0,0.2)",border:`1px solid ${C.goldBright}44`,borderRadius:"12px",padding:"16px",marginBottom:"16px"}}>
           <h3 style={{color:C.goldBright,fontSize:"14px",fontWeight:"800",margin:"0 0 8px",fontFamily:"Georgia,serif"}}>⭐ The My Ciné Standard</h3>
-          {["⭐ TMDB Community Score: 75%+","👥 Meaningful vote count","🏆 Awards, cultural impact or strong audience enthusiasm"].map(item=><div key={item} style={{color:C.cream,fontSize:"12px",marginBottom:"4px"}}>• {item}</div>)}
+          {["⭐ TMDB Score: 75%+","👥 Meaningful vote count","🏆 Awards, cultural impact or strong audience enthusiasm"].map(item=><div key={item} style={{color:C.cream,fontSize:"12px",marginBottom:"4px"}}>• {item}</div>)}
         </div>
         <div style={{background:"rgba(0,0,0,0.2)",border:`1px solid ${C.goldBright}44`,borderRadius:"12px",padding:"14px",marginBottom:"16px"}}>
           <p style={{color:C.goldBright,fontSize:"13px",fontWeight:"700",margin:"0 0 6px",fontFamily:"Georgia,serif"}}>The My Ciné Promise</p>
@@ -3547,7 +3547,7 @@ function CuratorPage() {
               className="curator-photo"
             />
           </div>
-          <div className="curator-role"><span>Screenwriter</span><span>Founder of My Ciné</span></div>
+          <div className="curator-role"><span>Screenwriter</span><span>Creator of My Ciné</span></div>
 
           <div className="legacy-card">
             <div className="legacy-kicker">A family legacy</div>
@@ -3577,7 +3577,7 @@ function CuratorPage() {
           </p>
 
           <p className="curator-lead">
-            I arrived in Hollywood at 20 with a suitcase, a strong French accent, and the certainty that stories could change the world.
+            I arrived in Hollywood at 20 with a suitcase, a strong French accent, and the certainty that great stories could change the world.
           </p>
 
           <p>
@@ -3593,11 +3593,11 @@ function CuratorPage() {
           </p>
 
           <p>
-            So I built the app I wished already existed — a cinematic concierge offering seven thoughtful recommendations at a time, available where you live.
+            So I built the app I wished existed — a cinematic concierge. Seven curated picks, available wherever you are, for the evening you actually deserve.
           </p>
 
           <div className="project-slate">
-            <div className="project-slate-heading">Current Screen Projects</div>
+            <div className="project-slate-heading">My Current Screen Projects</div>
 
             <div className="project-credit">
               <div className="project-type">📺 Limited Series</div>
@@ -3637,7 +3637,7 @@ function CuratorPage() {
                 </a>.
               </div>
               <div className="project-representation">
-                Interested in a project?{" "}
+                Interested in creating a project with me?{" "}
                 <a
                   className="contact-armelle"
                   href="https://wa.me/14155057678"
@@ -3655,7 +3655,7 @@ function CuratorPage() {
           </blockquote>
 
           <div className="letter-signature">
-            <div>Enjoy the show! 🍿</div>
+            <div>Enjoy your movie night! 🍿</div>
             <span>Armelle</span>
           </div>
         </div>
@@ -3664,7 +3664,7 @@ function CuratorPage() {
   );
 }
 
-function SavedPage({savedTitles, onToggle}) {
+function SavedPage({savedTitles, onToggle, watchRegion}) {
   return (
     <main className="page-shell">
       <div className="page-heading">
@@ -3727,8 +3727,21 @@ function SavedPage({savedTitles, onToggle}) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    ⭐ {score ? `${score}%` : "—"} TMDB Community
+                    ⭐ {score ? `${score}%` : "—"} TMDB
                     {title.vote_count ? <small>{Number(title.vote_count).toLocaleString()} votes</small> : null}
+                  </a>
+
+                  <a
+                    className="saved-watch-button"
+                    href={tmdbWatchUrl(
+                      title.id,
+                      title.isTV ? "tv" : "movie",
+                      watchRegion
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    📺 Where to Watch
                   </a>
 
                   <button onClick={() => onToggle(title.id)}>Remove</button>
@@ -4647,6 +4660,28 @@ const run = async (
     color:rgba(255,255,255,0.62);
     font-size:8px;
     font-weight:600;
+  }
+  .saved-watch-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    box-sizing:border-box;
+    margin:0 0 8px;
+    border:1px solid rgba(255,184,0,0.72);
+    background:${C.goldBright};
+    color:${C.navy};
+    border-radius:8px;
+    padding:9px 8px;
+    font-size:10px;
+    font-weight:900;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .saved-watch-button:hover,
+  .saved-watch-button:focus-visible{
+    filter:brightness(1.08);
+    transform:translateY(-1px);
   }
   .saved-card-body button{width:100%;border:1px solid rgba(255,184,0,0.5);background:transparent;color:${C.goldBright};border-radius:8px;padding:8px;cursor:pointer;}
   .empty-library{text-align:center;max-width:620px;margin:0 auto;}
@@ -5907,16 +5942,16 @@ const run = async (
       max-width:100%;
       margin-left:auto;
       margin-right:auto;
-      padding:0 2px;
+      padding:0;
       text-align:center;
       white-space:nowrap !important;
       overflow:visible;
       overflow-wrap:normal;
       word-break:normal;
-      font-size:clamp(7px,2.45vw,11px) !important;
+      font-size:clamp(10px,3.15vw,14px) !important;
       font-weight:900 !important;
-      letter-spacing:0.07em;
-      line-height:1.25;
+      letter-spacing:0.035em;
+      line-height:1.2;
     }
 
     .lobby-feature-grid{
@@ -6054,7 +6089,13 @@ const run = async (
           }}
         />
       )}
-      {page === "saved" && <SavedPage savedTitles={savedTitles} onToggle={toggleWatched}/>}
+      {page === "saved" && (
+        <SavedPage
+          savedTitles={savedTitles}
+          onToggle={toggleWatched}
+          watchRegion={watchRegion}
+        />
+      )}
       {page === "curator" && <CuratorPage/>}
 
       {page === "home" && (
@@ -6346,7 +6387,7 @@ const run = async (
             >
               Armelle Cloche
             </button>
-            <small>Screenwriter • Founder of My Ciné</small>
+            <small>Screenwriter • Creator of My Ciné</small>
           </div>
 
           <div className="footer-meta">
