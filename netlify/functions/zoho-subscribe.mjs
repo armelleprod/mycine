@@ -75,15 +75,14 @@ async function getAccessToken({clientId, clientSecret, refreshToken}) {
   }
 
   return {
-    accessToken:payload.access_token,
-    apiDomain:
-      payload.api_domain ||
-      Netlify.env.get("ZOHO_CAMPAIGNS_DOMAIN") ||
-      "https://campaigns.zoho.com"
+    accessToken:payload.access_token
   };
 }
 
-async function subscribeContact({accessToken, apiDomain, listKey, email, source}) {
+async function subscribeContact({accessToken, listKey, email, source}) {
+  const campaignsDomain =
+    Netlify.env.get("ZOHO_CAMPAIGNS_DOMAIN") ||
+    "https://campaigns.zoho.com";
   const contactInfo = JSON.stringify({"Contact Email":email});
   const body = new URLSearchParams({
     resfmt:"JSON",
@@ -93,7 +92,7 @@ async function subscribeContact({accessToken, apiDomain, listKey, email, source}
   });
 
   const response = await fetch(
-    `${apiDomain}/api/v1.1/json/listsubscribe`,
+    `${campaignsDomain}/api/v1.1/json/listsubscribe`,
     {
       method:"POST",
       headers:{
@@ -113,19 +112,22 @@ async function subscribeContact({accessToken, apiDomain, listKey, email, source}
     payload = {message:text};
   }
 
- if (!response.ok) {
-  const errorText = await response.text();
-
-  console.error("Zoho subscribe HTTP error", {
-    status: response.status,
-    payload,
-    error: errorText
+  console.log("Zoho subscribe response", {
+    status:response.status,
+    code:payload?.code,
+    message:payload?.message,
+    url:payload?.url
   });
 
-  throw new Error(
-    `ZOHO_SUBSCRIBE_FAILED (${response.status}): ${errorText}`
-  );
-}
+  if (!response.ok) {
+    console.error("Zoho subscribe HTTP error", {
+      status:response.status,
+      code:payload?.code,
+      message:payload?.message,
+      url:payload?.url
+    });
+    throw new Error("ZOHO_SUBSCRIBE_FAILED");
+  }
 
   const success =
     String(payload.code) === "0" ||
@@ -225,10 +227,9 @@ export default async request => {
   }
 
   try {
-    const {accessToken, apiDomain} = await getAccessToken(values);
+    const {accessToken} = await getAccessToken(values);
     const result = await subscribeContact({
       accessToken,
-      apiDomain,
       listKey:values.listKey,
       email,
       source:"My Cine App"
@@ -241,7 +242,7 @@ export default async request => {
     const publicMessage =
       code === "ZOHO_AUTH_FAILED"
         ? "The My Ciné Letter connection needs attention. Please try again later."
-        : "Zoho could not complete the signup. Please try again in a moment.";
+        : "Our projectionist dropped the film reel. Please try again in a moment. 🍿";
 
     return json(502, {
       ok:false,

@@ -3849,7 +3849,7 @@ function NewsletterInvitation({onClose, onSubscribed}) {
       if (!response.ok || !payload.ok) {
         throw new Error(
           payload.message ||
-          "Zoho could not accept the subscription. Please try again."
+          "Our projectionist dropped the film reel. Please try again in a moment. 🍿"
         );
       }
 
@@ -3867,7 +3867,7 @@ function NewsletterInvitation({onClose, onSubscribed}) {
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please try again."
+          : "Our projectionist dropped the film reel. Please try again in a moment. 🍿"
       );
     }
   };
@@ -3918,13 +3918,13 @@ function NewsletterInvitation({onClose, onSubscribed}) {
         ) : (
           <>
             <div className="newsletter-clapper">🎬</div>
-            <div className="newsletter-kicker">BEFORE YOU GO</div>
+            <div className="newsletter-kicker">🎬 A GIFT FOR FILM LOVERS</div>
             <h2 id="newsletter-title">
-              Discover hard-to-find cinematic gems, once a month.
+              Discover <span className="newsletter-gold">hard-to-find</span> cinematic gems, once a month.
             </h2>
             <p className="newsletter-description">
-              Film recommendations, craft notes, behind-the-scenes discoveries,
-              and the occasional treasure no algorithm will find.
+              Film recommendations, screenwriting insights, behind-the-scenes
+              discoveries, and cinematic treasures no algorithm will ever find.
             </p>
             <p className="newsletter-curator">
               Curated by screenwriter <strong>Armelle Cloche</strong>.
@@ -3968,7 +3968,7 @@ function NewsletterInvitation({onClose, onSubscribed}) {
                 type="submit"
                 disabled={status === "submitting"}
               >
-                {status === "submitting" ? "Joining…" : "Join"}
+                {status === "submitting" ? "Joining…" : "Count Me In"}
               </button>
             </form>
 
@@ -5029,6 +5029,9 @@ const run = async (
     font-weight:900;
     letter-spacing:.16em;
     margin-bottom:13px;
+  }
+  .newsletter-gold{
+    color:${C.goldBright};
   }
   .newsletter-card h2{
     max-width:520px;
