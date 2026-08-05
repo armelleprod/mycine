@@ -3298,7 +3298,7 @@ function LobbyDecor() {
   );
 }
 
-function TopNav({page, setPage, savedCount}) {
+function TopNav({page, setPage, savedCount, onHomeReset}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const items = [
@@ -3309,7 +3309,11 @@ function TopNav({page, setPage, savedCount}) {
   ];
 
   const goTo = id => {
-    setPage(id);
+    if (id === "home" && onHomeReset) {
+      onHomeReset();
+    } else {
+      setPage(id);
+    }
     setMenuOpen(false);
     window.scrollTo({top:0, behavior:"smooth"});
   };
@@ -3405,14 +3409,16 @@ function ManifestoPage() {
       <div className="page-heading">
         <span>🎞️</span>
         <h1>My Ciné Manifesto</h1>
-        <p className="manifesto-signature">The App That Celebrates Cinema.</p>
+        <p className="manifesto-signature">The App That Celebrates Cinema</p>
       </div>
 
       <section className="manifesto-intro">
         <h2>Why My Ciné Exists</h2>
-        <p>Streaming gave film lovers an extraordinary ocean of choice, but somewhere in the race for more content, choosing a truly good film became harder. Too many evenings disappear into forty-five minutes of scrolling through quickly produced, disposable titles.</p>
-        <p><strong>Enough.</strong> My Ciné was created by a screenwriter and lifelong film lover for people who still believe a great movie can transform an evening.</p>
-        <p>Not everything. Only what is worth your time.</p>
+        <p>Streaming gave us an ocean of choice, but somewhere in the race for more content, finding something truly worth watching only got harder.</p>
+        <p>Too many evenings now turn into forty-five minutes of scrolling through titles no one will remember next week. That's not a movie night. That's a time robbery.</p>
+        <p>My Ciné was created by a screenwriter who got tired of spending more time searching for a good film than the film itself lasts — for people who know the difference between content and cinema, and refuse to settle for background noise when they came for an experience.</p>
+        <p>We don't curate everything.</p>
+        <p><strong>Only what deserves your evening.</strong></p>
       </section>
 
       <section className="pillars-section">
@@ -3446,9 +3452,7 @@ function ManifestoPage() {
 
         <section className="standard-card">
           <h2>⭐ A Quality Standard</h2>
-          <p>Every recommendation must reach at least 75% in the live TMDB community rating. Romcom now serves precomposed editorial batches from the My Ciné Database. TMDB supplies posters, ratings, trailers and availability, but never chooses or rearranges the seven films.</p>
-          <p>My Ciné displays the source transparently. It does not present TMDB scores as Rotten Tomatoes, IMDb, Google, or a fabricated average.</p>
-          <p>Future versions may integrate additional verified rating sources, but each source will remain clearly identified.</p>
+          <p>Every recommendation is selected for quality, relevance and genuine movie-night value. Trusted data enriches each pick, but human curation decides what deserves your evening.</p>
         </section>
 
         <section className="standard-card">
@@ -3473,10 +3477,20 @@ function ManifestoPage() {
       </div>
 
       <div className="promise-card">
-        <h2 className="promise-title">Our Promise</h2>
-        <h3>My Ciné does not try to recommend every movie.</h3>
+        <h2 className="promise-title">My Ciné Promise</h2>
+        <h3>My Ciné does not try to recommend every movie</h3>
         <p>It tries to recommend your next great one.</p>
       </div>
+
+      <aside className="watchlist-sync-card" aria-label="Watchlist synchronization information">
+        <h2>💙 Watchlist Synchronization</h2>
+        <p>Your Watchlist currently uses secure browser storage on each individual device. This means your phone, desktop and tablet each maintain their own separate list.</p>
+        <p>Automatic cross-device synchronization requires:</p>
+        <div className="watchlist-sync-formula">
+          <span>User identity</span><strong>+</strong><span>Cloud database</span><strong>+</strong><span>Watchlist synchronization</span>
+        </div>
+        <p className="watchlist-sync-note">A future account-based update will allow the same Watchlist to follow you across all your devices.</p>
+      </aside>
     </main>
   );
 }
@@ -3723,6 +3737,18 @@ export default function App() {
       return [];
     }
   });
+
+  const resetHomeExperience = () => {
+    setPage("home");
+    setGenerated(false);
+    setHero(null);
+    setAlts([]);
+    setError(null);
+    setLoading(false);
+    setBatchNumber(0);
+    setSeenPickIds([]);
+    window.scrollTo({top:0, behavior:"smooth"});
+  };
 
   const toggleGenre = id => setSelGenres(prev =>
     prev.includes(id)
@@ -4312,19 +4338,51 @@ const run = async (
   .pillar-card{background:${C.navyMid};border:1px solid rgba(255,184,0,0.32);border-radius:18px;padding:20px;}
   .pillar-card h3{color:${C.goldBright};font-family:Georgia,serif;margin:0 0 9px;font-size:18px;}
   .pillar-card p{color:#fff;line-height:1.6;margin:0;}
+  .manifesto-intro p{margin:0 0 22px;}
+  .manifesto-intro p:last-child{margin-bottom:0;}
+  .watchlist-sync-card{
+    margin-top:22px;
+    padding:24px;
+    border-radius:22px;
+    background:linear-gradient(145deg,rgba(11,31,74,.97),rgba(22,45,96,.97));
+    border:1px solid rgba(255,184,0,.42);
+    color:#fff;
+    box-shadow:0 18px 44px rgba(11,31,74,.32);
+  }
+  .watchlist-sync-card h2{margin:0 0 12px;color:${C.goldBright};font-family:Georgia,serif;}
+  .watchlist-sync-card p{margin:0 0 12px;line-height:1.65;}
+  .watchlist-sync-formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin:18px 0;padding:14px;border-radius:14px;background:rgba(255,255,255,.06);}
+  .watchlist-sync-formula span{padding:7px 10px;border-radius:999px;background:${C.navy};border:1px solid rgba(255,184,0,.34);font-weight:800;}
+  .watchlist-sync-formula strong{color:${C.goldBright};font-size:20px;}
+  .watchlist-sync-note{color:rgba(255,255,255,.78);font-size:13px;margin-bottom:0!important;}
 
   @keyframes momentCinemaIn{
     0%{opacity:0;transform:scale(0.965) translateY(12px);filter:blur(8px) brightness(1.8);}
     42%{opacity:1;filter:blur(0) brightness(1.25);}
     100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0) brightness(1);}
   }
-  @keyframes filmFlash{
-    0%,100%{opacity:0;transform:translateX(-120%) skewX(-18deg);}
-    28%{opacity:.72;}
-    62%{opacity:0;transform:translateX(160%) skewX(-18deg);}
+  @keyframes cinemaCenterBloom{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(.05);filter:blur(18px);}
+    34%{opacity:.92;filter:blur(7px);}
+    72%{opacity:.28;transform:translate(-50%,-50%) scale(2.8);filter:blur(2px);}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(4.2);filter:blur(0);}
   }
   .moment-enter{animation:momentCinemaIn .8s cubic-bezier(.2,.75,.2,1) both;position:relative;overflow:hidden;}
-  .moment-enter::after{content:"";position:absolute;inset:-20%;pointer-events:none;background:linear-gradient(100deg,transparent 35%,rgba(255,248,231,.42) 50%,transparent 65%);animation:filmFlash .9s ease-out both;z-index:8;}
+  .moment-enter::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:42%;
+    aspect-ratio:1;
+    border-radius:50%;
+    pointer-events:none;
+    background:radial-gradient(circle,rgba(255,255,255,.92) 0%,rgba(178,220,255,.56) 24%,rgba(69,153,255,.24) 48%,transparent 72%);
+    box-shadow:0 0 44px rgba(126,194,255,.62),0 0 100px rgba(61,139,255,.34);
+    animation:cinemaCenterBloom 1.15s cubic-bezier(.2,.75,.2,1) both;
+    z-index:8;
+    mix-blend-mode:screen;
+  }
 
   @keyframes lobbyCardLeft{to{opacity:0;transform:translateX(-38vw) scale(.88);filter:blur(5px);}}
   @keyframes lobbyCardRight{to{opacity:0;transform:translateX(38vw) scale(.88);filter:blur(5px);}}
@@ -5798,8 +5856,32 @@ const run = async (
 
 
   @media (min-width:981px){
-    .home-before-results .home-hero .logo{font-size:clamp(66px,6vw,92px)!important;line-height:1!important;}
-    .home-before-results .home-hero .tagline{font-size:13px!important;letter-spacing:.22em!important;}
+    .home-before-results .home-hero{
+      width:100%!important;
+      display:flex!important;
+      flex-direction:column;
+      align-items:center!important;
+      justify-content:center!important;
+      text-align:center!important;
+      padding-top:18px!important;
+      padding-bottom:20px!important;
+    }
+    .home-before-results .home-hero .logo{
+      width:100%;
+      margin:0 auto!important;
+      text-align:center!important;
+      font-size:clamp(66px,6vw,92px)!important;
+      line-height:1!important;
+      letter-spacing:.055em!important;
+    }
+    .home-before-results .home-hero .tagline{
+      width:100%;
+      margin:10px auto 0!important;
+      text-align:center!important;
+      font-size:13px!important;
+      font-weight:900!important;
+      letter-spacing:.22em!important;
+    }
   }
   @media (max-width:760px){
     .mobile-menu-panel{
@@ -5824,7 +5906,7 @@ const run = async (
   }
 `}</style>
       <LobbyDecor/>
-      <TopNav page={page} setPage={setPage} savedCount={savedTitles.length}/>
+      <TopNav page={page} setPage={setPage} savedCount={savedTitles.length} onHomeReset={resetHomeExperience}/>
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
 
       {showAbout && <AboutModal onClose={()=>setShowAbout(false)}/>}
