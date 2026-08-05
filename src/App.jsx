@@ -2167,16 +2167,48 @@ async function buildPicks(
 // ── POSTER COMPONENT ──────────────────────────────────────────────────────────
 // poster_path is always a real TMDB path from seed data.
 // <img> tag loads from image.tmdb.org CDN — no CORS issues.
-function Poster({ path, title, size="w500", style={} }) {
+function Poster({
+  path,
+  title,
+  size="w780",
+  fit="cover",
+  loading="lazy",
+  style={}
+}) {
   const [err, setErr] = useState(false);
-  // Build full URL: https://image.tmdb.org/t/p/w500/path.jpg
-  const src = !err && path
-    ? `https://image.tmdb.org/t/p/${size}${path.startsWith("/") ? path : "/"+path}`
+  const normalizedPath = path
+    ? (path.startsWith("/") ? path : `/${path}`)
     : null;
+  const src = !err && normalizedPath
+    ? `https://image.tmdb.org/t/p/${size}${normalizedPath}`
+    : null;
+  const srcSet = !err && normalizedPath
+    ? [
+        `https://image.tmdb.org/t/p/w342${normalizedPath} 342w`,
+        `https://image.tmdb.org/t/p/w500${normalizedPath} 500w`,
+        `https://image.tmdb.org/t/p/w780${normalizedPath} 780w`
+      ].join(", ")
+    : undefined;
 
   if (src) return (
-    <img src={src} alt={title} onError={()=>setErr(true)}
-      style={{width:"100%",height:"100%",objectFit:"cover",display:"block",...style}}/>
+    <img
+      src={src}
+      srcSet={srcSet}
+      sizes="(max-width: 520px) 92vw, (max-width: 900px) 48vw, 360px"
+      alt={title}
+      loading={loading}
+      decoding="async"
+      onError={()=>setErr(true)}
+      style={{
+        width:"100%",
+        height:"100%",
+        objectFit:fit,
+        objectPosition:"center",
+        background:C.navy,
+        display:"block",
+        ...style
+      }}
+    />
   );
   return (
     <div style={{width:"100%",height:"100%",background:`linear-gradient(135deg,${C.navyMid},${C.navy})`,
@@ -2536,7 +2568,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
   target="_blank"
   rel="noopener noreferrer"
         style={{display:"block",position:"relative",width:"100%",aspectRatio:"2/3",maxHeight:"400px",overflow:"hidden",textDecoration:"none"}}>
-        <Poster path={film.poster_path} title={film.title} size="w500"/>
+        <Poster path={film.poster_path} title={film.title} size="w780" loading="eager"/>
         <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(to top,rgba(11,20,48,1),transparent)"}}/>
         <div style={{position:"absolute",top:"12px",left:"12px"}}>
           <span style={{background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.08em"}}>{film.roleBadge || "🍿 Tonight's Pick"}</span>
@@ -2676,7 +2708,7 @@ function AltCard({film, watched, onToggle, watchRegion}) {
     textDecoration:"none"
   }}
 >
-  <Poster path={film.poster_path} title={film.title} size="w342"/>
+  <Poster path={film.poster_path} title={film.title} size="w500"/>
 
 {film.roleBadge && (
   <div style={{position:"absolute",top:"7px",left:"7px"}}>
@@ -3585,7 +3617,7 @@ function CuratorPage() {
           </p>
 
           <p>
-            Along the way, I learned that loving movies means more than what appears on screen. It means honoring the writers, directors, editors, composers, cinematographers, costume designers, and all the people behind the camera whose names deserve to be remembered.
+            Along the way, I learned that loving movies means more than binge-watching. It means honoring the writers, directors, editors, composers, cinematographers, costume designers, and all the people behind the camera whose names deserve to be remembered.
           </p>
 
           <p>
@@ -3656,7 +3688,7 @@ function CuratorPage() {
 
           <div className="letter-signature">
             <div>Enjoy your movie night! 🍿</div>
-            <span>Armelle</span>
+            <span className="armelle-signature">Armelle</span>
           </div>
         </div>
       </div>
@@ -3698,7 +3730,7 @@ function SavedPage({savedTitles, onToggle, watchRegion}) {
                   className="saved-card-link"
                   aria-label={`Search for ${title.title} on Google`}
                 >
-                  <Poster path={title.poster_path} title={title.title} size="w342"/>
+                  <Poster path={title.poster_path} title={title.title} size="w780" fit="contain"/>
                 </a>
 
                 <div className="saved-card-body">
@@ -3741,7 +3773,8 @@ function SavedPage({savedTitles, onToggle, watchRegion}) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    📺 Where to Watch
+                    <span aria-hidden="true">📺</span>
+                    <span>Where to Watch</span>
                   </a>
 
                   <button onClick={() => onToggle(title.id)}>Remove</button>
@@ -3752,6 +3785,214 @@ function SavedPage({savedTitles, onToggle, watchRegion}) {
         </div>
       )}
     </main>
+  );
+}
+
+
+// ── END-OF-SESSION MY CINÉ LETTER INVITATION ─────────────────────────────────
+const MYCINE_NEWSLETTER_SUBSCRIBED_KEY = "mycine-letter-subscribed";
+const MYCINE_NEWSLETTER_DISMISSED_KEY = "mycine-letter-dismissed-at";
+const MYCINE_NEWSLETTER_PAUSE_MS = 30 * 24 * 60 * 60 * 1000;
+
+function canShowNewsletterInvitation() {
+  try {
+    if (localStorage.getItem(MYCINE_NEWSLETTER_SUBSCRIBED_KEY) === "true") {
+      return false;
+    }
+
+    const dismissedAt = Number(
+      localStorage.getItem(MYCINE_NEWSLETTER_DISMISSED_KEY) || 0
+    );
+
+    return !dismissedAt || Date.now() - dismissedAt >= MYCINE_NEWSLETTER_PAUSE_MS;
+  } catch {
+    return true;
+  }
+}
+
+function NewsletterInvitation({onClose, onSubscribed}) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const submitNewsletter = async event => {
+    event.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setStatus("invalid");
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/.netlify/functions/zoho-subscribe", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          email:normalizedEmail,
+          source:"My Cine App",
+          website:""
+        })
+      });
+
+      let payload = {};
+      try {
+        payload = await response.json();
+      } catch {
+        payload = {};
+      }
+
+      if (!response.ok || !payload.ok) {
+        throw new Error(
+          payload.message ||
+          "Zoho could not accept the subscription. Please try again."
+        );
+      }
+
+      try {
+        localStorage.setItem(MYCINE_NEWSLETTER_SUBSCRIBED_KEY, "true");
+        localStorage.removeItem(MYCINE_NEWSLETTER_DISMISSED_KEY);
+      } catch {
+        // Subscription still succeeds if browser storage is blocked.
+      }
+
+      setStatus("success");
+      onSubscribed?.();
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    }
+  };
+
+  const dismissForThirtyDays = () => {
+    try {
+      localStorage.setItem(
+        MYCINE_NEWSLETTER_DISMISSED_KEY,
+        String(Date.now())
+      );
+    } catch {
+      // Closing remains available if browser storage is blocked.
+    }
+    onClose?.();
+  };
+
+  return (
+    <div
+      className="newsletter-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="newsletter-title"
+    >
+      <div className="newsletter-card">
+        {status === "success" ? (
+          <div className="newsletter-success">
+            <div className="newsletter-clapper">🎬</div>
+            <div className="newsletter-kicker">WELCOME ABOARD</div>
+            <h2>One last step.</h2>
+            <p>
+              Zoho accepted your subscription request. Please check your inbox
+              and confirm your subscription to
+              <strong> The My Ciné Letter</strong>.
+            </p>
+            <p>
+              If the confirmation email is hiding, check Spam or Promotions.
+            </p>
+            <div className="newsletter-signature">Armelle</div>
+            <div className="newsletter-creator-credit">Creator of My Ciné</div>
+            <button
+              type="button"
+              className="newsletter-done"
+              onClick={onClose}
+            >
+              Back to My Ciné
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="newsletter-clapper">🎬</div>
+            <div className="newsletter-kicker">BEFORE YOU GO</div>
+            <h2 id="newsletter-title">
+              Discover hard-to-find cinematic gems, once a month.
+            </h2>
+            <p className="newsletter-description">
+              Film recommendations, craft notes, behind-the-scenes discoveries,
+              and the occasional treasure no algorithm will find.
+            </p>
+            <p className="newsletter-curator">
+              Curated by screenwriter <strong>Armelle Cloche</strong>.
+            </p>
+
+            <form
+              onSubmit={submitNewsletter}
+              className="newsletter-form"
+              noValidate
+            >
+              <label htmlFor="mycine-letter-email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="mycine-letter-email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={event => {
+                  setEmail(event.target.value);
+                  if (status === "invalid" || status === "error") {
+                    setStatus("idle");
+                    setErrorMessage("");
+                  }
+                }}
+                placeholder="your@email.com"
+                autoComplete="email"
+                required
+              />
+
+              <input
+                className="newsletter-honeypot"
+                name="website"
+                type="text"
+                tabIndex="-1"
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" ? "Joining…" : "Join"}
+              </button>
+            </form>
+
+            {(status === "invalid" || status === "error") && (
+              <div className="newsletter-error" role="alert">
+                {errorMessage}
+              </div>
+            )}
+
+            <div className="newsletter-privacy">
+              🔒 Your email stays with me. Never sold. Never shared.
+            </div>
+
+            <button
+              type="button"
+              className="newsletter-later"
+              onClick={dismissForThirtyDays}
+            >
+              Maybe next time
+            </button>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -3818,6 +4059,7 @@ export default function App() {
   const [seenPickIds, setSeenPickIds] = useState([]);
   const [batchNumber, setBatchNumber] = useState(0);
   const [preparedBatchOrder, setPreparedBatchOrder] = useState([]);
+  const [showNewsletterInvitation, setShowNewsletterInvitation] = useState(false);
   const [savedTitles, setSavedTitles] = useState(() => {
     try {
       const permanent = JSON.parse(localStorage.getItem("mycine-watchlist") || "[]");
@@ -3844,6 +4086,7 @@ export default function App() {
     setBatchNumber(0);
     setPreparedBatchOrder([]);
     setSeenPickIds([]);
+    setShowNewsletterInvitation(false);
     window.scrollTo({top:0, behavior:"smooth"});
   };
 
@@ -4229,6 +4472,32 @@ const run = async (
     }, 760);
     return () => window.clearTimeout(timer);
   }, [generated, hero?.id]);
+
+  useEffect(() => {
+    if (
+      page !== "home" ||
+      !generated ||
+      loading ||
+      batchNumber < 3 ||
+      showNewsletterInvitation ||
+      !canShowNewsletterInvitation()
+    ) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setShowNewsletterInvitation(true);
+    }, 2200);
+
+    return () => window.clearTimeout(timer);
+  }, [
+    page,
+    generated,
+    loading,
+    batchNumber,
+    activeBatchCount,
+    showNewsletterInvitation
+  ]);
 
   return (
     <div
@@ -4665,18 +4934,26 @@ const run = async (
     display:flex;
     align-items:center;
     justify-content:center;
+    gap:6px;
     width:100%;
     box-sizing:border-box;
     margin:0 0 8px;
-    border:1px solid rgba(255,184,0,0.72);
+    border:1px solid rgba(255,184,0,0.92);
     background:${C.goldBright};
-    color:${C.navy};
+    color:${C.navy}!important;
     border-radius:8px;
-    padding:9px 8px;
-    font-size:10px;
+    padding:10px 8px;
+    font-size:12px;
+    line-height:1.15;
     font-weight:900;
-    text-decoration:none;
+    text-decoration:none!important;
     cursor:pointer;
+  }
+  .saved-watch-button span{
+    display:inline-block!important;
+    color:${C.navy}!important;
+    opacity:1!important;
+    visibility:visible!important;
   }
   .saved-watch-button:hover,
   .saved-watch-button:focus-visible{
@@ -4684,6 +4961,208 @@ const run = async (
     transform:translateY(-1px);
   }
   .saved-card-body button{width:100%;border:1px solid rgba(255,184,0,0.5);background:transparent;color:${C.goldBright};border-radius:8px;padding:8px;cursor:pointer;}
+
+  .armelle-signature{
+    display:block;
+    margin-top:8px;
+    color:${C.goldBright};
+    font-family:Georgia,serif;
+    font-size:inherit;
+    line-height:inherit;
+    font-weight:900;
+  }
+
+  .sr-only{
+    position:absolute!important;
+    width:1px!important;
+    height:1px!important;
+    padding:0!important;
+    margin:-1px!important;
+    overflow:hidden!important;
+    clip:rect(0,0,0,0)!important;
+    white-space:nowrap!important;
+    border:0!important;
+  }
+  .newsletter-honeypot{
+    position:absolute!important;
+    left:-9999px!important;
+    width:1px!important;
+    height:1px!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+  .newsletter-overlay{
+    position:fixed!important;
+    inset:0;
+    z-index:200000!important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(4,11,30,.80);
+    backdrop-filter:blur(10px);
+    animation:newsletterFadeIn .36s ease both;
+  }
+  .newsletter-card{
+    width:min(620px,100%);
+    max-height:calc(100vh - 40px);
+    overflow:auto;
+    padding:clamp(28px,5vw,48px);
+    text-align:center;
+    color:${C.white};
+    background:
+      radial-gradient(circle at 50% 0%,rgba(255,184,0,.18),transparent 32%),
+      linear-gradient(150deg,${C.navyMid},${C.navy});
+    border:2px solid ${C.goldBright};
+    border-radius:28px;
+    box-shadow:0 34px 90px rgba(0,0,0,.58),0 0 46px rgba(255,184,0,.16);
+    animation:newsletterCardIn .48s cubic-bezier(.2,.78,.2,1) both;
+  }
+  .newsletter-clapper{
+    font-size:42px;
+    line-height:1;
+    margin-bottom:12px;
+  }
+  .newsletter-kicker{
+    color:${C.goldBright};
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.16em;
+    margin-bottom:13px;
+  }
+  .newsletter-card h2{
+    max-width:520px;
+    margin:0 auto 18px;
+    color:${C.white};
+    font-family:Georgia,serif;
+    font-size:clamp(27px,5vw,42px);
+    line-height:1.12;
+    text-wrap:balance;
+  }
+  .newsletter-description,
+  .newsletter-curator,
+  .newsletter-success p{
+    max-width:510px;
+    margin:0 auto 13px;
+    color:rgba(255,255,255,.84);
+    font-size:clamp(15px,2.4vw,18px);
+    line-height:1.62;
+  }
+  .newsletter-curator strong,
+  .newsletter-success strong{
+    color:${C.goldBright};
+  }
+  .newsletter-form{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:10px;
+    margin:26px auto 15px;
+    max-width:500px;
+  }
+  .newsletter-form input[type="email"]{
+    min-width:0;
+    height:52px;
+    border:1px solid rgba(255,184,0,.56);
+    border-radius:12px;
+    padding:0 16px;
+    background:rgba(255,255,255,.98);
+    color:${C.navy};
+    font-size:16px;
+    outline:none;
+  }
+  .newsletter-form input[type="email"]:focus{
+    border-color:${C.goldBright};
+    box-shadow:0 0 0 3px rgba(255,184,0,.20);
+  }
+  .newsletter-form button,
+  .newsletter-done{
+    min-height:52px;
+    border:0;
+    border-radius:12px;
+    padding:0 24px;
+    background:${C.goldBright};
+    color:${C.navy};
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(255,184,0,.19);
+  }
+  .newsletter-form button:disabled{
+    opacity:.68;
+    cursor:wait;
+  }
+  .newsletter-error{
+    color:#FFD6D6;
+    font-size:13px;
+    font-weight:800;
+    margin:-4px 0 12px;
+  }
+  .newsletter-privacy{
+    color:rgba(255,255,255,.65);
+    font-size:13px;
+    line-height:1.5;
+  }
+  .newsletter-later{
+    margin-top:20px;
+    padding:6px 8px;
+    border:0;
+    background:transparent;
+    color:rgba(255,255,255,.68);
+    font-size:14px;
+    font-weight:700;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  .newsletter-success h2{
+    color:${C.goldBright};
+  }
+  .newsletter-signature{
+    margin-top:20px;
+    color:${C.goldBright};
+    font-family:Georgia,serif;
+    font-size:32px;
+    font-weight:900;
+  }
+  .newsletter-creator-credit{
+    margin:4px 0 25px;
+    color:rgba(255,255,255,.68);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .newsletter-done{
+    padding:13px 22px;
+  }
+  @keyframes newsletterFadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+  @keyframes newsletterCardIn{
+    from{opacity:0;transform:translateY(26px) scale(.96);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  @media (max-width:600px){
+    .newsletter-overlay{
+      align-items:flex-end;
+      padding:10px;
+    }
+    .newsletter-card{
+      max-height:calc(100vh - 20px);
+      border-radius:24px 24px 16px 16px;
+      padding:27px 18px 24px;
+    }
+    .newsletter-card h2{
+      font-size:clamp(25px,8vw,34px);
+    }
+    .newsletter-form{
+      grid-template-columns:1fr;
+    }
+    .newsletter-form button{
+      width:100%;
+    }
+  }
+
   .empty-library{text-align:center;max-width:620px;margin:0 auto;}
   .empty-library > div{font-size:56px;}
 
@@ -6080,6 +6559,15 @@ const run = async (
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
 
       {showAbout && <AboutModal onClose={()=>setShowAbout(false)}/>}
+
+      {showNewsletterInvitation && (
+        <NewsletterInvitation
+          onClose={() => setShowNewsletterInvitation(false)}
+          onSubscribed={() => {
+            // The success panel remains visible until the viewer closes it.
+          }}
+        />
+      )}
 
       {page === "standard" && (
         <ManifestoPage
