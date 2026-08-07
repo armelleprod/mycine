@@ -4516,10 +4516,11 @@ const run = async (
 
     const globalRecentIds = globalRecentRawIds(100, false);
     const globalRecentHeroIds = globalRecentRawIds(30, true);
-    const globalExcludeIds = [...new Set([
+    const strictFreshnessIds = [...new Set([
       ...excludeIds.map(String),
       ...globalRecentIds
     ])];
+    const globalExcludeIds = strictFreshnessIds;
 
     let result;
     if (preparedBatches) {
@@ -4531,7 +4532,10 @@ const run = async (
 
       let bestResult = null;
       let bestScore = Number.POSITIVE_INFINITY;
-      const attempts = Math.min(candidateBatches.length, 7);
+      // Search the full prepared collection before accepting any overlap.
+      // This keeps the experience fresh without ever failing just because a
+      // user's local history is unusually large.
+      const attempts = candidateBatches.length;
 
       for (let index = 0; index < attempts; index += 1) {
         const candidate = await buildPrebuiltEditorialBatch(
@@ -4540,7 +4544,7 @@ const run = async (
           watchRegion,
           candidateBatches[index]
         );
-        const score = batchFreshnessScore(candidate, globalRecentIds, globalRecentHeroIds);
+        const score = batchFreshnessScore(candidate, strictFreshnessIds, globalRecentHeroIds);
         if (score < bestScore) {
           bestResult = candidate;
           bestScore = score;
@@ -4550,15 +4554,31 @@ const run = async (
 
       result = bestResult;
     } else {
-      result = await buildPicks(
-        tab,
-        selGenres,
-        selMood,
-        watchRegion,
-        contentMode,
-        globalExcludeIds,
-        targetBatch
-      );
+      try {
+        result = await buildPicks(
+          tab,
+          selGenres,
+          selMood,
+          watchRegion,
+          contentMode,
+          globalExcludeIds,
+          targetBatch
+        );
+      } catch (freshnessError) {
+        // Freshness is a preference, never a reason to break movie night.
+        // If a long local history leaves too few candidates, retry with only
+        // the titles from the current journey excluded.
+        console.warn("MY CINÉ relaxed freshness fallback:", freshnessError);
+        result = await buildPicks(
+          tab,
+          selGenres,
+          selMood,
+          watchRegion,
+          contentMode,
+          [...new Set(excludeIds.map(String))],
+          targetBatch
+        );
+      }
     }
 
     const newIds = [result.hero?.id, ...result.alts.map(item => item.id)].filter(Boolean);
@@ -4571,8 +4591,11 @@ const run = async (
     );
 
     if (newIds.length > 0 && repeatedFromPreviousBatch.length > 0) {
-      throw new Error(
-        `Fresh batch contained ${repeatedFromPreviousBatch.length} repeated title(s).`
+      // Prepared editorial sets should prefer freshness, but availability wins.
+      // Never show a public error solely because the least-overlapping prepared
+      // set still contains a title the user saw recently.
+      console.warn(
+        `MY CINÉ freshness fallback: ${repeatedFromPreviousBatch.length} repeated title(s) in the least-overlapping set.`
       );
     }
 
@@ -4599,7 +4622,8 @@ const run = async (
   } catch (error) {
     // Preserve the current seven if the next batch cannot be assembled.
     console.error("MY CINÉ recommendation error:", error);
-    setError("fresh-set-unavailable");
+    const message = String(error?.message || "").toLowerCase();
+    setError(message.includes("tmdb token") ? "tmdb-token-missing" : "temporary-recommendation-error");
   } finally {
     clearInterval(timer);
     // Let the blue projector dissolve into the finished recommendations
@@ -7884,8 +7908,17 @@ const run = async (
       <div className="app-content">
         {error&&(
           <div className="public-error">
-            <strong>🎬 My Ciné could not load the recommendations.</strong>
-            <span>Local setup needs the same VITE_TMDB_TOKEN used by your live app. Copy the original .env file into this folder, then restart Vite.</span>
+            {error === "tmdb-token-missing" && window.location.hostname === "localhost" ? (
+              <>
+                <strong>🎬 My Ciné needs its local movie connection.</strong>
+                <span>Copy the working .env file into this project folder, then restart Vite.</span>
+              </>
+            ) : (
+              <>
+                <strong>🎞️ Our projectionist dropped the film reel.</strong>
+                <span>Please try again in a moment. Your current selections are safe.</span>
+              </>
+            )}
           </div>
         )}
         {loading&&generated&&(
