@@ -100,7 +100,7 @@ function loadingMessagesFor(contentMode = "both") {
     `🔦 Shining the light on ${subject} worth remembering`,
     "🕵️ Looking where algorithms forgot to look",
     "🎟️ Seven better choices, now entering!",
-    `🍿 Less scrolling. More great ${subject}`,
+    `🍿 Less scrolling. More great ${subject}.`,
     "💫 Dusting off a few forgotten gems",
     `🏺 Raiding the ${singularTreasure} treasure chest for you`,
     `🥂 Finding ${subject} worthy of your evening`,
@@ -488,6 +488,30 @@ function saveRecommendationHistory(selectionKey, titles) {
 
 function titleIdentity(title) {
   return `${title.media_type || (title.isTV ? "tv" : "movie")}-${title.id}`;
+}
+
+function globalRecentRawIds(limit = 100, heroOnly = false) {
+  const history = safeReadRecommendationHistory()
+    .filter(entry => entry && entry.id && (!heroOnly || entry.hero))
+    .sort((a, b) => Number(b.shownAt || 0) - Number(a.shownAt || 0));
+
+  const ids = [];
+  const seen = new Set();
+  for (const entry of history) {
+    const id = String(entry.id);
+    if (seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+    if (ids.length >= limit) break;
+  }
+  return new Set(ids);
+}
+
+function batchFreshnessScore(result, recentIds, recentHeroIds) {
+  const titles = [result?.hero, ...(result?.alts || [])].filter(Boolean);
+  const overlap = titles.reduce((score, title) => score + (recentIds.has(String(title.id)) ? 1 : 0), 0);
+  const heroPenalty = result?.hero && recentHeroIds.has(String(result.hero.id)) ? 4 : 0;
+  return overlap + heroPenalty;
 }
 
 function dedupeTitles(titles) {
@@ -4490,22 +4514,52 @@ const run = async (
 
     const preparedBatches = activePreparedBatches;
 
-    const result = preparedBatches
-      ? await buildPrebuiltEditorialBatch(
+    const globalRecentIds = globalRecentRawIds(100, false);
+    const globalRecentHeroIds = globalRecentRawIds(30, true);
+    const globalExcludeIds = [...new Set([
+      ...excludeIds.map(String),
+      ...globalRecentIds
+    ])];
+
+    let result;
+    if (preparedBatches) {
+      const candidateBatches = [
+        targetBatch,
+        ...preparedBatchOrder.filter(batch => Number(batch) !== Number(targetBatch)),
+        ...Array.from({length: preparedBatches.length}, (_, index) => index + 1)
+      ].filter((batch, index, array) => array.indexOf(batch) === index);
+
+      let bestResult = null;
+      let bestScore = Number.POSITIVE_INFINITY;
+      const attempts = Math.min(candidateBatches.length, 7);
+
+      for (let index = 0; index < attempts; index += 1) {
+        const candidate = await buildPrebuiltEditorialBatch(
           preparedBatches,
           preparedGenre,
           watchRegion,
-          targetBatch
-        )
-      : await buildPicks(
-          tab,
-          selGenres,
-          selMood,
-          watchRegion,
-          contentMode,
-          excludeIds,
-          targetBatch
+          candidateBatches[index]
         );
+        const score = batchFreshnessScore(candidate, globalRecentIds, globalRecentHeroIds);
+        if (score < bestScore) {
+          bestResult = candidate;
+          bestScore = score;
+        }
+        if (score === 0) break;
+      }
+
+      result = bestResult;
+    } else {
+      result = await buildPicks(
+        tab,
+        selGenres,
+        selMood,
+        watchRegion,
+        contentMode,
+        globalExcludeIds,
+        targetBatch
+      );
+    }
 
     const newIds = [result.hero?.id, ...result.alts.map(item => item.id)].filter(Boolean);
     const previousBatchIds = new Set(
@@ -7542,6 +7596,122 @@ const run = async (
     max-width:min(900px,88vw)!important;
   }
 
+  /* V1.0 FINAL LOCK: readability, end-credit footer, stronger freshness UI. */
+  .hero-promise{
+    color:#FFC94A!important;
+    -webkit-text-stroke:0!important;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,.18),
+      0 0 5px rgba(255,213,102,.48),
+      0 0 13px rgba(255,184,0,.30)!important;
+    letter-spacing:.02em!important;
+  }
+  .hero-promise-sparkle{
+    display:inline-block;
+    margin:0 .22em;
+    color:${C.goldBright};
+    text-shadow:0 0 8px rgba(255,255,255,.72),0 0 16px rgba(255,184,0,.68);
+  }
+
+  .refined-footer{
+    padding:18px 18px 16px!important;
+  }
+  .refined-footer-content{
+    gap:5px!important;
+    max-width:1040px!important;
+  }
+  .refined-footer .footer-line{
+    font-family:Georgia,serif!important;
+  }
+  .refined-footer .footer-line-primary{
+    font-size:28px!important;
+    line-height:1.08!important;
+    font-weight:900!important;
+    color:${C.white}!important;
+    margin-bottom:7px!important;
+    white-space:nowrap!important;
+  }
+  .refined-footer .footer-line-name,
+  .refined-footer .footer-line-identity,
+  .refined-footer .footer-line-legal{
+    font-size:14px!important;
+    line-height:1.28!important;
+    font-weight:400!important;
+  }
+  .refined-footer .footer-curator-link{
+    color:${C.goldBright}!important;
+    font-size:14px!important;
+    font-weight:700!important;
+    text-decoration:underline!important;
+    text-underline-offset:3px!important;
+    background:none!important;
+    border:none!important;
+    padding:0!important;
+    margin:0!important;
+    cursor:pointer!important;
+  }
+  .refined-footer .footer-screenwriter-link{
+    color:${C.white}!important;
+    font-weight:400!important;
+    text-decoration:none!important;
+  }
+  .refined-footer .footer-line-identity{color:${C.white}!important;}
+  .refined-footer .footer-line-legal{color:rgba(255,255,255,.82)!important;}
+  .refined-footer .footer-divider{
+    width:min(760px,86%)!important;
+    height:1px!important;
+    background:rgba(255,184,0,.42)!important;
+    margin:7px auto 6px!important;
+  }
+
+  @media (min-width:981px){
+    .home-before-results .home-hero{
+      min-height:245px!important;
+      padding:26px 14px 24px!important;
+      justify-content:center!important;
+    }
+    .home-before-results .home-hero .tagline{
+      font-size:18px!important;
+      line-height:1.12!important;
+      letter-spacing:.12em!important;
+      margin-top:14px!important;
+    }
+    .home-before-results .home-hero .hero-promise{
+      font-size:20px!important;
+      line-height:1.15!important;
+      margin-top:11px!important;
+    }
+  }
+
+  @media (max-width:760px){
+    .home-hero .tagline{
+      font-size:14px!important;
+      line-height:1.2!important;
+    }
+    .home-hero .hero-promise{
+      font-size:15px!important;
+      line-height:1.28!important;
+      letter-spacing:.045em!important;
+    }
+    .refined-footer{padding:24px 18px 22px!important;}
+    .refined-footer .footer-line-primary{
+      font-size:25px!important;
+      line-height:1.12!important;
+      white-space:normal!important;
+      max-width:620px!important;
+      margin-left:auto!important;
+      margin-right:auto!important;
+      margin-bottom:13px!important;
+    }
+    .refined-footer .footer-line-name,
+    .refined-footer .footer-line-identity,
+    .refined-footer .footer-line-legal{
+      font-size:14px!important;
+      line-height:1.3!important;
+    }
+    .refined-footer .footer-divider{margin:10px auto 9px!important;}
+  }
+
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length} onHomeReset={resetHomeExperience}/>
@@ -7594,7 +7764,7 @@ const run = async (
           <span style={{color:C.white}}>MY </span><span style={{color:C.goldBright}}>CIN</span><span style={{color:C.white}}>É</span>
         </div>
         <p className="tagline">The Art of Choosing Tonight's Movie</p>
-        <p className="hero-promise">✨ 7 handpicked choices. One perfect movie night.</p>
+        <p className="hero-promise">7 handpicked choices <span className="hero-promise-sparkle">✨</span> One perfect movie night</p>
       </section>
 
       <div className="lobby-feature-grid">
@@ -7861,20 +8031,21 @@ const run = async (
       <footer className="mycine-footer refined-footer">
         <div className="footer-content refined-footer-content">
           <div className="footer-line footer-line-primary">Never waste 45 minutes choosing a movie again</div>
+          <button
+            type="button"
+            className="footer-curator-link footer-line footer-line-name"
+            onClick={() => {
+              setPage("curator");
+              window.scrollTo({top:0, behavior:"smooth"});
+            }}
+          >Armelle Cloche</button>
           <div className="footer-line footer-line-identity">
-            <button
-              type="button"
-              className="footer-curator-link"
-              onClick={() => {
-                setPage("curator");
-                window.scrollTo({top:0, behavior:"smooth"});
-              }}
-            >Armelle Cloche</button>
-            <span> • </span>
             <a className="footer-screenwriter-link" href="https://www.armelle.com/" target="_blank" rel="noreferrer">Screenwriter</a>
             <span> • Creator of My Ciné</span>
           </div>
-          <div className="footer-line footer-line-legal">Celebrating cinema, seven picks at a time. &nbsp; © 2026 My Ciné by Armelle Cloche. All Rights Reserved.</div>
+          <div className="footer-divider" aria-hidden="true" />
+          <div className="footer-line footer-line-legal">Celebrating cinema, seven picks at a time.</div>
+          <div className="footer-line footer-line-legal">© 2026 My Ciné by Armelle Cloche. All Rights Reserved.</div>
         </div>
       </footer>
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
