@@ -918,6 +918,16 @@ function writeCanonTmdbCache(cache) {
   localStorage.setItem(CANON_TMDB_CACHE_KEY, JSON.stringify(cache));
 }
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = 6000) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, {...options, signal:controller.signal});
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function fetchCanonTitleCandidate(entry, token) {
   const cache = readCanonTmdbCache();
   const cacheKey = entry.key;
@@ -938,7 +948,7 @@ async function fetchCanonTitleCandidate(entry, token) {
     params.set("year", String(entry.year));
   }
 
-  const response = await fetch(
+  const response = await fetchWithTimeout(
     `https://api.themoviedb.org/3/search/${endpoint}?${params.toString()}`,
     {
       headers:{
@@ -1379,16 +1389,29 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     return requests;
   });
 
+  // One failed TMDB request must never abort the whole recommendation search.
+  // Keep every successful request and quietly discard only the failed endpoint.
+  const settleRequestGroup = async requests => {
+    const settled = await Promise.allSettled(requests);
+    return settled.flatMap((result, index) => {
+      if (result.status === "fulfilled") {
+        return Array.isArray(result.value) ? result.value : [];
+      }
+      console.warn("MY CINÉ TMDB request skipped:", result.reason, {index});
+      return [];
+    });
+  };
+
   const [currentGroups, previousGroups, altGroups] = await Promise.all([
-    Promise.all(heroCurrentRequests),
-    Promise.all(heroPreviousRequests),
-    Promise.all(altRequests)
+    settleRequestGroup(heroCurrentRequests),
+    settleRequestGroup(heroPreviousRequests),
+    settleRequestGroup(altRequests)
   ]);
 
   return {
-    currentHeroTitles: dedupeTitles(currentGroups.flat()),
-    previousHeroTitles: dedupeTitles(previousGroups.flat()),
-    altTitles: dedupeTitles(altGroups.flat())
+    currentHeroTitles: dedupeTitles(currentGroups),
+    previousHeroTitles: dedupeTitles(previousGroups),
+    altTitles: dedupeTitles(altGroups)
   };
 }
 // ── MAIN PIPELINE ─────────────────────────────────────────────────────────────
@@ -1396,7 +1419,7 @@ async function fetchTitleDetails(title) {
   const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
   const mediaType = title.media_type || (title.isTV ? "tv" : "movie");
 
-  const response = await fetch(
+  const response = await fetchWithTimeout(
     `https://api.themoviedb.org/3/${mediaType}/${title.id}?append_to_response=credits,keywords`,
     {
       headers: {
@@ -1683,132 +1706,229 @@ async function buildPrebuiltEditorialBatch(
     throw new Error(`Prepared ${genreKey} batch ${safeIndex + 1} is incomplete.`);
   }
 
-  const enrichPreparedTitle = async editorial => {
+  // A prepared slot is an editorial promise. TMDB enriches it, but TMDB is
+  // never allowed to cancel the recommendation itself. If metadata cannot be
+  // resolved, render the approved editorial title with graceful fallbacks.
+  const makeEditorialFallback = (editorial, slotTemplate = editorial) => {
     const editorialBadge =
-      editorial.badge ||
-      editorial.role ||
-      "✨ Surprise";
-
-    const entry = {
-      ...editorial,
-      badge:editorialBadge,
-      key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
-    };
-
-    const candidate = await fetchCanonTitleCandidate(entry, token);
-    if (!candidate) {
-      throw new Error(`${editorial.title} could not be matched on TMDB.`);
-    }
-
+      slotTemplate.badge || slotTemplate.role || editorial.badge || editorial.role || "✨ Surprise";
     const mediaType = editorial.type === "tv" ? "tv" : "movie";
-
-    const normalized = {
-      ...candidate,
-      title:candidate.title || candidate.name || editorial.title,
-      year:String(
-        candidate.release_date || candidate.first_air_date || editorial.year
-      ).slice(0,4),
+    const stableId = `editorial:${genreKey}:${normalizeFilterLabel(editorial.title || "title")}:${editorial.year || ""}:${slotTemplate.slot || editorial.slot || ""}`;
+    const note = editorial.curatorNote || slotTemplate.curatorNote || "A My Ciné editorial pick selected for this movie night.";
+    return {
+      id:stableId,
+      title:editorial.title,
+      year:String(editorial.year || ""),
       media_type:mediaType,
       isTV:mediaType === "tv",
       format:mediaType === "tv" ? "TV Series" : "Film",
-      rating:Number(candidate.vote_average || 0),
-      vote_count:Number(candidate.vote_count || 0),
-      popularity:Number(candidate.popularity || 0),
-      poster_path:candidate.poster_path || null,
-      overview:candidate.overview || editorial.curatorNote || "Synopsis unavailable.",
-      original_language:candidate.original_language || "",
-      genre_ids:candidate.genre_ids || [],
-      era:Number(editorial.year) < 1990
-        ? "classic"
-        : Number(editorial.year) < 2020
-          ? "modern"
-          : "current"
-    };
-
-    const details = await fetchTitleDetails(normalized);
-
-    // Prepared movie batches must resolve to a feature film.
-    // Prepared TV batches must resolve to a released television series.
-    if (mediaType === "movie" && Number(details.runtime || 0) > 0 && Number(details.runtime || 0) < 40) {
-      throw new Error(`${editorial.title} matched an implausibly short TMDB result.`);
-    }
-
-    if (mediaType === "tv" && !details.isTV) {
-      throw new Error(`${editorial.title} did not resolve as a TV series.`);
-    }
-
-    // Prepared Romcom batches are approved editorially before runtime.
-    // TMDB enriches the title with live metadata, but does not veto it.
-    // The live community score remains visible to the user.
-    const liveTmdbRating = Number(details.rating || 0);
-    const displayedTmdbPercent = Math.round(liveTmdbRating * 10);
-
-    let availability = {
-      stream:[], free:[], ads:[], rent:[], buy:[], link:null
-    };
-
-    try {
-      availability = await fetchWatchProviders(
-        details.id,
-        watchRegion,
-        mediaType
-      );
-    } catch (error) {
-      console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, error);
-    }
-
-    const providers = [
-      ...(availability.stream || []),
-      ...(availability.free || []),
-      ...(availability.ads || []),
-      ...(availability.rent || []),
-      ...(availability.buy || [])
-    ];
-
-    const providerNames = [...new Set(
-      providers
-        .map(item => canonicalProviderName(item.provider_name))
-        .filter(Boolean)
-    )];
-
-    return {
-      ...details,
+      rating:0,
+      vote_count:0,
+      popularity:0,
+      poster_path:null,
+      backdrop_path:null,
+      overview:note,
+      genres:[],
+      keywords:[],
+      director:"",
+      runtime:null,
+      countryCode:"",
+      languageCode:"",
+      era:Number(editorial.year) < 1990 ? "classic" : Number(editorial.year) < 2020 ? "modern" : "current",
       editorialBatch:safeIndex + 1,
-      editorialSlot:editorial.slot,
+      editorialSlot:slotTemplate.slot,
       roleBadge:editorialBadge,
       editoriallyApproved:true,
-      displayedTmdbPercent,
-      canonTier:editorial.tier,
-      curatorNote:editorial.curatorNote,
+      tmdbResolved:false,
+      displayedTmdbPercent:0,
+      canonTier:editorial.tier || slotTemplate.tier,
+      curatorNote:note,
       countryEditorial:editorial.country,
       languageEditorial:editorial.language,
-      providerNames,
-      provider:providerNames.length
-        ? providerNames.slice(0,3).join(" • ")
-        : "Check availability",
-      watchLink:availability.link ||
-        `https://www.themoviedb.org/${mediaType}/${details.id}/watch?locale=${watchRegion}`,
+      providerNames:[],
+      provider:"",
+      watchLink:`https://www.google.com/search?q=${encodeURIComponent(`${editorial.title} ${editorial.year || ""} where to watch`)}`,
       watchRegionCode:watchRegion,
       highlight:{
         icon:String(editorialBadge).split(" ")[0],
         label:String(editorialBadge).replace(/^\S+\s*/, ""),
-        text:editorial.curatorNote
+        text:note
       },
-      moodTags:editorial.moodTags || [],
-      whyWatch:editorial.curatorNote || details.overview
+      moodTags:editorial.moodTags || slotTemplate.moodTags || [],
+      whyWatch:note
     };
+  };
+
+  const enrichPreparedTitle = async (editorial, slotTemplate = editorial) => {
+    try {
+      const editorialBadge =
+        slotTemplate.badge ||
+        slotTemplate.role ||
+        editorial.badge ||
+        editorial.role ||
+        "✨ Surprise";
+
+      const entry = {
+        ...editorial,
+        badge:editorialBadge,
+        key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
+      };
+
+      const candidate = await fetchCanonTitleCandidate(entry, token);
+      if (!candidate) {
+        console.warn(`MY CINÉ TMDB match unavailable; using editorial fallback: ${editorial.title} (${editorial.year})`);
+        return makeEditorialFallback(editorial, slotTemplate);
+      }
+
+      const mediaType = editorial.type === "tv" ? "tv" : "movie";
+
+      const normalized = {
+        ...candidate,
+        title:candidate.title || candidate.name || editorial.title,
+        year:String(
+          candidate.release_date || candidate.first_air_date || editorial.year
+        ).slice(0,4),
+        media_type:mediaType,
+        isTV:mediaType === "tv",
+        format:mediaType === "tv" ? "TV Series" : "Film",
+        rating:Number(candidate.vote_average || 0),
+        vote_count:Number(candidate.vote_count || 0),
+        popularity:Number(candidate.popularity || 0),
+        poster_path:candidate.poster_path || null,
+        overview:candidate.overview || editorial.curatorNote || "Synopsis unavailable.",
+        original_language:candidate.original_language || "",
+        genre_ids:candidate.genre_ids || [],
+        era:Number(editorial.year) < 1990
+          ? "classic"
+          : Number(editorial.year) < 2020
+            ? "modern"
+            : "current"
+      };
+
+      // Details are enrichment, not permission to exist. A temporary details
+      // failure falls back to the successful search result instead of killing
+      // the title or the seven-pick batch.
+      let details = normalized;
+      try {
+        details = await fetchTitleDetails(normalized);
+      } catch (detailsError) {
+        console.warn(`MY CINÉ details unavailable for ${editorial.title}:`, detailsError);
+      }
+
+      if (
+        mediaType === "movie" &&
+        Number(details.runtime || 0) > 0 &&
+        Number(details.runtime || 0) < 40
+      ) {
+        console.warn(`MY CINÉ rejected implausibly short match; using editorial fallback for ${editorial.title}.`);
+        return makeEditorialFallback(editorial, slotTemplate);
+      }
+
+      if (mediaType === "tv" && details.media_type && details.media_type !== "tv") {
+        console.warn(`MY CINÉ rejected non-TV match; using editorial fallback for ${editorial.title}.`);
+        return makeEditorialFallback(editorial, slotTemplate);
+      }
+
+      const liveTmdbRating = Number(details.rating || normalized.rating || 0);
+      const displayedTmdbPercent = Math.round(liveTmdbRating * 10);
+
+      let availability = {
+        stream:[], free:[], ads:[], rent:[], buy:[], link:null
+      };
+
+      try {
+        availability = await fetchWatchProviders(
+          details.id,
+          watchRegion,
+          mediaType
+        );
+      } catch (providerError) {
+        console.warn(`Prepared ${genreKey} providers unavailable:`, editorial.title, providerError);
+      }
+
+      const providers = [
+        ...(availability.stream || []),
+        ...(availability.free || []),
+        ...(availability.ads || []),
+        ...(availability.rent || []),
+        ...(availability.buy || [])
+      ];
+
+      const providerNames = [...new Set(
+        providers
+          .map(item => canonicalProviderName(item.provider_name))
+          .filter(Boolean)
+      )];
+
+      const note = editorial.curatorNote || slotTemplate.curatorNote;
+
+      return {
+        ...details,
+        editorialBatch:safeIndex + 1,
+        editorialSlot:slotTemplate.slot,
+        roleBadge:editorialBadge,
+        editoriallyApproved:true,
+        tmdbResolved:true,
+        displayedTmdbPercent,
+        canonTier:editorial.tier || slotTemplate.tier,
+        curatorNote:note,
+        countryEditorial:editorial.country,
+        languageEditorial:editorial.language,
+        providerNames,
+        provider:providerNames.length
+          ? providerNames.slice(0,3).join(" • ")
+          : "Check availability",
+        watchLink:availability.link ||
+          `https://www.themoviedb.org/${mediaType}/${details.id}/watch?locale=${watchRegion}`,
+        watchRegionCode:watchRegion,
+        highlight:{
+          icon:String(editorialBadge).split(" ")[0],
+          label:String(editorialBadge).replace(/^\S+\s*/, ""),
+          text:note
+        },
+        moodTags:editorial.moodTags || slotTemplate.moodTags || [],
+        whyWatch:note || details.overview || normalized.overview
+      };
+    } catch (error) {
+      console.warn(`MY CINÉ metadata unavailable; using editorial fallback: ${editorial?.title || "Unknown title"}`, error);
+      return makeEditorialFallback(editorial, slotTemplate);
+    }
   };
 
   const resolved = await mapWithConcurrency(
     editorialBatch,
-    enrichPreparedTitle,
+    editorial => enrichPreparedTitle(editorial, editorial),
     4
   );
 
+  // Every editorial slot now resolves either to TMDB metadata or to a local
+  // editorial fallback, so no network/title error can stall the Rule of Seven.
+  // If TMDB accidentally maps two prepared titles to the same id, preserve
+  // both editorial choices by converting the later duplicate to its fallback.
+  const usedIds = new Set();
+  const usedTitles = new Set();
+  for (let slotIndex = 0; slotIndex < resolved.length; slotIndex += 1) {
+    const item = resolved[slotIndex];
+    const template = editorialBatch[slotIndex];
+    if (!item) {
+      resolved[slotIndex] = makeEditorialFallback(template, template);
+      continue;
+    }
+    const id = String(item.id);
+    const identity = titleIdentity(item);
+    if (usedIds.has(id) || usedTitles.has(identity)) {
+      resolved[slotIndex] = makeEditorialFallback(template, template);
+    }
+    usedIds.add(String(resolved[slotIndex].id));
+    usedTitles.add(titleIdentity(resolved[slotIndex]));
+  }
+
   const titles = resolved.filter(Boolean);
   if (titles.length !== 7) {
+    // This is not a one-title failure anymore. It means the entire approved
+    // prepared library could not supply seven distinct resolvable titles.
     throw new Error(
-      `Prepared ${genreKey} batch ${safeIndex + 1} could not resolve all seven titles.`
+      `Prepared ${genreKey} library could supply only ${titles.length} of 7 titles right now.`
     );
   }
 
@@ -2329,7 +2449,7 @@ async function fetchWatchProviders(titleId, region, mediaType = "movie") {
     throw new Error("TMDB token is missing");
   }
 
-  const response = await fetch(
+  const response = await fetchWithTimeout(
     `https://api.themoviedb.org/3/${mediaType}/${titleId}/watch/providers`,
     {
       headers: {
@@ -2630,12 +2750,16 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
   const critScore  = film.rtCritics || 0;
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
-  const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
-  const tmdbWatchLink = tmdbWatchUrl(
-    film.id,
-    film.isTV ? "tv" : "movie",
-    watchRegion
-  );
+  const tmdbLink = film.tmdbResolved === false
+    ? `https://www.google.com/search?q=${encodeURIComponent(`${film.title} ${film.year} ${film.isTV ? "TV series" : "movie"}`)}`
+    : `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
+  const tmdbWatchLink = film.tmdbResolved === false
+    ? `https://www.google.com/search?q=${encodeURIComponent(`${film.title} ${film.year} where to watch`)}`
+    : tmdbWatchUrl(
+        film.id,
+        film.isTV ? "tv" : "movie",
+        watchRegion
+      );
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -2768,7 +2892,9 @@ function AltCard({film, watched, onToggle, watchRegion}) {
   const scoreColor = critScore>=85?"#4ADE80":critScore>=70?C.goldBright:"#aaa";
   const eraColor   = ERA_COLORS[film.era] || C.gold;
   const search  = `https://www.google.com/search?q=${encodeURIComponent(film.title)}`;
-  const tmdbLink = `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
+  const tmdbLink = film.tmdbResolved === false
+    ? `https://www.google.com/search?q=${encodeURIComponent(`${film.title} ${film.year} ${film.isTV ? "TV series" : "movie"}`)}`
+    : `https://www.themoviedb.org/${film.isTV ? "tv" : "movie"}/${film.id}`;
   const trailer = `https://www.youtube.com/results?search_query=${encodeURIComponent(film.title+" "+film.year+" official trailer")}`;
 
   return (
@@ -2880,11 +3006,13 @@ function AltCard({film, watched, onToggle, watchRegion}) {
 </div>
 
 <a
-  href={tmdbWatchUrl(
-    film.id,
-    film.isTV ? "tv" : "movie",
-    watchRegion
-  )}
+  href={film.tmdbResolved === false
+    ? `https://www.google.com/search?q=${encodeURIComponent(`${film.title} ${film.year} where to watch`)}`
+    : tmdbWatchUrl(
+        film.id,
+        film.isTV ? "tv" : "movie",
+        watchRegion
+      )}
   target="_blank"
   rel="noopener noreferrer"
   style={{
@@ -4481,9 +4609,9 @@ export default function App() {
   const activeBatchCount = activePreparedBatches
     ? Math.min(7, totalPreparedBatchCount)
     : 7;
-  const cycleMsg = () => setInterval(() => {
-    setLoadingMsg(nextBrandMessage(contentMode));
-  }, 2600);
+  // One elegant projector jingle per request. The message changes on the next
+  // batch, never repeatedly while the viewer is waiting.
+  const cycleMsg = () => null;
 
 const run = async (
   excludeIds = [],
@@ -4514,8 +4642,8 @@ const run = async (
 
     const preparedBatches = activePreparedBatches;
 
-    const globalRecentIds = globalRecentRawIds(100, false);
-    const globalRecentHeroIds = globalRecentRawIds(30, true);
+    const globalRecentIds = globalRecentRawIds(140, false);
+    const globalRecentHeroIds = globalRecentRawIds(40, true);
     const strictFreshnessIds = [...new Set([
       ...excludeIds.map(String),
       ...globalRecentIds
@@ -4524,35 +4652,16 @@ const run = async (
 
     let result;
     if (preparedBatches) {
-      const candidateBatches = [
-        targetBatch,
-        ...preparedBatchOrder.filter(batch => Number(batch) !== Number(targetBatch)),
-        ...Array.from({length: preparedBatches.length}, (_, index) => index + 1)
-      ].filter((batch, index, array) => array.indexOf(batch) === index);
-
-      let bestResult = null;
-      let bestScore = Number.POSITIVE_INFINITY;
-      // Search the full prepared collection before accepting any overlap.
-      // This keeps the experience fresh without ever failing just because a
-      // user's local history is unusually large.
-      const attempts = candidateBatches.length;
-
-      for (let index = 0; index < attempts; index += 1) {
-        const candidate = await buildPrebuiltEditorialBatch(
-          preparedBatches,
-          preparedGenre,
-          watchRegion,
-          candidateBatches[index]
-        );
-        const score = batchFreshnessScore(candidate, strictFreshnessIds, globalRecentHeroIds);
-        if (score < bestScore) {
-          bestResult = candidate;
-          bestScore = score;
-        }
-        if (score === 0) break;
-      }
-
-      result = bestResult;
+      // The persistent rotation already chooses a fresh prepared set. Resolve
+      // that one set only. Individual TMDB failures are handled inside the set
+      // with editorial fallbacks, so there is no reason to exhaustively query
+      // every prepared batch and leave the viewer trapped in transitions.
+      result = await buildPrebuiltEditorialBatch(
+        preparedBatches,
+        preparedGenre,
+        watchRegion,
+        targetBatch
+      );
     } else {
       try {
         result = await buildPicks(
@@ -4625,7 +4734,7 @@ const run = async (
     const message = String(error?.message || "").toLowerCase();
     setError(message.includes("tmdb token") ? "tmdb-token-missing" : "temporary-recommendation-error");
   } finally {
-    clearInterval(timer);
+    if (timer) clearInterval(timer);
     // Let the blue projector dissolve into the finished recommendations
     // instead of disappearing in a single frame.
     setOverlayExiting(true);
