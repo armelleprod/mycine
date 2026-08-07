@@ -78,12 +78,67 @@ const ROLE_BADGE_COLORS = {
 };
 const CURRENT_YEAR    = new Date().getFullYear();
 
-const LOADING_MSGS = [
-  "🎬 Finding tonight\'s best picks…",
-  "🍿 Tasting films so you don\'t have to…",
-  "✨ Applying the My Ciné Standard…",
-  "💫 Almost there — worth the wait!",
-];
+const BRAND_MESSAGE_ROTATION_KEY = "mycine-brand-message-rotation-v2";
+
+function loadingMessagesFor(contentMode = "both") {
+  const subject = contentMode === "tv"
+    ? "TV series"
+    : contentMode === "movie"
+      ? "movies"
+      : "movies and TV series";
+  const singularTreasure = contentMode === "tv" ? "television" : "cinema";
+  const bMovieLine = contentMode === "tv"
+    ? "🍿 Enough filler. Try these 7 series."
+    : contentMode === "both"
+      ? "🍿 Enough filler. Try these 7 picks."
+      : "🍿 Enough B movies. Try these 7 picks.";
+
+  return [
+    `🎞️ Bringing great ${subject} back into focus`,
+    "🎬 Rescuing tonight from endless scrolling",
+    bMovieLine,
+    `🔦 Shining the light on ${subject} worth remembering`,
+    "🕵️ Looking where algorithms forgot to look",
+    "🎟️ Seven better choices, now entering!",
+    `🍿 Less scrolling. More great ${subject}`,
+    "💫 Dusting off a few forgotten gems",
+    `🏺 Raiding the ${singularTreasure} treasure chest for you`,
+    `🥂 Finding ${subject} worthy of your evening`,
+    "🎞️ 7 reasons not to settle for something mediocre",
+    "🔎 Hunting down the titles you almost missed",
+    `🎥 Giving great ${subject} another turn in the spotlight`,
+    "🍿 Your couch deserves better. We’re on it!",
+    `💎 We’re digging into ${singularTreasure} treasures`
+  ];
+}
+
+function nextBrandMessage(contentMode = "both") {
+  const messages = loadingMessagesFor(contentMode);
+  const storageKey = `${BRAND_MESSAGE_ROTATION_KEY}-${contentMode}`;
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey) || "null");
+    let order = Array.isArray(stored?.order) ? stored.order.filter(index => index >= 0 && index < messages.length) : [];
+    let position = Number.isInteger(stored?.position) ? stored.position : 0;
+
+    if (order.length !== messages.length || position >= order.length) {
+      order = Array.from({length:messages.length}, (_, index) => index);
+      for (let i = order.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      position = 0;
+    }
+
+    const message = messages[order[position]] || messages[0];
+    localStorage.setItem(storageKey, JSON.stringify({
+      order,
+      position:position + 1
+    }));
+    return message;
+  } catch {
+    return messages[Math.floor(Math.random() * messages.length)] || messages[0];
+  }
+}
 
 const GENRES = [
   {id:"romcom",label:"Romcom",emoji:"💕"},
@@ -1363,6 +1418,8 @@ async function fetchTitleDetails(title) {
 
   return {
     ...title,
+    poster_path: details.poster_path || title.poster_path || null,
+    backdrop_path: details.backdrop_path || title.backdrop_path || null,
     genres: (details.genres || []).slice(0, 3).map(genre => genre.name),
     keywords: keywordItems.map(keyword => keyword.name).filter(Boolean),
     director,
@@ -1589,7 +1646,7 @@ async function buildPrebuiltEditorialBatch(
 ) {
   const token = import.meta.env.VITE_TMDB_TOKEN;
   if (!token) {
-    throw new Error(`TMDB token is required to enrich the prepared ${genreKey} batch.`);
+    throw new Error("TMDB_TOKEN_MISSING");
   }
 
   const safeIndex = Math.max(
@@ -1889,7 +1946,7 @@ async function buildPicks(
 
   const enrichTitle = async title => {
     const cached = getCachedEnrichedTitle(title, watchRegion);
-    if (cached) {
+    if (cached && cached.poster_path) {
       return applyCanonMetadata({
         ...cached,
         myCineArrival:title.myCineArrival || cached.myCineArrival || null
@@ -2223,11 +2280,11 @@ function Poster({
 function Chip({label, emoji, selected, onClick}) {
   return (
     <button onClick={onClick} style={{
-      display:"inline-flex",alignItems:"center",gap:"5px",padding:"6px 13px",borderRadius:"999px",
+      display:"inline-flex",alignItems:"center",gap:"4px",padding:"5px 10px",borderRadius:"999px",
       border:`1.5px solid ${selected?C.goldBright:C.navyMid}`,
       background:selected?C.goldBright:C.navyMid,
       color:selected?C.navy:C.goldBright,
-      fontWeight:selected?"800":"500",fontSize:"13px",cursor:"pointer",fontFamily:"inherit",
+      fontWeight:selected?"800":"500",fontSize:"11px",cursor:"pointer",fontFamily:"inherit",
     }}>{emoji} {label}</button>
   );
 }
@@ -3296,6 +3353,70 @@ function buildDynamicCinemaMoment(movie, details) {
   });
 }
 
+const DYNAMIC_MOMENTS_CACHE_KEY = "mycine-dynamic-cinema-moments-v1";
+const DYNAMIC_MOMENTS_CACHE_MS = 7 * 24 * 60 * 60 * 1000;
+
+function readDynamicCinemaMomentCache() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(DYNAMIC_MOMENTS_CACHE_KEY) || "null");
+    if (!cached || !Array.isArray(cached.moments)) return null;
+    if (Date.now() - Number(cached.generatedAt || 0) > DYNAMIC_MOMENTS_CACHE_MS) return null;
+    return cached.moments;
+  } catch {
+    return null;
+  }
+}
+
+async function buildDynamicCinemaMomentPool(maxMovies = 30) {
+  const cached = readDynamicCinemaMomentCache();
+  if (cached?.length) return cached;
+
+  const candidates = await fetchCinemaMomentCandidates();
+  if (!candidates.length) return [];
+
+  // Shuffle the source movies so each weekly cache is genuinely fresh.
+  const shuffled = [...candidates];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+
+  const selected = shuffled.slice(0, maxMovies);
+  const moments = [];
+
+  // Small concurrency groups keep this background enrichment gentle on TMDB.
+  for (let offset = 0; offset < selected.length; offset += 5) {
+    const group = selected.slice(offset, offset + 5);
+    const details = await Promise.all(group.map(movie => fetchCinemaMomentDetail(movie.id)));
+
+    group.forEach((movie, groupIndex) => {
+      const detail = details[groupIndex];
+      if (!detail) return;
+      const options = buildDynamicCinemaMoment(movie, detail);
+      if (!options.length) return;
+
+      // One card per movie avoids seeing the same title repeatedly even when
+      // several craft facts are available for it.
+      const option = options[(movie.id + offset + groupIndex) % options.length];
+      moments.push({
+        ...option,
+        key:`dynamic-${option.key}`,
+        sourceLabel:"The Movie Database (TMDB)",
+        sourceLink:`https://www.themoviedb.org/movie/${movie.id}`
+      });
+    });
+  }
+
+  try {
+    localStorage.setItem(DYNAMIC_MOMENTS_CACHE_KEY, JSON.stringify({
+      generatedAt:Date.now(),
+      moments
+    }));
+  } catch {}
+
+  return moments;
+}
+
 const MOMENT_CYCLE_KEY = "mycine-moment-cycle-v2";
 
 function shuffleMomentKeys(keys) {
@@ -3996,7 +4117,7 @@ function NewsletterInvitation({onClose, onSubscribed}) {
 }
 
 // ── APP ───────────────────────────────────────────────────────────────────────
-const BATCH_ROTATION_KEY = "mycine-prepared-batch-rotation-v1";
+const BATCH_ROTATION_KEY = "mycine-prepared-batch-rotation-v2";
 
 function readBatchRotationState() {
   try {
@@ -4007,7 +4128,14 @@ function readBatchRotationState() {
   }
 }
 
-function shuffledBatchOrder(batchCount, previousFirst = null) {
+function writeBatchRotationState(state) {
+  try {
+    localStorage.setItem(BATCH_ROTATION_KEY, JSON.stringify(state));
+  } catch {}
+}
+
+function shuffledBatchOrder(batchCount, lastBatch = null, avoid = []) {
+  const avoidSet = new Set(avoid.map(Number));
   const order = Array.from({length:batchCount}, (_, index) => index + 1);
 
   for (let index = order.length - 1; index > 0; index -= 1) {
@@ -4015,26 +4143,67 @@ function shuffledBatchOrder(batchCount, previousFirst = null) {
     [order[index], order[randomIndex]] = [order[randomIndex], order[index]];
   }
 
-  if (order.length > 1 && order[0] === previousFirst) {
+  // Never open a new cycle with the exact batch the viewer just saw.
+  if (order.length > 1 && Number(order[0]) === Number(lastBatch)) {
     [order[0], order[1]] = [order[1], order[0]];
+  }
+
+  // When a 7-pick journey crosses the end of a cycle, prefer a batch that
+  // has not already appeared earlier in that same journey.
+  if (avoidSet.size && order.length > 1 && avoidSet.has(Number(order[0]))) {
+    const swapIndex = order.findIndex(batch => !avoidSet.has(Number(batch)) && Number(batch) !== Number(lastBatch));
+    if (swapIndex > 0) [order[0], order[swapIndex]] = [order[swapIndex], order[0]];
   }
 
   return order;
 }
 
-function nextPreparedBatchOrder(selectionKey, batchCount) {
+function nextPreparedBatchOrder(selectionKey, totalBatchCount, sessionSize = 7) {
+  if (!totalBatchCount) return [];
+
   const state = readBatchRotationState();
   const previous = state[selectionKey] || {};
-  const order = shuffledBatchOrder(batchCount, previous.first || null);
+  const valid = batch => Number.isInteger(Number(batch)) && Number(batch) >= 1 && Number(batch) <= totalBatchCount;
+  let remaining = Array.isArray(previous.remaining)
+    ? previous.remaining.filter(valid).map(Number)
+    : [];
+  let lastBatch = valid(previous.lastBatch) ? Number(previous.lastBatch) : null;
+  let cycle = Number(previous.cycle || 0);
+  const session = [];
+  const target = Math.min(sessionSize, totalBatchCount);
+
+  while (session.length < target) {
+    if (!remaining.length) {
+      remaining = shuffledBatchOrder(totalBatchCount, lastBatch, session);
+      cycle += 1;
+    }
+
+    let next = Number(remaining.shift());
+    if (!valid(next)) continue;
+
+    // A duplicate inside one visible 7-set journey is never useful. If a
+    // cycle boundary caused one, rotate the queue until a fresh one appears.
+    if (session.includes(next) && totalBatchCount > session.length) {
+      const freshIndex = remaining.findIndex(batch => !session.includes(Number(batch)));
+      if (freshIndex >= 0) {
+        remaining.push(next);
+        next = Number(remaining.splice(freshIndex, 1)[0]);
+      }
+    }
+
+    session.push(next);
+    lastBatch = next;
+  }
 
   state[selectionKey] = {
-    first:order[0],
-    order,
+    remaining,
+    lastBatch,
+    cycle,
+    totalBatchCount,
     updatedAt:Date.now()
   };
-
-  localStorage.setItem(BATCH_ROTATION_KEY, JSON.stringify(state));
-  return order;
+  writeBatchRotationState(state);
+  return session;
 }
 
 export default function App() {
@@ -4050,9 +4219,12 @@ export default function App() {
   const [showAbout, setShowAbout]   = useState(false);
   const [watchRegion, setWatchRegion] = useState("MX");
   const [contentMode, setContentMode] = useState("both");
-  const [loadingMsg, setLoadingMsg] = useState(LOADING_MSGS[0]);
+  const [loadingMsg, setLoadingMsg] = useState(() => nextBrandMessage("both"));
+  const [overlayExiting, setOverlayExiting] = useState(false);
+  const [intermissionMsg, setIntermissionMsg] = useState(() => loadingMessagesFor("both")[0]);
   const [page, setPage] = useState("home");
   const [momentIndex, setMomentIndex] = useState(0);
+  const [cinemaMomentPool, setCinemaMomentPool] = useState(CURATED_CINEMA_MOMENTS);
   const [cinemaMoment, setCinemaMoment] = useState(CURATED_CINEMA_MOMENTS[0]);
   const resultsRef = useRef(null);
   const [seenPickIds, setSeenPickIds] = useState([]);
@@ -4279,17 +4451,15 @@ export default function App() {
   // My Ciné Rule of Seven:
   // exactly seven recommendations per set and a maximum of seven sets
   // during one genre session, even when the editorial database stores more.
+  const totalPreparedBatchCount = activePreparedBatches
+    ? activePreparedBatches.length
+    : 0;
   const activeBatchCount = activePreparedBatches
-    ? Math.min(7, activePreparedBatches.length)
+    ? Math.min(7, totalPreparedBatchCount)
     : 7;
-  const cycleMsg = () => {
-  let i = 0;
-
-  return setInterval(() => {
-    i = (i + 1) % LOADING_MSGS.length;
-    setLoadingMsg(LOADING_MSGS[i]);
-  }, 3000);
-};
+  const cycleMsg = () => setInterval(() => {
+    setLoadingMsg(nextBrandMessage(contentMode));
+  }, 2600);
 
 const run = async (
   excludeIds = [],
@@ -4297,9 +4467,12 @@ const run = async (
   requestedBatch = null,
   journeyPosition = null
 ) => {
+  const openingMessage = nextBrandMessage(contentMode);
+  setOverlayExiting(false);
   setLoading(true);
   setError(null);
-  setLoadingMsg(LOADING_MSGS[0]);
+  setLoadingMsg(openingMessage);
+  setIntermissionMsg(openingMessage);
 
   const timer = cycleMsg();
   const targetBatch = requestedBatch ?? (
@@ -4357,6 +4530,13 @@ const run = async (
     setAlts(result.alts);
     setGenerated(true);
 
+    // Prepared editorial sets now participate in the same long-term freshness
+    // history as dynamically assembled mood results.
+    if (preparedBatches) {
+      const selectionKey = recommendationSelectionKey(tab, selGenres, selMood, contentMode);
+      saveRecommendationHistory(selectionKey, [result.hero, ...result.alts]);
+    }
+
     setSeenPickIds(previous =>
       [...new Set([...previous, ...newIds])]
     );
@@ -4367,8 +4547,13 @@ const run = async (
     console.error("MY CINÉ recommendation error:", error);
     setError("fresh-set-unavailable");
   } finally {
-    setLoading(false);
     clearInterval(timer);
+    // Let the blue projector dissolve into the finished recommendations
+    // instead of disappearing in a single frame.
+    setOverlayExiting(true);
+    await new Promise(resolve => setTimeout(resolve, 650));
+    setLoading(false);
+    setOverlayExiting(false);
   }
 };
 
@@ -4410,7 +4595,7 @@ const run = async (
     );
 
     const nextOrder = activePreparedBatches
-      ? nextPreparedBatchOrder(key, activeBatchCount)
+      ? nextPreparedBatchOrder(key, totalPreparedBatchCount, activeBatchCount)
       : Array.from({length:activeBatchCount}, (_, index) => index + 1);
 
     setPreparedBatchOrder(nextOrder);
@@ -4456,15 +4641,36 @@ const run = async (
 
 
   useEffect(() => {
+    let cancelled = false;
+
+    const hydrate = async () => {
+      const cached = readDynamicCinemaMomentCache();
+      if (cached?.length && !cancelled) {
+        setCinemaMomentPool([...CURATED_CINEMA_MOMENTS, ...cached]);
+      }
+
+      const dynamic = await buildDynamicCinemaMomentPool();
+      if (!cancelled && dynamic.length) {
+        setCinemaMomentPool([...CURATED_CINEMA_MOMENTS, ...dynamic]);
+      }
+    };
+
+    hydrate();
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    if (!cinemaMomentPool.length) return;
+
     const showNextMoment = () => {
-      const moment = pickNextMoment(CURATED_CINEMA_MOMENTS);
+      const moment = pickNextMoment(cinemaMomentPool);
       if (moment) setCinemaMoment(moment);
     };
 
     showNextMoment();
-    const timer = setInterval(showNextMoment, 10000);
+    const timer = setInterval(showNextMoment, 12000);
     return () => clearInterval(timer);
-  }, []);
+  }, [cinemaMomentPool]);
 
   useEffect(() => {
     if (!generated || !hero || !resultsRef.current) return;
@@ -4646,6 +4852,15 @@ const run = async (
     letter-spacing:0.18em;
     font-family:Georgia,serif;
     font-size:12px;
+  }
+  .hero-promise{
+    margin:6px auto 0;
+    color:${C.goldBright};
+    font-family:Georgia,serif;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:0.18em;
+    line-height:1.2;
   }
   .moment-strip{
     margin:4px auto 16px;
@@ -6508,6 +6723,340 @@ const run = async (
   }
 
 
+  .brand-intermission{
+    position:relative;
+    overflow:hidden;
+    margin:0 auto 24px;
+    max-width:760px;
+    padding:20px 24px;
+    border:1px solid rgba(255,184,0,0.48);
+    border-radius:18px;
+    background:linear-gradient(135deg,rgba(11,31,74,0.98),rgba(22,45,96,0.94));
+    color:#fff;
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:clamp(18px,3vw,27px);
+    font-weight:800;
+    line-height:1.3;
+    box-shadow:0 16px 38px rgba(11,31,74,0.34), inset 0 0 32px rgba(91,141,239,0.12);
+    animation:brandIntermissionIn .55s ease both;
+  }
+  .brand-intermission::before{
+    content:"";
+    position:absolute;
+    inset:50% auto auto 50%;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(120,184,255,0.82);
+    box-shadow:0 0 28px 15px rgba(91,141,239,0.42),0 0 85px 42px rgba(91,141,239,0.18);
+    animation:intermissionGlow 2.2s ease-in-out infinite;
+  }
+  .brand-intermission span{position:relative;z-index:1;}
+
+  .cinematic-loading-overlay{
+    position:fixed!important;
+    inset:0;
+    z-index:200000!important;
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    background:#050b1c;
+    isolation:isolate;
+  }
+  .cinematic-loading-vignette{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    background:radial-gradient(circle at center,transparent 18%,rgba(2,8,24,.22) 48%,rgba(0,0,0,.86) 100%);
+  }
+  .cinematic-loading-beam{
+    position:absolute;
+    z-index:1;
+    top:-18%;
+    left:-12%;
+    width:74vw;
+    height:138vh;
+    transform:rotate(-13deg) translateX(-8%);
+    transform-origin:top left;
+    clip-path:polygon(0 42%,100% 4%,100% 96%,0 58%);
+    background:linear-gradient(90deg,rgba(76,132,235,0),rgba(122,184,255,.38) 46%,rgba(211,235,255,.62) 56%,rgba(91,141,239,.12) 82%,transparent);
+    filter:blur(10px);
+    animation:projectorSweep 1.8s ease-in-out infinite alternate;
+  }
+  .cinematic-loading-glow{
+    position:absolute;
+    z-index:2;
+    left:50%;
+    top:50%;
+    width:min(42vw,520px);
+    aspect-ratio:1;
+    border-radius:50%;
+    transform:translate(-50%,-50%) scale(.2);
+    background:radial-gradient(circle,rgba(230,246,255,.92) 0%,rgba(111,180,255,.44) 18%,rgba(46,102,220,.2) 42%,transparent 72%);
+    filter:blur(7px);
+    animation:projectorBloom 1.7s cubic-bezier(.2,.75,.2,1) infinite;
+  }
+  .cinematic-loading-content{
+    position:relative;
+    z-index:5;
+    width:min(760px,calc(100% - 36px));
+    text-align:center;
+    color:#fff;
+    text-shadow:0 3px 18px rgba(0,0,0,.82);
+  }
+  .cinematic-loading-mark{
+    width:76px;
+    height:76px;
+    margin:0 auto 22px;
+    display:grid;
+    place-items:center;
+    border:2px solid ${C.goldBright};
+    border-radius:50%;
+    color:${C.goldBright};
+    font-family:Georgia,serif;
+    font-size:44px;
+    font-weight:900;
+    box-shadow:0 0 28px rgba(255,184,0,.3),inset 0 0 22px rgba(255,184,0,.12);
+    animation:markReveal 1.35s ease-in-out infinite alternate;
+  }
+  .cinematic-loading-message{
+    font-family:Georgia,serif;
+    font-size:clamp(24px,4.8vw,52px);
+    font-weight:900;
+    line-height:1.16;
+    animation:loadingMessageIn .45s ease both;
+  }
+  .cinematic-loading-caption{
+    margin-top:14px;
+    color:rgba(255,255,255,.72);
+    font-size:clamp(11px,1.8vw,14px);
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .footer-curation-note{
+    margin:8px 0 18px;
+    color:rgba(255,255,255,.78);
+    font-style:italic;
+    font-size:13px;
+  }
+  .footer-signature-line small a{
+    color:${C.goldBright};
+    font-weight:800;
+    text-decoration:none;
+  }
+  .footer-signature-line small a:hover{text-decoration:underline;}
+
+  .minimal-footer{
+    padding:7px 16px 6px!important;
+    min-height:0!important;
+  }
+  .minimal-footer-content{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .minimal-footer .closing-promise{
+    margin:0!important;
+    font-size:15px!important;
+    line-height:1.1!important;
+  }
+  .minimal-footer-credit{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    color:rgba(255,255,255,.72);
+    font-size:8px;
+    white-space:nowrap;
+  }
+  .minimal-footer .footer-curator-link{
+    font-size:11px!important;
+    line-height:1!important;
+  }
+  @media (max-width:760px){
+    .minimal-footer-content{gap:5px;}
+    .minimal-footer .closing-promise{font-size:13px!important;}
+    .minimal-footer-credit{font-size:8px;}
+  }
+
+  /* V1.0 design polish 3: optical centering, balanced concierge panel, refined footer, soft projector dissolve. */
+  .lobby-wrap{
+    width:min(1120px,calc(100% - 32px));
+    max-width:1120px;
+  }
+  .home-hero{
+    width:100%;
+    max-width:1120px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+  }
+  .home-hero .logo,
+  .home-hero .tagline,
+  .home-hero .hero-promise{
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+  }
+  .home-curate-card{
+    display:flex;
+    flex-direction:column;
+  }
+  .home-curate-card > div{
+    width:min(100%,560px);
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .home-before-results .home-curate-card > div{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .home-before-results .home-curate-card > div > .primary-cta{
+    align-self:center;
+  }
+  .cinematic-loading-overlay{
+    opacity:1;
+    transition:opacity .65s cubic-bezier(.22,.61,.36,1), visibility .65s ease;
+    animation:cinematicOverlayFadeIn .42s ease both;
+  }
+  .cinematic-loading-overlay.is-exiting{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  .cinematic-loading-overlay.is-exiting .cinematic-loading-glow{
+    transform:translate(-50%,-50%) scale(2.05);
+    opacity:0;
+    transition:transform .65s cubic-bezier(.22,.61,.36,1), opacity .65s ease;
+  }
+  .cinematic-loading-overlay.is-exiting .cinematic-loading-beam{
+    opacity:0;
+    filter:blur(20px);
+    transition:opacity .55s ease,filter .55s ease;
+  }
+  @keyframes cinematicOverlayFadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+  .refined-footer{
+    padding:10px 16px 9px!important;
+    min-height:0!important;
+  }
+  .refined-footer-content{
+    max-width:980px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+  }
+  .refined-footer .footer-line{
+    margin:0;
+    text-align:center;
+    line-height:1.18;
+  }
+  .refined-footer .footer-line-primary{
+    color:${C.white};
+    font-family:Georgia,serif;
+    font-size:16px;
+    font-weight:900;
+  }
+  .refined-footer .footer-line-identity{
+    color:rgba(255,255,255,.86);
+    font-family:Arial,sans-serif;
+    font-size:10px;
+  }
+  .refined-footer .footer-curator-link,
+  .refined-footer .footer-screenwriter-link{
+    color:${C.goldBright};
+    font-weight:900;
+    text-decoration:underline;
+  }
+  .refined-footer .footer-curator-link{
+    border:0;
+    background:transparent;
+    padding:0;
+    font:inherit;
+    cursor:pointer;
+  }
+  .refined-footer .footer-line-legal{
+    color:rgba(255,255,255,.62);
+    font-family:Arial,sans-serif;
+    font-size:8px;
+  }
+  @media (min-width:981px) and (max-height:1100px){
+    .home-before-results .home-hero{
+      width:min(1120px,100%)!important;
+      padding-left:0!important;
+      padding-right:0!important;
+    }
+    .home-before-results .home-hero .tagline,
+    .home-before-results .home-hero .hero-promise{
+      width:auto!important;
+      max-width:100%!important;
+    }
+    .home-before-results .home-hero .hero-promise{
+      font-size:9px!important;
+      letter-spacing:.18em!important;
+      font-weight:900!important;
+      line-height:1!important;
+    }
+    .home-before-results .lobby-feature-grid{
+      width:100%!important;
+      max-width:1120px!important;
+    }
+    .home-before-results .home-curate-card > div{
+      width:min(100%,520px)!important;
+      padding:4px 0 8px;
+    }
+    .home-before-results .refined-footer{
+      padding:7px 14px 6px!important;
+    }
+    .home-before-results .refined-footer .footer-line-primary{font-size:14px!important;}
+    .home-before-results .refined-footer .footer-line-identity{font-size:9px!important;}
+    .home-before-results .refined-footer .footer-line-legal{font-size:7px!important;}
+  }
+  @media (max-width:760px){
+    .refined-footer{padding:11px 10px 10px!important;}
+    .refined-footer .footer-line-primary{font-size:14px;}
+    .refined-footer .footer-line-identity{font-size:9px;white-space:normal;}
+    .refined-footer .footer-line-legal{font-size:7px;max-width:94%;}
+  }
+
+
+  @keyframes projectorSweep{
+    from{transform:rotate(-13deg) translateX(-12%);opacity:.58;}
+    to{transform:rotate(-8deg) translateX(14%);opacity:1;}
+  }
+  @keyframes projectorBloom{
+    0%{transform:translate(-50%,-50%) scale(.18);opacity:.35;}
+    55%{transform:translate(-50%,-50%) scale(1.08);opacity:1;}
+    100%{transform:translate(-50%,-50%) scale(1.42);opacity:.48;}
+  }
+  @keyframes markReveal{from{transform:scale(.94);opacity:.78;}to{transform:scale(1.04);opacity:1;}}
+  @keyframes loadingMessageIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes brandIntermissionIn{from{opacity:0;transform:translateY(12px) scale(.985);}to{opacity:1;transform:none;}}
+  @keyframes intermissionGlow{0%,100%{opacity:.32;transform:translate(-50%,-50%) scale(.7);}50%{opacity:.68;transform:translate(-50%,-50%) scale(1.35);}}
+
+  @media (prefers-reduced-motion:reduce){
+    .cinematic-loading-beam,
+    .cinematic-loading-glow,
+    .cinematic-loading-mark,
+    .cinematic-loading-message,
+    .brand-intermission,
+    .brand-intermission::before{animation:none!important;}
+    .cinematic-loading-glow{transform:translate(-50%,-50%) scale(1);opacity:.65;}
+  }
+
   @media (min-width:981px){
     .home-before-results .home-hero{
       width:100%!important;
@@ -6535,7 +7084,104 @@ const run = async (
       font-weight:900!important;
       letter-spacing:.22em!important;
     }
+    .home-before-results .home-hero .hero-promise{
+      width:100%;
+      margin:7px auto 0!important;
+      text-align:center!important;
+      font-size:13px!important;
+      font-weight:900!important;
+      letter-spacing:.18em!important;
+      line-height:1.2!important;
+    }
   }
+  /* V1.0 desktop fit polish: keep the full CTA visible without making the homepage feel compressed. */
+  @media (min-width:981px) and (max-height:860px){
+    .home-before-results .lobby-wrap{
+      justify-content:flex-start!important;
+      padding-top:2px!important;
+      padding-bottom:2px!important;
+    }
+    .home-before-results .home-hero{
+      padding:4px 14px 8px!important;
+    }
+    .home-before-results .home-hero .logo{
+      font-size:clamp(46px,4.5vw,66px)!important;
+      line-height:.94!important;
+    }
+    .home-before-results .home-hero .tagline{
+      margin-top:5px!important;
+      font-size:9px!important;
+      letter-spacing:.19em!important;
+    }
+    .home-before-results .home-hero .hero-promise{
+      margin-top:4px!important;
+      font-size:9px!important;
+      letter-spacing:.19em!important;
+      line-height:1.2!important;
+    }
+    .home-before-results .lobby-feature-grid{
+      max-height:none!important;
+      margin-bottom:2px!important;
+      gap:12px!important;
+    }
+    .home-before-results .cinema-moment-inner{
+      padding:16px 24px!important;
+    }
+    .home-before-results .concierge-panel{
+      padding:11px 12px 0!important;
+    }
+    .home-before-results .concierge-title{
+      margin:0 0 7px!important;
+      font-size:18px!important;
+    }
+    .home-before-results .format-selector{
+      margin-bottom:7px!important;
+      padding:6px!important;
+    }
+    .home-before-results .format-option{
+      min-height:46px!important;
+      padding:7px 5px!important;
+    }
+    .home-before-results .primary-cta{
+      padding:11px 12px!important;
+      margin-bottom:8px!important;
+      font-size:14px!important;
+    }
+    .home-before-results .mycine-footer{
+      padding:6px 16px 5px!important;
+    }
+    .home-before-results .mycine-footer .closing-promise{
+      font-size:16px!important;
+      line-height:1.05!important;
+      margin-bottom:1px!important;
+    }
+    .home-before-results .footer-subtitle{
+      font-size:9px!important;
+      line-height:1.15!important;
+      margin-bottom:1px!important;
+    }
+    .home-before-results .footer-curation-note{
+      margin:1px 0 4px!important;
+      font-size:9px!important;
+      line-height:1.1!important;
+    }
+    .home-before-results .footer-signature-line strong,
+    .home-before-results .footer-curator-link{
+      font-size:13px!important;
+      line-height:1!important;
+    }
+    .home-before-results .footer-signature-line small{
+      font-size:8px!important;
+      line-height:1.1!important;
+    }
+    .home-before-results .footer-meta{
+      margin-top:3px!important;
+      padding-top:3px!important;
+      font-size:7px!important;
+      line-height:1.1!important;
+    }
+  }
+
   @media (max-width:760px){
     .mobile-menu-panel{
       position:fixed!important;
@@ -6557,6 +7203,345 @@ const run = async (
     .home-with-results .home-curate-card{animation:none!important;}
     .home-with-results .lobby-wrap{max-height:0!important;}
   }
+
+
+  /* V1.0 compact desktop pass 2: designed for 1366/1536px laptops and 100% browser zoom. */
+  @media (min-width:981px) and (max-height:1100px){
+    .home-before-results .lobby-wrap{
+      padding-top:0!important;
+      padding-bottom:0!important;
+    }
+    .home-before-results .home-hero{
+      padding:1px 12px 5px!important;
+    }
+    .home-before-results .home-hero .logo{
+      font-size:clamp(44px,4.2vw,62px)!important;
+      line-height:.92!important;
+    }
+    .home-before-results .home-hero .tagline{
+      margin-top:4px!important;
+      font-size:9px!important;
+      line-height:1!important;
+      letter-spacing:.18em!important;
+    }
+    .home-before-results .home-hero .hero-promise{
+      margin-top:5px!important;
+      font-size:14px!important;
+      line-height:1.05!important;
+    }
+    .home-before-results .lobby-feature-grid{
+      height:min(500px,calc(100vh - 245px))!important;
+      min-height:430px!important;
+      gap:10px!important;
+      margin:0 auto!important;
+      align-items:stretch!important;
+    }
+    .home-before-results .home-moment-card,
+    .home-before-results .home-curate-card,
+    .home-before-results .cinema-moment,
+    .home-before-results .cinema-moment-inner{
+      height:100%!important;
+      min-height:0!important;
+    }
+    .home-before-results .cinema-moment-inner{
+      padding:12px 20px!important;
+    }
+    .home-before-results .cinema-moment h3{
+      font-size:clamp(20px,2vw,27px)!important;
+      margin:6px 0!important;
+    }
+    .home-before-results .cinema-moment blockquote{
+      font-size:clamp(14px,1.45vw,18px)!important;
+      margin:4px 0 7px!important;
+    }
+    .home-before-results .concierge-panel{
+      padding:8px 10px 4px!important;
+      overflow:hidden!important;
+    }
+    .home-before-results .concierge-title{
+      margin:0 0 6px!important;
+      font-size:17px!important;
+      line-height:1.05!important;
+    }
+    .home-before-results .format-selector{
+      margin-bottom:6px!important;
+      padding:5px!important;
+    }
+    .home-before-results .format-selector-label{
+      margin-bottom:4px!important;
+      font-size:9px!important;
+    }
+    .home-before-results .format-option{
+      min-height:41px!important;
+      padding:5px 4px!important;
+    }
+    .home-before-results .format-option-icon{font-size:15px!important;}
+    .home-before-results .format-option-text{font-size:9px!important;}
+    .home-before-results .primary-cta{
+      padding:10px 11px!important;
+      margin:0 0 4px!important;
+      font-size:14px!important;
+      line-height:1.05!important;
+    }
+    .home-before-results .mycine-footer{
+      padding:5px 14px 4px!important;
+      min-height:0!important;
+    }
+    .home-before-results .footer-content{
+      max-width:980px!important;
+    }
+    .home-before-results .mycine-footer .closing-promise{
+      font-size:15px!important;
+      line-height:1!important;
+      margin:0 0 1px!important;
+    }
+    .home-before-results .footer-subtitle{
+      font-size:8px!important;
+      line-height:1!important;
+      margin:0 0 1px!important;
+    }
+    .home-before-results .footer-curation-note{
+      margin:1px 0 3px!important;
+      font-size:8px!important;
+      line-height:1!important;
+    }
+    .home-before-results .footer-signature-line{
+      gap:0!important;
+    }
+    .home-before-results .footer-signature-line strong,
+    .home-before-results .footer-curator-link{
+      font-size:12px!important;
+      line-height:1!important;
+      margin:0!important;
+    }
+    .home-before-results .footer-signature-line small{
+      font-size:7px!important;
+      line-height:1!important;
+    }
+    .home-before-results .footer-meta{
+      display:flex!important;
+      flex-direction:row!important;
+      justify-content:center!important;
+      margin-top:2px!important;
+      padding-top:2px!important;
+      gap:8px!important;
+      font-size:6px!important;
+      line-height:1!important;
+    }
+  }
+
+
+  /* V1.0 design polish 4: optical hero centering, vertically balanced concierge, elegant 3-line footer. */
+  .refined-footer{
+    padding:11px 18px 10px!important;
+  }
+  .refined-footer-content{
+    max-width:980px!important;
+    gap:4px!important;
+  }
+  .refined-footer .footer-line{
+    font-family:Georgia,serif!important;
+    text-align:center!important;
+    line-height:1.16!important;
+  }
+  .refined-footer .footer-line-primary{
+    color:${C.white}!important;
+    font-size:16px!important;
+    font-weight:900!important;
+    letter-spacing:0!important;
+  }
+  .refined-footer .footer-line-identity{
+    color:rgba(255,255,255,.88)!important;
+    font-size:11px!important;
+    font-weight:500!important;
+  }
+  .refined-footer .footer-line-legal{
+    color:rgba(255,255,255,.62)!important;
+    font-size:8px!important;
+    font-weight:400!important;
+    letter-spacing:.02em!important;
+  }
+  .refined-footer .footer-curator-link,
+  .refined-footer .footer-screenwriter-link{
+    color:${C.goldBright}!important;
+    font-family:Georgia,serif!important;
+    font-weight:900!important;
+    text-decoration:none!important;
+  }
+  .refined-footer .footer-curator-link:hover,
+  .refined-footer .footer-screenwriter-link:hover{
+    text-decoration:underline!important;
+  }
+
+  @media (min-width:981px){
+    .home-before-results .home-hero{
+      transform:translateX(30px)!important;
+    }
+    .home-before-results .home-hero .tagline,
+    .home-before-results .home-hero .hero-promise{
+      font-family:Georgia,serif!important;
+      font-size:10px!important;
+      line-height:1.08!important;
+      font-weight:900!important;
+      letter-spacing:.18em!important;
+    }
+    .home-before-results .home-hero .hero-promise{
+      margin-top:6px!important;
+    }
+    .home-before-results .home-curate-card{
+      justify-content:center!important;
+      padding-top:14px!important;
+      padding-bottom:14px!important;
+    }
+    .home-before-results .home-curate-card .concierge-title{
+      width:100%!important;
+      margin:0 auto 16px!important;
+      text-align:center!important;
+      flex:0 0 auto!important;
+    }
+    .home-before-results .home-curate-card > div{
+      flex:0 0 auto!important;
+      width:min(100%,560px)!important;
+      margin:0 auto!important;
+      padding:0!important;
+      justify-content:flex-start!important;
+    }
+  }
+
+  @media (min-width:981px) and (max-height:1100px){
+    .home-before-results .home-curate-card{
+      justify-content:center!important;
+      padding-top:10px!important;
+      padding-bottom:10px!important;
+    }
+    .home-before-results .home-curate-card .concierge-title{
+      margin-bottom:11px!important;
+    }
+    .home-before-results .refined-footer{
+      padding:8px 16px 7px!important;
+    }
+    .home-before-results .refined-footer .footer-line-primary{font-size:15px!important;}
+    .home-before-results .refined-footer .footer-line-identity{font-size:10px!important;}
+    .home-before-results .refined-footer .footer-line-legal{font-size:7px!important;}
+  }
+
+  @media (max-width:760px){
+    .refined-footer{padding:10px 12px 9px!important;}
+    .refined-footer .footer-line-primary{font-size:14px!important;}
+    .refined-footer .footer-line-identity{font-size:10px!important;}
+    .refined-footer .footer-line-legal{font-size:8px!important;}
+  }
+
+  /* V1.1 FINAL VISUAL LOCK — no architecture changes below this line. */
+  @media (min-width:981px){
+    .home-before-results .lobby-wrap{
+      width:min(1240px,calc(100% - 40px))!important;
+      max-width:1240px!important;
+      padding-top:0!important;
+    }
+    .home-before-results .home-hero{
+      width:100%!important;
+      min-height:210px!important;
+      padding:18px 14px 18px!important;
+      margin:0 auto!important;
+      display:flex!important;
+      flex-direction:column!important;
+      align-items:center!important;
+      justify-content:center!important;
+      transform:none!important;
+      text-align:center!important;
+    }
+    .home-before-results .home-hero .logo{
+      margin:0!important;
+      line-height:.92!important;
+    }
+    .home-before-results .home-hero .tagline,
+    .home-before-results .home-hero .hero-promise{
+      width:100%!important;
+      margin-left:auto!important;
+      margin-right:auto!important;
+      text-align:center!important;
+      font-family:Georgia,serif!important;
+      font-size:11px!important;
+      line-height:1.18!important;
+      font-weight:900!important;
+      letter-spacing:.18em!important;
+    }
+    .home-before-results .home-hero .tagline{margin-top:10px!important;margin-bottom:0!important;}
+    .home-before-results .home-hero .hero-promise{margin-top:7px!important;margin-bottom:0!important;}
+
+    .home-before-results .home-curate-card{
+      display:flex!important;
+      flex-direction:column!important;
+      justify-content:flex-start!important;
+      padding:0 18px 18px!important;
+    }
+    .home-before-results .home-curate-card .concierge-title{
+      min-height:86px!important;
+      width:100%!important;
+      margin:0 auto!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      text-align:center!important;
+      flex:0 0 86px!important;
+    }
+    .home-before-results .home-curate-card > div{
+      width:100%!important;
+      max-width:560px!important;
+      margin:0 auto!important;
+      padding:0!important;
+      flex:0 0 auto!important;
+    }
+  }
+
+  .refined-footer{
+    padding:13px 18px 12px!important;
+  }
+  .refined-footer-content{
+    max-width:980px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:4px!important;
+  }
+  .refined-footer .footer-line{
+    width:100%!important;
+    font-family:Georgia,serif!important;
+    text-align:center!important;
+  }
+  .refined-footer .footer-line-primary{
+    font-size:18px!important;
+    line-height:1.15!important;
+    color:${C.white}!important;
+    font-weight:900!important;
+  }
+  .refined-footer .footer-line-identity{
+    font-size:12px!important;
+    line-height:1.2!important;
+    color:${C.white}!important;
+  }
+  .refined-footer .footer-line-legal{
+    font-size:9px!important;
+    line-height:1.25!important;
+    color:rgba(255,255,255,.76)!important;
+  }
+  .refined-footer .footer-curator-link{
+    color:${C.goldBright}!important;
+    font-size:16px!important;
+  }
+  .refined-footer .footer-screenwriter-link{
+    color:${C.goldBright}!important;
+  }
+
+  .cinematic-loading-content-single{
+    gap:0!important;
+  }
+  .cinematic-loading-content-single .cinematic-loading-message{
+    margin:0!important;
+    max-width:min(900px,88vw)!important;
+  }
+
 `}</style>
       <LobbyDecor/>
       <TopNav page={page} setPage={setPage} savedCount={savedTitles.length} onHomeReset={resetHomeExperience}/>
@@ -6571,6 +7556,17 @@ const run = async (
             // The success panel remains visible until the viewer closes it.
           }}
         />
+      )}
+
+      {loading && (
+        <div className={`cinematic-loading-overlay${overlayExiting ? " is-exiting" : ""}`} role="status" aria-live="polite" aria-label="My Ciné is curating recommendations">
+          <div className="cinematic-loading-vignette" />
+          <div className="cinematic-loading-beam" />
+          <div className="cinematic-loading-glow" />
+          <div className="cinematic-loading-content cinematic-loading-content-single">
+            <div className="cinematic-loading-message" key={loadingMsg}>{loadingMsg}</div>
+          </div>
+        </div>
       )}
 
       {page === "standard" && (
@@ -6598,6 +7594,7 @@ const run = async (
           <span style={{color:C.white}}>MY </span><span style={{color:C.goldBright}}>CIN</span><span style={{color:C.white}}>É</span>
         </div>
         <p className="tagline">The Art of Choosing Tonight's Movie</p>
+        <p className="hero-promise">✨ 7 handpicked choices. One perfect movie night.</p>
       </section>
 
       <div className="lobby-feature-grid">
@@ -6609,9 +7606,9 @@ const run = async (
         <h2 className="concierge-title">🍿 Curate My Movie Night</h2>
 
       <div style={{padding:"0 0 0",textAlign:"center"}}>
-        <div style={{display:"flex",background:"rgba(11,20,48,0.6)",borderRadius:"12px",border:`1px solid ${C.goldBright}33`,overflow:"hidden",marginBottom:"14px"}}>
+        <div style={{display:"flex",background:"rgba(11,20,48,0.6)",borderRadius:"12px",border:`1px solid ${C.goldBright}33`,overflow:"hidden",marginBottom:"7px"}}>
   {[{id:"genre",label:"🎬 Genres"},{id:"mood",label:"🎭 Mood"}].map(t=>(
-    <button key={t.id} onClick={()=>setTab(t.id)} style={{flex:1,padding:"12px",background:tab===t.id?C.goldBright:"#162D60",color:tab===t.id?C.navy:C.goldBright,border:"none",fontWeight:"800",fontSize:"13px",cursor:"pointer",fontFamily:"inherit",transition:"all 0.15s"}}>{t.label}</button>
+    <button key={t.id} onClick={()=>setTab(t.id)} style={{flex:1,padding:"8px",background:tab===t.id?C.goldBright:"#162D60",color:tab===t.id?C.navy:C.goldBright,border:"none",fontWeight:"800",fontSize:"13px",cursor:"pointer",fontFamily:"inherit",transition:"all 0.15s"}}>{t.label}</button>
   ))}
 </div>
 
@@ -6619,8 +7616,8 @@ const run = async (
   display:"flex",
   alignItems:"center",
   justifyContent:"center",
-  gap:"8px",
-  marginBottom:"14px"
+  gap:"7px",
+  marginBottom:"7px"
 }}>
   <span style={{
     color:C.white,
@@ -6679,7 +7676,7 @@ const run = async (
   </div>
 </div>
 
-<div style={{display:"flex",flexWrap:"wrap",gap:"7px",justifyContent:"center",marginBottom:"14px"}}>
+<div style={{display:"flex",flexWrap:"wrap",gap:"5px",justifyContent:"center",marginBottom:"7px"}}>
           {tab==="genre"
             ? GENRES.map(g=><Chip key={g.id} emoji={g.emoji} label={g.label} selected={selGenres.includes(g.id)} onClick={()=>toggleGenre(g.id)}/>)
             : MOODS.map(m=><Chip key={m.id} emoji={m.emoji} label={m.label} selected={selMood===m.id} onClick={()=>setSelMood(m.id)}/>)
@@ -6691,12 +7688,12 @@ const run = async (
           background:loading?C.navyMid:C.goldBright,
           color:loading?C.goldBright:C.navy,
           border:loading?`2px solid ${C.goldBright}`:"none",
-          borderRadius:"10px",padding:"14px",
-          fontWeight:"800",fontSize:loading?"13px":"15px",
+          borderRadius:"10px",padding:"11px",
+          fontWeight:"800",fontSize:loading?"12px":"14px",
           cursor:(loading||!canFetch)?"not-allowed":"pointer",
           fontFamily:"Georgia,serif",
           boxShadow:loading?"none":`0 2px 20px ${C.goldBright}44`,
-          marginBottom:"20px",
+          marginBottom:"6px",
         }}>
           {loading ? loadingMsg : generated ? "🔄 Start fresh" : "🍿 Let's find tonight's movie"}
         </button>
@@ -6717,8 +7714,8 @@ const run = async (
       <div className="app-content">
         {error&&(
           <div className="public-error">
-            <strong>🎬 My Ciné could not load the next prepared editorial collection.</strong>
-            <span>Please tap the button again. The current seven remain safely in place.</span>
+            <strong>🎬 My Ciné could not load the recommendations.</strong>
+            <span>Local setup needs the same VITE_TMDB_TOKEN used by your live app. Copy the original .env file into this folder, then restart Vite.</span>
           </div>
         )}
         {loading&&generated&&(
@@ -6739,6 +7736,9 @@ const run = async (
 />
             {alts.length>0&&(
               <div style={{marginTop:"24px"}}>
+                <div className="brand-intermission" aria-label="My Ciné promise">
+                  <span>{intermissionMsg}</span>
+                </div>
                 <h2 className="results-heading alternatives-heading">
                   {alts.length} Great Alternatives to Explore
                 </h2>
@@ -6858,17 +7858,10 @@ const run = async (
       </>
       )}
 
-      <footer className="mycine-footer">
-        <div className="footer-content">
-          <h2 className="closing-promise">
-            Never waste 45 minutes choosing a movie again
-          </h2>
-
-          <p className="footer-subtitle">
-            Seven thoughtful choices. One unforgettable night.
-          </p>
-
-          <div className="footer-signature-line footer-signature-spaced">
+      <footer className="mycine-footer refined-footer">
+        <div className="footer-content refined-footer-content">
+          <div className="footer-line footer-line-primary">Never waste 45 minutes choosing a movie again</div>
+          <div className="footer-line footer-line-identity">
             <button
               type="button"
               className="footer-curator-link"
@@ -6876,16 +7869,12 @@ const run = async (
                 setPage("curator");
                 window.scrollTo({top:0, behavior:"smooth"});
               }}
-            >
-              Armelle Cloche
-            </button>
-            <small>Screenwriter • Creator of My Ciné</small>
+            >Armelle Cloche</button>
+            <span> • </span>
+            <a className="footer-screenwriter-link" href="https://www.armelle.com/" target="_blank" rel="noreferrer">Screenwriter</a>
+            <span> • Creator of My Ciné</span>
           </div>
-
-          <div className="footer-meta">
-            <span>Celebrating cinema, seven picks at a time.</span>
-            <span className="footer-legal">© 2026 My Ciné by Armelle Cloche. All Rights Reserved.</span>
-          </div>
+          <div className="footer-line footer-line-legal">Celebrating cinema, seven picks at a time. &nbsp; © 2026 My Ciné by Armelle Cloche. All Rights Reserved.</div>
         </div>
       </footer>
       <div style={{height:"4px",background:`linear-gradient(90deg,${C.navy},${C.goldBright},${C.navy})`}}/>
