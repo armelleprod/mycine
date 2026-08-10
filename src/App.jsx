@@ -33,6 +33,7 @@ import { DOCUMENTARY_EDITORIAL_BATCHES } from "./data/documentaryBatches";
 import { INTERNATIONAL_EDITORIAL_BATCHES } from "./data/internationalBatches";
 import { HIDDEN_GEMS_EDITORIAL_BATCHES } from "./data/hiddenGemsBatches";
 import { LGBTQ_EDITORIAL_BATCHES } from "./data/lgbtqBatches";
+import { CURATED_MOOD_EDITORIAL_BATCHES } from "./data/moodBatches";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -1657,6 +1658,88 @@ async function mapWithConcurrency(items, worker, concurrency = 5) {
 }
 
 
+
+
+// MY CINÉ V1.1 — MOOD JOURNEY UNIQUENESS
+// A mood journey is built from unique editorial titles FIRST, then divided into
+// seven-title sets. A title can therefore never reappear anywhere in the same
+// visible journey. If a strict emotional pool has fewer than 49 excellent
+// titles, My Ciné shows fewer sets rather than padding the mood with weak picks
+// or repeating a title. Quality and trust win over an artificial set count.
+const MOOD_JOURNEY_ROLES = [
+  "🍿 Tonight's Pick",
+  "❤️ Crowd Favorite",
+  "🎞️ Classic",
+  "🌍 Passport",
+  "💎 Discovery",
+  "🏆 Critics",
+  "✨ Surprise"
+];
+
+function uniqueEditorialPool(batches = []) {
+  const seen = new Set();
+  const pool = [];
+  for (const item of batches.flat()) {
+    if (!item) continue;
+    const key = `${String(item.type || "").toLowerCase()}|${String(item.title || "").trim().toLowerCase()}|${Number(item.year || 0)}`;
+    if (!item.title || seen.has(key)) continue;
+    seen.add(key);
+    pool.push(item);
+  }
+  return pool;
+}
+
+function stampMoodBatch(items, batchIndex) {
+  return items.map((item, slotIndex) => ({
+    ...item,
+    slot: slotIndex + 1,
+    badge: MOOD_JOURNEY_ROLES[slotIndex],
+    role: MOOD_JOURNEY_ROLES[slotIndex],
+    moodJourneyUnique: true,
+    moodJourneyBatch: batchIndex + 1
+  }));
+}
+
+function buildUniqueMoodJourneyBatches(movieBatches = [], seriesBatches = [], mode = "both") {
+  const movies = uniqueEditorialPool(movieBatches);
+  const series = uniqueEditorialPool(seriesBatches);
+
+  if (mode === "movie" || mode === "tv") {
+    const source = mode === "movie" ? movies : series;
+    const completeBatchCount = Math.min(7, Math.floor(source.length / 7));
+    return Array.from({length: completeBatchCount}, (_, batchIndex) =>
+      stampMoodBatch(source.slice(batchIndex * 7, batchIndex * 7 + 7), batchIndex)
+    );
+  }
+
+  // Both mode keeps the familiar 4/3, then 3/4 balance while consuming each
+  // editorial title only once across the entire journey.
+  let movieIndex = 0;
+  let seriesIndex = 0;
+  const result = [];
+
+  for (let batchIndex = 0; batchIndex < 7; batchIndex += 1) {
+    const movieTarget = batchIndex % 2 === 0 ? 4 : 3;
+    const seriesTarget = 7 - movieTarget;
+    if (movies.length - movieIndex < movieTarget || series.length - seriesIndex < seriesTarget) break;
+
+    const selectedMovies = movies.slice(movieIndex, movieIndex + movieTarget);
+    const selectedSeries = series.slice(seriesIndex, seriesIndex + seriesTarget);
+    movieIndex += movieTarget;
+    seriesIndex += seriesTarget;
+
+    const mixed = [];
+    let mi = 0;
+    let si = 0;
+    for (let slot = 0; slot < 7; slot += 1) {
+      const useMovie = batchIndex % 2 === 0 ? slot % 2 === 0 : slot % 2 === 1;
+      mixed.push(useMovie ? selectedMovies[mi++] : selectedSeries[si++]);
+    }
+    result.push(stampMoodBatch(mixed, batchIndex));
+  }
+
+  return result;
+}
 
 function composeBalancedEditorialBatches(movieBatches, seriesBatches) {
   const batchCount = Math.min(movieBatches.length, seriesBatches.length);
@@ -4443,7 +4526,17 @@ export default function App() {
   const canFetch =
     tab === "genre" ? selGenres.length > 0 : !!selMood;
 
+  const activeMoodPreparedBatches =
+    tab === "mood" && selMood && CURATED_MOOD_EDITORIAL_BATCHES[selMood]
+      ? buildUniqueMoodJourneyBatches(
+          CURATED_MOOD_EDITORIAL_BATCHES[selMood].movies,
+          CURATED_MOOD_EDITORIAL_BATCHES[selMood].series,
+          contentMode
+        )
+      : null;
+
   const activePreparedBatches =
+    activeMoodPreparedBatches || (
     tab === "genre" && selGenres.length === 1
       ? contentMode === "movie"
         ? selGenres[0] === "romcom"
@@ -4598,7 +4691,8 @@ export default function App() {
                                               )
                                             : null
             : null
-      : null;
+      : null
+    );
 
   // My Ciné Rule of Seven:
   // exactly seven recommendations per set and a maximum of seven sets
@@ -4634,11 +4728,13 @@ const run = async (
 
   try {
     const preparedGenre =
-      tab === "genre" &&
-      selGenres.length === 1 &&
-      Boolean(activePreparedBatches)
-        ? selGenres[0]
-        : null;
+      tab === "mood" && selMood && Boolean(activePreparedBatches)
+        ? `mood-${selMood}`
+        : tab === "genre" &&
+          selGenres.length === 1 &&
+          Boolean(activePreparedBatches)
+          ? selGenres[0]
+          : null;
 
     const preparedBatches = activePreparedBatches;
 
