@@ -89,10 +89,9 @@ export const DRAMA_EDITORIAL_BATCHES = [
   {
     title: "My Brilliant Career",
     year: 2026,
-    type: "movie",
+    type: "tv",
     language: "en",
     tags: ["critics"],
-    tmdbId: 1469946,
     curatorNote: "A bold new adaptation of Miles Franklin's Australian feminist classic, following a young woman in the 1890s who chooses her own ambition over every conventional expectation placed on her."
   },
   {
