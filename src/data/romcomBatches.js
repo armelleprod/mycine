@@ -206,6 +206,176 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   { title: "The Pod Generation", year: 2023, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A speculative relationship comedy about technology and parenthood.", tmdbId: 802387 },
   { title: "Romantics Anonymous", year: 2010, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Gentle, eccentric and deeply charming.", tmdbId: 44801 },
   { title: "Spellbound", year: 2011, type: "movie", language: "ko", tags: ["surprise"], curatorNote: "Horror-romcom hybrid that still honors the romance.", tmdbId: null },
+
+  // ── ADDITIONS FROM CURATED LISTS ─────────────────────────────────────────
+
+  // 2024
+  { title: "Hit Man", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A slick, witty romantic thriller-comedy — Glen Powell at his most charismatic.", tmdbId: 1029575 },
+  { title: "The Idea of You", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A confident adult romance with strong chemistry and emotional maturity.", tmdbId: 1072263 },
+  { title: "We Live in Time", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A non-linear love story with humour, tenderness and genuine heartbreak.", tmdbId: 1126166 },
+  { title: "Love at First Sight", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Netflix romcom with an irresistible conceit and warm performances.", tmdbId: 1003596 },
+
+  // 2022
+  { title: "Ticket to Paradise", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Two movie stars, a Bali wedding and pure romcom comfort food.", tmdbId: 718930 },
+
+  // 2021
+  { title: "The Hating Game", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Enemies-to-lovers office rivalry played with great gusto.", tmdbId: 644083 },
+
+  // 2020
+  { title: "Spontaneous", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A deeply original romcom in which teenagers randomly explode — funnier and sadder than it sounds.", tmdbId: 674205 },
+
+  // 2019
+  { title: "Always Be My Maybe", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Childhood sweethearts reunited — funny, warm and culturally specific.", tmdbId: 578413 },
+  { title: "The Half of It", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "A queer coming-of-age romance that reinvents the Cyrano formula.", tmdbId: 602211 },
+  { title: "Appropriate Behavior", year: 2014, type: "movie", language: "en", tags: ["critics"], curatorNote: "A sharp, funny bisexual breakup comedy in the vein of Frances Ha.", tmdbId: 287483 },
+
+  // 2018
+  { title: "Set It Up", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Netflix workplace romcom that helped revive the genre — breezy and charming.", tmdbId: 504172 },
+  { title: "Love, Simon", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A major studio queer teen romcom — warm, funny and genuinely moving.", tmdbId: 467640 },
+
+  // 2017
+  { title: "The Proposal", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A peak forced-proximity romcom — Sandra Bullock and Ryan Reynolds at full charm.", tmdbId: 18645 },
+
+  // 2016
+  { title: "Midnight in Paris", year: 2011, type: "movie", language: "en", tags: ["critics"], curatorNote: "Woody Allen's warmest late film — nostalgia, romance and Paris at their most seductive.", tmdbId: 74643 },
+
+  // 2011
+  { title: "Bridesmaids", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The film that proved women-led comedies could dominate the box office — raucous and real.", tmdbId: 56558 },
+  { title: "Crazy Stupid Love", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An ensemble romantic comedy with surprising depth and one of cinema's great plot twists.", tmdbId: 65759 },
+
+  // 2009
+  { title: "The Ugly Truth", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Raucous battle-of-the-sexes romcom with undeniable chemistry.", tmdbId: 18320 },
+  { title: "500 Days of Summer", year: 2009, type: "movie", language: "en", tags: ["critics"], curatorNote: "An anti-romcom that deconstructs expectations while being deeply romantic.", tmdbId: 19913 },
+
+  // 2008
+  { title: "Definitely, Maybe", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A mystery-structure romcom told in flashback — smart, funny and genuinely touching.", tmdbId: 10596 },
+
+  // 2007
+  { title: "27 Dresses", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A reliable crowd-pleaser built on a great premise and irresistible chemistry.", tmdbId: 10950 },
+  { title: "Music and Lyrics", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hugh Grant and Drew Barrymore in a witty, musical romcom that earns its sweetness.", tmdbId: 9592 },
+
+  // 2006
+  { title: "The Devil Wears Prada", year: 2006, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Fashion, ambition and a touch of romance — Meryl Streep gives one of cinema's great performances.", tmdbId: 1640 },
+
+  // 2005
+  { title: "Hitch", year: 2005, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A slick date-doctor romcom — Will Smith at his most charming.", tmdbId: 8204 },
+
+  // 2004
+  { title: "13 Going on 30", year: 2004, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A body-swap romcom with massive rewatchability and genuine emotional punch.", tmdbId: 11516 },
+  { title: "Love, Rosie", year: 2014, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A slow-burn friends-to-lovers story that earns its tears.", tmdbId: 257091 },
+
+  // 2003
+  { title: "Something's Gotta Give", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Adult romantic comedy with two legends — Diane Keaton and Jack Nicholson — at their best.", tmdbId: 11767 },
+  { title: "How to Lose a Guy in 10 Days", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A perfectly constructed premise executed with great chemistry and comic timing.", tmdbId: 10867 },
+
+  // 2002
+  { title: "Sweet Home Alabama", year: 2002, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Reese Witherspoon at peak charm in this Southern-set love triangle.", tmdbId: 10660 },
+
+  // 2001
+  { title: "Legally Blonde", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A romcom that transcends its genre — funny, feminist and joyously rewatchable.", tmdbId: 8247 },
+
+  // 2000
+  { title: "High Fidelity", year: 2000, type: "movie", language: "en", tags: ["critics"], curatorNote: "A music-obsessive's romantic inventory — John Cusack, sharp wit and genuine melancholy.", tmdbId: 8966 },
+  { title: "The Whole Nine Yards", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Comic crime and accidental romance — huge crowd-pleaser.", tmdbId: 11667 },
+
+  // 1999
+  { title: "Sleepless in Seattle", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A romcom built on longing and coincidence — tender and irresistible.", tmdbId: 858 },
+  { title: "You've Got Mail", year: 1998, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The Shop Around the Corner reimagined for the internet age — still charming.", tmdbId: 3783 },
+  { title: "French Kiss", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Paris-set caper romance with Meg Ryan and Kevin Kline in great form.", tmdbId: 11535 },
+  { title: "Sliding Doors", year: 1998, type: "movie", language: "en", tags: ["critics"], curatorNote: "Two parallel love stories exploring how one moment changes everything.", tmdbId: 9566 },
+  { title: "Clueless", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Cher Horowitz is one of cinema's great comic heroines — a romcom and a time capsule.", tmdbId: 9603 },
+
+  { title: "Pretty Woman", year: 1990, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The Cinderella romcom that defined a generation — Julia Roberts at her most luminous.", tmdbId: 114 },
+  { title: "Miss Congeniality", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A comedy-romcom hybrid with Sandra Bullock in irresistible underdog mode.", tmdbId: 8869 },
+
+  // 1998
+  { title: "The Mask of Zorro", year: 1998, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Swashbuckling adventure with sizzling romantic tension.", tmdbId: 8195 },
+
+  // 1997
+  { title: "Chasing Amy", year: 1997, type: "movie", language: "en", tags: ["critics"], curatorNote: "Kevin Smith's most emotionally complex film — a romcom about assumptions and love.", tmdbId: 7515 },
+
+  // 1996
+  { title: "The Birdcage", year: 1996, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A farce of mismatched families and queer joy that still lands every joke.", tmdbId: 9441 },
+  { title: "Emma", year: 1996, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A charming and faithful Austen adaptation — Gwyneth Paltrow perfectly cast.", tmdbId: 16987 },
+
+  // 1995
+  { title: "While You Were Sleeping", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Sandra Bullock gem — cozy, funny and unexpectedly moving.", tmdbId: 8688 },
+  { title: "The American President", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Aaron Sorkin's walking-and-talking romantic comedy — sharp and genuinely charming.", tmdbId: 9472 },
+
+  // 1993
+  { title: "Dave", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A political farce with a warm romantic heart — Kevin Kline at his most likeable.", tmdbId: 9522 },
+  { title: "Mrs. Doubtfire", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Robin Williams at his most inventive in a family comedy with real emotional stakes.", tmdbId: 788 },
+
+  // 1992
+  { title: "Singles", year: 1992, type: "movie", language: "en", tags: ["critics"], curatorNote: "A grunge-era ensemble romcom — funny, melancholy and full of great music.", tmdbId: 11678 },
+
+  // 1990
+  { title: "Joe Versus the Volcano", year: 1990, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An eccentric, fable-like romcom that rewards patient viewers.", tmdbId: 11232 },
+
+  // 1989
+  { title: "Say Anything...", year: 1989, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The boombox scene is cinema. Lloyd Dobler is the template for romantic heroes.", tmdbId: 10274 },
+  { title: "The Princess Bride", year: 1987, type: "movie", language: "en", tags: ["crowd"], curatorNote: "As you wish. A perfect fairy-tale romance with wit, adventure and quotable lines forever.", tmdbId: 2493 },
+
+  // 1988
+  { title: "Bull Durham", year: 1988, type: "movie", language: "en", tags: ["critics"], curatorNote: "A baseball romance with sharp dialogue and real adult feeling.", tmdbId: 9696 },
+  { title: "Dirty Dancing", year: 1987, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Nobody puts Baby in a corner. Dance, desire and class — a genuine classic.", tmdbId: 3062 },
+  { title: "Roxanne", year: 1987, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Steve Martin's warm, funny Cyrano update — charming from first scene to last.", tmdbId: 15006 },
+
+  // 1986
+  { title: "Hannah and Her Sisters", year: 1986, type: "movie", language: "en", tags: ["critics"], curatorNote: "Woody Allen's richest ensemble — love, art and mortality handled with lightness.", tmdbId: 1799 },
+
+  // 1984
+  { title: "Romancing the Stone", year: 1984, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Adventure and romance in equal measure — a pure crowd-pleaser.", tmdbId: 8358 },
+
+  // 1983
+  { title: "Local Hero", year: 1983, type: "movie", language: "en", tags: ["critics"], curatorNote: "A gentle, witty Scottish comedy with romantic dimensions and great soul.", tmdbId: 27052 },
+
+  // 1981
+  { title: "Arthur", year: 1981, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Dudley Moore as the loveable drunk millionaire — effortlessly charming.", tmdbId: 16619 },
+
+  // 1980
+  { title: "Somewhere in Time", year: 1980, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A time-travel romance with sweeping emotion and Christopher Reeve at his most romantic.", tmdbId: 14072 },
+
+  // 1977
+  { title: "Annie Hall", year: 1977, type: "movie", language: "en", tags: ["critics"], curatorNote: "The deconstructed romcom — Woody Allen's masterpiece about love and why it ends.", tmdbId: 703 },
+
+  // 1967
+  { title: "The Graduate", year: 1967, type: "movie", language: "en", tags: ["critics"], curatorNote: "Mrs Robinson, a wedding crash and one of cinema's most ambiguous romcom endings.", tmdbId: 1050 },
+
+  // 1961
+  { title: "Breakfast at Tiffany's", year: 1961, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Audrey Hepburn, Moon River and one of cinema's most iconic romantic heroines.", tmdbId: 4687 },
+
+  // 1959
+  { title: "Some Like It Hot", year: 1959, type: "movie", language: "en", tags: ["critics"], curatorNote: "Often called the greatest comedy ever made — a cross-dressing farce with perfect timing.", tmdbId: 425 },
+  { title: "Pillow Talk", year: 1959, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Doris Day and Rock Hudson at their sharpest — the battle-of-the-sexes romcom at its peak.", tmdbId: 26566 },
+
+  // 1957
+  { title: "An Affair to Remember", year: 1957, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The original weeper romcom — a benchmark of romantic longing.", tmdbId: 9548 },
+
+  // 1954
+  { title: "Sabrina", year: 1954, type: "movie", language: "en", tags: ["critics"], curatorNote: "Audrey Hepburn, Humphrey Bogart and Billy Wilder — elegant, witty and achingly romantic.", tmdbId: 1904 },
+
+  // 1952
+  { title: "Singin' in the Rain", year: 1952, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The greatest Hollywood musical — full of comedy, romance and pure cinematic joy.", tmdbId: 872 },
+
+  // 1942
+  { title: "To Be or Not to Be", year: 1942, type: "movie", language: "en", tags: ["critics"], curatorNote: "Lubitsch's wartime romcom farce — daring, brilliant and impossibly funny.", tmdbId: 38414 },
+
+  // 1939
+  { title: "Ninotchka", year: 1939, type: "movie", language: "en", tags: ["critics"], curatorNote: "Garbo laughs — a Cold War comedy of romantic thaw with Lubitsch's signature grace.", tmdbId: 28966 },
+  { title: "The Women", year: 1939, type: "movie", language: "en", tags: ["critics"], curatorNote: "All-female cast, sharp dialogue and a bitingly funny take on marriage and romance.", tmdbId: 72479 },
+
+  // 1938
+  { title: "Holiday", year: 1938, type: "movie", language: "en", tags: ["critics"], curatorNote: "Cary Grant and Katharine Hepburn sparring — sophisticated and surprisingly radical.", tmdbId: 27266 },
+
+  // 1937
+  { title: "The Awful Truth", year: 1937, type: "movie", language: "en", tags: ["critics"], curatorNote: "Cary Grant and Irene Dunne in remarriage comedy at its finest.", tmdbId: 28723 },
+
+  // 1934
+  { title: "Twentieth Century", year: 1934, type: "movie", language: "en", tags: ["critics"], curatorNote: "John Barrymore and Carole Lombard in a screwball battle of wills on a train.", tmdbId: 72230 },
+
+  // 1933
+  { title: "Design for Living", year: 1933, type: "movie", language: "en", tags: ["critics"], curatorNote: "Lubitsch's pre-code polyamorous comedy — ahead of its time in every way.", tmdbId: 33542 },
 ];
 
 export const ROMCOM_POOL_COUNT = ROMCOM_EDITORIAL_BATCHES.length;

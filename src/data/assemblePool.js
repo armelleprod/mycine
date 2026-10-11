@@ -2,12 +2,14 @@
 // Assembles a fresh 7-entry editorial batch from a flat pool each time a user requests.
 // Rotates through the pool via localStorage so the same titles don't repeat every session.
 //
-// DESIGN: Dual-rotation guarantee —
+// DESIGN: Triple-rotation guarantee —
 //   Slot 1 (Tonight's Pick) always comes from a SEPARATE rotation over the current-year sub-pool
 //   (year === CURRENT_YEAR). This guarantees a 2026 title every single batch,
 //   regardless of where the main pool pointer happens to be.
-//   Slot 2 (NEW) is any entry with year >= 2025 (2025 or 2026 only — never 2024).
-//   The remaining 6 entries come from the main pool rotation (recent entry excluded).
+//   Slot 2 (NEW) always comes from a SECOND SEPARATE rotation over year >= 2025 entries
+//   (excluding Tonight's Pick). This guarantees a 2025 or 2026 title is always available for NEW,
+//   regardless of where the main pool pointer happens to be.
+//   The remaining 5 entries come from the main pool rotation (both guaranteed picks excluded).
 //   Badges are assigned AFTER selection based on what each entry actually is.
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -76,28 +78,47 @@ function getNextFromRotation(pool, storageKey, count) {
   }
 }
 
-// Assembles 7 entries using dual rotation:
-//   1. Pick 1 entry from the recent sub-pool (year >= CURRENT_YEAR - 1) using its own pointer.
-//   2. Pick 6 entries from the main pool (skipping any title already picked in step 1).
-// This guarantees a 2025/2026 film appears in every batch.
+// Assembles 7 entries using triple rotation:
+//   1. Pick 1 entry from the recent sub-pool (year === CURRENT_YEAR) — Tonight's Pick guarantee.
+//   2. Pick 1 entry from the new sub-pool (year >= 2025, excluding Tonight's Pick) — NEW badge guarantee.
+//   3. Pick 5 entries from the main pool (excluding the two guaranteed picks).
+// This guarantees both Slot 1 (Tonight's Pick = 2026) and Slot 2 (NEW = 2025+) are always filled.
 function getNextBatch(pool, storageKey) {
   const recentPool = pool.filter(e => Number(e.year) === CURRENT_YEAR);
   const recentKey = storageKey + ":recent";
 
-  // Step 1: one guaranteed recent pick
+  // Step 1: one guaranteed Tonight's Pick (year === CURRENT_YEAR)
   let recentPick = null;
   if (recentPool.length > 0) {
     const picks = getNextFromRotation(recentPool, recentKey, 1);
     recentPick = picks[0] || null;
   }
 
-  // Step 2: 6 more from the main pool, excluding the recent pick's title
-  const mainPool = recentPick
-    ? pool.filter(e => e.title !== recentPick.title)
-    : pool;
-  const mainPicks = getNextFromRotation(mainPool, storageKey, BATCH_SIZE - 1);
+  // Step 2: one guaranteed NEW pick (year >= 2025, not already picked)
+  const newPool = pool.filter(
+    e => Number(e.year) >= 2025 && e.title !== recentPick?.title
+  );
+  const newKey = storageKey + ":new";
+  let newPick = null;
+  if (newPool.length > 0) {
+    const picks = getNextFromRotation(newPool, newKey, 1);
+    newPick = picks[0] || null;
+  }
 
-  return recentPick ? [recentPick, ...mainPicks] : mainPicks;
+  // Step 3: 5 more from the main pool, excluding both guaranteed picks
+  const excludedTitles = new Set(
+    [recentPick?.title, newPick?.title].filter(Boolean)
+  );
+  const mainPool = pool.filter(e => !excludedTitles.has(e.title));
+  const mainPicks = getNextFromRotation(mainPool, storageKey, BATCH_SIZE - 2);
+
+  const batch = [];
+  if (recentPick) batch.push(recentPick);
+  if (newPick) batch.push(newPick);
+  batch.push(...mainPicks);
+
+  // Trim to BATCH_SIZE in case edge cases (tiny pool) over-fill
+  return batch.slice(0, BATCH_SIZE);
 }
 
 // Assign badges to the 7 selected entries based on what they actually are.
@@ -188,8 +209,10 @@ function assignBadges(entries) {
  * each assigned a badge based on the entry's actual properties.
  *
  * GUARANTEE: Slot 1 (Tonight's Pick) always shows a 2026 title, drawn from
- * a separate rotation over the current-year sub-pool. Slot 2 (NEW) shows
- * 2025 or 2026. The remaining slots rotate through the full pool.
+ * a separate rotation over the current-year sub-pool. Slot 2 (NEW) always
+ * shows 2025 or 2026, drawn from a second separate rotation over year >= 2025
+ * entries (excluding Tonight's Pick). The remaining 5 slots rotate through
+ * the full pool.
  *
  * Entry object shape:
  * {

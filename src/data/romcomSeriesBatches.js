@@ -191,6 +191,41 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   // ── 1966 ──────────────────────────────────────────────────────────────────
   { title: "That Girl", year: 1966, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Marlo Thomas as a single woman pursuing her dreams in New York — groundbreaking.", moodTags: ["nostalgia", "date"] },
 
+  // ── ADDITIONS FROM CURATED LISTS ─────────────────────────────────────────
+
+  // 2024 K-dramas
+  { title: "Queen of Tears", year: 2024, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A chaebol marriage on the rocks finds its way back — sweeping, emotional and wildly popular.", moodTags: ["travel", "date", "feelgood"], tmdbId: 239770 },
+  { title: "When Life Gives You Tangerines", year: 2025, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A Jeju Island love story spanning decades — IU and Park Bo-gum in career-best form.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
+  { title: "My Demon", year: 2023, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A powerful businesswoman forms a contract with a demon — supernatural romcom with big energy.", moodTags: ["travel", "date", "escape"], tmdbId: 237026 },
+  { title: "Twenty-Five Twenty-One", year: 2022, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A fencing prodigy and a struggling young man meet at the turn of the millennium — bittersweet and beautiful.", moodTags: ["travel", "date", "feelgood"], tmdbId: 187878 },
+  { title: "It's Okay to Not Be Okay", year: 2020, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A children's book author and a psychiatric nurse heal each other — dark fairy-tale romance.", moodTags: ["travel", "date", "think"], tmdbId: 99879 },
+  { title: "Start-Up", year: 2020, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A Silicon Valley-inspired K-drama love triangle set in Seoul's tech scene.", moodTags: ["travel", "date", "feelgood"], tmdbId: 104771 },
+  { title: "Hospital Playlist", year: 2020, type: "tv", language: "ko", tags: ["critics"], curatorNote: "Five doctors who've been friends for 20 years — warmth, medicine and slow-burn romance.", moodTags: ["travel", "date", "feelgood"], tmdbId: 97298 },
+  { title: "My Mister", year: 2018, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A middle-aged engineer and a young woman in survival mode form an unlikely bond — quietly devastating.", moodTags: ["think", "date"], tmdbId: 75234 },
+  { title: "Go Back Couple", year: 2017, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A divorcing couple travel back to their college days to relive — and rethink — their love story.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
+  { title: "Chicago Typewriter", year: 2017, type: "tv", language: "ko", tags: ["surprise"], curatorNote: "A bestselling author and a ghostwriter share a past-life connection — romantic and mysterious.", moodTags: ["travel", "date", "escape"], tmdbId: null },
+  { title: "Romantic Doctor Teacher Kim", year: 2016, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A genius surgeon hides in a rural hospital — medical romance with wit and heart.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
+
+  // Workplace comedies with romantic heart
+  { title: "Ted Lasso", year: 2020, type: "tv", language: "en", tags: ["crowd"], curatorNote: "An American football coach takes over a British soccer club — optimism, friendship and unexpected love.", moodTags: ["feelgood", "laugh", "escape"], tmdbId: 97546 },
+  { title: "Abbott Elementary", year: 2021, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Mockumentary about underfunded Philadelphia teachers — the funniest workplace romance on TV.", moodTags: ["laugh", "feelgood"], tmdbId: 130392 },
+  { title: "Brooklyn Nine-Nine", year: 2013, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A police precinct comedy with one of TV's best slow-burn romances at its centre.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 48891 },
+  { title: "New Girl", year: 2011, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Zooey Deschanel moves in with three men — the ensemble chemistry is unbeatable.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 40075 },
+  { title: "The Mindy Project", year: 2012, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A romantic comedy-obsessed OB-GYN navigates love and medicine — Mindy Kaling at her best.", moodTags: ["laugh", "date", "escape"], tmdbId: 44006 },
+  { title: "Parks and Recreation", year: 2009, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Leslie Knope's Pawnee — workplace comedy with one of television's great love stories.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 8592 },
+  { title: "The Office", year: 2005, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Jim and Pam is one of the greatest will-they-won't-they romances in TV history.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 2316 },
+  { title: "Ghosts", year: 2019, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A couple inherit a haunted manor — the British original is warm, witty and quietly romantic.", moodTags: ["laugh", "escape"], tmdbId: 91186 },
+  { title: "Frasier", year: 1993, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Pompous psychiatrist navigates Seattle dating — still one of the finest sitcoms ever made.", moodTags: ["laugh", "nostalgia"], tmdbId: 2316 },
+  { title: "Ugly Betty", year: 2006, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Fashion world fish-out-of-water comedy with a warm romantic core.", moodTags: ["laugh", "escape", "date"], tmdbId: 1420 },
+  { title: "Unbreakable Kimmy Schmidt", year: 2015, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A cult survivor reinvents herself in New York — irrepressibly funny with surprising romantic warmth.", moodTags: ["laugh", "escape"], tmdbId: 60708 },
+  { title: "iZombie", year: 2015, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A zombie medical examiner solves crimes — genre-bending romcom with great charm.", moodTags: ["laugh", "escape"], tmdbId: 61888 },
+  { title: "Santa Clarita Diet", year: 2017, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A real estate agent becomes a zombie — Drew Barrymore and Timothy Olyphant are perfect together.", moodTags: ["laugh", "escape"], tmdbId: 67466 },
+  { title: "Atypical", year: 2017, type: "tv", language: "en", tags: ["crowd"], curatorNote: "An autistic teenager navigates dating for the first time — funny, moving and genuine.", moodTags: ["date", "feelgood"], tmdbId: 67955 },
+
+  // Late 90s / 2000s classics
+  { title: "Felicity", year: 1998, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A college student follows her crush cross-country — deeply romantic and emotionally honest.", moodTags: ["date", "nostalgia"], tmdbId: 1668 },
+  { title: "Outlander", year: 2014, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A WWII nurse time-travels to 18th-century Scotland and finds an epic love — sweeping and passionate.", moodTags: ["date", "escape"], tmdbId: 56570 },
+
   // ── The Makanai (2023 Netflix Japan) ─────────────────────────────────────
   { title: "The Makanai: Cooking for the Maiko House", year: 2023, type: "tv", language: "ja", tags: ["surprise"], curatorNote: "Hirokazu Kore-eda's quiet, beautiful cooking series with a soft romantic heart.", moodTags: ["date", "think"] },
 
