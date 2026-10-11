@@ -990,7 +990,7 @@ async function fetchCanonTitleCandidate(entry, token) {
 
     return normalizeFilterLabel(itemTitle) === normalizeFilterLabel(entry.title) &&
       (!itemYear || Number(itemYear) === Number(entry.year));
-  }) || (data.results || [])[0];
+  });
 
   if (!exact) return null;
 

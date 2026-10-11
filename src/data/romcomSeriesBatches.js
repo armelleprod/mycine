@@ -3,15 +3,12 @@
 
 export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   // ── 2026 (added — required for Tonight's Pick guarantee) ──────────────────
-  { title: "Nobody Wants This", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "The season 2 return of Netflix's hit romantic comedy, funnier and more confident than ever.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 242873 },
-  { title: "Running Point", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A sharp workplace romcom set in the world of professional basketball — great chemistry and lots of laughs.", moodTags: ["date", "laugh", "feelgood"], tmdbId: null },
-  { title: "XO, Kitty", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Season 2 of the K-drama-inspired Netflix romcom, with Kitty navigating new love and old complications.", moodTags: ["date", "escape", "feelgood"], tmdbId: null },
+  { title: "Nobody Wants This", year: 2025, type: "tv", language: "en", tags: ["crowd"], curatorNote: "The season 2 return of Netflix's hit romantic comedy, funnier and more confident than ever.", moodTags: ["date", "feelgood", "laugh"], tmdbId: null },
+  { title: "XO, Kitty", year: 2025, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Season 2 of the K-drama-inspired Netflix romcom, with Kitty navigating new love and old complications.", moodTags: ["date", "escape", "feelgood"], tmdbId: null },
 
   // ── 2024 ──────────────────────────────────────────────────────────────────
-  { title: "Nobody Wants This", year: 2024, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Kristen Bell and Adam Brody ignite in this fresh, funny Netflix romcom.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 242873 },
+  { title: "Nobody Wants This", year: 2024, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Kristen Bell and Adam Brody ignite in this fresh, funny Netflix romcom.", moodTags: ["date", "feelgood", "laugh"], tmdbId: null },
   { title: "One Day", year: 2024, type: "tv", language: "en", tags: ["critics"], curatorNote: "A devastating, beautifully acted adaptation of the beloved novel.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 207968 },
-  { title: "The Decameron", year: 2024, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Bawdy, gorgeous and unexpectedly tender — medieval romcom chaos.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 234737 },
-  { title: "The New Look", year: 2024, type: "tv", language: "en", tags: ["critics"], curatorNote: "Elegant historical romance wrapped in postwar Paris glamour.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 210064 },
   { title: "The Completely Made-Up Adventures of Dick Turpin", year: 2024, type: "tv", language: "en", tags: ["surprise"], curatorNote: "An unexpected, playful or genre-bending romantic-comedy choice.", moodTags: ["laugh", "escape"], tmdbId: null },
 
   // ── 2023 ──────────────────────────────────────────────────────────────────
@@ -23,9 +20,9 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Survival of the Thickest", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A bold, joyful romcom about rebuilding your life and love life.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "Platonic", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Seth Rogen and Rose Byrne reignite a friendship — and maybe something more.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "King the Land", year: 2023, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A transporting romantic-comedy series from South Korea.", moodTags: ["travel", "date", "feelgood"] },
-  { title: "Mrs. Davis", year: 2023, type: "tv", language: "en", tags: ["surprise"], curatorNote: "An unexpected, playful or genre-bending romantic-comedy choice.", moodTags: ["laugh", "escape"] },
 
   // ── 2022 ──────────────────────────────────────────────────────────────────
+  { title: "Romantic Killer", year: 2022, type: "tv", language: "ja", tags: ["surprise"], curatorNote: "A girl who loves games, manga and cats is forced into real-life romance by a wizard — a hilarious anime that skewers every romcom trope it uses.", moodTags: ["laugh", "escape", "date"], tmdbId: null },
   { title: "Heartstopper", year: 2022, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Pure-hearted queer teen romance — warm, funny and essential.", moodTags: ["date", "escape"] },
   { title: "The Summer I Turned Pretty", year: 2022, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Summertime love triangles and coming-of-age feeling.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "Colin from Accounts", year: 2022, type: "tv", language: "en", tags: ["critics"], curatorNote: "Australian comedy about an accidental bond over an injured dog.", moodTags: ["date", "feelgood", "laugh"] },
@@ -37,13 +34,11 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Everything I Know About Love", year: 2022, type: "tv", language: "en", tags: ["critics"], curatorNote: "Dolly Alderton's love letter to female friendship in your twenties.", moodTags: ["date", "think"] },
   { title: "Semantic Error", year: 2022, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Charming enemies-to-lovers Korean BL series.", moodTags: ["travel", "date", "feelgood"] },
   { title: "Partner Track", year: 2022, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A law firm, workplace romance and the price of ambition.", moodTags: ["date", "feelgood", "laugh"] },
-  { title: "Somebody Somewhere", year: 2022, type: "tv", language: "en", tags: ["critics"], curatorNote: "Quiet, warm comedy about belonging, friendship and late-blooming love.", moodTags: ["think", "laugh"] },
   { title: "Our Flag Means Death", year: 2022, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Pirate queer romcom — swashbuckling and sweethearted.", moodTags: ["laugh", "escape"] },
   { title: "Thirty-Nine", year: 2022, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Three friends on the edge of forty find love and face loss.", moodTags: ["travel", "date", "feelgood"] },
 
   // ── 2021 ──────────────────────────────────────────────────────────────────
   { title: "Starstruck", year: 2021, type: "tv", language: "en", tags: ["surprise"], curatorNote: "An ordinary woman accidentally falls into a movie star's orbit — delightful.", moodTags: ["date", "think"] },
-  { title: "Scenes from a Marriage", year: 2021, type: "tv", language: "en", tags: ["critics"], curatorNote: "A marriage unraveling — shot with searing intimacy.", moodTags: ["think", "laugh"] },
   { title: "Hometown Cha-Cha-Cha", year: 2021, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Warm Korean romcom set in a cozy seaside village.", moodTags: ["travel", "date", "feelgood"] },
   { title: "Our Beloved Summer", year: 2021, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A documentary reunites exes — feelings resurface beautifully.", moodTags: ["travel", "date", "feelgood"] },
   { title: "Sort Of", year: 2021, type: "tv", language: "en", tags: ["critics"], curatorNote: "A non-binary nanny navigates identity, family and slow-burn love.", moodTags: ["date", "think"] },
@@ -90,9 +85,7 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Derry Girls", year: 2018, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Teenage chaos, friendship and romance in 1990s Northern Ireland.", moodTags: ["laugh", "escape"] },
   { title: "The Hook Up Plan", year: 2018, type: "tv", language: "fr", tags: ["surprise"], curatorNote: "French friends hire a gigolo to boost their heartbroken friend's confidence.", moodTags: ["date", "think"] },
   { title: "Because This Is My First Life", year: 2017, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A platonic cohabitation arrangement slowly becomes something real.", moodTags: ["travel", "date", "feelgood"] },
-  { title: "The Split", year: 2018, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A family law firm, a marriage faltering — adult romance at its thorniest.", moodTags: ["date", "think"] },
   { title: "Welcome to Waikiki", year: 2018, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Three struggling friends and a surprise baby in a Jeju guesthouse.", moodTags: ["travel", "date", "feelgood"] },
-  { title: "Plan Coeur", year: 2018, type: "tv", language: "fr", tags: ["surprise"], curatorNote: "Parisian friends hire an actor to be their friend's boyfriend — feelings ensue.", moodTags: ["date", "think"] },
 
   // ── 2017 ──────────────────────────────────────────────────────────────────
   { title: "The Bold Type", year: 2017, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Three magazine staffers navigating careers and complicated love lives.", moodTags: ["date", "escape"] },
@@ -101,15 +94,11 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Fight for My Way", year: 2017, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Lifelong friends who realize their feelings run deeper.", moodTags: ["travel", "date", "feelgood"] },
 
   // ── 2016 ──────────────────────────────────────────────────────────────────
-  { title: "Fleabag", year: 2016, type: "tv", language: "en", tags: ["critics"], curatorNote: "Phoebe Waller-Bridge's confessional comedy — the best priest romance ever committed to screen.", moodTags: ["think", "laugh"] },
-  { title: "Crazy Ex-Girlfriend", year: 2015, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Musical romcom that deconstructs every trope it deploys.", moodTags: ["laugh", "escape"] },
+{ title: "Crazy Ex-Girlfriend", year: 2015, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Musical romcom that deconstructs every trope it deploys.", moodTags: ["laugh", "escape"] },
   { title: "Insecure", year: 2016, type: "tv", language: "en", tags: ["critics"], curatorNote: "Issa Rae's sharp, funny and achingly real Los Angeles love story.", moodTags: ["think", "laugh"] },
   { title: "Love", year: 2016, type: "tv", language: "en", tags: ["critics"], curatorNote: "Judd Apatow's messy, honest LA relationship — the antidote to fairy-tale romance.", moodTags: ["date", "think"] },
   { title: "Mum", year: 2016, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A quietly heartbreaking and funny slow-burn second-chance romance.", moodTags: ["laugh", "escape"] },
   { title: "Weightlifting Fairy Kim Bok-joo", year: 2016, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Athletic young people discover love between competitions.", moodTags: ["travel", "date", "feelgood"] },
-  { title: "Better Things", year: 2016, type: "tv", language: "en", tags: ["critics"], curatorNote: "Pamela Adlon's brilliant comedy about a single mother's chaotic love life.", moodTags: ["think", "laugh"] },
-  { title: "Easy", year: 2016, type: "tv", language: "en", tags: ["critics"], curatorNote: "Joe Swanberg's anthology of contemporary Chicago relationships — honest and observant.", moodTags: ["think", "laugh"] },
-  { title: "Divorce", year: 2016, type: "tv", language: "en", tags: ["critics"], curatorNote: "Sarah Jessica Parker navigates the end of a marriage — sharp and unglamorous.", moodTags: ["think", "laugh"] },
   { title: "The Durrells", year: 2016, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A British family transplanted to 1930s Corfu — sunny, witty and romantic.", moodTags: ["laugh", "escape"] },
 
   // ── 2015 ──────────────────────────────────────────────────────────────────
@@ -126,15 +115,15 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Jane the Virgin", year: 2014, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A telenovela-inspired gem full of romance, humour and heart.", moodTags: ["date", "escape"] },
   { title: "Looking", year: 2014, type: "tv", language: "en", tags: ["critics"], curatorNote: "San Francisco gay men navigating love and identity — precise and understated.", moodTags: ["think", "laugh"] },
   { title: "Detectorists", year: 2014, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Metal detectorists pursue treasure and romance with quiet English magic.", moodTags: ["laugh", "escape"] },
-  { title: "W1A", year: 2014, type: "tv", language: "en", tags: ["surprise"], curatorNote: "BBC satire with romantic undertones — brilliantly dry.", moodTags: ["laugh", "escape"] },
 
   // ── 2013 ──────────────────────────────────────────────────────────────────
   { title: "Please Like Me", year: 2013, type: "tv", language: "en", tags: ["critics"], curatorNote: "Josh Thomas's semi-autobiographical queer coming-of-age — tender and real.", moodTags: ["think", "laugh"] },
   { title: "My Love from the Star", year: 2013, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "An alien who's been on Earth 400 years falls for a Hallyu star.", moodTags: ["travel", "date", "feelgood"] },
   { title: "Love Sick", year: 2014, type: "tv", language: "th", tags: ["surprise"], curatorNote: "Thai BL romance that paved the way for an entire genre.", moodTags: ["think", "laugh"] },
+  { title: "Coffee Prince", year: 2007, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A woman disguises herself as a man to work at an all-male coffee house — and falls for her boss. The K-drama that launched a thousand tropes.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
+  { title: "My Lovely Sam Soon", year: 2005, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A plain-spoken pastry chef and a cold hotelier who can't stand each other — until they can't be apart. The original relatable K-drama heroine.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
 
   // ── 2011 ──────────────────────────────────────────────────────────────────
-  { title: "Enlightened", year: 2011, type: "tv", language: "en", tags: ["critics"], curatorNote: "A woman rebuilding herself finds unexpected connections — Laura Dern is extraordinary.", moodTags: ["think", "laugh"] },
 
   // ── 2009 ──────────────────────────────────────────────────────────────────
   { title: "Miranda", year: 2009, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Miranda Hart's pratfalling, fourth-wall-breaking romcom — pure joy.", moodTags: ["laugh", "escape"] },
@@ -159,7 +148,6 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Moonlighting", year: 1985, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Bruce Willis and Cybill Shepherd — the original will-they-won't-they.", moodTags: ["nostalgia", "date"] },
   { title: "A Different World", year: 1987, type: "tv", language: "en", tags: ["crowd"], curatorNote: "HBCU romance and comedy — rich and rarely matched.", moodTags: ["nostalgia", "date"] },
   { title: "Designing Women", year: 1986, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Atlanta interior designers with sharp tongues and big hearts.", moodTags: ["nostalgia", "date"] },
-  { title: "Thirtysomething", year: 1987, type: "tv", language: "en", tags: ["critics"], curatorNote: "Baby boomer love, marriage and doubt — influential and honest.", moodTags: ["nostalgia", "date"] },
 
   // ── 1984 ──────────────────────────────────────────────────────────────────
   { title: "Kate & Allie", year: 1984, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Two divorced friends raise their families together — warm feminist comedy.", moodTags: ["laugh", "escape"] },
@@ -168,7 +156,6 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Cheers", year: 1982, type: "tv", language: "en", tags: ["crowd"], curatorNote: "The bar where everybody knows your name — and Sam and Diane changed television romance.", moodTags: ["nostalgia", "date"] },
 
   // ── 1978 ──────────────────────────────────────────────────────────────────
-  { title: "WKRP in Cincinnati", year: 1978, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Radio station romcom — goofy, warm and ahead of its time.", moodTags: ["laugh", "escape"] },
 
   // ── 1977 ──────────────────────────────────────────────────────────────────
   { title: "The Love Boat", year: 1977, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Weekly cruise-ship romances — the ultimate feel-good comfort series.", moodTags: ["nostalgia", "date"] },
@@ -180,7 +167,6 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Rhoda", year: 1974, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Mary Tyler Moore's brash best friend gets her own romantic journey.", moodTags: ["nostalgia", "date"] },
 
   // ── 1970 ──────────────────────────────────────────────────────────────────
-  { title: "The Mary Tyler Moore Show", year: 1970, type: "tv", language: "en", tags: ["critics"], curatorNote: "The show that redefined what a TV woman could want — and love.", moodTags: ["nostalgia", "date"] },
 
   // ── 1968 ──────────────────────────────────────────────────────────────────
   { title: "The Doris Day Show", year: 1968, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Doris Day's sunny, charming TV turn — delightfully of its era.", moodTags: ["nostalgia", "date"] },
@@ -192,12 +178,14 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
 
   // 2024 K-dramas
   { title: "Queen of Tears", year: 2024, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A chaebol marriage on the rocks finds its way back — sweeping, emotional and wildly popular.", moodTags: ["travel", "date", "feelgood"], tmdbId: 239770 },
-  { title: "When Life Gives You Tangerines", year: 2025, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A Jeju Island love story spanning decades — IU and Park Bo-gum in career-best form.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
+  { title: "Lovely Runner", year: 2024, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A time-travel romance between a wheelchair-using fan and her idol — emotional, warm and completely addictive.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
+  { title: "Love Next Door", year: 2024, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Childhood friends reunited as adults — a warm, beautifully observed slow-burn romance.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
   { title: "My Demon", year: 2023, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A powerful businesswoman forms a contract with a demon — supernatural romcom with big energy.", moodTags: ["travel", "date", "escape"], tmdbId: 237026 },
   { title: "Twenty-Five Twenty-One", year: 2022, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A fencing prodigy and a struggling young man meet at the turn of the millennium — bittersweet and beautiful.", moodTags: ["travel", "date", "feelgood"], tmdbId: 187878 },
   { title: "It's Okay to Not Be Okay", year: 2020, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A children's book author and a psychiatric nurse heal each other — dark fairy-tale romance.", moodTags: ["travel", "date", "think"], tmdbId: 99879 },
   { title: "Start-Up", year: 2020, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A Silicon Valley-inspired K-drama love triangle set in Seoul's tech scene.", moodTags: ["travel", "date", "feelgood"], tmdbId: 104771 },
   { title: "Hospital Playlist", year: 2020, type: "tv", language: "ko", tags: ["critics"], curatorNote: "Five doctors who've been friends for 20 years — warmth, medicine and slow-burn romance.", moodTags: ["travel", "date", "feelgood"], tmdbId: 97298 },
+  { title: "What's Wrong with Secretary Kim", year: 2018, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A narcissistic VP can't accept that his perfect secretary is quitting — peak chaebol romcom, funny and irresistible.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
   { title: "My Mister", year: 2018, type: "tv", language: "ko", tags: ["critics"], curatorNote: "A middle-aged engineer and a young woman in survival mode form an unlikely bond — quietly devastating.", moodTags: ["think", "date"], tmdbId: 75234 },
   { title: "Go Back Couple", year: 2017, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A divorcing couple travel back to their college days to relive — and rethink — their love story.", moodTags: ["travel", "date", "feelgood"], tmdbId: null },
   { title: "Chicago Typewriter", year: 2017, type: "tv", language: "ko", tags: ["surprise"], curatorNote: "A bestselling author and a ghostwriter share a past-life connection — romantic and mysterious.", moodTags: ["travel", "date", "escape"], tmdbId: null },
@@ -206,13 +194,10 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   // Workplace comedies with romantic heart
   { title: "Ted Lasso", year: 2020, type: "tv", language: "en", tags: ["crowd"], curatorNote: "An American football coach takes over a British soccer club — optimism, friendship and unexpected love.", moodTags: ["feelgood", "laugh", "escape"], tmdbId: 97546 },
   { title: "Abbott Elementary", year: 2021, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Mockumentary about underfunded Philadelphia teachers — the funniest workplace romance on TV.", moodTags: ["laugh", "feelgood"], tmdbId: 130392 },
-  { title: "Brooklyn Nine-Nine", year: 2013, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A police precinct comedy with one of TV's best slow-burn romances at its centre.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 48891 },
   { title: "New Girl", year: 2011, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Zooey Deschanel moves in with three men — the ensemble chemistry is unbeatable.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 40075 },
   { title: "The Mindy Project", year: 2012, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A romantic comedy-obsessed OB-GYN navigates love and medicine — Mindy Kaling at her best.", moodTags: ["laugh", "date", "escape"], tmdbId: 44006 },
   { title: "Parks and Recreation", year: 2009, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Leslie Knope's Pawnee — workplace comedy with one of television's great love stories.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 8592 },
-  { title: "The Office", year: 2005, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Jim and Pam is one of the greatest will-they-won't-they romances in TV history.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 2316 },
   { title: "Ghosts", year: 2019, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A couple inherit a haunted manor — the British original is warm, witty and quietly romantic.", moodTags: ["laugh", "escape"], tmdbId: 91186 },
-  { title: "Frasier", year: 1993, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Pompous psychiatrist navigates Seattle dating — still one of the finest sitcoms ever made.", moodTags: ["laugh", "nostalgia"], tmdbId: null },
   { title: "Ugly Betty", year: 2006, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Fashion world fish-out-of-water comedy with a warm romantic core.", moodTags: ["laugh", "escape", "date"], tmdbId: 1420 },
   { title: "Unbreakable Kimmy Schmidt", year: 2015, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A cult survivor reinvents herself in New York — irrepressibly funny with surprising romantic warmth.", moodTags: ["laugh", "escape"], tmdbId: 60708 },
   { title: "iZombie", year: 2015, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A zombie medical examiner solves crimes — genre-bending romcom with great charm.", moodTags: ["laugh", "escape"], tmdbId: 61888 },
@@ -221,7 +206,6 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
 
   // Late 90s / 2000s classics
   { title: "Felicity", year: 1998, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A college student follows her crush cross-country — deeply romantic and emotionally honest.", moodTags: ["date", "nostalgia"], tmdbId: 1668 },
-  { title: "Outlander", year: 2014, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A WWII nurse time-travels to 18th-century Scotland and finds an epic love — sweeping and passionate.", moodTags: ["date", "escape"], tmdbId: 56570 },
 
   // ── The Makanai (2023 Netflix Japan) ─────────────────────────────────────
   { title: "The Makanai: Cooking for the Maiko House", year: 2023, type: "tv", language: "ja", tags: ["surprise"], curatorNote: "Hirokazu Kore-eda's quiet, beautiful cooking series with a soft romantic heart.", moodTags: ["date", "think"] },

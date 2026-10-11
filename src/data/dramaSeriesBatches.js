@@ -289,6 +289,14 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     tags: ["crowd", "surprise"],
     curatorNote: "Sterling K. Brown as a Secret Service agent protecting a former president in an underground bunker — until a murder makes everyone a suspect. A locked-room thriller with real emotional weight underneath the twists."
   },
+  {
+    title: "When Life Gives You Tangerines",
+    year: 2025,
+    type: "tv",
+    language: "ko",
+    tags: ["critics"],
+    curatorNote: "IU and Park Bo-gum in a multigenerational love story set on Jeju Island — following two families across decades from the 1950s to the present. Quiet, unhurried and devastating in the way only Korean melodrama at its best can be."
+  },
 
   {
     title: "Dark Winds",
@@ -308,6 +316,14 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
   },
   // ── 2024 SERIES ────────────────────────────────────────────────────────────
 
+  {
+    title: "The Decameron",
+    year: 2024,
+    type: "tv",
+    language: "en",
+    tags: ["crowd", "surprise"],
+    curatorNote: "Boccaccio's medieval tales reimagined as a dark ensemble comedy — ten strangers locked in a Florentine villa during the Black Death, each pursuing pleasure, power and survival. Visually lush, mordantly funny and unlike anything else on television."
+  },
   {
     title: "Baby Reindeer",
     year: 2024,
@@ -399,6 +415,14 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
 
   // ── 2023 SERIES ────────────────────────────────────────────────────────────
 
+  {
+    title: "Sullivan's Crossing",
+    year: 2023,
+    type: "tv",
+    language: "en",
+    tags: ["crowd"],
+    curatorNote: "A Boston neurosurgeon retreats to a small Canadian wilderness community after a career crisis and rediscovers herself. A warmly observed drama about slowing down, belonging and second chances — gentle but sincere."
+  },
   {
     title: "Succession",
     year: 2023,
@@ -573,6 +597,22 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
 
   // ── 2021 SERIES ────────────────────────────────────────────────────────────
 
+  {
+    title: "Firefly Lane",
+    year: 2021,
+    type: "tv",
+    language: "en",
+    tags: ["crowd"],
+    curatorNote: "Katherine Heigl and Sarah Chalke as lifelong best friends navigating four decades of love, loss and loyalty — told across timelines from the 1970s to the 2000s. A female friendship drama with genuine emotional heft."
+  },
+  {
+    title: "Acapulco",
+    year: 2021,
+    type: "tv",
+    language: "en",
+    tags: ["crowd", "surprise"],
+    curatorNote: "Bilingual Apple TV+ comedy following a young Mexican man who lands a dream job at the hottest resort in Acapulco in 1984. Warm, funny and genuinely underrated — one of the most joyful shows of its era."
+  },
   {
     title: "Squid Game",
     year: 2021,
@@ -924,6 +964,30 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
   // ── 2016 SERIES ────────────────────────────────────────────────────────────
 
   {
+    title: "Easy",
+    year: 2016,
+    type: "tv",
+    language: "en",
+    tags: ["critics", "surprise"],
+    curatorNote: "Joe Swanberg's Chicago anthology — interconnected stories about modern love and sex, each episode following different characters navigating desire and commitment. Loose, intimate and surprisingly honest about the messiness of adult life."
+  },
+  {
+    title: "Divorce",
+    year: 2016,
+    type: "tv",
+    language: "en",
+    tags: ["critics"],
+    curatorNote: "Sarah Jessica Parker and Thomas Haden Church in Sharon Horgan's HBO comedy-drama about the long, unglamorous process of ending a marriage. Dark, specific and deeply uncomfortable in the best way."
+  },
+  {
+    title: "Fleabag",
+    year: 2016,
+    type: "tv",
+    language: "en",
+    tags: ["critics"],
+    curatorNote: "Phoebe Waller-Bridge's two-season confessional — a sharp, chaotic London woman breaks the fourth wall to tell you what she won't tell anyone else, including herself. The Priest arc in season two is as good as television gets."
+  },
+  {
     title: "The Night Of",
     year: 2016,
     type: "tv",
@@ -1017,6 +1081,14 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
 
   // ── 2014 SERIES ────────────────────────────────────────────────────────────
 
+  {
+    title: "Outlander",
+    year: 2014,
+    type: "tv",
+    language: "en",
+    tags: ["crowd"],
+    curatorNote: "Diana Gabaldon's historical epic — a WWII combat nurse time-travels to 18th-century Scotland and is caught between two worlds, two men and two centuries. Seven seasons of sweeping romance and brutal historical drama."
+  },
   {
     title: "The Knick",
     year: 2014,
@@ -1149,6 +1221,14 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
 
   // ── 2010 SERIES ────────────────────────────────────────────────────────────
 
+  {
+    title: "Love/Hate",
+    year: 2010,
+    type: "tv",
+    language: "en",
+    tags: ["critics", "crowd"],
+    curatorNote: "Ireland's most celebrated crime drama — Darren's rise through Dublin's drug underworld across five seasons of loyalty, betrayal and brutal consequence. The series that redefined Irish television and made Aidan Gillen's reputation."
+  },
   {
     title: "Borgen",
     year: 2010,
@@ -1609,5 +1689,16 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     language: "en",
     tags: ["crowd", "surprise"],
     curatorNote: "Billy Bob Thornton as a disgraced lawyer who takes on the cases nobody else will — Amazon's four seasons of a legal thriller that understands that the law is mostly about power and that charisma is the only real weapon the powerless have."
+  },
+
+  // ── 1998 SERIES ────────────────────────────────────────────────────────────
+
+  {
+    title: "Dawson's Creek",
+    year: 1998,
+    type: "tv",
+    language: "en",
+    tags: ["crowd"],
+    curatorNote: "Kevin Williamson's teen drama set on the Massachusetts coast — Dawson, Joey, Pacey and Jen navigating high school, heartbreak and identity in six seasons that defined a generation's emotional vocabulary. The show that launched a thousand coming-of-age dramas."
   },
 ];

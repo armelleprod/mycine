@@ -1538,6 +1538,14 @@ export const DRAMA_EDITORIAL_BATCHES = [
   // ── 2020 RELEASES ──────────────────────────────────────────────────────────
 
   {
+    title: "Shithouse",
+    year: 2020,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "surprise"],
+    curatorNote: "Cooper Raiff wrote, directed and stars as a lonely college freshman who spends an unexpected night with his RA — an achingly specific portrait of the particular sadness of being young and far from home. Raiff announced himself as a major talent."
+  },
+  {
     title: "Never Rarely Sometimes Always",
     year: 2020,
     type: "movie",
@@ -1877,6 +1885,22 @@ export const DRAMA_EDITORIAL_BATCHES = [
   // ── 2011 RELEASES ──────────────────────────────────────────────────────────
 
   {
+    title: "The Artist",
+    year: 2011,
+    type: "movie",
+    language: "fr",
+    tags: ["critics", "crowd"],
+    curatorNote: "Michel Hazanavicius's silent black-and-white love letter to Hollywood's golden age — Jean Dujardin and Bérénice Bejo in a film about a silent movie star undone by the talkies and the woman who rises as he falls. Five Oscars including Best Picture."
+  },
+  {
+    title: "Take This Waltz",
+    year: 2011,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "surprise"],
+    curatorNote: "Sarah Polley's film about the gap between the life you have and the life you imagine — Michelle Williams as a married woman drawn toward her attractive neighbour. A film that refuses to make desire simple or its consequences comfortable."
+  },
+  {
     title: "A Separation",
     year: 2011,
     type: "movie",
@@ -2051,6 +2075,14 @@ export const DRAMA_EDITORIAL_BATCHES = [
   // ── 2000 RELEASES ──────────────────────────────────────────────────────────
 
   {
+    title: "The Taste of Others",
+    year: 2000,
+    type: "movie",
+    language: "fr",
+    tags: ["critics", "surprise"],
+    curatorNote: "Agnès Jaoui's ensemble comedy-drama about a boorish industrialist who becomes obsessed with an actress and discovers art for the first time — and the collision between his world and hers. César winner for Best Film. Sharp, warm and deeply human."
+  },
+  {
     title: "Yi Yi",
     year: 2000,
     type: "movie",
@@ -2180,6 +2212,30 @@ export const DRAMA_EDITORIAL_BATCHES = [
     language: "en",
     tags: ["critics", "crowd"],
     curatorNote: "Scorsese's biography of Henry Hill — the funniest and most kinetically alive film about organized crime ever made. Also the one that makes the glamour most horrifying by making you want it most."
+  },
+  {
+    title: "Truly Madly Deeply",
+    year: 1990,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "crowd"],
+    curatorNote: "Anthony Minghella's British gem — Juliet Stevenson as a woman paralyzed by grief for her dead partner, until he returns as a ghost and she must learn to let go. One of the most honest films about loss and recovery, and a love story of extraordinary feeling."
+  },
+  {
+    title: "Hannah and Her Sisters",
+    year: 1986,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "crowd"],
+    curatorNote: "Woody Allen's ensemble masterpiece — three sisters, their loves and their parents over two Thanksgivings. Michael Caine, Mia Farrow, Dianne Wiest (Oscar), Barbara Hershey. One of American cinema's warmest and most humane portraits of a family in motion."
+  },
+  {
+    title: "Local Hero",
+    year: 1983,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "surprise"],
+    curatorNote: "Bill Forsyth's Scottish comedy — an American oil company executive arrives in a remote Highland village to buy it for a refinery and finds himself enchanted instead. Gentle, melancholy and quietly magical; the film that Mark Knopfler scored and nobody forgets."
   },
   {
     title: "Fanny and Alexander",
@@ -2520,5 +2576,21 @@ export const DRAMA_EDITORIAL_BATCHES = [
     language: "sv",
     tags: ["critics", "surprise"],
     curatorNote: "Bergman's most radical film — an actress who stops speaking and her nurse slowly exchange identities. A film that deconstructs itself on screen. The starting point of a thousand graduate theses."
+  },
+  {
+    title: "The Graduate",
+    year: 1967,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "crowd"],
+    curatorNote: "Mike Nichols's landmark — Dustin Hoffman as Benjamin Braddock, seduced by Anne Bancroft's Mrs. Robinson and falling for her daughter. A film about a generation's paralysis and yearning, scored by Simon & Garfunkel, that invented a new language for American cinema."
+  },
+  {
+    title: "The General",
+    year: 1926,
+    type: "movie",
+    language: "en",
+    tags: ["critics", "crowd"],
+    curatorNote: "Buster Keaton's Civil War comedy and the greatest action film of the silent era — a Confederate train engineer races to recover his beloved locomotive and his girl. Every stunt real, every frame precisely composed. The film that proves Keaton was a genius."
   },
 ];
