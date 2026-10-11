@@ -34,6 +34,7 @@ import { INTERNATIONAL_EDITORIAL_BATCHES } from "./data/internationalBatches";
 import { HIDDEN_GEMS_EDITORIAL_BATCHES } from "./data/hiddenGemsBatches";
 import { LGBTQ_EDITORIAL_BATCHES } from "./data/lgbtqBatches";
 import { CURATED_MOOD_EDITORIAL_BATCHES } from "./data/moodBatches";
+import { assembleBatchFromPool } from "./data/assemblePool";
 import {
   applyCanonMetadata,
   canonViewerType,
@@ -75,7 +76,8 @@ const ROLE_BADGE_COLORS = {
   "🌍 Passport": "#1A73E8",
   "💎 Discovery": "#7C3AED",
   "🏆 Critics": "#16A34A",
-  "✨ Surprise": "#9333EA"
+  "✨ Surprise": "#9333EA",
+  "🆕 NEW": "#F97316"
 };
 const CURRENT_YEAR    = new Date().getFullYear();
 
@@ -938,6 +940,24 @@ async function fetchCanonTitleCandidate(entry, token) {
   }
 
   const endpoint = entry.type === "tv" ? "tv" : "movie";
+
+  // If the entry has a known TMDB id, use the direct details endpoint —
+  // this bypasses title-normalisation mismatches (e.g. "Beau Travail" vs "Beau travail").
+  if (entry.tmdbId) {
+    const detailRes = await fetchWithTimeout(
+      `https://api.themoviedb.org/3/${endpoint}/${entry.tmdbId}?language=en-US`,
+      { headers:{ Authorization:`Bearer ${token}`, accept:"application/json" } }
+    );
+    if (detailRes.ok) {
+      const detail = await detailRes.json();
+      const candidate = { ...detail, media_type: endpoint };
+      cache[cacheKey] = candidate;
+      writeCanonTmdbCache(cache);
+      return candidate;
+    }
+    // Fall through to search if direct lookup fails
+  }
+
   const params = new URLSearchParams({
     query: entry.title,
     language: "en-US",
@@ -1741,31 +1761,17 @@ function buildUniqueMoodJourneyBatches(movieBatches = [], seriesBatches = [], mo
   return result;
 }
 
-function composeBalancedEditorialBatches(movieBatches, seriesBatches) {
-  const batchCount = Math.min(movieBatches.length, seriesBatches.length);
-
-  return Array.from({length:batchCount}, (_, batchIndex) => {
-    const movieBatch = movieBatches[batchIndex];
-    const seriesBatch = seriesBatches[batchIndex];
-    const movieLeads = batchIndex % 2 === 0;
-
-    // Preserve the seven editorial badge slots while alternating format balance:
-    // odd sets: 4 movies + 3 series; even sets: 3 movies + 4 series.
-    return movieBatch.map((movieEntry, slotIndex) => {
-      const useMovie = movieLeads
-        ? slotIndex % 2 === 0
-        : slotIndex % 2 === 1;
-      const selected = useMovie ? movieEntry : seriesBatch[slotIndex];
-
-      return {
-        ...selected,
-        badge:movieEntry.badge || selected.badge,
-        role:movieEntry.role || selected.role,
-        slot:movieEntry.slot || slotIndex + 1,
-        balancedBoth:true
-      };
-    });
-  });
+function composeBalancedEditorialBatches(moviePool, seriesPool) {
+  // Interleave the two flat pools into one combined flat pool.
+  // buildPrebuiltEditorialBatch will assemble 7 entries from this combined pool
+  // using its normal slot-diversity logic and TMDB enrichment pipeline.
+  const combined = [];
+  const maxLen = Math.max(moviePool.length, seriesPool.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (i < moviePool.length) combined.push(moviePool[i]);
+    if (i < seriesPool.length) combined.push(seriesPool[i]);
+  }
+  return combined;
 }
 
 async function buildPrebuiltEditorialBatch(
@@ -1779,14 +1785,11 @@ async function buildPrebuiltEditorialBatch(
     throw new Error("TMDB_TOKEN_MISSING");
   }
 
-  const safeIndex = Math.max(
-    0,
-    Math.min(editorialBatches.length - 1, Number(batchNumber || 1) - 1)
-  );
-  const editorialBatch = editorialBatches[safeIndex];
+  const storageKey = `mycine-pool-rotation-${genreKey}`;
+  const editorialBatch = assembleBatchFromPool(editorialBatches, storageKey);
 
-  if (!editorialBatch || editorialBatch.length !== 7) {
-    throw new Error(`Prepared ${genreKey} batch ${safeIndex + 1} is incomplete.`);
+  if (!editorialBatch || editorialBatch.length === 0) {
+    throw new Error(`No entries available in ${genreKey} pool.`);
   }
 
   // A prepared slot is an editorial promise. TMDB enriches it, but TMDB is
@@ -1818,7 +1821,7 @@ async function buildPrebuiltEditorialBatch(
       countryCode:"",
       languageCode:"",
       era:Number(editorial.year) < 1990 ? "classic" : Number(editorial.year) < 2020 ? "modern" : "current",
-      editorialBatch:safeIndex + 1,
+      editorialBatch:editorial.slot || 1,
       editorialSlot:slotTemplate.slot,
       roleBadge:editorialBadge,
       editoriallyApproved:true,
@@ -1854,13 +1857,26 @@ async function buildPrebuiltEditorialBatch(
       const entry = {
         ...editorial,
         badge:editorialBadge,
-        key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`
+        key:`prepared-${genreKey}:${editorial.title}|${editorial.year}`,
+        // Pass tmdbId so fetchCanonTitleCandidate can use direct lookup
+        tmdbId: editorial.tmdbId || null,
       };
 
+      // If the editorial entry supplies a posterUrl override, we can still
+      // attempt TMDB enrichment for metadata but we'll use the curated poster.
       const candidate = await fetchCanonTitleCandidate(entry, token);
       if (!candidate) {
-        console.warn(`MY CINÉ TMDB match unavailable; using editorial fallback: ${editorial.title} (${editorial.year})`);
-        return makeEditorialFallback(editorial, slotTemplate);
+        // If a posterUrl was curated, inject it into the editorial fallback
+        const fallback = makeEditorialFallback(editorial, slotTemplate);
+        if (editorial.posterUrl) {
+          // poster_path is null here; we store posterUrl as a separate field
+          // and the render layer checks posterUrl before poster_path
+          fallback.posterUrl = editorial.posterUrl;
+        }
+        if (!editorial.posterUrl) {
+          console.warn(`MY CINÉ TMDB match unavailable; using editorial fallback: ${editorial.title} (${editorial.year})`);
+        }
+        return fallback;
       }
 
       const mediaType = editorial.type === "tv" ? "tv" : "movie";
@@ -1877,7 +1893,9 @@ async function buildPrebuiltEditorialBatch(
         rating:Number(candidate.vote_average || 0),
         vote_count:Number(candidate.vote_count || 0),
         popularity:Number(candidate.popularity || 0),
-        poster_path:candidate.poster_path || null,
+        // posterUrl override from editorial data takes priority over TMDB poster
+        poster_path:editorial.posterUrl ? null : (candidate.poster_path || null),
+        posterUrl:editorial.posterUrl || null,
         overview:candidate.overview || editorial.curatorNote || "Synopsis unavailable.",
         original_language:candidate.original_language || "",
         genre_ids:candidate.genre_ids || [],
@@ -1947,7 +1965,7 @@ async function buildPrebuiltEditorialBatch(
 
       return {
         ...details,
-        editorialBatch:safeIndex + 1,
+        editorialBatch:editorial.slot || 1,
         editorialSlot:slotTemplate.slot,
         roleBadge:editorialBadge,
         editoriallyApproved:true,
@@ -2450,9 +2468,11 @@ async function buildPicks(
 }
 // ── POSTER COMPONENT ──────────────────────────────────────────────────────────
 // poster_path is always a real TMDB path from seed data.
+// url (optional) is a direct poster URL — used for titles where TMDB search fails.
 // <img> tag loads from image.tmdb.org CDN — no CORS issues.
 function Poster({
   path,
+  url,
   title,
   size="w780",
   fit="cover",
@@ -2460,6 +2480,18 @@ function Poster({
   style={}
 }) {
   const [err, setErr] = useState(false);
+  // Direct URL takes priority over TMDB path
+  if (url && !err) {
+    return (
+      <img
+        src={url}
+        alt={title || ""}
+        style={{width:"100%",height:"100%",objectFit:fit,display:"block",...style}}
+        onError={() => {}}
+        loading={loading}
+      />
+    );
+  }
   const normalizedPath = path
     ? (path.startsWith("/") ? path : `/${path}`)
     : null;
@@ -2856,7 +2888,7 @@ function HeroCard({film, watched, onToggle, watchRegion}) {
   target="_blank"
   rel="noopener noreferrer"
         style={{display:"block",position:"relative",width:"100%",aspectRatio:"2/3",maxHeight:"400px",overflow:"hidden",textDecoration:"none"}}>
-        <Poster path={film.poster_path} title={film.title} size="w780" loading="eager"/>
+        <Poster path={film.poster_path} url={film.posterUrl} title={film.title} size="w780" loading="eager"/>
         <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(to top,rgba(11,20,48,1),transparent)"}}/>
         <div style={{position:"absolute",top:"12px",left:"12px"}}>
           <span style={{background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,color:C.navy,fontSize:"10px",fontWeight:"800",padding:"4px 12px",borderRadius:"999px",textTransform:"uppercase",letterSpacing:"0.08em"}}>{film.roleBadge || "🍿 Tonight's Pick"}</span>
@@ -2998,14 +3030,14 @@ function AltCard({film, watched, onToggle, watchRegion}) {
     textDecoration:"none"
   }}
 >
-  <Poster path={film.poster_path} title={film.title} size="w500"/>
+  <Poster path={film.poster_path} url={film.posterUrl} title={film.title} size="w500"/>
 
 {film.roleBadge && (
   <div style={{position:"absolute",top:"7px",left:"7px"}}>
     <span
       style={{
         background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,
-        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic")
+        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic") || film.roleBadge.includes("NEW")
           ? C.navy
           : C.white,
         fontSize:"8px",
@@ -4733,7 +4765,7 @@ const run = async (
         : tab === "genre" &&
           selGenres.length === 1 &&
           Boolean(activePreparedBatches)
-          ? selGenres[0]
+          ? `${selGenres[0]}-${contentMode}`
           : null;
 
     const preparedBatches = activePreparedBatches;
