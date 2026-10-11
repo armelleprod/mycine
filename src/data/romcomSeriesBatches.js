@@ -5,7 +5,7 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   // ── 2026 (added — required for Tonight's Pick guarantee) ──────────────────
   { title: "Nobody Wants This", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "The season 2 return of Netflix's hit romantic comedy, funnier and more confident than ever.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 242873 },
   { title: "Running Point", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A sharp workplace romcom set in the world of professional basketball — great chemistry and lots of laughs.", moodTags: ["date", "laugh", "feelgood"], tmdbId: null },
-  { title: "XO, Kitty", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Season 2 of the K-drama-inspired Netflix romcom, with Kitty navigating new love and old complications.", moodTags: ["date", "escape", "feelgood"], tmdbId: 210879 },
+  { title: "XO, Kitty", year: 2026, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Season 2 of the K-drama-inspired Netflix romcom, with Kitty navigating new love and old complications.", moodTags: ["date", "escape", "feelgood"], tmdbId: null },
 
   // ── 2024 ──────────────────────────────────────────────────────────────────
   { title: "Nobody Wants This", year: 2024, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Kristen Bell and Adam Brody ignite in this fresh, funny Netflix romcom.", moodTags: ["date", "feelgood", "laugh"], tmdbId: 242873 },
@@ -19,7 +19,7 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "The Lovers", year: 2023, type: "tv", language: "en", tags: ["surprise"], curatorNote: "An estranged couple's last holiday takes an unexpected turn.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "Queen Charlotte: A Bridgerton Story", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A swooning origin story for Bridgerton's most formidable character.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "Still Up", year: 2023, type: "tv", language: "en", tags: ["critics"], curatorNote: "Two insomniac friends whose late-night chats become something more.", moodTags: ["date", "feelgood", "laugh"] },
-  { title: "XO, Kitty", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A To All the Boys spinoff: Kitty chases love at a Seoul boarding school.", moodTags: ["date", "escape", "feelgood"], tmdbId: 210879 },
+  { title: "XO, Kitty", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A To All the Boys spinoff: Kitty chases love at a Seoul boarding school.", moodTags: ["date", "escape", "feelgood"], tmdbId: null },
   { title: "Survival of the Thickest", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A bold, joyful romcom about rebuilding your life and love life.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "Platonic", year: 2023, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Seth Rogen and Rose Byrne reignite a friendship — and maybe something more.", moodTags: ["date", "feelgood", "laugh"] },
   { title: "King the Land", year: 2023, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "A transporting romantic-comedy series from South Korea.", moodTags: ["travel", "date", "feelgood"] },
@@ -40,7 +40,6 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Somebody Somewhere", year: 2022, type: "tv", language: "en", tags: ["critics"], curatorNote: "Quiet, warm comedy about belonging, friendship and late-blooming love.", moodTags: ["think", "laugh"] },
   { title: "Our Flag Means Death", year: 2022, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Pirate queer romcom — swashbuckling and sweethearted.", moodTags: ["laugh", "escape"] },
   { title: "Thirty-Nine", year: 2022, type: "tv", language: "ko", tags: ["crowd"], curatorNote: "Three friends on the edge of forty find love and face loss.", moodTags: ["travel", "date", "feelgood"] },
-  { title: "Partner Track", year: 2022, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A law firm, workplace romance and the price of ambition.", moodTags: ["date", "feelgood", "laugh"] },
 
   // ── 2021 ──────────────────────────────────────────────────────────────────
   { title: "Starstruck", year: 2021, type: "tv", language: "en", tags: ["surprise"], curatorNote: "An ordinary woman accidentally falls into a movie star's orbit — delightful.", moodTags: ["date", "think"] },
@@ -125,9 +124,7 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
 
   // ── 2014 ──────────────────────────────────────────────────────────────────
   { title: "Jane the Virgin", year: 2014, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A telenovela-inspired gem full of romance, humour and heart.", moodTags: ["date", "escape"] },
-  { title: "Lovesick", year: 2014, type: "tv", language: "en", tags: ["critics"], curatorNote: "A man contacts his exes after an STI diagnosis — sweeter than it sounds.", moodTags: ["think", "laugh"] },
   { title: "Looking", year: 2014, type: "tv", language: "en", tags: ["critics"], curatorNote: "San Francisco gay men navigating love and identity — precise and understated.", moodTags: ["think", "laugh"] },
-  { title: "You're the Worst", year: 2014, type: "tv", language: "en", tags: ["critics"], curatorNote: "Anti-romantic protagonists who fall for each other anyway — wickedly good.", moodTags: ["think", "laugh"] },
   { title: "Detectorists", year: 2014, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Metal detectorists pursue treasure and romance with quiet English magic.", moodTags: ["laugh", "escape"] },
   { title: "W1A", year: 2014, type: "tv", language: "en", tags: ["surprise"], curatorNote: "BBC satire with romantic undertones — brilliantly dry.", moodTags: ["laugh", "escape"] },
 
@@ -215,7 +212,7 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Parks and Recreation", year: 2009, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Leslie Knope's Pawnee — workplace comedy with one of television's great love stories.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 8592 },
   { title: "The Office", year: 2005, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Jim and Pam is one of the greatest will-they-won't-they romances in TV history.", moodTags: ["laugh", "escape", "feelgood"], tmdbId: 2316 },
   { title: "Ghosts", year: 2019, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A couple inherit a haunted manor — the British original is warm, witty and quietly romantic.", moodTags: ["laugh", "escape"], tmdbId: 91186 },
-  { title: "Frasier", year: 1993, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Pompous psychiatrist navigates Seattle dating — still one of the finest sitcoms ever made.", moodTags: ["laugh", "nostalgia"], tmdbId: 2316 },
+  { title: "Frasier", year: 1993, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Pompous psychiatrist navigates Seattle dating — still one of the finest sitcoms ever made.", moodTags: ["laugh", "nostalgia"], tmdbId: null },
   { title: "Ugly Betty", year: 2006, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Fashion world fish-out-of-water comedy with a warm romantic core.", moodTags: ["laugh", "escape", "date"], tmdbId: 1420 },
   { title: "Unbreakable Kimmy Schmidt", year: 2015, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A cult survivor reinvents herself in New York — irrepressibly funny with surprising romantic warmth.", moodTags: ["laugh", "escape"], tmdbId: 60708 },
   { title: "iZombie", year: 2015, type: "tv", language: "en", tags: ["surprise"], curatorNote: "A zombie medical examiner solves crimes — genre-bending romcom with great charm.", moodTags: ["laugh", "escape"], tmdbId: 61888 },
@@ -239,7 +236,6 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Single Parents", year: 2018, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Neighbourhood single parents figuring out dating and parenting — warm ensemble.", moodTags: ["date", "escape"] },
 
   // ── Good Girls Revolt (2015) ──────────────────────────────────────────────
-  { title: "Good Girls Revolt", year: 2015, type: "tv", language: "en", tags: ["critics"], curatorNote: "1960s magazine romance with feminist fire.", moodTags: ["date", "escape"] },
 ];
 
 export const ROMCOM_SERIES_POOL_COUNT = ROMCOM_SERIES_EDITORIAL_BATCHES.length;

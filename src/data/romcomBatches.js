@@ -158,7 +158,6 @@ export const ROMCOM_EDITORIAL_BATCHES = [
 
   // ── 1988 ──────────────────────────────────────────────────────────────────
   { title: "Working Girl", year: 1988, type: "movie", language: "en", tags: ["critics"], curatorNote: "Career ambition and romance with iconic late-80s energy.", tmdbId: 10792 },
-  { title: "Holiday", year: 1938, type: "movie", language: "en", tags: ["critics"], curatorNote: "A sophisticated romance about choosing life over convention.", tmdbId: 27266 },
 
   // ── 1987 ──────────────────────────────────────────────────────────────────
   { title: "Moonstruck", year: 1987, type: "movie", language: "en", tags: ["critics"], curatorNote: "Adult romance, family comedy and operatic emotion.", tmdbId: 9042 },
@@ -241,7 +240,6 @@ export const ROMCOM_EDITORIAL_BATCHES = [
 
   // 2011
   { title: "Bridesmaids", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The film that proved women-led comedies could dominate the box office — raucous and real.", tmdbId: 56558 },
-  { title: "Crazy Stupid Love", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An ensemble romantic comedy with surprising depth and one of cinema's great plot twists.", tmdbId: 65759 },
 
   // 2009
   { title: "The Ugly Truth", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Raucous battle-of-the-sexes romcom with undeniable chemistry.", tmdbId: 18320 },
@@ -283,7 +281,7 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   { title: "You've Got Mail", year: 1998, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The Shop Around the Corner reimagined for the internet age — still charming.", tmdbId: 3783 },
   { title: "French Kiss", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Paris-set caper romance with Meg Ryan and Kevin Kline in great form.", tmdbId: 11535 },
   { title: "Sliding Doors", year: 1998, type: "movie", language: "en", tags: ["critics"], curatorNote: "Two parallel love stories exploring how one moment changes everything.", tmdbId: 9566 },
-  { title: "Clueless", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Cher Horowitz is one of cinema's great comic heroines — a romcom and a time capsule.", tmdbId: 9603 },
+  { title: "Clueless", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Cher Horowitz is one of cinema's great comic heroines — a romcom and a time capsule.", tmdbId: null },
 
   { title: "Pretty Woman", year: 1990, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The Cinderella romcom that defined a generation — Julia Roberts at her most luminous.", tmdbId: 114 },
   { title: "Miss Congeniality", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A comedy-romcom hybrid with Sandra Bullock in irresistible underdog mode.", tmdbId: 8869 },
