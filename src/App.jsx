@@ -77,7 +77,7 @@ const ROLE_BADGE_COLORS = {
   "💎 Discovery": "#7C3AED",
   "🏆 Critics": "#16A34A",
   "✨ Surprise": "#9333EA",
-  "🆕 NEW": "#F97316"
+  "🆕 RECENT": "#F97316"
 };
 const CURRENT_YEAR    = new Date().getFullYear();
 
@@ -3037,7 +3037,7 @@ function AltCard({film, watched, onToggle, watchRegion}) {
     <span
       style={{
         background:ROLE_BADGE_COLORS[film.roleBadge] || C.goldBright,
-        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic") || film.roleBadge.includes("NEW")
+        color:film.roleBadge.includes("Tonight") || film.roleBadge.includes("Classic") || film.roleBadge.includes("RECENT")
           ? C.navy
           : C.white,
         fontSize:"8px",

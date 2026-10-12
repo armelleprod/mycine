@@ -6,8 +6,8 @@
 //   Slot 1 (Tonight's Pick) always comes from a SEPARATE rotation over the current-year sub-pool
 //   (year === CURRENT_YEAR). This guarantees a 2026 title every single batch,
 //   regardless of where the main pool pointer happens to be.
-//   Slot 2 (NEW) always comes from a SECOND SEPARATE rotation over year >= 2025 entries
-//   (excluding Tonight's Pick). This guarantees a 2025 or 2026 title is always available for NEW,
+//   Slot 2 (RECENT) always comes from a SECOND SEPARATE rotation over year >= 2025 entries
+//   (excluding Tonight's Pick). This guarantees a 2025 or 2026 title is always available for RECENT,
 //   regardless of where the main pool pointer happens to be.
 //   The remaining 5 entries come from the main pool rotation (both guaranteed picks excluded).
 //   Badges are assigned AFTER selection based on what each entry actually is.
@@ -17,7 +17,7 @@ const BATCH_SIZE = 7;
 
 const SLOT_BADGES = [
   "🍿 Tonight's Pick",  // slot 1
-  "🆕 NEW",             // slot 2
+  "🆕 RECENT",          // slot 2
   "🎞️ Classic",         // slot 3
   "🌍 Passport",        // slot 4
   "🏆 Critics",         // slot 5
@@ -80,9 +80,9 @@ function getNextFromRotation(pool, storageKey, count) {
 
 // Assembles 7 entries using triple rotation:
 //   1. Pick 1 entry from the recent sub-pool (year === CURRENT_YEAR) — Tonight's Pick guarantee.
-//   2. Pick 1 entry from the new sub-pool (year >= 2025, excluding Tonight's Pick) — NEW badge guarantee.
+//   2. Pick 1 entry from the new sub-pool (year >= 2025, excluding Tonight's Pick) — RECENT badge guarantee.
 //   3. Pick 5 entries from the main pool (excluding the two guaranteed picks).
-// This guarantees both Slot 1 (Tonight's Pick = 2026) and Slot 2 (NEW = 2025+) are always filled.
+// This guarantees both Slot 1 (Tonight's Pick = 2026) and Slot 2 (RECENT = 2025+) are always filled.
 function getNextBatch(pool, storageKey) {
   const recentPool = pool.filter(e => Number(e.year) === CURRENT_YEAR);
   const recentKey = storageKey + ":recent";
@@ -94,7 +94,7 @@ function getNextBatch(pool, storageKey) {
     recentPick = picks[0] || null;
   }
 
-  // Step 2: one guaranteed NEW pick (year >= 2025, not already picked)
+  // Step 2: one guaranteed RECENT pick (year >= 2025, not already picked)
   const newPool = pool.filter(
     e => Number(e.year) >= 2025 && e.title !== recentPick?.title
   );
@@ -151,7 +151,7 @@ function assignBadges(entries) {
   );
   if (slot0 !== -1) { result[0] = slot0; assigned.add(slot0); }
 
-  // Slot 2: NEW — 2025 or 2026 only, prefer 2026 first, then 2025
+  // Slot 2: RECENT — 2025 or 2026 only, prefer 2026 first, then 2025
   const slot0Year = slot0 !== -1 ? Number(entries[slot0].year) : null;
   const slot1 = findBest(
     e => Number(e.year) >= 2025,
@@ -195,11 +195,17 @@ function assignBadges(entries) {
     }
   }
 
-  return result.map((entryIndex, slotIndex) => ({
-    ...(entryIndex !== null ? entries[entryIndex] : entries[slotIndex] || entries[0]),
-    badge: SLOT_BADGES[slotIndex],
-    slot: slotIndex + 1,
-  }));
+  return result.map((entryIndex, slotIndex) => {
+    const entry = entryIndex !== null ? entries[entryIndex] : entries[slotIndex] || entries[0];
+    let badge = SLOT_BADGES[slotIndex];
+    // Safety guard: never label an entry "RECENT" unless its year is 2025 or later.
+    // If the RECENT slot had to fall back to an older title (pool exhaustion edge case),
+    // downgrade the badge to "✨ Surprise" so the label stays honest.
+    if (badge === "🆕 RECENT" && Number(entry.year) < 2025) {
+      badge = "✨ Surprise";
+    }
+    return { ...entry, badge, slot: slotIndex + 1 };
+  });
 }
 
 /**
@@ -209,7 +215,7 @@ function assignBadges(entries) {
  * each assigned a badge based on the entry's actual properties.
  *
  * GUARANTEE: Slot 1 (Tonight's Pick) always shows a 2026 title, drawn from
- * a separate rotation over the current-year sub-pool. Slot 2 (NEW) always
+ * a separate rotation over the current-year sub-pool. Slot 2 (RECENT) always
  * shows 2025 or 2026, drawn from a second separate rotation over year >= 2025
  * entries (excluding Tonight's Pick). The remaining 5 slots rotate through
  * the full pool.
