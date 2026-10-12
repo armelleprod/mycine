@@ -3,12 +3,41 @@
 
 export const ROMCOM_EDITORIAL_BATCHES = [
   // ── 2026 ──────────────────────────────────────────────────────────────────
+  { title: "Finding Emily", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An 89% RT campus romcom about a wrong-number mix-up that goes viral — charming and sharp.", tmdbId: null },
+  { title: "Kissing Is the Easy Part", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A light-hearted new romcom with great chemistry — the feel-good hit of early 2026.", tmdbId: 1515615 },
+  { title: "40 Dates and 40 Nights", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A high-concept summer romcom — forty blind dates, one revelation. Smart and very funny.", tmdbId: 1431804 },
+  { title: "The Love Hypothesis", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Enemies-to-lovers in academia — the fake-dating romcom fans have been waiting for.", tmdbId: null },
+  { title: "Girls Like Girls", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "One of 2026's most talked-about queer romances — emotionally raw and beautifully shot.", tmdbId: 1397485 },
+  { title: "The Last Sunrise", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sweeping late-summer romance — visually stunning and emotionally devastating in the best way.", tmdbId: 1516698 },
+  { title: "The Sun Never Sets", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A crowd-pleasing summer romcom with genuine warmth and a great central couple.", tmdbId: 1490214 },
+  { title: "Love on Tap", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A witty brewery-set romcom — one of the year's most delightful discoveries.", tmdbId: null },
+  { title: "One Night Only", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A single-night romance that packs more feeling into 102 minutes than most films do in two hours.", tmdbId: null },
+  { title: "Fantasy Life", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An offbeat romantic comedy-drama that goes somewhere you don't expect.", tmdbId: null },
+  { title: "Solo Mio", year: 2026, type: "movie", language: "it", tags: ["passport"], curatorNote: "A breezy Italian-flavoured romance-comedy that charms on every level.", tmdbId: null },
+  { title: "Ladies First", year: 2026, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A bold French comedy with international flavour — fresh voice, confident execution.", tmdbId: null },
+  { title: "Charlie Harper", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A romance-drama with a magnetic lead performance — flying under the radar.", tmdbId: null },
+  { title: "Mile End Kicks", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A scrappy British romcom with real heart — one of 2026's best surprises.", tmdbId: null },
+  { title: "Love of Your Life", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A quietly devastating and ultimately uplifting romance — strong awards buzz.", tmdbId: 1381078 },
+  { title: "Next Life", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A sci-fi/music/romance hybrid — inventive and genuinely moving.", tmdbId: 1387778 },
+  { title: "You're Dating a Narcissist!", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A crowd-pleasing comedy with a modern, self-aware edge.", tmdbId: 1217505 },
+  { title: "Before I Do", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A sharp pre-wedding comedy that earns its happy ending.", tmdbId: 1623967 },
+  { title: "Bethlehem Kudumba Unit", year: 2026, type: "movie", language: "ml", tags: ["passport"], curatorNote: "A Malayalam feel-good neighbourhood romcom — warm, funny and unlike anything else in 2026.", tmdbId: null },
+  { title: "Chasing Summer", year: 2026, type: "movie", language: "es", tags: ["passport"], curatorNote: "A Mexican summer romance with beautiful coastal cinematography and real chemistry.", tmdbId: 1571654 },
+  { title: "Here the Whole Time", year: 2026, type: "movie", language: "pt", tags: ["passport"], curatorNote: "A Brazilian Netflix romcom about childhood enemies forced to share a flat — warm and funny.", tmdbId: 1418582 },
+  { title: "Don't Be Shy!", year: 2026, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A Bollywood romance-comedy with infectious energy — 2h29m of pure joy from India.", tmdbId: 1529372 },
+  { title: "Reminders of Him", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An adaptation of Colleen Hoover's novel — emotionally intense and beautifully made.", tmdbId: 1367642 },
   { title: "Office Romance", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Jennifer Lopez and Brett Goldstein spark in this sharp Netflix workplace romcom — banter, power dynamics and an irresistible slow-burn.", tmdbId: 1358005 },
   { title: "Voicemails for Isabelle", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A high-concept contemporary romcom with strong audience appeal — voice messages become the unexpected thread of a modern love story.", tmdbId: 614945 },
   { title: "People We Meet on Vacation", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A friends-to-lovers road trip that crackles with chemistry — Emily Bader and Tom Blyth in the Netflix adaptation of Emily Henry's beloved novel.", tmdbId: 1034716 },
   { title: "The Drama", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A contemporary romance-comedy with major stars and critical attention.", tmdbId: 1325734 },
 
   // ── 2025 ──────────────────────────────────────────────────────────────────
+  { title: "You, Me & Tuscany", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Sun-drenched and heartfelt — a romantic comedy that earns every smile.", tmdbId: null },
+  { title: "Poetic License", year: 2025, type: "movie", language: "en", tags: ["critics"], curatorNote: "A literary romcom with something to say — sharp, funny and beautifully performed.", tmdbId: null },
+  { title: "Regretting You", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Colleen Hoover adaptation — this mother-daughter romance drama hits hard.", tmdbId: 1327862 },
+  { title: "Eternity", year: 2025, type: "movie", language: "en", tags: ["critics"], curatorNote: "A romantic fantasy-drama with critical pedigree — lyrical and achingly beautiful.", tmdbId: null },
+  { title: "The Threesome", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A daring romantic comedy that manages to be both funny and genuinely tender.", tmdbId: null },
+  { title: "Karen Kingsbury's The Christmas Ring", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A heartfelt holiday romance that earns its sentiment — perfect festive viewing.", tmdbId: 1518521 },
   { title: "Bridget Jones: Mad About the Boy", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A mature continuation of one of the genre's defining heroines.", tmdbId: 1064213 },
   { title: "Materialists", year: 2025, type: "movie", language: "en", tags: ["critics"], curatorNote: "A sophisticated modern romance about value, status and choice.", tmdbId: 1198342 },
   { title: "The Wedding Banquet", year: 2025, type: "movie", language: "en", tags: ["critics"], curatorNote: "A contemporary queer reimagining of Ang Lee's landmark — two gay couples navigate immigration, family expectations and fake marriages with warmth and wit.", tmdbId: 1278827 },
@@ -19,7 +48,7 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   // ── 2024 ──────────────────────────────────────────────────────────────────
   { title: "Música", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A formally inventive, culturally specific romantic comedy.", tmdbId: 1111873 },
   { title: "A Nice Indian Boy", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A warm queer family romcom with cultural richness.", tmdbId: 1141417 },
-  { title: "Jane Austen Wrecked My Life", year: 2024, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A literary French romcom with wit and emotional intelligence.", tmdbId: 1118224 },
+  { title: "Jane Austen Wrecked My Life", year: 2024, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A literary French romcom with wit and emotional intelligence.", tmdbId: 1118224 },
   { title: "Hit Man", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A slick, witty romantic thriller-comedy — Glen Powell at his most charismatic.", tmdbId: 1029575 },
   { title: "The Idea of You", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A confident adult romance with strong chemistry and emotional maturity.", tmdbId: 1072263 },
   { title: "We Live in Time", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A non-linear love story with humour, tenderness and genuine heartbreak.", tmdbId: 1126166 },
@@ -30,12 +59,12 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   { title: "No Hard Feelings", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A raunchy star vehicle with unexpected tenderness.", tmdbId: 941554 },
   { title: "Anyone But You", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A major theatrical hit that revived mainstream romcom appetite.", tmdbId: 1072790 },
   { title: "Rye Lane", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Inventive visual language and irresistible chemistry.", tmdbId: 969461 },
-  { title: "Love Reset", year: 2023, type: "movie", language: "ko", tags: ["crowd"], curatorNote: "High-energy marriage comedy with strong audience appeal.", tmdbId: 1052433 },
+  { title: "Love Reset", year: 2023, type: "movie", language: "ko", tags: ["passport"], curatorNote: "High-energy marriage comedy with strong audience appeal.", tmdbId: 1052433 },
   { title: "Love at First Sight", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Netflix romcom with an irresistible conceit and warm performances.", tmdbId: 1003596 },
   { title: "Red, White & Royal Blue", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A significant LGBTQ+ romcom — charming, glossy and crowd-pleasing.", tmdbId: 1075390 },
-  { title: "Fallen Leaves", year: 2023, type: "movie", language: "fi", tags: ["critics"], curatorNote: "A minimalist Finnish romantic tragicomedy — Aki Kaurismäki at his most tender.", tmdbId: 814721 },
-  { title: "Eres tú", year: 2023, type: "movie", language: "es", tags: ["surprise"], curatorNote: "A Spanish fantasy-romcom about a man who sees the future of every relationship with a kiss.", tmdbId: 818648 },
-  { title: "Rocky Aur Rani Kii Prem Kahaani", year: 2023, type: "movie", language: "hi", tags: ["crowd"], curatorNote: "A big, joyful Indian romcom — family, culture clashes and irresistible chemistry.", tmdbId: 848116 },
+  { title: "Fallen Leaves", year: 2023, type: "movie", language: "fi", tags: ["passport"], curatorNote: "A minimalist Finnish romantic tragicomedy — Aki Kaurismäki at his most tender.", tmdbId: 814721 },
+  { title: "Eres tú", year: 2023, type: "movie", language: "es", tags: ["passport"], curatorNote: "A Spanish fantasy-romcom about a man who sees the future of every relationship with a kiss.", tmdbId: 818648 },
+  { title: "Rocky Aur Rani Kii Prem Kahaani", year: 2023, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A big, joyful Indian romcom — family, culture clashes and irresistible chemistry.", tmdbId: 848116 },
   { title: "Shortcomings", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "A sharp, witty indie romcom about a self-absorbed Asian-American film buff — biting and unexpectedly moving.", tmdbId: 855017 },
 
   // ── 2022 ──────────────────────────────────────────────────────────────────
@@ -48,17 +77,17 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   { title: "Cha Cha Real Smooth", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "An acclaimed romantic dramedy with warmth and emotional intelligence.", tmdbId: 795514 },
 
   // ── 2021 ──────────────────────────────────────────────────────────────────
-  { title: "The Worst Person in the World", year: 2021, type: "movie", language: "no", tags: ["critics"], curatorNote: "A defining millennial romantic comedy-drama.", tmdbId: 628827 },
-  { title: "I'm Your Man", year: 2021, type: "movie", language: "de", tags: ["critics"], curatorNote: "A Berlin scientist is paired with a perfect AI man designed to make her happy — elegant, witty and surprisingly moving.", tmdbId: 786892 },
+  { title: "The Worst Person in the World", year: 2021, type: "movie", language: "no", tags: ["passport"], curatorNote: "A defining millennial romantic comedy-drama.", tmdbId: 628827 },
+  { title: "I'm Your Man", year: 2021, type: "movie", language: "de", tags: ["passport"], curatorNote: "A Berlin scientist is paired with a perfect AI man designed to make her happy — elegant, witty and surprisingly moving.", tmdbId: 786892 },
   { title: "The Hating Game", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Enemies-to-lovers office rivalry played with great gusto.", tmdbId: 644083 },
   { title: "Licorice Pizza", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "PTA's sun-drenched San Fernando Valley romance — two mismatched souls chasing each other through the 1970s in a story about youth, longing and the gap between who you are and who you want to be.", tmdbId: 718032 },
-  { title: "Loco por ella", year: 2021, type: "movie", language: "es", tags: ["surprise"], curatorNote: "A Netflix Spanish romcom — a man voluntarily checks into a psychiatric facility to be close to the woman he loves.", tmdbId: null },
+  { title: "Loco por ella", year: 2021, type: "movie", language: "es", tags: ["passport"], curatorNote: "A Netflix Spanish romcom — a man voluntarily checks into a psychiatric facility to be close to the woman he loves.", tmdbId: null },
 
   // ── 2020 ──────────────────────────────────────────────────────────────────
   { title: "Palm Springs", year: 2020, type: "movie", language: "en", tags: ["critics"], curatorNote: "Time-loop romcom with wit and genuine heart.", tmdbId: 631843 },
   { title: "Emma.", year: 2020, type: "movie", language: "en", tags: ["critics"], curatorNote: "A visually exquisite Austen adaptation with comic precision.", tmdbId: 573095 },
   { title: "The Broken Hearts Gallery", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Bright contemporary romcom with distinctive premise.", tmdbId: 644093 },
-  { title: "The Wedding Unplanner", year: 2020, type: "movie", language: "es", tags: ["surprise"], curatorNote: "Bright Spanish wedding romcom.", tmdbId: 623926 },
+  { title: "The Wedding Unplanner", year: 2020, type: "movie", language: "es", tags: ["passport"], curatorNote: "Bright Spanish wedding romcom.", tmdbId: 623926 },
   { title: "The Lovebirds", year: 2020, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A fast-paced couple's comedy — Issa Rae and Kumail Nanjiani with great chemistry.", tmdbId: 576845 },
   { title: "Happiest Season", year: 2020, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A significant LGBTQ+ holiday romcom — funny, warm and emotionally real.", tmdbId: 644564 },
 
@@ -74,19 +103,19 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   // ── 2018 ──────────────────────────────────────────────────────────────────
   { title: "Crazy Rich Asians", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Glossy, culturally specific and emotionally satisfying.", tmdbId: 490132 },
   { title: "Juliet, Naked", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "A mature, music-infused romcom with literary wit.", tmdbId: 467788 },
-  { title: "On Your Wedding Day", year: 2018, type: "movie", language: "ko", tags: ["surprise"], curatorNote: "Bittersweet Korean romcom with genuine emotional range.", tmdbId: 532444 },
+  { title: "On Your Wedding Day", year: 2018, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Bittersweet Korean romcom with genuine emotional range.", tmdbId: 532444 },
   { title: "Set It Up", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Netflix workplace romcom that helped revive the genre — breezy and charming.", tmdbId: 504172 },
   { title: "Love, Simon", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A major studio queer teen romcom — warm, funny and genuinely moving.", tmdbId: 467640 },
   { title: "To All the Boys I've Loved Before", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An essential modern teen romcom — letters, secrets and irresistible chemistry.", tmdbId: 505249 },
-  { title: "Soltera codiciada", year: 2018, type: "movie", language: "es", tags: ["crowd"], curatorNote: "A popular Peruvian romantic comedy about a woman rebuilding her life after a breakup.", tmdbId: 527246 },
+  { title: "Soltera codiciada", year: 2018, type: "movie", language: "es", tags: ["passport"], curatorNote: "A popular Peruvian romantic comedy about a woman rebuilding her life after a breakup.", tmdbId: 527246 },
 
   // ── 2017 ──────────────────────────────────────────────────────────────────
   { title: "The Big Sick", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "Personal, funny and culturally specific.", tmdbId: 385103 },
-  { title: "Qarib Qarib Singlle", year: 2017, type: "movie", language: "hi", tags: ["surprise"], curatorNote: "Mature Indian travel romcom.", tmdbId: 479918 },
+  { title: "Qarib Qarib Singlle", year: 2017, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Mature Indian travel romcom.", tmdbId: 479918 },
   { title: "The Incredible Jessica James", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An underseen, sharp independent romcom — Jessica Williams is magnetic.", tmdbId: 454992 },
-  { title: "Mr. & Mrs. Adelman", year: 2017, type: "movie", language: "fr", tags: ["critics"], curatorNote: "A sweeping, witty look at 45 years of a chaotic French marriage — funny, tender, literary.", tmdbId: 429200 },
-  { title: "Bareilly Ki Barfi", year: 2017, type: "movie", language: "hi", tags: ["crowd"], curatorNote: "A vibrant, funny Indian romcom about a small-town woman searching for the author who captured her soul.", tmdbId: 467106 },
-  { title: "Shubh Mangal Saavdhan", year: 2017, type: "movie", language: "hi", tags: ["crowd"], curatorNote: "A charming, warm-hearted Indian romcom tackling a sensitive subject with great humor.", tmdbId: 471892 },
+  { title: "Mr. & Mrs. Adelman", year: 2017, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A sweeping, witty look at 45 years of a chaotic French marriage — funny, tender, literary.", tmdbId: 429200 },
+  { title: "Bareilly Ki Barfi", year: 2017, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A vibrant, funny Indian romcom about a small-town woman searching for the author who captured her soul.", tmdbId: 467106 },
+  { title: "Shubh Mangal Saavdhan", year: 2017, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A charming, warm-hearted Indian romcom tackling a sensitive subject with great humor.", tmdbId: 471892 },
 
   // ── 2016 ──────────────────────────────────────────────────────────────────
   { title: "Me Before You", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A major modern romance hit with comic warmth.", tmdbId: 296098 },
@@ -94,78 +123,78 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   // ── 2015 ──────────────────────────────────────────────────────────────────
   { title: "Sleeping with Other People", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "A smart, funny modern relationship comedy.", tmdbId: 308266 },
   { title: "Man Up", year: 2015, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A one-night mistaken-identity romcom with sharp chemistry.", tmdbId: 314218 },
-  { title: "The Beauty Inside", year: 2015, type: "movie", language: "ko", tags: ["surprise"], curatorNote: "High-concept romance with warm comic texture.", tmdbId: 338729 },
-  { title: "Blind Date", year: 2015, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A French romcom about a pianist and an inventor separated by a thin wall — opposites who clash and fall in love.", tmdbId: 296100 },
+  { title: "The Beauty Inside", year: 2015, type: "movie", language: "ko", tags: ["passport"], curatorNote: "High-concept romance with warm comic texture.", tmdbId: 338729 },
+  { title: "Blind Date", year: 2015, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A French romcom about a pianist and an inventor separated by a thin wall — opposites who clash and fall in love.", tmdbId: 296100 },
   { title: "Trainwreck", year: 2015, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Amy Schumer's breakthrough — a commitment-phobe falls for a sports doctor despite herself. Raunchy, funny and surprisingly sweet.", tmdbId: 278154 },
 
   // ── 2014 ──────────────────────────────────────────────────────────────────
   { title: "Obvious Child", year: 2014, type: "movie", language: "en", tags: ["critics"], curatorNote: "Modern, honest indie romcom with comic voice.", tmdbId: 245503 },
   { title: "Love, Rosie", year: 2014, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A slow-burn friends-to-lovers story that earns its tears.", tmdbId: 257091 },
-  { title: "Spanish Affair", year: 2014, type: "movie", language: "es", tags: ["crowd"], curatorNote: "A hilarious cultural clash — a Sevillian man travels to the Basque Country to win over a young woman.", tmdbId: 260513 },
+  { title: "Spanish Affair", year: 2014, type: "movie", language: "es", tags: ["passport"], curatorNote: "A hilarious cultural clash — a Sevillian man travels to the Basque Country to win over a young woman.", tmdbId: 260513 },
   { title: "The One I Love", year: 2014, type: "movie", language: "en", tags: ["critics"], curatorNote: "A mind-bending indie sci-fi romcom — a couple in crisis retreats to a house that holds an uncanny surprise.", tmdbId: 244582 },
 
   // ── 2013 ──────────────────────────────────────────────────────────────────
   { title: "About Time", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Romcom framework elevated by family and gratitude.", tmdbId: 175616 },
   { title: "Enough Said", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Adult romance with emotional precision.", tmdbId: 176263 },
   { title: "What If", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "A charming friends-to-lovers comedy with lively banter.", tmdbId: 176819 },
-  { title: "Three Many Weddings", year: 2013, type: "movie", language: "es", tags: ["surprise"], curatorNote: "Energetic Spanish wedding comedy.", tmdbId: 201765 },
-  { title: "The Lunchbox", year: 2013, type: "movie", language: "hi", tags: ["critics"], curatorNote: "An exquisite Indian romantic dramedy — two strangers exchange letters through a mistaken tiffin delivery.", tmdbId: 203264 },
+  { title: "Three Many Weddings", year: 2013, type: "movie", language: "es", tags: ["passport"], curatorNote: "Energetic Spanish wedding comedy.", tmdbId: 201765 },
+  { title: "The Lunchbox", year: 2013, type: "movie", language: "hi", tags: ["passport"], curatorNote: "An exquisite Indian romantic dramedy — two strangers exchange letters through a mistaken tiffin delivery.", tmdbId: 203264 },
   { title: "The Spectacular Now", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "A coming-of-age romantic dramedy with extraordinary performances and emotional honesty.", tmdbId: 204974 },
 
   // ── 2012 ──────────────────────────────────────────────────────────────────
-  { title: "Populaire", year: 2012, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Stylish period workplace romcom.", tmdbId: 87552 },
+  { title: "Populaire", year: 2012, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Stylish period workplace romcom.", tmdbId: 87552 },
   { title: "Safety Not Guaranteed", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An offbeat indie romcom with science-fiction wonder.", tmdbId: 96712 },
   { title: "Ruby Sparks", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A clever fantasy about authorship, control and love.", tmdbId: 103332 },
   { title: "Silver Linings Playbook", year: 2012, type: "movie", language: "en", tags: ["critics"], curatorNote: "A major romantic dramedy — Bradley Cooper and Jennifer Lawrence at their very best.", tmdbId: 116745 },
   { title: "Moonrise Kingdom", year: 2012, type: "movie", language: "en", tags: ["critics"], curatorNote: "Wes Anderson's eccentric, visually distinctive young-love comedy — a gem for discovery.", tmdbId: 83666 },
-  { title: "Love 911", year: 2012, type: "movie", language: "ko", tags: ["surprise"], curatorNote: "A Korean romantic comedy-drama about a grieving firefighter and an emergency doctor.", tmdbId: 146724 },
+  { title: "Love 911", year: 2012, type: "movie", language: "ko", tags: ["passport"], curatorNote: "A Korean romantic comedy-drama about a grieving firefighter and an emergency doctor.", tmdbId: 146724 },
+  { title: "Much Ado About Nothing", year: 2012, type: "movie", language: "en", tags: ["critics"], curatorNote: "Joss Whedon shoots Shakespeare in glorious black and white at his own house over a weekend — intimate, playful and surprisingly moving.", tmdbId: 116711 },
 
   // ── 2011 ──────────────────────────────────────────────────────────────────
   { title: "Crazy, Stupid, Love.", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An expertly constructed ensemble romcom with huge rewatchability.", tmdbId: 65759 },
-  { title: "Sidewalls", year: 2011, type: "movie", language: "es", tags: ["surprise"], curatorNote: "Urban loneliness transformed into romantic possibility.", tmdbId: 86543 },
-  { title: "Much Ado About Nothing", year: 2012, type: "movie", language: "en", tags: ["critics"], curatorNote: "Joss Whedon shoots Shakespeare in glorious black and white at his own house over a weekend — intimate, playful and surprisingly moving.", tmdbId: 116711 },
-  { title: "You Are the Apple of My Eye", year: 2011, type: "movie", language: "zh", tags: ["surprise"], curatorNote: "Influential Taiwanese youth romance-comedy.", tmdbId: 84111 },
+  { title: "Sidewalls", year: 2011, type: "movie", language: "es", tags: ["passport"], curatorNote: "Urban loneliness transformed into romantic possibility.", tmdbId: 86543 },
+  { title: "You Are the Apple of My Eye", year: 2011, type: "movie", language: "zh", tags: ["passport"], curatorNote: "Influential Taiwanese youth romance-comedy.", tmdbId: 84111 },
   { title: "Midnight in Paris", year: 2011, type: "movie", language: "en", tags: ["critics"], curatorNote: "Woody Allen's warmest late film — nostalgia, romance and Paris at their most seductive.", tmdbId: 74643 },
   { title: "Bridesmaids", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The film that proved women-led comedies could dominate the box office — raucous and real.", tmdbId: 56558 },
-  { title: "Spellbound", year: 2011, type: "movie", language: "ko", tags: ["surprise"], curatorNote: "Horror-romcom hybrid that still honors the romance.", tmdbId: 92499 },
+  { title: "Spellbound", year: 2011, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Horror-romcom hybrid that still honors the romance.", tmdbId: 92499 },
   { title: "Friends with Benefits", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A popular contemporary romcom — Justin Timberlake and Mila Kunis with sharp chemistry.", tmdbId: 64635 },
   { title: "One Day", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A romantic drama following two friends on the same date each year over 18 years.", tmdbId: 57150 },
 
   // ── 2010 ──────────────────────────────────────────────────────────────────
   { title: "Easy A", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A razor-sharp teen comedy with romantic heart.", tmdbId: 44264 },
-  { title: "Heartbreaker", year: 2010, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "High-concept French romcom with buoyant pace.", tmdbId: 38225 },
-  { title: "Band Baaja Baaraat", year: 2010, type: "movie", language: "hi", tags: ["surprise"], curatorNote: "Wedding-business romance with strong pace and chemistry.", tmdbId: 52696 },
-  { title: "Romantics Anonymous", year: 2010, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Gentle, eccentric and deeply charming — two pathologically shy chocolatiers fall in love.", tmdbId: 44801 },
-  { title: "No eres tú, soy yo", year: 2010, type: "movie", language: "es", tags: ["surprise"], curatorNote: "A sharp, funny Mexican romantic comedy about breakups and self-discovery.", tmdbId: 64694 },
+  { title: "Heartbreaker", year: 2010, type: "movie", language: "fr", tags: ["passport"], curatorNote: "High-concept French romcom with buoyant pace.", tmdbId: 38225 },
+  { title: "Band Baaja Baaraat", year: 2010, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Wedding-business romance with strong pace and chemistry.", tmdbId: 52696 },
+  { title: "Romantics Anonymous", year: 2010, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Gentle, eccentric and deeply charming — two pathologically shy chocolatiers fall in love.", tmdbId: 44801 },
+  { title: "No eres tú, soy yo", year: 2010, type: "movie", language: "es", tags: ["passport"], curatorNote: "A sharp, funny Mexican romantic comedy about breakups and self-discovery.", tmdbId: 64694 },
 
   // ── 2009 ──────────────────────────────────────────────────────────────────
   { title: "The Proposal", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A peak forced-proximity romcom — Sandra Bullock and Ryan Reynolds at full charm.", tmdbId: 18240 },
   { title: "The Ugly Truth", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Raucous battle-of-the-sexes romcom with undeniable chemistry.", tmdbId: 23439 },
   { title: "500 Days of Summer", year: 2009, type: "movie", language: "en", tags: ["critics"], curatorNote: "An anti-romcom that deconstructs expectations while being deeply romantic.", tmdbId: 19913 },
-  { title: "Hear Me", year: 2009, type: "movie", language: "zh", tags: ["surprise"], curatorNote: "Gentle Taiwanese romance with graceful visual storytelling.", tmdbId: 41531 },
+  { title: "Hear Me", year: 2009, type: "movie", language: "zh", tags: ["passport"], curatorNote: "Gentle Taiwanese romance with graceful visual storytelling.", tmdbId: 41531 },
 
   // ── 2008 ──────────────────────────────────────────────────────────────────
   { title: "Forgetting Sarah Marshall", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A breakup comedy that balances raunch and tenderness.", tmdbId: 10972 },
-  { title: "A Boyfriend for My Wife", year: 2008, type: "movie", language: "es", tags: ["surprise"], curatorNote: "Clever Argentine relationship comedy.", tmdbId: 16916 },
+  { title: "A Boyfriend for My Wife", year: 2008, type: "movie", language: "es", tags: ["passport"], curatorNote: "Clever Argentine relationship comedy.", tmdbId: 16916 },
   { title: "Definitely, Maybe", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A mystery-structure romcom told in flashback — smart, funny and genuinely touching.", tmdbId: 11216 },
   { title: "27 Dresses", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A reliable crowd-pleaser built on a great premise and irresistible chemistry.", tmdbId: 11236 },
   { title: "Nick and Norah's Infinite Playlist", year: 2008, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An indie one-night romcom set to a great soundtrack — sweet, genuine and fun.", tmdbId: 13273 },
 
   // ── 2007 ──────────────────────────────────────────────────────────────────
-  { title: "Jab We Met", year: 2007, type: "movie", language: "hi", tags: ["crowd"], curatorNote: "Beloved Indian romcom driven by unforgettable character energy.", tmdbId: 11807 },
+  { title: "Jab We Met", year: 2007, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Beloved Indian romcom driven by unforgettable character energy.", tmdbId: 11807 },
   { title: "Music and Lyrics", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hugh Grant and Drew Barrymore in a witty, musical romcom that earns its sweetness.", tmdbId: 11096 },
   { title: "Enchanted", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Disney animated fairy-tale meets live-action New York — joyful, funny and irresistible.", tmdbId: 6972 },
   { title: "Waitress", year: 2007, type: "movie", language: "en", tags: ["critics"], curatorNote: "A critically admired romantic dramedy — funny, warm and beautifully observed.", tmdbId: 10898 },
   { title: "Juno", year: 2007, type: "movie", language: "en", tags: ["critics"], curatorNote: "A witty, warm coming-of-age love story told sideways — Diablo Cody's script is endlessly quotable.", tmdbId: 8080 },
   { title: "Knocked Up", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Apatow's most romantic film — raunchy and chaotic, but the love story earns every bit of it.", tmdbId: 4912 },
-  { title: "2 Days in Paris", year: 2007, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Julie Delpy writes, directs and stars in this sharp, funny Franco-American relationship comedy — like Before Sunset with sharper elbows.", tmdbId: 12446 },
+  { title: "2 Days in Paris", year: 2007, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Julie Delpy writes, directs and stars in this sharp, funny Franco-American relationship comedy — like Before Sunset with sharper elbows.", tmdbId: 12446 },
 
   // ── 2006 ──────────────────────────────────────────────────────────────────
   { title: "The Holiday", year: 2006, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Peak cozy romcom comfort.", tmdbId: 1865 },
-  { title: "The Valet", year: 2006, type: "movie", language: "fr", tags: ["critics"], curatorNote: "French farce with heart and comic efficiency.", tmdbId: 9577 },
-  { title: "Priceless", year: 2006, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Riviera glamour, wit and romantic games.", tmdbId: 10064 },
+  { title: "The Valet", year: 2006, type: "movie", language: "fr", tags: ["passport"], curatorNote: "French farce with heart and comic efficiency.", tmdbId: 9577 },
+  { title: "Priceless", year: 2006, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Riviera glamour, wit and romantic games.", tmdbId: 10064 },
   { title: "The Devil Wears Prada", year: 2006, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Fashion, ambition and a touch of romance — Meryl Streep gives one of cinema's great performances.", tmdbId: 349 },
-  { title: "200 Pounds Beauty", year: 2006, type: "movie", language: "ko", tags: ["crowd"], curatorNote: "A hugely popular Korean romantic comedy about transformation, identity and love.", tmdbId: 16374 },
+  { title: "200 Pounds Beauty", year: 2006, type: "movie", language: "ko", tags: ["passport"], curatorNote: "A hugely popular Korean romantic comedy about transformation, identity and love.", tmdbId: 16374 },
   { title: "Penelope", year: 2006, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A fairy-tale romantic comedy about a girl with a pig nose cursed by an ancient family spell.", tmdbId: 9484 },
 
   // ── 2005 ──────────────────────────────────────────────────────────────────
@@ -185,28 +214,28 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   { title: "Love Actually", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An iconic ensemble romance with huge cultural reach.", tmdbId: 508 },
   { title: "Something's Gotta Give", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Adult romantic comedy with two legends — Diane Keaton and Jack Nicholson — at their best.", tmdbId: 9386 },
   { title: "How to Lose a Guy in 10 Days", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A perfectly constructed premise executed with great chemistry and comic timing.", tmdbId: 10693 },
-  { title: "Love Me If You Dare", year: 2003, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Two lifelong French friends play an escalating dare game masking turbulent romantic feelings.", tmdbId: 11055 },
+  { title: "Love Me If You Dare", year: 2003, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Two lifelong French friends play an escalating dare game masking turbulent romantic feelings.", tmdbId: 11055 },
   { title: "Down with Love", year: 2003, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A stylish screwball homage to 1960s Doris Day comedies — witty and gorgeous.", tmdbId: 11571 },
 
   // ── 2002 ──────────────────────────────────────────────────────────────────
-  { title: "The Spanish Apartment", year: 2002, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Youthful European ensemble romance and travel energy.", tmdbId: 9464 },
+  { title: "The Spanish Apartment", year: 2002, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Youthful European ensemble romance and travel energy.", tmdbId: 9464 },
   { title: "My Big Fat Greek Wedding", year: 2002, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A cultural phenomenon — the highest-grossing romantic comedy of all time, warm and irresistible.", tmdbId: 5765 },
   { title: "About a Boy", year: 2002, type: "movie", language: "en", tags: ["critics"], curatorNote: "Hugh Grant at his most charming — a witty, warm comedy about connection and growing up.", tmdbId: 7916 },
   { title: "Punch-Drunk Love", year: 2002, type: "movie", language: "en", tags: ["critics"], curatorNote: "Paul Thomas Anderson's unconventional romantic comedy — tender, strange and unforgettable.", tmdbId: 6820 },
-  { title: "El otro lado de la cama", year: 2002, type: "movie", language: "es", tags: ["crowd"], curatorNote: "A massive Spanish box-office hit blending musical numbers with chaotic bed-hopping romance.", tmdbId: 59756 },
+  { title: "El otro lado de la cama", year: 2002, type: "movie", language: "es", tags: ["passport"], curatorNote: "A massive Spanish box-office hit blending musical numbers with chaotic bed-hopping romance.", tmdbId: 59756 },
   { title: "Sweet Home Alabama", year: 2002, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Reese Witherspoon at peak charm in this Southern-set love triangle.", tmdbId: 11354 },
 
   // ── 2001 ──────────────────────────────────────────────────────────────────
-  { title: "Amélie", year: 2001, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Whimsical French romance with unmistakable visual identity.", tmdbId: 194 },
+  { title: "Amélie", year: 2001, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Whimsical French romance with unmistakable visual identity.", tmdbId: 194 },
   { title: "Bridget Jones's Diary", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Messy heroine, sharp comedy, enduring appeal.", tmdbId: 3087 },
-  { title: "My Sassy Girl", year: 2001, type: "movie", language: "ko", tags: ["critics"], curatorNote: "Influential Korean romcom balancing chaos and tenderness.", tmdbId: 23022 },
-  { title: "Monsoon Wedding", year: 2001, type: "movie", language: "hi", tags: ["critics"], curatorNote: "A vibrant family ensemble around love and marriage.", tmdbId: 9691 },
+  { title: "My Sassy Girl", year: 2001, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Influential Korean romcom balancing chaos and tenderness.", tmdbId: 23022 },
+  { title: "Monsoon Wedding", year: 2001, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A vibrant family ensemble around love and marriage.", tmdbId: 9691 },
   { title: "Legally Blonde", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A romcom that transcends its genre — funny, feminist and joyously rewatchable.", tmdbId: 8347 },
   { title: "Kate & Leopold", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A time-travel fantasy romcom — a 19th-century duke arrives in modern New York and falls for a career woman.", tmdbId: 10095 },
   { title: "Kissing Jessica Stein", year: 2001, type: "movie", language: "en", tags: ["critics"], curatorNote: "An independent LGBTQ+ romcom — funny, fresh and ahead of its time.", tmdbId: 15936 },
 
   // ── 2000 ──────────────────────────────────────────────────────────────────
-  { title: "Bread and Tulips", year: 2000, type: "movie", language: "it", tags: ["critics"], curatorNote: "Adult reinvention with warmth and whimsy.", tmdbId: 11202 },
+  { title: "Bread and Tulips", year: 2000, type: "movie", language: "it", tags: ["passport"], curatorNote: "Adult reinvention with warmth and whimsy.", tmdbId: 11202 },
   { title: "High Fidelity", year: 2000, type: "movie", language: "en", tags: ["critics"], curatorNote: "A music-obsessive's romantic inventory — John Cusack, sharp wit and genuine melancholy.", tmdbId: 854 },
   { title: "Return to Me", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An underseen gem — a tender, funny romantic comedy about love after loss.", tmdbId: 43625 },
   { title: "Keeping the Faith", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An underrated romantic comedy about two best friends — a priest and a rabbi — both falling for the same woman.", tmdbId: 11530 },
@@ -237,7 +266,7 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   { title: "The Truth About Cats & Dogs", year: 1996, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An underappreciated 1990s romcom — a smart, funny modern Cyrano with Uma Thurman and Janeane Garofalo.", tmdbId: 10960 },
 
   // ── 1995 ──────────────────────────────────────────────────────────────────
-  { title: "Dilwale Dulhania Le Jayenge", year: 1995, type: "movie", language: "hi", tags: ["crowd"], curatorNote: "Landmark Indian romance with humor, family and cultural reach.", tmdbId: 19274 },
+  { title: "Dilwale Dulhania Le Jayenge", year: 1995, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Landmark Indian romance with humor, family and cultural reach.", tmdbId: 19274 },
   { title: "French Kiss", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Paris-set caper romance with Meg Ryan and Kevin Kline in great form.", tmdbId: 9022 },
   { title: "Clueless", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Cher Horowitz is one of cinema's great comic heroines — a romcom and a time capsule.", tmdbId: 9602 },
   { title: "While You Were Sleeping", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Sandra Bullock gem — cozy, funny and unexpectedly moving.", tmdbId: 11520 },
@@ -246,11 +275,12 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   // ── 1994 ──────────────────────────────────────────────────────────────────
   { title: "Four Weddings and a Funeral", year: 1994, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Ensemble warmth, wit and emotional intelligence.", tmdbId: 232 },
   { title: "Muriel's Wedding", year: 1994, type: "movie", language: "en", tags: ["critics"], curatorNote: "A funny, moving reinvention story with romantic dimensions.", tmdbId: 10850 },
+  { title: "The Adventures of Priscilla, Queen of the Desert", year: 1994, type: "movie", language: "en", tags: ["critics"], curatorNote: "A defining queer road-trip comedy — dazzling costumes, big laughs and a surprisingly tender heart.", tmdbId: 11099 },
 
   // ── 1993 ──────────────────────────────────────────────────────────────────
   { title: "Groundhog Day", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "High-concept romcom with philosophical depth.", tmdbId: 1408 },
   { title: "Much Ado About Nothing", year: 1993, type: "movie", language: "en", tags: ["critics"], curatorNote: "Branagh and Thompson at the peak of their chemistry — Shakespeare's funniest battle of wits, joyfully filmed in Tuscany.", tmdbId: 22383 },
-  { title: "The Wedding Banquet", year: 1993, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Ang Lee's sharp, humane queer family romcom — a Taiwanese man's lavish fake marriage spirals hilariously out of control.", tmdbId: 9261 },
+  { title: "The Wedding Banquet", year: 1993, type: "movie", language: "zh", tags: ["passport"], curatorNote: "Ang Lee's sharp, humane queer family romcom — a Taiwanese man's lavish fake marriage spirals hilariously out of control.", tmdbId: 9261 },
   { title: "Sleepless in Seattle", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A romcom built on longing and coincidence — tender and irresistible.", tmdbId: 858 },
   { title: "Dave", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A political farce with a warm romantic heart — Kevin Kline at his most likeable.", tmdbId: 14294 },
 
@@ -298,8 +328,6 @@ export const ROMCOM_EDITORIAL_BATCHES = [
 
   // ── 1979 ──────────────────────────────────────────────────────────────────
   { title: "The Goodbye Girl", year: 1977, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A beloved opposites-attract romance — Richard Dreyfuss won the Oscar for his magnetic performance.", tmdbId: 26679 },
-
-  // ── 1979 ──────────────────────────────────────────────────────────────────
   { title: "Manhattan", year: 1979, type: "movie", language: "en", tags: ["critics"], curatorNote: "Woody Allen's love letter to New York — gorgeous Gershwin-scored romance, bracingly honest about its own contradictions.", tmdbId: 9675 },
 
   // ── 1977 ──────────────────────────────────────────────────────────────────
