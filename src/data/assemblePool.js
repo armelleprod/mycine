@@ -204,6 +204,16 @@ function assignBadges(entries) {
     if (badge === "🆕 RECENT" && Number(entry.year) < 2025) {
       badge = "✨ Surprise";
     }
+    // Safety guard: never label an entry "Classic" unless its year is before 1980.
+    // If the Classic slot falls back to a newer title, downgrade to Surprise.
+    if (badge === "🎞️ Classic" && Number(entry.year) >= 1980) {
+      badge = "✨ Surprise";
+    }
+    // Safety guard: never label an entry "Passport" unless it is non-English.
+    // If the Passport slot falls back to an English title, downgrade to Surprise.
+    if (badge === "🌍 Passport" && (!entry.language || entry.language === "en")) {
+      badge = "✨ Surprise";
+    }
     return { ...entry, badge, slot: slotIndex + 1 };
   });
 }

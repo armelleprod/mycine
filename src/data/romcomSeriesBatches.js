@@ -34,8 +34,7 @@ export const ROMCOM_SERIES_EDITORIAL_BATCHES = [
   { title: "Everything I Know About Love", year: 2022, type: "tv", language: "en", tags: ["critics"], curatorNote: "Dolly Alderton's love letter to female friendship in your twenties.", moodTags: ["date", "think"] },
   { title: "Semantic Error", year: 2022, type: "tv", language: "ko", tags: ["passport"], curatorNote: "Charming enemies-to-lovers Korean BL series.", moodTags: ["travel", "date", "feelgood"] },
   { title: "Partner Track", year: 2022, type: "tv", language: "en", tags: ["crowd"], curatorNote: "A law firm, workplace romance and the price of ambition.", moodTags: ["date", "feelgood", "laugh"] },
-  { title: "Our Flag Means Death", year: 2022, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Pirate queer romcom — swashbuckling and sweethearted.", moodTags: ["laugh", "escape"] },
-  { title: "Thirty-Nine", year: 2022, type: "tv", language: "ko", tags: ["passport"], curatorNote: "Three friends on the edge of forty find love and face loss.", moodTags: ["travel", "date", "feelgood"] },
+{ title: "Thirty-Nine", year: 2022, type: "tv", language: "ko", tags: ["passport"], curatorNote: "Three friends on the edge of forty find love and face loss.", moodTags: ["travel", "date", "feelgood"] },
 
   // ── 2021 ──────────────────────────────────────────────────────────────────
   { title: "Starstruck", year: 2021, type: "tv", language: "en", tags: ["surprise"], curatorNote: "An ordinary woman accidentally falls into a movie star's orbit — delightful.", moodTags: ["date", "think"] },
