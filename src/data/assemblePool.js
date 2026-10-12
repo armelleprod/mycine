@@ -163,8 +163,8 @@ function assignBadges(entries) {
   );
   if (slot1 !== -1) { result[1] = slot1; assigned.add(slot1); }
 
-  // Slot 3: Classic — year < 2000, oldest first for variety
-  const slot2 = findBest(e => Number(e.year) < 2000, null);
+  // Slot 3: Classic — year < 1980, oldest first for variety
+  const slot2 = findBest(e => Number(e.year) < 1980, null);
   if (slot2 !== -1) { result[2] = slot2; assigned.add(slot2); }
 
   // Slot 4: Passport — non-English

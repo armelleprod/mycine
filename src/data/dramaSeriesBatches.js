@@ -91,7 +91,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2026,
     type: "tv",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Season 2 of the Apple TV+ French-Japanese wine drama — a Japanese woman inheriting her legendary wine critic father's estate while a rival contests the legacy. Genuinely sensory television about obsession, legacy and taste."
   },
   {
@@ -246,7 +246,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2025,
     type: "tv",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "French series about Marie-Antoine Carême, the 19th-century chef who invented modern French cuisine and cooked for Napoleon, Tsar Alexander and the Rothschilds. 95% on Rotten Tomatoes. Lavish, strange and unexpectedly thrilling about ambition and art."
   },
   {
@@ -294,7 +294,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2025,
     type: "tv",
     language: "ko",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "IU and Park Bo-gum in a multigenerational love story set on Jeju Island — following two families across decades from the 1950s to the present. Quiet, unhurried and devastating in the way only Korean melodrama at its best can be."
   },
 
@@ -361,7 +361,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2024,
     type: "tv",
     language: "ja",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "An English pilot washes ashore in feudal Japan and enters a world of lethal political chess. A landmark — the first show to win both Outstanding Drama and acting awards at the Emmys in the same year without a single anglophone lead."
   },
   {
@@ -385,7 +385,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2024,
     type: "tv",
     language: "vi",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Hoa Xuande as a communist spy embedded with South Vietnamese refugees after Saigon falls — Park Chan-wook's first English-language series, and one of the most formally audacious things on television."
   },
   {
@@ -559,7 +559,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2022,
     type: "tv",
     language: "ko",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Min Jin Lee's multigenerational novel — a Korean family across four generations, from Japanese-occupied Korea to 1980s Osaka and modern New York. Sumptuous, heartbreaking and bilingual in every sense."
   },
   {
@@ -575,7 +575,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2022,
     type: "tv",
     language: "de",
-    tags: ["crowd", "surprise"],
+    tags: ["passport"],
     curatorNote: "A German-language reimagining of Sisi — the young Austrian empress as a woman who refuses every expectation placed on her. Gorgeous and genuinely feminist where the Hollywood versions were merely romantic."
   },
   {
@@ -583,7 +583,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2022,
     type: "tv",
     language: "ko",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "Song Hye-kyo as a woman who spent twenty years planning revenge on the classmates who destroyed her life. The most-watched Korean drama of its year globally — and a vindication that patience is its own kind of power."
   },
   {
@@ -618,7 +618,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2021,
     type: "tv",
     language: "ko",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "456 people in debt play deadly children's games for a 45-billion-won prize. Hwang Dong-hyuk's Korean series became the most-watched Netflix show ever — a Kafkaesque allegory about capitalism that is also genuinely, ruthlessly gripping."
   },
   {
@@ -749,7 +749,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2020,
     type: "tv",
     language: "yi",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Shira Haas as a young Hasidic woman who flees her arranged marriage in Brooklyn for Berlin. The first major series shot primarily in Yiddish — four episodes of quietly extraordinary precision about tradition, freedom and what we owe our past."
   },
   {
@@ -781,7 +781,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2020,
     type: "tv",
     language: "ko",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "Five doctor friends who've known each other since medical school — a Korean drama that is basically a warm hug across 24 episodes. The most comforting prestige TV of recent years, and funnier than anything this gentle has a right to be."
   },
   {
@@ -789,7 +789,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2020,
     type: "tv",
     language: "es",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "The real life of Cristina Ortiz, 'La Veneno' — a trans Spanish sex worker who became a 1990s television phenomenon. The Javis' series is the most joyful, heartbreaking and radical portrait of a trans life in European television."
   },
   {
@@ -813,7 +813,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2020,
     type: "tv",
     language: "ko",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "A doctor discovers her husband is having an affair — and the Korean drama that became a record-breaking ratings phenomenon as the most-watched cable series in Korean TV history. Propulsive, stylish and absolutely merciless."
   },
   {
@@ -821,7 +821,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2020,
     type: "tv",
     language: "sv",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "A Swedish series about a married consultant who begins a game of escalating dares with the young IT technician at a publishing house. Funny, erotic and genuinely subversive about gender, power and the things we dare each other into."
   },
 
@@ -864,7 +864,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2019,
     type: "tv",
     language: "ko",
-    tags: ["crowd", "surprise"],
+    tags: ["passport"],
     curatorNote: "A Joseon-era Korean prince investigates a plague that is turning people into zombies — and discovers the political conspiracy underneath. Netflix's first Korean original and proof that genre and prestige drama aren't opposites."
   },
 
@@ -883,7 +883,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2018,
     type: "tv",
     language: "ko",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "An unlikely friendship between a middle-aged civil engineer whose life is quietly falling apart and a young woman with a brutal secret. Korean television's most precise and compassionate portrait of people simply trying to survive."
   },
   {
@@ -907,7 +907,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2018,
     type: "tv",
     language: "ko",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "A Korean man who fled slavery as a child returns from America as a US Marine officer during the Japanese occupation — and falls in love with an aristocrat who is secretly in the resistance. Epic romance and genuine historical urgency."
   },
   {
@@ -1067,7 +1067,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2015,
     type: "tv",
     language: "ko",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "Five families in a Seoul alley in the late 1980s — the most beloved Korean drama ever made by a large margin. Twenty episodes about neighbors, nostalgia and the neighborhood that shaped you, and you will cry at episode 20."
   },
   {
@@ -1234,7 +1234,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2010,
     type: "tv",
     language: "da",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Sidse Babett Knudsen as Denmark's first female prime minister — the Danish political drama that launched the Nordic crime wave and has never been matched for its intelligence about power, compromise and the cost of public life."
   },
   {
@@ -1320,7 +1320,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2022,
     type: "tv",
     language: "ja",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "A female journalist at a national newspaper exposes a cover-up in a Japanese ministry — adapted from the film of the same name, this Netflix Japan series is a precise and angry portrait of institutional corruption and the women who refuse to accept it."
   },
 
@@ -1439,7 +1439,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 1973,
     type: "tv",
     language: "sv",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Ingmar Bergman's six-hour Swedish television drama about a marriage falling apart — Liv Ullmann and Erland Josephson. The most intimate and devastating examination of a relationship in the history of the medium."
   },
   {
@@ -1543,7 +1543,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2014,
     type: "tv",
     language: "ko",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "A failed Go player becomes an office worker and discovers that corporate life has its own rigid hierarchies — the Korean drama about modern work that became a genuine cultural phenomenon, beloved for its painful accuracy."
   },
   {
@@ -1559,7 +1559,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2021,
     type: "tv",
     language: "ko",
-    tags: ["crowd", "surprise"],
+    tags: ["passport"],
     curatorNote: "A young man with Asperger's and his uncle run a trauma cleaning service — and in each apartment find the story of the person who died there. The most quietly devastating Korean drama of its year, and a genuinely original premise."
   },
   {
@@ -1655,7 +1655,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2019,
     type: "tv",
     language: "hi",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "The investigation into the 2012 Delhi gang rape — Netflix India's Emmy-winning series follows the police detective who led the case with unflinching honesty about the crime, the investigation and the city it happened in."
   },
   {
@@ -1663,7 +1663,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2022,
     type: "tv",
     language: "ko",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "Park Eun-bin as Woo Young-woo, a brilliant attorney with autism starting her career at a top Seoul law firm — the Korean drama that became a global phenomenon for the warmth and specificity of its portrait of a neurodivergent woman navigating a world not built for her."
   },
   {
@@ -1679,7 +1679,7 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     year: 2018,
     type: "tv",
     language: "it",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Elena Ferrante's Neapolitan novels — Elena and Lila's friendship across four seasons and fifty years of Naples, from postwar poverty to the 1990s. Italian television's most ambitious production and the most faithful great literary adaptation."
   },
   {

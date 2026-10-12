@@ -127,7 +127,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "ro",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Cristian Mungiu's Palme d'Or winner — Sebastian Stan and Renate Reinsve as an evangelical Romanian couple in Norway whose faith is tested when they're accused of abusing their child. Harrowing, compassionate and impossible to leave behind."
   },
   {
@@ -135,7 +135,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "ru",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Andrey Zvyagintsev's Grand Prix winner at Cannes — a remake of Chabrol's La Femme Infidèle reset in Russia during the Ukraine war, where adultery and murder unspool with devastating moral clarity against a country consuming itself."
   },
   {
@@ -143,7 +143,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "rw",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Marie-Clémentine Dusabejambo's Caméra d'Or winner — set in Rwanda twenty years after the genocide, a woman and the man who killed her family are brought together by a reconciliation programme. The year's most quietly devastating debut."
   },
   {
@@ -178,7 +178,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "ja",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Kiyoshi Kurosawa's samurai film — a feudal lord who rebels against a tyrannical warlord finds himself besieged in his own castle, the film folding medieval honor into the director's signature dread. Kurosawa at his most unexpected."
   },
   {
@@ -194,7 +194,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Christian Petzold's film — a reclusive woman, a house by a lake, and a stranger who arrives with unclear intentions. Elliptical, sensory and quietly devastating, as all Petzold's films are."
   },
   {
@@ -202,7 +202,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Ildikó Enyedi's German-Hungarian co-production — an aging man forms an unlikely bond with a much younger woman that confounds everyone around them. The Hungarian director of On Body and Soul at her most intimate."
   },
   {
@@ -210,7 +210,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Based on Giuliano da Empoli's novel — a former Kremlin spin doctor tells the story of how he helped build the machinery of a modern authoritarian state. A political thriller about the manufacture of power and the men who service it."
   },
   {
@@ -218,7 +218,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Ryûsuke Hamaguchi's French-language film — a care-facility director attempts to center the humanity of residents against institutional indifference. Quiet, precise and profoundly moving, as everything Hamaguchi makes is."
   },
   {
@@ -226,7 +226,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "pl",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Pawel Pawlikowski's return — Sandra Hüller as a celebrated actress confronting the Nobel Prize-winning father she barely knows. A film about art, inheritance and the damage that passes between generations in silence."
   },
   {
@@ -258,7 +258,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2026,
     type: "movie",
     language: "ja",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Based on Japan's real 'family rental' industry — actors hired to play missing relatives — a quietly devastating drama about loneliness, performance and the hunger to be known."
   },
   {
@@ -277,7 +277,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "ko",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Park Chan-wook's Venice competition film — a Korean woman in an untenable situation is forced to make a choice that has no good answer. Precise, morally exacting, and visually immaculate as all his work."
   },
   {
@@ -293,7 +293,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "fa",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Jafar Panahi's latest — made while the Iranian director was under a travel ban, about an ordinary accident that spirals into a confrontation with guilt and complicity. Made with his customary courage and moral intelligence."
   },
   {
@@ -301,7 +301,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "es",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Oliver Laxe's visionary Spanish drama — pilgrims in a brutal landscape, a film that pushes against narrative to find something closer to pure sensory experience of faith and endurance. #4 on Sight & Sound's 2025 list."
   },
   {
@@ -309,7 +309,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Boris Lojkine's film — a Guinean delivery cyclist in Paris prepares for his asylum interview while racing through the city on his bike. Told in near-real time, in a performance of extraordinary physical and emotional precision."
   },
   {
@@ -333,7 +333,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Richard Linklater's film about Godard making Breathless in 1959 Paris — a love letter to the French New Wave that is also a film about what it costs to break with everything that came before. Shot in luminous black and white."
   },
   {
@@ -341,7 +341,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "is",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Hlynur Pálmason's Icelandic film — a family across generations, grief accumulating across time like sediment. Austere and devastating, with the landscape doing what words cannot."
   },
   {
@@ -349,7 +349,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "ka",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Dea Kulumbegashvili's Georgian drama — a doctor who performs illegal abortions in a rural community where women have no other choice. Unflinching, formally radical, and morally necessary."
   },
   {
@@ -357,7 +357,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Alain Guiraudie's French drama — a man returns to his hometown after his father's death and is drawn into an entanglement of desire, guilt and a local priest. Strange, funny and genuinely unsettling."
   },
   {
@@ -365,7 +365,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "ro",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Radu Jude's latest provocation — a darkly comic collage about Romanian society, media and political hypocrisy, assembled from found footage, reenactments and satirical interviews. Brilliant and infuriating in equal measure."
   },
   {
@@ -373,7 +373,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "de",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Mascha Schilinski's German drama — four girls on the same farm across different decades, time folding between them. A film about inherited grief, land and the way the past never fully releases the living."
   },
   {
@@ -413,7 +413,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "ko",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Hong Sang-soo's latest miniature — two women, an afternoon, conversation and coffee. The Korean master working at his most distilled, finding the infinite in the apparently ordinary."
   },
   {
@@ -421,7 +421,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "zh",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Bi Gan's visionary Chinese film — a man searching for someone across a dreamlike landscape, the boundary between past and present dissolved. Cinema as pure poetic experience from the director of Long Day's Journey Into Night."
   },
   {
@@ -429,7 +429,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Lucile Hadzihalilović's hypnotic film — a woman and a child in an isolated tower, a mystery that unfolds in images rather than explanations. Dreamlike, feminine and wholly unlike anything else."
   },
   {
@@ -437,7 +437,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "es",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Albert Serra's film about the matador Andrés Roca Rey — an immersive portrait of the bullfight, violence, ritual and the man at the center of the arena. Formally extraordinary and deeply polarizing."
   },
   {
@@ -445,7 +445,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Alexandre Koberidze's quietly radical film — a Georgian refugee in Germany, days passing in stillness, small acts of kindness accumulating into something luminous. A film about surviving displacement with grace intact."
   },
   {
@@ -509,7 +509,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "ar",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "A documentary-drama about the six-year-old Palestinian girl whose voice on a distress call became a symbol heard around the world — a film of grief, witness and moral reckoning."
   },
   {
@@ -525,7 +525,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "A French-language adaptation of Joseph Conrad's novel — a double agent in Edwardian London discovers the bomb he was meant to place has killed someone he loved. Moral dread rendered as tragedy."
   },
   {
@@ -533,7 +533,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "bem",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "A Zambian woman's grief at her uncle's death collides with family silence about who he really was — an extraordinary debut that uses mourning ritual to expose what a family agrees not to see."
   },
   {
@@ -541,7 +541,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2025,
     type: "movie",
     language: "no",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Joachim Trier's intimate Norwegian drama about an estranged father and his two daughters reuniting around a family film — memory, artistic legacy and the damage we do without meaning to."
   },
   {
@@ -568,7 +568,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "ml",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Payal Kapadia's Cannes Grand Prix winner — two nurses in Mumbai, adrift in the city's immensity, find their way toward something resembling freedom. A film of rare grace and political tenderness."
   },
   {
@@ -584,7 +584,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "fa",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Mohammad Rasoulof risked his freedom to make this — an Iranian judge loses his gun during the 2022 Women, Life, Freedom protests. A thriller about paranoia that is also a document of tremendous courage."
   },
   {
@@ -632,7 +632,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "it",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Maura Delpero's Golden Lion winner — the last winter of World War II arrives in an isolated Alpine village through a deserter who changes everything. Stunning, still, and impossible to forget."
   },
   {
@@ -656,7 +656,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "pt",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Walter Salles's return to Brazil — the true story of Eunice Paiva, whose husband disappeared under the military dictatorship, and the forty years she spent demanding the truth. Fernanda Torres won Best Actress at Cannes."
   },
   {
@@ -681,7 +681,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "it",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Alice Rohrwacher's reverie — Josh O'Connor as a melancholy Englishman who tomb-raids Etruscan graves with a band of Italian scavengers. A film about loss, beauty and the things we dig up that we cannot put back."
   },
   {
@@ -729,7 +729,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "ja",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Ryusuke Hamaguchi's spare, devastating film — a community in a Japanese village resists a glamping development. A film that begins as ecological drama and ends somewhere else entirely, with one of the year's most abrupt and haunting conclusions."
   },
   {
@@ -737,7 +737,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "pt",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Miguel Gomes's Cannes Best Director winner — a British colonial official flees his fiancée across 1917 Asia, and she follows. A film in two movements, between past and present, that makes you feel the whole colonial century in its bones."
   },
   {
@@ -753,7 +753,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "es",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Víctor Erice returns after 30 years away from features — a filmmaker searches for his missing lead actor, and the past opens up. A film about cinema, memory and the unbearable weight of the unfinished, from one of Spain's greatest directors."
   },
   {
@@ -761,7 +761,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "pl",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Agnieszka Holland's furious black-and-white film — refugees trapped in the forest between Poland and Belarus, weaponised by both governments. One of Europe's most politically urgent films of the decade."
   },
   {
@@ -769,7 +769,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "zh",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Jia Zhangke assembled twenty years of footage — a woman searches for a man across a China that keeps physically and economically transforming around her. A film made from time itself, haunting and completely unlike anything else."
   },
   {
@@ -777,7 +777,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "zh",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Guan Hu's BFI top-50 film — a man returns to a desolate northwestern Chinese town to find a stray dog he once knew. A film of extraordinary visual patience about solitude, economic ruin and the things that wait for you to come back."
   },
   {
@@ -785,7 +785,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "ro",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Radu Jude's maximalist Romanian satire — a woman drives around Bucharest for a work assignment while the city's exhaustion and grotesquerie accumulate. A film that contains everything and asks what on earth we're supposed to do about it."
   },
   {
@@ -793,7 +793,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "sv",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Levan Akin's quiet, compassionate film — a retired Georgian teacher travels to Istanbul to find her trans niece. A road movie about the distance between who people were and who they are now, shot with enormous gentleness."
   },
   {
@@ -817,7 +817,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Bertrand Bonello's science fiction drama — Léa Seydoux across three timelines, always meeting the same man, always ending in catastrophe. An adaptation of a Henry James story that becomes something stranger and more unsettling than any ghost story."
   },
   {
@@ -825,7 +825,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "fr",
-    tags: ["crowd"],
+    tags: ["passport"],
     curatorNote: "The definitive screen adaptation of Dumas — Pierre Niney as Edmond Dantès, betrayed, imprisoned and reborn as an avenger. Three hours of the most purely entertaining French cinema in decades, and the highest-grossing European film of 2024."
   },
   {
@@ -833,7 +833,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "fr",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Anh Hung Tran's Cannes Best Director winner — Juliette Binoche and Benoît Magimel in a 19th-century love story told through the preparation of extraordinary food. The most sensuous and melancholy film about cooking ever made."
   },
   {
@@ -865,7 +865,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "hi",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Shuchi Talati's 100% RT Indian debut — a teenage girl at a boarding school falls for a new boy, while her mother returns and their desires start to mirror each other. A film about female desire in a society designed to extinguish it."
   },
   {
@@ -889,7 +889,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "ga",
-    tags: ["critics", "crowd", "surprise"],
+    tags: ["passport"],
     curatorNote: "The real Irish-language rap trio play themselves — a foul-mouthed, furiously funny biopic about three musicians from Belfast who made the Irish language dangerous again. Language as resistance; resistance as joy."
   },
   {
@@ -929,7 +929,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "tr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Nuri Bilge Ceylan's 197-minute Turkish drama — a teacher in an Anatolian village, bored and self-regarding, is accused by a student. A film about the gap between how we see ourselves and how we actually are, patient and merciless."
   },
   {
@@ -937,7 +937,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Mati Diop's documentary essay — 26 royal treasures looted by France from the Kingdom of Dahomey are returned to Benin after 130 years. A film about colonial legacies, belonging and what it means for a culture to reclaim its own past."
   },
   {
@@ -945,7 +945,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2024,
     type: "movie",
     language: "ar",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Basel Adra and Yuval Abraham's Palestinian-Israeli documentary — the demolition of Masafer Yatta villages filmed by the people who live there, over five years. Oscar winner for Best Documentary; an essential and devastating record."
   },
 
@@ -988,7 +988,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "fi",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Aki Kaurismäki's Cannes Jury Prize winner — two lonely Helsinki workers keep almost meeting. A film of devastating economy: every line earns its place, every silence has weight, and the ending is as close to joy as cinema ever honestly manages."
   },
   {
@@ -1004,7 +1004,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "ja",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Hirokazu Kore-eda's Cannes Queer Palm winner — a school incident seen from three perspectives, each one revealing what the previous one concealed. A film about the violence of assumptions, told with the precision of a watch being disassembled."
   },
   {
@@ -1012,7 +1012,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Christian Petzold's Grand Prix winner at Berlin — a writer at a lakeside house in Germany as wildfires approach, unable to see the catastrophe happening around him. A film about creative ego and climate grief that sneaks up on you completely."
   },
   {
@@ -1068,7 +1068,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "de",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "İlker Çatak's German thriller — a young idealistic teacher investigates a theft at her school and the institution closes around her. Nerve-shredding and precise about the way good intentions are used against you by systems designed for something else."
   },
   {
@@ -1092,7 +1092,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Ira Sachs's Paris love triangle — Franz Rogowski as a filmmaker who leaves his husband for a woman and destroys everyone in his orbit without ever understanding he's doing it. A film about desire as pure selfishness, shot in the most beautiful light."
   },
   {
@@ -1100,7 +1100,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "de",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Jonathan Glazer's Palme d'Or winner — the commandant of Auschwitz and his family tend their garden next door to the camp. A film about the banality of complicity that refuses to show what it knows you already know."
   },
   {
@@ -1108,7 +1108,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2023,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Palme d'Or winner. A woman on trial for her husband's death — but the real subject is marriage, language and what we can never truly know about the person we live with. A masterwork of ambiguity."
   },
 
@@ -1127,7 +1127,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "ko",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Park Chan-wook's Cannes Best Director winner — a detective investigates a woman whose husband fell from a mountain, and falls obsessively in love with his suspect. A noir as elegant as anything Hitchcock made."
   },
   {
@@ -1135,7 +1135,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Alice Diop's Venice Grand Jury Prize winner — a novelist attends the trial of a Senegalese woman who left her infant daughter on a beach to drown. A film about motherhood, race and justice that refuses every easy answer."
   },
   {
@@ -1143,7 +1143,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "ga",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Ireland's first Irish-language Oscar nomination — a quiet, withdrawn girl is sent to stay with relatives for the summer and discovers what it means to be cared for. One of the most tender films of the decade."
   },
   {
@@ -1167,7 +1167,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "de",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "The German remake of Remarque's novel won four Oscars including Best International Film — an 18-year-old enlists for the glory of the Kaiser and finds only mud, wire and the meaningless deaths of boys like himself."
   },
   {
@@ -1175,7 +1175,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "sv",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Ruben Östlund's Palme d'Or winner — a luxury yacht cruise ends in shipwreck, and the power dynamics of class invert on a deserted island. A comedy of vomit and capitalism that goes places you cannot predict."
   },
   {
@@ -1183,7 +1183,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "nl",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Lukas Dhont's Cannes Grand Prix winner — two thirteen-year-old boys, best friends since childhood, are separated by the cruelty of adolescent expectation. A film about grief so understated it devastates you quietly."
   },
   {
@@ -1191,7 +1191,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "es",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Rodrigo Sorogoyen's thriller — a French couple farming in rural Galicia face escalating hostility from their neighbours. A film about belonging, stubbornness and the violence that can live in a community."
   },
   {
@@ -1199,7 +1199,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "it",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Felix van Groeningen and Charlotte Vandermeersch's Cannes Jury Prize winner — a lifelong friendship between two men from different worlds, tracked across decades in the Italian Alps. An epic about chosen family and the lives we almost lived."
   },
   {
@@ -1207,7 +1207,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "es",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Alejandro G. Iñárritu's most personal film — a Mexican documentary filmmaker living in Los Angeles confronts his identity, his homeland, and his place in the world. Breathtaking cinematography by Darius Khondji. Streaming on Netflix."
   },
   {
@@ -1215,7 +1215,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "es",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Santiago Mitre's Oscar-nominated drama — the true story of the lawyers who prosecuted Argentina's military junta for crimes against humanity. A courtroom film that understands what justice actually costs."
   },
   {
@@ -1223,7 +1223,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "The Dardenne brothers' Cannes Jury Prize special winner — two African teenagers in Belgium, a boy and a girl who call themselves brother and sister, navigating the dehumanising machinery of immigration. Urgent and unsparing."
   },
   {
@@ -1231,7 +1231,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "fa",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Ali Abbasi's Cannes Best Actress winner — the true story of a serial killer targeting sex workers in Iran, and the female journalist who hunted him. A horror film and a political film simultaneously."
   },
   {
@@ -1239,7 +1239,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "ko",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Hirokazu Kore-eda's Korean-language film — two men who sell abandoned babies at a baby box are followed by a detective and joined by the baby's mother. Song Kang-ho won Best Actor at Cannes. A film about the family you choose."
   },
   {
@@ -1247,7 +1247,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "fa",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Saeed Roustaee's three-hour Iranian family epic — a sister and her four brothers fight for the future of their family against a father who is slowly losing his grip. Cannes competition favourite and one of the great recent Iranian films."
   },
   {
@@ -1255,7 +1255,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "fa",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Jafar Panahi's film made while under a travel ban from the Iranian government — he plays himself, a director in a village near the Turkish border, making a film remotely about lovers trying to escape. Meta, urgent, formally extraordinary."
   },
   {
@@ -1263,7 +1263,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "ar",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Maryam Touzani's Cannes Critics Week winner — a master tailor in a Moroccan medina hires a young apprentice, and his wife slowly understands what her husband has kept hidden. A film about desire, loyalty and the tenderness of late life."
   },
   {
@@ -1279,7 +1279,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Marie Kreutzer's feminist reimagining of Empress Elisabeth of Austria — Vicky Krieps won Best Performance at Cannes in a film that deliberately, gleefully defies every biopic convention."
   },
   {
@@ -1287,7 +1287,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "ur",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Saim Sadiq's Pakistan Oscar submission — a man in Lahore joins a dance troupe and falls in love with a transgender performer. A gentle, radical film about gender and desire in a society that punishes both."
   },
   {
@@ -1327,7 +1327,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2022,
     type: "movie",
     language: "pl",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Jerzy Skolimowski's Silver Bear winner — a donkey's journey across Europe. An animal film that becomes a moral audit of humanity, shot in frames so beautiful you can barely stand it."
   },
   {
@@ -1354,7 +1354,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Céline Sciamma's 72-minute miracle — a girl clearing out her late grandmother's house meets a child her own age in the woods. A film about grief and mothers and daughters that conjures genuine magic from the simplest possible means."
   },
   {
@@ -1362,7 +1362,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Julia Ducournau's Palme d'Or winner — a woman with a titanium plate in her head begins a strange relationship with a car, then goes on the run. The most visceral, genre-defying film of the year, and unexpectedly tender."
   },
   {
@@ -1370,7 +1370,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "es",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Apichatpong Weerasethakul's Cannes Jury Prize winner — Tilda Swinton as a Scottish woman in Colombia who hears a mysterious sound no one else can. A film that runs at the pace of consciousness itself."
   },
   {
@@ -1378,7 +1378,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "es",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Pedro Almodóvar's return to form — Penélope Cruz as a photojournalist who gives birth on the same day as a teenage girl, and whose lives remain entwined. A film about motherhood, history and the graves Spain still refuses to open."
   },
   {
@@ -1418,7 +1418,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "ko",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Lee Isaac Chung's autobiographical film — a Korean-American family moves to rural Arkansas to start a farm. Steven Yeun and Youn Yuh-jung (who won the Oscar). A film about the American dream as experienced by those it never quite includes."
   },
   {
@@ -1442,7 +1442,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "ja",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Ryûsuke Hamaguchi's Silver Bear winner — three separate stories about coincidence, desire and the conversations that change people. Made in the same year as Drive My Car. Proof that he is one of the great living filmmakers."
   },
   {
@@ -1450,7 +1450,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "it",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Paolo Sorrentino's autobiographical film — a teenager in 1980s Naples the summer Maradona arrived, and the tragedy that saved his life. A film about youth, grief and the city Sorrentino has always been writing about."
   },
   {
@@ -1458,7 +1458,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "fi",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Juho Kuosmanen's Cannes Grand Prix winner — a Finnish woman on a train to the Russian Arctic shares a compartment with a drunken Russian miner. An unlikely friendship film that manages to feel completely new."
   },
   {
@@ -1466,7 +1466,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "ka",
-    tags: ["critics"],
+    tags: ["passport"],
     tmdbId: 750187,
     curatorNote: "Déa Kulumbegashvili's San Sebastián winner — a Jehovah's Witness woman in a Georgian village in the aftermath of an attack on her congregation. Shot in long, motionless takes. A film of devastating formal control."
   },
@@ -1475,7 +1475,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Laura Wandel's Cannes debut — a seven-year-old girl watches her brother be bullied in a Belgian school and must decide what to do. Told entirely from child height. Unbearably tense."
   },
   {
@@ -1483,7 +1483,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "da",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Jonas Poher Rasmussen's animated documentary — an Afghan refugee recounts for the first time the story of how he fled Kabul as a child. The only film ever nominated for Oscar, BAFTA, and Grammy simultaneously."
   },
   {
@@ -1491,7 +1491,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "fa",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Asghar Farhadi's Cannes Grand Prix winner — a man in prison for debt briefly holds a bag of gold coins and must decide whether to return them. A moral thriller that implicates everyone, including the audience."
   },
   {
@@ -1499,7 +1499,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "ro",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Radu Jude's Berlin Golden Bear winner — a schoolteacher's sex tape goes viral and she must face a parents' meeting to keep her job. Three wildly different sections. Furious, funny, and formally unlike anything else."
   },
   {
@@ -1507,7 +1507,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "fa",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Panah Panahi's debut — an Iranian family on a road trip that may be driving their eldest son to the border. The reason for the journey is withheld, the comedy is constant, and the grief arrives when you least expect it."
   },
   {
@@ -1523,7 +1523,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "ja",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Ryûsuke Hamaguchi's three-hour Chekhov-filtered grief odyssey — a theater director, his driver, and the long drive toward honesty. Winner of the Oscar for Best International Film. Unmissable."
   },
   {
@@ -1531,7 +1531,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2021,
     type: "movie",
     language: "no",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Joachim Trier's Cannes prize-winner — twelve chapters in the life of a woman in Oslo figuring out who she wants to be. Funny, devastating and wholly on the side of female ambiguity."
   },
 
@@ -1574,7 +1574,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "da",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Thomas Vinterberg's Oscar winner for Best International Film — four Danish schoolteachers test the theory that a maintained blood-alcohol level improves life. Mads Mikkelsen in the role of his career, ending in one of cinema's great final sequences."
   },
   {
@@ -1582,7 +1582,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "pt",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Kleber Mendonça Filho and Juliano Dornelles's Cannes Jury Prize winner — a small village in the Brazilian sertão disappears from maps and strangers begin to arrive. A genre-blending political thriller that operates as myth."
   },
   {
@@ -1590,7 +1590,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "bs",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Jasmila Žbanić's Oscar-nominated film about Srebrenica — a UN translator trying to save her family as the Bosnian Serb army takes the enclave in 1995. One of the most important European films about the aftermath of the Yugoslav wars."
   },
   {
@@ -1598,7 +1598,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "mr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Chaitanya Tamhane's Venice Best Screenplay winner — a young classical Hindustani vocalist devotes his life to an art form that may not want him back. A film about obsession, tradition and the cruelty of the artistic ideal."
   },
   {
@@ -1606,7 +1606,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "ro",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Alexander Nanau's Oscar-nominated documentary — Romanian investigative journalists expose a health ministry corruption scandal after a nightclub fire. Real-time journalism as political thriller."
   },
   {
@@ -1630,7 +1630,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "it",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Pietro Marcello's adaptation of Jack London's novel transposed to twentieth-century Naples — a sailor educates himself and becomes a writer, and success destroys him. Luca Marinelli's award-winning performance."
   },
   {
@@ -1638,7 +1638,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Christian Petzold's Berlin Silver Bear winner — Paula Beer as a historian in Berlin who falls in love with an industrial diver. A myth about water and return reimagined as contemporary romance."
   },
   {
@@ -1646,7 +1646,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "es",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Pablo Larraín's incendiary Chilean film — a reggaeton dancer and her choreographer husband give back their adopted son and ignite the consequences. A film about desire as force of nature, shot like a music video and structured like a provocation."
   },
   {
@@ -1662,7 +1662,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2020,
     type: "movie",
     language: "ko",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Hong Sangsoo's Berlin Silver Bear winner — a woman visits three friends while her husband travels for the first time in five years. Deceptively simple conversations that reveal an entire life. Hong at his most essential."
   },
   {
@@ -1705,7 +1705,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2019,
     type: "movie",
     language: "ko",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Bong Joon-ho's class warfare thriller won four Oscars including Best Picture — the first non-English film to do so. A film that makes you laugh, then scream, then think for days."
   },
   {
@@ -1713,7 +1713,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2019,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Céline Sciamma's incandescent period film — a painter and her subject fall in love in eighteenth-century Brittany. A film about looking, being looked at, and the art made from what cannot last."
   },
   {
@@ -1721,7 +1721,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2019,
     type: "movie",
     language: "es",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Pedro Almodóvar at his most autobiographical — Antonio Banderas as a director in late-life crisis, revisiting the childhood memories and lost loves that made him. A film of extraordinary tenderness."
   },
 
@@ -1732,7 +1732,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2018,
     type: "movie",
     language: "es",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Alfonso Cuarón's Oscar-winning memoir — a domestic worker in 1970s Mexico City navigating a family's unraveling and a country on the edge of violence. Shot in luminous black and white. A masterpiece."
   },
   {
@@ -1740,7 +1740,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2018,
     type: "movie",
     language: "ko",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Lee Chang-dong's mystery of class and desire — a young man, a woman, and a wealthy stranger who burns greenhouses. Based on a Murakami story; stretched into something profound and deeply unsettling."
   },
   {
@@ -1748,7 +1748,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2018,
     type: "movie",
     language: "ja",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Hirokazu Kore-eda's Palme d'Or winner — a family of misfits who steal to survive take in an abandoned child. A film that asks what family truly means, and answers with aching, unresolved love."
   },
   {
@@ -1756,7 +1756,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2018,
     type: "movie",
     language: "pl",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Pawel Pawlikowski's black-and-white love story spans fifteen years, two Europes and a passion that keeps destroying itself. Fifty-nine minutes of compressed longing. Nothing wasted."
   },
 
@@ -1775,7 +1775,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2017,
     type: "movie",
     language: "ru",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Andrei Zvyagintsev's Cannes Jury Prize winner — a divorcing Moscow couple searches for the son neither of them noticed had vanished. A film about a country that has forgotten how to feel."
   },
   {
@@ -1813,7 +1813,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2015,
     type: "movie",
     language: "hu",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "László Nemes's suffocating, formally radical Holocaust film — a Sonderkommando in Auschwitz pursues a single impossible task while the camera holds close to his face and keeps everything else at the edge of sight."
   },
   {
@@ -1840,7 +1840,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2014,
     type: "movie",
     language: "ru",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Andrei Zvyagintsev's Cannes Best Screenplay winner — a man fights to keep his home on the Barents Sea against a corrupt mayor. A modern Job story set against Russia's most crushing landscapes."
   },
 
@@ -1859,7 +1859,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2013,
     type: "movie",
     language: "pl",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Pawel Pawlikowski's Oscar winner — a young Polish nun discovers, on the eve of taking her vows, that she is Jewish. Shot in luminous black-and-white Academy ratio. A small film of immense gravity."
   },
 
@@ -1870,7 +1870,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2012,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Michael Haneke's Palme d'Or and Oscar winner — an elderly Parisian couple, a stroke, and the slow, merciless reality of love in the face of decline. The most honest film ever made about old age."
   },
   {
@@ -1889,7 +1889,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2011,
     type: "movie",
     language: "fr",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Michel Hazanavicius's silent black-and-white love letter to Hollywood's golden age — Jean Dujardin and Bérénice Bejo in a film about a silent movie star undone by the talkies and the woman who rises as he falls. Five Oscars including Best Picture."
   },
   {
@@ -1905,7 +1905,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2011,
     type: "movie",
     language: "fa",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Asghar Farhadi's Oscar winner — an Iranian couple's divorce spirals into a legal case with no innocent parties. A film so fair to every character it feels like life itself."
   },
   {
@@ -1932,7 +1932,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2010,
     type: "movie",
     language: "fr",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Denis Villeneuve adapts Wajdi Mouawad's play — twins follow their dead mother's instructions into the Middle East and discover a past of impossible violence. A mystery that earns its devastating reveal."
   },
 
@@ -1951,7 +1951,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2009,
     type: "movie",
     language: "de",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Michael Haneke's Palme d'Or winner — a German village in 1913, on the eve of war, where strange accidents begin to happen. A meditation on the origins of evil in righteousness and obedience."
   },
   {
@@ -1959,7 +1959,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2009,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Jacques Audiard's Cannes Grand Prix winner — a young Arab man enters a French prison with nothing and exits six years later having built an empire. One of the greatest prison films ever made."
   },
 
@@ -1978,7 +1978,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2007,
     type: "movie",
     language: "ro",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Cristian Mungiu's Palme d'Or winner — a woman helps her roommate obtain an illegal abortion in Ceaușescu's Romania. Filmed in long, unbroken takes. Tense, moral and utterly uncompromising."
   },
 
@@ -1989,7 +1989,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2006,
     type: "movie",
     language: "de",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Florian Henckel von Donnersmarck's Oscar winner — a Stasi agent surveilling a playwright in East Berlin begins to be changed by what he hears. A thriller about art, surveillance and the capacity for conscience."
   },
   {
@@ -1997,7 +1997,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2006,
     type: "movie",
     language: "es",
-    tags: ["critics", "crowd", "surprise"],
+    tags: ["passport"],
     curatorNote: "Guillermo del Toro's fairy tale set against Franco's Spain — a girl escapes into a labyrinth of dark magic while fascism closes in above ground. A film about the necessity and cost of imagination."
   },
   {
@@ -2005,7 +2005,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2001,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Michael Haneke adapts Elfriede Jelinek — Isabelle Huppert as a conservatory professor whose repressed inner life erupts into obsession and self-destruction. Extremity in the service of devastating precision."
   },
 
@@ -2016,7 +2016,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2005,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Michael Haneke's surveillance thriller — a bourgeois Parisian family receives anonymous tapes of their own home being watched. A film about guilt, colonial memory and the violence of looking away."
   },
 
@@ -2049,7 +2049,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2002,
     type: "movie",
     language: "pt",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Fernando Meirelles's furious chronicle of Rio's Cidade de Deus favela from the 1960s through the 1980s — one of the most kinetically alive films ever made, and one of the most enraging."
   },
   {
@@ -2057,7 +2057,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2002,
     type: "movie",
     language: "es",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Pedro Almodóvar's most mysterious film — two men watch over two women in comas. About male devotion, female silence and what happens in the space between. His most morally complex work."
   },
 
@@ -2079,7 +2079,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2000,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Agnès Jaoui's ensemble comedy-drama about a boorish industrialist who becomes obsessed with an actress and discovers art for the first time — and the collision between his world and hers. César winner for Best Film. Sharp, warm and deeply human."
   },
   {
@@ -2087,7 +2087,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2000,
     type: "movie",
     language: "zh",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Edward Yang's three-hour portrait of a Taipei family across one year — a dying grandfather, a mid-life crisis, a child discovering truth. The most comprehensive film about ordinary life ever made."
   },
   {
@@ -2095,7 +2095,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2000,
     type: "movie",
     language: "zh",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Wong Kar-wai's most achingly beautiful film — two neighbors in 1962 Hong Kong discover their spouses are having an affair. Slow motion, dress fabric, the smell of a stairwell. Pure cinema."
   },
   {
@@ -2103,7 +2103,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 2000,
     type: "movie",
     language: "es",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Alejandro González Iñárritu's debut — three stories collide in a Mexico City car crash. Raw, furious and unmistakable: the film that announced a new voice in world cinema."
   },
 
@@ -2114,7 +2114,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1999,
     type: "movie",
     language: "es",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Almodóvar at his most generous — a woman goes to Barcelona after her son's death and finds a community of extraordinary women. His most beloved film, and his Oscar winner for Best International Film."
   },
   {
@@ -2130,7 +2130,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1999,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "The Dardenne brothers' Palme d'Or winner — a Belgian teenager fights for any job at all with a desperation that never tips into sentimentality. Cinema of the body, all forward motion and refusal."
   },
   {
@@ -2138,7 +2138,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1998,
     type: "movie",
     language: "pt",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Walter Salles's road movie across Brazil — a cynical letter-writer and an orphaned boy in search of a father he's never met. A film about unexpected grace that never cheats to earn its feeling."
   },
   {
@@ -2146,7 +2146,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1997,
     type: "movie",
     language: "fa",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Abbas Kiarostami's Palme d'Or winner — a man drives through the hills outside Tehran asking strangers to help him bury himself after he's gone. A film about the will to live that contains no easy answers."
   },
   {
@@ -2170,7 +2170,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1995,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Mathieu Kassovitz's 24-hour portrait of three young men in the banlieues after a police beating. Shot in black and white. Nothing has dated. The most important French film of its decade."
   },
   {
@@ -2194,7 +2194,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1991,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Krzysztof Kieślowski's mystery — two women in Poland and France, one of them feeling the other's existence without explanation. A film of pure sensation and the most beautiful score Zbigniew Preisner ever wrote."
   },
   {
@@ -2202,7 +2202,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1991,
     type: "movie",
     language: "zh",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Zhang Yimou's color-drenched masterwork — a young woman becomes the fourth wife of a rich man and is slowly consumed by ritual and competition. One of the most formally perfect films in world cinema."
   },
   {
@@ -2242,7 +2242,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1982,
     type: "movie",
     language: "sv",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Ingmar Bergman's valediction — a wealthy Swedish family's Christmas and the catastrophe that follows, seen through children's eyes. His most generous film and his most irreplaceable."
   },
   {
@@ -2290,7 +2290,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1972,
     type: "movie",
     language: "sv",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Bergman's most harrowing film — three sisters and a servant in a manor house as one of them dies slowly. Shot in deep reds and absolute silence. About death, love and the failure of compassion."
   },
   {
@@ -2306,7 +2306,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1972,
     type: "movie",
     language: "de",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Werner Herzog and Klaus Kinski on the Amazon — a 16th century conquistador descends into madness pursuing El Dorado. A film made under conditions as extreme as the obsession it portrays."
   },
   {
@@ -2330,7 +2330,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1931,
     type: "movie",
     language: "de",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Fritz Lang's first sound film — Peter Lorre as a child murderer hunted by both the police and the Berlin underworld. A masterwork of suspense, sympathy and the terrifying logic of mob justice."
   },
   {
@@ -2338,7 +2338,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1928,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Carl Theodor Dreyer's silent masterpiece — Renée Jeanne Falconetti's face in extreme close-up as Joan is questioned, condemned and burned. The greatest performance in silent cinema."
   },
 
@@ -2381,7 +2381,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1993,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Kieślowski's most personal film — Juliette Binoche as a woman who loses her composer husband and child and attempts to live in perfect freedom from memory and feeling. A study in grief as abstraction."
   },
   {
@@ -2397,7 +2397,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1993,
     type: "movie",
     language: "zh",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Chen Kaige's co-winner of the Palme d'Or — two Peking opera performers across fifty years of Chinese history, from civil war through Cultural Revolution. Love, ambition and the cost of survival."
   },
   {
@@ -2413,7 +2413,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1945,
     type: "movie",
     language: "it",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Roberto Rossellini's neorealist landmark — shot in the streets of Rome weeks after liberation, with non-professional actors, about the Resistance under Nazi occupation. The birth of a new cinema."
   },
   {
@@ -2421,7 +2421,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1945,
     type: "movie",
     language: "fr",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Marcel Carné's epic of the Paris theater world — made in secret during the German occupation, about four men who love the same woman. The most beloved French film ever made."
   },
   {
@@ -2445,7 +2445,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1963,
     type: "movie",
     language: "it",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Luchino Visconti adapts Lampedusa — Burt Lancaster as a Sicilian prince watching the world that made him dissolve in the unification of Italy. The most magnificent film about decline ever made."
   },
   {
@@ -2453,7 +2453,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1960,
     type: "movie",
     language: "it",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Fellini's portrait of Rome's jet set through the eyes of a gossip journalist — Marcello Mastroianni in the role that defined an era. Seven nights in the city, each one emptier than the last."
   },
   {
@@ -2461,7 +2461,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1959,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Alain Resnais's debut, scripted by Marguerite Duras — a French actress and a Japanese architect meet in Hiroshima fourteen years after the bomb. The film that invented the modern memory-structure of cinema."
   },
   {
@@ -2469,7 +2469,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1959,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Truffaut's debut — Antoine Doinel, twelve years old, unwanted at home and incomprehended at school. The film that launched the French New Wave and is still its most human document."
   },
   {
@@ -2477,7 +2477,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1955,
     type: "movie",
     language: "bn",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Satyajit Ray's debut — a Bengali family's poverty, beauty and slow dissolution, filmed with a camera borrowed on weekends. One of the greatest directorial debuts in the history of cinema."
   },
   {
@@ -2485,7 +2485,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1954,
     type: "movie",
     language: "ja",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Kenji Mizoguchi's most devastating film — a governor's children are sold into slavery in feudal Japan. A film about injustice, dignity and the possibility of mercy that ends in absolute desolation."
   },
   {
@@ -2493,7 +2493,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1953,
     type: "movie",
     language: "ja",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Yasujirō Ozu's masterpiece — elderly parents visit their grown children in Tokyo and discover they are inconvenient. The film critics most often name as the greatest ever made."
   },
   {
@@ -2501,7 +2501,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1952,
     type: "movie",
     language: "ja",
-    tags: ["critics", "crowd"],
+    tags: ["passport"],
     curatorNote: "Kurosawa's most humanist film — a Tokyo bureaucrat learns he is dying and decides, for the first time, to do something that matters. One of cinema's most moving meditations on the meaning of a life."
   },
   {
@@ -2509,7 +2509,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1957,
     type: "movie",
     language: "sv",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Ingmar Bergman's medieval allegory — a knight returning from the Crusades plays chess with Death. Every image iconic, every question unanswered. The film that made world cinema possible in the modern sense."
   },
   {
@@ -2517,7 +2517,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1957,
     type: "movie",
     language: "sv",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Bergman's most accessible film — an elderly professor drives to receive an honorary degree and revisits his past. A meditation on regret, memory and the things we understand too late."
   },
   {
@@ -2533,7 +2533,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1948,
     type: "movie",
     language: "it",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Vittorio De Sica's neorealist landmark — a Roman worker's bicycle is stolen, and he and his young son spend a day trying to find it. The simplest and most heartbreaking story in cinema."
   },
   {
@@ -2541,7 +2541,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1975,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Chantal Akerman's landmark — three days in the life of a Brussels widow who cooks, cleans and prostitutes herself in exact routine, until a small disruption shatters everything. Voted #1 in the 2022 Sight & Sound poll. Cinema will never be the same."
   },
   {
@@ -2549,7 +2549,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1998,
     type: "movie",
     language: "fr",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     tmdbId: 1422,
     curatorNote: "Claire Denis's adaptation of Melville's Billy Budd — French Foreign Legionnaires in Djibouti, male desire and violence rendered as pure choreography. The final scene is one of cinema's most euphoric moments. #7 in the 2022 Sight & Sound poll."
   },
@@ -2558,7 +2558,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1966,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Robert Bresson's masterpiece — the life of a donkey in rural France, passed between hands good and cruel. Godard called it the world in 90 minutes. There is no more spiritually serious film."
   },
   {
@@ -2566,7 +2566,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1966,
     type: "movie",
     language: "fr",
-    tags: ["critics"],
+    tags: ["passport"],
     curatorNote: "Gillo Pontecorvo's docudrama — the Algerian independence movement from the inside. Shot to look like newsreel footage it fooled actual newsreel footage. Still screened at the Pentagon."
   },
   {
@@ -2574,7 +2574,7 @@ export const DRAMA_EDITORIAL_BATCHES = [
     year: 1966,
     type: "movie",
     language: "sv",
-    tags: ["critics", "surprise"],
+    tags: ["passport"],
     curatorNote: "Bergman's most radical film — an actress who stops speaking and her nurse slowly exchange identities. A film that deconstructs itself on screen. The starting point of a thousand graduate theses."
   },
   {
