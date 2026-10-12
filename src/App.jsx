@@ -1238,7 +1238,7 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
   }
 
   const MOVIE_FILTERS = {
-    romcom: "10749|35", comedy: "35", romance: "10749", drama: "18",
+    romcom: "10749,35", comedy: "35", romance: "10749", drama: "18",
     thriller: "53", mystery: "9648", "action & adventure": "28,12",
     horror: "27", "sci-fi": "878", fantasy: "14", animation: "16",
     musical: "10402", "true stories / biopic": "18,36", documentary: "99",
@@ -1248,7 +1248,7 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
   };
 
   const TV_FILTERS = {
-    romcom: "35|18", comedy: "35", romance: "18", drama: "18",
+    romcom: "35,18", comedy: "35", romance: "18", drama: "18",
     thriller: "9648,10759", mystery: "9648", "action & adventure": "10759",
     horror: "9648", "sci-fi": "10765", fantasy: "10765", animation: "16",
     musical: "18", "true stories / biopic": "18", documentary: "99",
@@ -1293,8 +1293,8 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     switch (label) {
       case "romcom":
         return isMovie
-          ? genreIds.has(35) && genreIds.has(10749)
-          : genreIds.has(35) && textMatches(titleText, romanceWords);
+          ? genreIds.has(35) && genreIds.has(10749) && !genreIds.has(27)
+          : genreIds.has(35) && textMatches(titleText, romanceWords) && !genreIds.has(27);
       case "comedy":
       case "make me laugh": return genreIds.has(35);
       case "romance": return isMovie ? genreIds.has(10749) : textMatches(titleText, romanceWords);
@@ -1312,7 +1312,7 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
       case "international": return Boolean(originalLanguage) && originalLanguage !== "en";
       case "hidden gems": return Number(item.vote_average || 0) >= 7.5 && votes >= 80 && votes <= 3500 && popularity < 45;
       case "mind blown": return (genreIds.has(878) || genreIds.has(9648) || genreIds.has(53) || genreIds.has(10765)) && textMatches(titleText, mindBlownWords);
-      case "date night": return ((isMovie && genreIds.has(10749)) || textMatches(titleText, romanceWords)) && !genreIds.has(27);
+      case "date night": return ((isMovie && genreIds.has(10749)) || textMatches(titleText, romanceWords)) && !genreIds.has(27) && !genreIds.has(53);
       case "travel somewhere": return (genreIds.has(12) || genreIds.has(10759) || originalLanguage !== "en") && textMatches(titleText, travelWords);
       case "ugly cry": return genreIds.has(18) && textMatches(titleText, emotionalWords);
       case "adrenaline rush": return (genreIds.has(28) || genreIds.has(53) || genreIds.has(10759)) && popularity >= 15;
@@ -1323,8 +1323,42 @@ async function fetchTMDBTitles(queryLabel, watchRegion, contentMode) {
     }
   };
 
+  // Universal genre exclusion map — genres that must NEVER appear for a given label.
+  // One central place to protect every genre and mood from cross-contamination.
+  const GENRE_EXCLUSIONS = {
+    romcom:              [27, 53, 9648, 28, 878],  // no horror, thriller, mystery, action, sci-fi
+    comedy:              [27, 53, 9648],            // no horror, thriller, mystery
+    "make me laugh":     [27, 53, 9648],            // no horror, thriller, mystery
+    romance:             [27, 53, 28],              // no horror, thriller, action
+    "date night":        [27, 53, 28],              // no horror, thriller, action
+    "ugly cry":          [27, 28],                  // no horror, action
+    "luxury vibes":      [27, 53, 28],              // no horror, thriller, action
+    "family night":      [27, 53, 28],              // no horror, thriller, action
+    "inspire me":        [27, 53, 28],              // no horror, thriller, action
+    drama:               [27],                      // no horror
+    animation:           [27],                      // no horror animation
+    musical:             [27, 53, 28],              // no horror, thriller, action
+    "true stories / biopic": [27],                  // no horror
+    // Open genres — no exclusions needed:
+    horror:              [],
+    thriller:            [],
+    mystery:             [],
+    "action & adventure":[],
+    "sci-fi":            [],
+    fantasy:             [],
+    documentary:         [],
+    "mind blown":        [],
+    "adrenaline rush":   [],
+    "travel somewhere":  [],
+    "hidden gems":       [],
+    international:       [],
+  };
+
   const titleFitsSelection = (item, mediaType) => {
     if (Number(item.vote_average || 0) < 7.5) return false;
+    const genreIds = new Set(item.genre_ids || []);
+    const excluded = labels.flatMap(label => GENRE_EXCLUSIONS[label] || []);
+    if (excluded.some(id => genreIds.has(id))) return false;
     return labels.every(label => matchesLabel(label, item, mediaType));
   };
 
