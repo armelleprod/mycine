@@ -1,1165 +1,311 @@
-// Generated from My_Cine_Romance_Database_Definitive_v1.xlsx
-// Editorial batches are the source of truth. TMDB enriches metadata only.
+// src/data/romanceBatches.js
+// Flat pool — assembled by assemblePool.js (quad-rotation guarantee).
+// One entry per film. No badge/slot fields. assemblePool assigns badges at runtime.
+//
+// Language tags: ISO 639-1.  "en" = English (never PASSPORT).
+// Tags: "critics" | "crowd" | "surprise"  (language field controls PASSPORT slot)
+// CLASSIC slot: year < 1980 (assemblePool.js strict threshold)
+// PASSPORT slot: language !== "en"
+//
+// Language fixes applied vs. original file:
+//   Sense and Sensibility (1995)  → en  (UK/US production, English-language)
+//   Atonement (2007)              → en  (UK/US production, English-language)
+//   Bright Star (2009)            → en  (UK/Australian production, English-language)
+//   Never Let Me Go (2010)        → en  (UK production, English-language)
+//   Supernova (2020)              → en  (UK production, English-language)
+//   A Nice Indian Boy (2024)      → en  (US production, English-language)
+//   We Live in Time (2024)        → en  (UK/US production, English-language)
+//   Persuasion (1995)             → en  (UK production, English-language)
+//   Ali & Ava (2021)              → en  (UK production, English-language)
+//   The Piano (1993)              → en  (NZ/AU/FR co-prod, English-language)
+//   Disobedience (2017)           → en  (UK/Irish production, English-language)
 
 export const ROMANCE_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Wuthering Heights",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Titanic",
-      "year": 1997,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Brief Encounter",
-      "year": 1945,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "In the Mood for Love",
-      "year": 2000,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Photograph",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Portrait of a Lady on Fire",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Eternal Sunshine of the Spotless Mind",
-      "year": 2004,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Bride!",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Notebook",
-      "year": 2004,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Roman Holiday",
-      "year": 1953,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Lunchbox",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Sylvie's Love",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Casablanca",
-      "year": 1942,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Shape of Water",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "People We Meet on Vacation",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Pride & Prejudice",
-      "year": 2005,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Umbrellas of Cherbourg",
-      "year": 1964,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Decision to Leave",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Touch",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Before Sunrise",
-      "year": 1995,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Her",
-      "year": 2013,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Office Romance",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Dirty Dancing",
-      "year": 1987,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Letter from an Unknown Woman",
-      "year": 1948,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "A Nice Indian Boy",
-      "year": 2024,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Love Lies Bleeding",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Moonlight",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Palm Springs",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Voicemails for Isabelle",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Notting Hill",
-      "year": 1999,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Apartment",
-      "year": 1960,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Past Lives",
-      "year": 2023,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Young Hearts",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Carol",
-      "year": 2015,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Wings of Desire",
-      "year": 1987,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Drama",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "A Star Is Born",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "An Affair to Remember",
-      "year": 1957,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Viet and Nam",
-      "year": 2025,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The World to Come",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Cold War",
-      "year": 2018,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Lobster",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Love Hypothesis",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Pretty Woman",
-      "year": 1990,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Sunrise: A Song of Two Humans",
-      "year": 1927,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Ali & Ava",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Música",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Handmaiden",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Bones and All",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Pillion",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Moulin Rouge!",
-      "year": 2001,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "A Man and a Woman",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Amour",
-      "year": 2012,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Breaking the Waves",
-      "year": 1996,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Bridges of Madison County",
-      "year": 1995,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Atlantics",
-      "year": 2019,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Challengers",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Trouble in Paradise",
-      "year": 1932,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Hiroshima mon amour",
-      "year": 1959,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Atonement",
-      "year": 2007,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Happy Together",
-      "year": 1997,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "45 Years",
-      "year": 2015,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Beast",
-      "year": 2024,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Materialists",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "City Lights",
-      "year": 1931,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Jules and Jim",
-      "year": 1962,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Bright Star",
-      "year": 2009,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Red Violin",
-      "year": 1998,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Fallen Leaves",
-      "year": 2023,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Truly Madly Deeply",
-      "year": 1990,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Ballad of Wallis Island",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "La La Land",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Doctor Zhivago",
-      "year": 1965,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Crouching Tiger, Hidden Dragon",
-      "year": 2000,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Girls Will Be Girls",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Amélie",
-      "year": 2001,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Certified Copy",
-      "year": 2010,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Wedding Banquet",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "When Harry Met Sally...",
-      "year": 1989,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Red Shoes",
-      "year": 1948,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Worst Person in the World",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Lovers on the Bridge",
-      "year": 1991,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Weekend",
-      "year": 2011,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Once",
-      "year": 2007,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Love Language",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Children of Paradise",
-      "year": 1945,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Harold and Maude",
-      "year": 1971,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Chungking Express",
-      "year": 1994,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Three Colors: Blue",
-      "year": 1993,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Call Me by Your Name",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "All of Us Strangers",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Bridget Jones: Mad About the Boy",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Gone with the Wind",
-      "year": 1939,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Reds",
-      "year": 1981,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Piano",
-      "year": 1993,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Talk to Her",
-      "year": 2002,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Taste of Things",
-      "year": 2023,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Brooklyn",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "You Deserve Each Other",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Rye Lane",
-      "year": 2023,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "All That Heaven Allows",
-      "year": 1955,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Sense and Sensibility",
-      "year": 1995,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "A Separation",
-      "year": 2011,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Monsoon Wedding",
-      "year": 2001,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Jab We Met",
-      "year": 2007,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "18th Rose",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Ninotchka",
-      "year": 1939,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "West Side Story",
-      "year": 1961,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "We Live in Time",
-      "year": 2024,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "About a Boy",
-      "year": 2002,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Secret in Their Eyes",
-      "year": 2009,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Rust and Bone",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "It Happened One Summer",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Singin' in the Rain",
-      "year": 1952,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "A Room with a View",
-      "year": 1985,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Compartment No. 6",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Howards End",
-      "year": 1992,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Y Tu Mamá También",
-      "year": 2001,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Malèna",
-      "year": 2000,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "You, Me & Tuscany",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Philadelphia Story",
-      "year": 1940,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Smiles of a Summer Night",
-      "year": 1955,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Persuasion",
-      "year": 1995,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Farewell My Concubine",
-      "year": 1993,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Disobedience",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Jane Austen Wrecked My Life",
-      "year": 2024,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Idea of You",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Four Weddings and a Funeral",
-      "year": 1994,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Days of Heaven",
-      "year": 1978,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Never Let Me Go",
-      "year": 2010,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Wheel of Fortune and Fantasy",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Blue Is the Warmest Color",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Double Life of Véronique",
-      "year": 1991,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Picture This",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Merry Widow",
-      "year": 1925,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Notorious",
-      "year": 1946,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Supernova",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven romantic favorite with strong audience or critical recognition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Artist",
-      "year": 2011,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "2046",
-      "year": 2004,
-      "badge": "🏆 Critics",
-      "curatorNote": "A distinctive love story that broadens the Canon through culture, tone or discovery value.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Phantom Thread",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining romance with enduring emotional power, craft and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ]
+
+  // ── 2026 titles ──────────────────────────────────────────────────────────────
+  { title: "Wuthering Heights", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sweeping new adaptation of the Brontë classic — dark, passionate and visually stunning.", tmdbId: null },
+  { title: "The Bride!", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A bold reimagining of the Bride of Frankenstein myth as a feminist monster romance.", tmdbId: null },
+  { title: "People We Meet on Vacation", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A beloved enemies-to-lovers road trip finally brought to the screen.", tmdbId: null },
+  { title: "Office Romance", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sharp workplace love story with real comic timing.", tmdbId: null },
+  { title: "Voicemails for Isabelle", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A delicate long-distance romance told through voice messages across time zones.", tmdbId: null },
+  { title: "The Drama", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A darkly funny drama-school romance from an exciting new voice.", tmdbId: null },
+  { title: "The Love Hypothesis", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A fake-dating academic romance with genuine chemistry and heart.", tmdbId: null },
+  { title: "Love Language", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A warm cross-cultural love story built around language, translation and misunderstanding.", tmdbId: null },
+  { title: "You Deserve Each Other", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An engaged couple who secretly hate each other try to make the other call it off first.", tmdbId: null },
+  { title: "18th Rose", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A lush period romance with a slow-burn courtship at its center.", tmdbId: null },
+  { title: "It Happened One Summer", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A socialite exiled to a small fishing town falls for a stubborn local — with serious Capra energy.", tmdbId: null },
+  { title: "You, Me & Tuscany", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sun-soaked Italian setting frames this charming second-chance love story.", tmdbId: null },
+  { title: "Love, Theoretically", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A witty academic enemies-to-lovers story with sharp comic timing.", tmdbId: null },
+  { title: "The Kiss Curse", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A warm magical-realism romance from the Sweetest Thing universe.", tmdbId: null },
+  { title: "When We Were Young and Reckless", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A sweeping coming-of-age love story told across decades.", tmdbId: null },
+  { title: "One True Loves", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A heartfelt love triangle built on loyalty, memory and second chances.", tmdbId: null },
+  { title: "The Mating Game", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A breezy rivals-to-lovers story set in the competitive world of academic biology.", tmdbId: null },
+  { title: "The Sun Never Sets", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sweeping new romance set against an unending summer — beauty and longing in equal measure.", tmdbId: null },
+  { title: "Romería", year: 2026, type: "movie", language: "es", tags: ["critics"], curatorNote: "A luminous Spanish drama following a young woman back to the village of her birth — and an unexpected encounter.", tmdbId: null },
+  { title: "The Invite", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A comedy-drama romance built around an awkward invitation and the feelings it stirs up.", tmdbId: null },
+  { title: "Leviticus", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A daring genre-bending horror romance that refuses to play it safe.", tmdbId: null },
+  { title: "Heartstopper Forever", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The beloved LGBTQ+ coming-of-age love story gets its definitive big-screen chapter.", tmdbId: null },
+  { title: "Girls Like Girls", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A tender queer romance drawn from the song and short film that captivated a generation.", tmdbId: null },
+  { title: "Tuner", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A moody crime-tinged romance set in the world of music and obsession.", tmdbId: null },
+  { title: "Carolina Caroline", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A mystery-laced romance that slowly reveals the story of two people and a shared secret.", tmdbId: null },
+  { title: "Erupcja", year: 2026, type: "movie", language: "pl", tags: ["surprise"], curatorNote: "A striking Polish drama about passion, rupture and the aftermath of love.", tmdbId: null },
+  { title: "The Serpent's Skin", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A dark, layered romance with gothic undertones and a genuinely unsettling love story at its core.", tmdbId: null },
+  { title: "Scarlet", year: 2026, type: "movie", language: "ja", tags: ["crowd"], curatorNote: "A breathtaking anime romance — lush visuals and a love story with real emotional weight.", tmdbId: null },
+  { title: "Love of Your Life", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Now playing — a warm and winning romance about finding the person who finally fits.", tmdbId: null },
+  { title: "Sense and Sensibility", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A fresh new adaptation of Austen's most emotionally volatile novel — in theaters Oct 16.", tmdbId: null },
+  { title: "Pillion", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A singular queer love story — raw, tender and unlike anything else.", tmdbId: null },
+
+  // ── 2025 titles ──────────────────────────────────────────────────────────────
+  { title: "Hamnet", year: 2025, type: "movie", language: "en", tags: ["critics"], curatorNote: "Maggie O'Farrell's devastating novel about Shakespeare's family and the love that survived grief.", tmdbId: null },
+  { title: "Plainclothes", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A low-key queer romance wrapped in a crime thriller — quietly devastating.", tmdbId: null },
+  { title: "All of You", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A warm second-chance romance with real emotional honesty.", tmdbId: null },
+  { title: "Heart Eyes", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A holiday horror-comedy romance — exactly as unhinged and fun as it sounds.", tmdbId: null },
+  { title: "Materialists", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sharp, witty look at love and ambition in New York — with an irresistible triangle.", tmdbId: null },
+  { title: "The Ballad of Wallis Island", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An eccentric British rom-com about a lottery winner, a stranded singer and an island of feelings.", tmdbId: null },
+  { title: "The Wedding Banquet", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A loving update of Ang Lee's classic — a queer couple's fake marriage gets beautifully complicated.", tmdbId: null },
+  { title: "Bridget Jones: Mad About the Boy", year: 2025, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Bridget is back — widowed, chaotic, and somehow more lovable than ever.", tmdbId: null },
+  { title: "Picture This", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A quiet, inventive romance about art, grief and the images we make of each other.", tmdbId: null },
+  { title: "Viet and Nam", year: 2025, type: "movie", language: "vi", tags: ["critics"], curatorNote: "A haunting Vietnamese love story set in the shadow of the mines — lyrical and unforgettable.", tmdbId: null },
+
+  // ── 2024 titles ──────────────────────────────────────────────────────────────
+  { title: "Challengers", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Three players, one sport, one impossible triangle — Guadagnino at his most kinetic.", tmdbId: null },
+  { title: "The Idea of You", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A 40-year-old mom falls for a pop star half her age — and it's surprisingly moving.", tmdbId: null },
+  { title: "Love Lies Bleeding", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A neon-soaked queer noir romance — dangerous, obsessive, and absolutely gripping.", tmdbId: null },
+  { title: "Young Hearts", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A tender coming-of-age first love story with a soft, luminous quality.", tmdbId: null },
+  { title: "Touch", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An elderly man retraces a wartime love across Iceland and Japan — deeply felt.", tmdbId: null },
+  { title: "A Nice Indian Boy", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A joyful queer Indian-American romance that earns every laugh and every tear.", tmdbId: null },
+  { title: "We Live in Time", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A love story told out of order — the structure mirrors how we remember the people we love most.", tmdbId: null },
+  { title: "Girls Will Be Girls", year: 2024, type: "movie", language: "hi", tags: ["surprise"], curatorNote: "A bold debut from India about desire, control and a daughter finding herself.", tmdbId: null },
+  { title: "The Beast", year: 2024, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Bertrand Bonello's strange, beautiful obsession film — love across centuries and genres.", tmdbId: null },
+  { title: "Jane Austen Wrecked My Life", year: 2024, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A Paris-set comedy about a woman who has read too much Austen and not enough reality.", tmdbId: null },
+  { title: "Música", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A Brazilian-American romance with music at its soul and real cultural warmth.", tmdbId: null },
+  { title: "Babygirl", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Nicole Kidman in a scorching power-dynamics thriller about desire and control.", tmdbId: null },
+  { title: "Queer", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Luca Guadagnino adapts Burroughs — a hallucinatory portrait of longing and loneliness.", tmdbId: null },
+  { title: "Anora", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sean Baker's Palme d'Or winner — a whirlwind romance that becomes something far more complicated.", tmdbId: null },
+  { title: "Between the Temples", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A Jewish grief-comedy about a cantor and an unexpected late-life romance.", tmdbId: null },
+  { title: "Banel & Adama", year: 2024, type: "movie", language: "fr", tags: ["critics"], curatorNote: "A Senegalese love story of fierce will and tragic consequence — a stunning debut.", tmdbId: null },
+  { title: "Skywalkers: A Love Story", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Two extreme skywalkers fall in love at dizzying heights — a documentary romance with real vertigo.", tmdbId: null },
+  { title: "The Dead Don't Hurt", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Viggo Mortensen's Western love story — austere, beautiful and genuinely moving.", tmdbId: null },
+  { title: "Coup de Chance", year: 2024, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Woody Allen's French-language return — a Paris romantic thriller with the old wit intact.", tmdbId: null },
+  { title: "Poor Things", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Lanthimos's wild, grotesque and strangely tender coming-of-age love story.", tmdbId: null },
+
+  // ── 2023 titles ──────────────────────────────────────────────────────────────
+  { title: "Past Lives", year: 2023, type: "movie", language: "ko", tags: ["critics"], curatorNote: "A masterpiece of restrained feeling — two childhood sweethearts across 24 years.", tmdbId: null },
+  { title: "Rye Lane", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A dazzlingly funny London love story — one of the best rom-coms in years.", tmdbId: null },
+  { title: "Fallen Leaves", year: 2023, type: "movie", language: "fi", tags: ["critics"], curatorNote: "Aki Kaurismäki's driest, sweetest love story — two lonely people in Helsinki.", tmdbId: null },
+  { title: "The Taste of Things", year: 2023, type: "movie", language: "fr", tags: ["critics"], curatorNote: "A love story told through cooking — Juliette Binoche and Benoît Magimel, luminous.", tmdbId: null },
+  { title: "All of Us Strangers", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Andrew Haigh's devastating queer ghost story about love, grief and the parents we never said goodbye to.", tmdbId: null },
+  { title: "May December", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Todd Haynes's unsettling, brilliant film about a woman whose teenage love scandal became tabloid history.", tmdbId: null },
+  { title: "Flora and Son", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A single mum, a guitar and an online music teacher — John Carney doing what he does best.", tmdbId: null },
+  { title: "Maestro", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Bradley Cooper's portrait of Leonard Bernstein and Felicia Montealegre — love, ambition, and sacrifice.", tmdbId: null },
+  { title: "Priscilla", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sofia Coppola reclaims the Elvis story from Priscilla's point of view — intimate, unsettling and beautiful.", tmdbId: null },
+
+  // ── 2022 titles ──────────────────────────────────────────────────────────────
+  { title: "Decision to Leave", year: 2022, type: "movie", language: "ko", tags: ["critics"], curatorNote: "Park Chan-wook's intoxicating detective noir — a love story that dissolves into obsession.", tmdbId: null },
+  { title: "Bones and All", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A cannibal road romance — genuinely tender, genuinely strange, genuinely moving.", tmdbId: null },
+  { title: "Lady Chatterley's Lover", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A sumptuous, sensual adaptation — the most romantic version of Lawrence's novel yet.", tmdbId: null },
+
+  // ── 2021 titles ──────────────────────────────────────────────────────────────
+  { title: "Wheel of Fortune and Fantasy", year: 2021, type: "movie", language: "ja", tags: ["surprise"], curatorNote: "Three short films about coincidence, desire and the wrong moment — Ryūsuke Hamaguchi at his most intimate.", tmdbId: null },
+  { title: "Ali & Ava", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Bradford love story between a British-Pakistani DJ and an Irish schoolteacher — tender and real.", tmdbId: null },
+  { title: "The Power of the Dog", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "Jane Campion's Western masterpiece — a slow-burn story of power, repression and unexpected love.", tmdbId: null },
+
+  // ── 2020 titles ──────────────────────────────────────────────────────────────
+  { title: "The Photograph", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A present-day love story intertwined with a mystery about a mother's hidden past.", tmdbId: null },
+  { title: "Sylvie's Love", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A lush, old-fashioned romance set in 1950s Harlem — deeply felt and beautifully shot.", tmdbId: null },
+  { title: "The World to Come", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A queer frontier love story told through journal entries — austere and achingly tender.", tmdbId: null },
+  { title: "Supernova", year: 2020, type: "movie", language: "en", tags: ["critics"], curatorNote: "Colin Firth and Stanley Tucci on a final road trip together — quietly devastating.", tmdbId: null },
+  { title: "Palm Springs", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A time-loop rom-com that uses its premise to say something genuinely true about love.", tmdbId: null },
+  { title: "EMMA.", year: 2020, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Autumn de Wilde's sharp, witty and visually gorgeous take on Austen's most self-satisfied heroine.", tmdbId: null },
+
+  // ── 2019 titles ──────────────────────────────────────────────────────────────
+  { title: "Portrait of a Lady on Fire", year: 2019, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Céline Sciamma's masterwork — a painter and her subject, and the most electric gaze in cinema.", tmdbId: null },
+  { title: "Atlantics", year: 2019, type: "movie", language: "fr", tags: ["critics"], curatorNote: "A Senegalese ghost love story — haunting, gorgeous and unlike anything else.", tmdbId: null },
+
+  // ── 2018 titles ──────────────────────────────────────────────────────────────
+  { title: "A Star Is Born", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The most emotionally devastating of the four versions — Cooper and Gaga are extraordinary.", tmdbId: null },
+  { title: "Cold War", year: 2018, type: "movie", language: "pl", tags: ["critics"], curatorNote: "Pawlikowski's black-and-white epic about two people who can't live with or without each other.", tmdbId: null },
+
+  // ── 2017 titles ──────────────────────────────────────────────────────────────
+  { title: "The Shape of Water", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Del Toro's fairy tale about a mute cleaner who falls in love with a creature — strangely, deeply romantic.", tmdbId: null },
+  { title: "Call Me by Your Name", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "A golden Italian summer, two young men, and a love story that never quite ends.", tmdbId: null },
+  { title: "Disobedience", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "A woman returns to her Orthodox Jewish community — and to the woman she once loved.", tmdbId: null },
+  { title: "Phantom Thread", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "PTA's portrait of a designer and his muse — one of cinema's most peculiar and perfect love stories.", tmdbId: null },
+  { title: "Your Name", year: 2017, type: "movie", language: "ja", tags: ["crowd"], curatorNote: "Makoto Shinkai's stunning anime about two teenagers who swap bodies — and fall in love across time.", tmdbId: null },
+
+  // ── 2016 titles ──────────────────────────────────────────────────────────────
+  { title: "The Handmaiden", year: 2016, type: "movie", language: "ko", tags: ["critics"], curatorNote: "Park Chan-wook's gorgeous, twisty tale of deception and desire in colonial Korea.", tmdbId: null },
+  { title: "Moonlight", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "Barry Jenkins's triptych of a life — tenderness, hardness and the love that shapes us.", tmdbId: null },
+  { title: "La La Land", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Damien Chazelle's LA musical — a love letter to dreamers and the bittersweet cost of ambition.", tmdbId: null },
+
+  // ── 2015 titles ──────────────────────────────────────────────────────────────
+  { title: "Carol", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "Todd Haynes's immaculate 1950s queer love story — Blanchett and Mara, unforgettable.", tmdbId: null },
+  { title: "45 Years", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "A revelation arrives a week before a 45th anniversary — and quietly dismantles a marriage.", tmdbId: null },
+  { title: "Brooklyn", year: 2015, type: "movie", language: "en", tags: ["crowd"], curatorNote: "An Irish girl in 1950s New York and the question of where — and who — you belong to.", tmdbId: null },
+  { title: "The Lobster", year: 2015, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Yorgos Lanthimos's dystopian satire where single people must find a partner or become an animal.", tmdbId: null },
+
+  // ── 2014 titles ──────────────────────────────────────────────────────────────
+  { title: "Gloria", year: 2014, type: "movie", language: "es", tags: ["crowd"], curatorNote: "A Chilean 58-year-old finds love and herself — Paulina García is a revelation.", tmdbId: null },
+
+  // ── 2013 titles ──────────────────────────────────────────────────────────────
+  { title: "Her", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Spike Jonze's near-future romance about a man who falls in love with his OS — genuinely devastating.", tmdbId: null },
+  { title: "The Lunchbox", year: 2013, type: "movie", language: "hi", tags: ["crowd"], curatorNote: "A Mumbai widow and a retiring office worker exchange letters through a misdirected tiffin box.", tmdbId: null },
+  { title: "Blue Is the Warmest Color", year: 2013, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Palme d'Or winner — an overwhelming, immersive portrait of first love and heartbreak.", tmdbId: null },
+  { title: "Before Midnight", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "The trilogy's devastating conclusion — Jesse and Céline nine years on, fighting for what they built.", tmdbId: null },
+
+  // ── 2012 titles ──────────────────────────────────────────────────────────────
+  { title: "Amour", year: 2012, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Michael Haneke's unbearable and beautiful portrait of an aging couple facing the end together.", tmdbId: null },
+  { title: "Rust and Bone", year: 2012, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Marion Cotillard and Matthias Schoenaerts — a fierce, physical love story from Jacques Audiard.", tmdbId: null },
+  { title: "The Perks of Being a Wallflower", year: 2012, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A shy teenager finds love and belonging — one of the great YA romance films.", tmdbId: null },
+
+  // ── 2011 titles ──────────────────────────────────────────────────────────────
+  { title: "A Separation", year: 2011, type: "movie", language: "fa", tags: ["critics"], curatorNote: "Farhadi's Palme d'Or winner — a marriage dissolving under legal and moral pressure.", tmdbId: null },
+  { title: "Weekend", year: 2011, type: "movie", language: "en", tags: ["critics"], curatorNote: "Two men meet at a club on Friday — Andrew Haigh's intimate queer love story over 48 hours.", tmdbId: null },
+  { title: "The Artist", year: 2011, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A silent-film star and a rising actress — a charming, old-fashioned Hollywood love story.", tmdbId: null },
+
+  // ── 2010 titles ──────────────────────────────────────────────────────────────
+  { title: "Never Let Me Go", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Carey Mulligan, Andrew Garfield and Keira Knightley in a devastating sci-fi love triangle.", tmdbId: null },
+  { title: "Certified Copy", year: 2010, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Kiarostami's puzzle — are they strangers or a married couple? Either way, it breaks your heart.", tmdbId: null },
+  { title: "Blue Valentine", year: 2010, type: "movie", language: "en", tags: ["critics"], curatorNote: "A marriage at its beginning and its end, intercut — Ryan Gosling and Michelle Williams are extraordinary.", tmdbId: null },
+
+  // ── 2009 titles ──────────────────────────────────────────────────────────────
+  { title: "Bright Star", year: 2009, type: "movie", language: "en", tags: ["critics"], curatorNote: "Jane Campion's portrait of Keats and Fanny Brawne — heartbreakingly beautiful.", tmdbId: null },
+  { title: "The Secret in Their Eyes", year: 2009, type: "movie", language: "es", tags: ["critics"], curatorNote: "An Argentine crime thriller with a decades-spanning love story buried inside it.", tmdbId: null },
+
+  // ── 2007 titles ──────────────────────────────────────────────────────────────
+  { title: "Atonement", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Joe Wright's wartime romance — a lie, a lifetime of guilt, and a love that never recovered.", tmdbId: null },
+  { title: "Jab We Met", year: 2007, type: "movie", language: "hi", tags: ["surprise"], curatorNote: "Bollywood's most sparkling rom-com — Kareena Kapoor is pure joy in every frame.", tmdbId: null },
+  { title: "Once", year: 2007, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A Dublin busker and a Czech immigrant make music and almost make love — achingly real.", tmdbId: null },
+
+  // ── 2005 titles ──────────────────────────────────────────────────────────────
+  { title: "Pride & Prejudice", year: 2005, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Joe Wright's rain-soaked adaptation — the hand flex scene alone is worth it.", tmdbId: null },
+  { title: "Brokeback Mountain", year: 2005, type: "movie", language: "en", tags: ["critics"], curatorNote: "Ang Lee's devastating epic — two cowboys, a mountain, and a love that outlasts everything.", tmdbId: null },
+
+  // ── 2004 titles ──────────────────────────────────────────────────────────────
+  { title: "Eternal Sunshine of the Spotless Mind", year: 2004, type: "movie", language: "en", tags: ["critics"], curatorNote: "What would you erase? Kaufman and Gondry's heartbreaking sci-fi romance.", tmdbId: null },
+  { title: "The Notebook", year: 2004, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Ryan Gosling in the rain. You know.", tmdbId: null },
+  { title: "2046", year: 2004, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Wong Kar-wai's melancholy companion to In the Mood for Love — memory, longing and departure.", tmdbId: null },
+  { title: "Before Sunset", year: 2004, type: "movie", language: "en", tags: ["critics"], curatorNote: "Nine years later, Jesse and Céline meet again in Paris — 80 minutes of pure romantic tension.", tmdbId: null },
+
+  // ── 2002 titles ──────────────────────────────────────────────────────────────
+  { title: "About a Boy", year: 2002, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Hugh Grant's finest hour — a selfish bachelor humanized by an unlikely friendship.", tmdbId: null },
+  { title: "Talk to Her", year: 2002, type: "movie", language: "es", tags: ["surprise"], curatorNote: "Almodóvar at his most empathetic — two men watch over two women in comas, and love in the strangest ways.", tmdbId: null },
+  { title: "Secretary", year: 2002, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A quirkily tender BDSM love story — Maggie Gyllenhaal and James Spader, perfectly matched.", tmdbId: null },
+
+  // ── 2001 titles ──────────────────────────────────────────────────────────────
+  { title: "Moulin Rouge!", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Baz Luhrmann's dazzling, heartbreaking musical — love in the most beautiful and doomed place.", tmdbId: null },
+  { title: "Amélie", year: 2001, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Audrey Tautou's iconic dreamer arranges love for everyone else — then risks it herself.", tmdbId: null },
+  { title: "Monsoon Wedding", year: 2001, type: "movie", language: "hi", tags: ["critics"], curatorNote: "Mira Nair's joyful, layered portrait of a Delhi wedding — tradition, desire and honesty colliding.", tmdbId: null },
+  { title: "Y Tu Mamá También", year: 2001, type: "movie", language: "es", tags: ["critics"], curatorNote: "Cuarón's road movie — two boys, one woman, and the summer that changes everything.", tmdbId: null },
+
+  // ── 2000 titles ──────────────────────────────────────────────────────────────
+  { title: "In the Mood for Love", year: 2000, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Wong Kar-wai's defining work — two neighbors suspect their spouses are having an affair and fall in love themselves.", tmdbId: null },
+  { title: "Crouching Tiger, Hidden Dragon", year: 2000, type: "movie", language: "zh", tags: ["crowd"], curatorNote: "Ang Lee's martial arts epic — desire, duty and a love that transcends both.", tmdbId: null },
+  { title: "Malèna", year: 2000, type: "movie", language: "it", tags: ["surprise"], curatorNote: "Tornatore's wartime coming-of-age — obsession, beauty and the cruelty of a small town.", tmdbId: null },
+
+  // ── 1999 titles ──────────────────────────────────────────────────────────────
+  { title: "Notting Hill", year: 1999, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A bookshop owner and the most famous actress in the world — still the gold standard of wish-fulfillment romance.", tmdbId: null },
+
+  // ── 1998 titles ──────────────────────────────────────────────────────────────
+  { title: "Out of Sight", year: 1998, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Soderbergh's coolest film — George Clooney and Jennifer Lopez in the most effortlessly sexy rom-crime ever made.", tmdbId: null },
+  { title: "The Red Violin", year: 1998, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A violin passes through centuries of love, obsession and loss — Samuel L. Jackson ties it all together.", tmdbId: null },
+  { title: "The Remains of the Day", year: 1993, type: "movie", language: "en", tags: ["critics"], curatorNote: "Anthony Hopkins and Emma Thompson and the love that a man too repressed to admit — one of cinema's great regrets.", tmdbId: null },
+
+  // ── 1997 titles ──────────────────────────────────────────────────────────────
+  { title: "Titanic", year: 1997, type: "movie", language: "en", tags: ["crowd"], curatorNote: "James Cameron's epic — three hours of spectacle built around a love story that still works.", tmdbId: null },
+  { title: "Happy Together", year: 1997, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Wong Kar-wai's most painful film — two Hong Kongers in Buenos Aires, trapped in a love they can't escape.", tmdbId: null },
+
+  // ── 1996 titles ──────────────────────────────────────────────────────────────
+  { title: "Breaking the Waves", year: 1996, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Von Trier's devastating tale of devotion — Emily Watson in her most remarkable performance.", tmdbId: null },
+
+  // ── 1995 titles ──────────────────────────────────────────────────────────────
+  { title: "Before Sunrise", year: 1995, type: "movie", language: "en", tags: ["critics"], curatorNote: "Jesse and Céline walk Vienna for one night — Linklater's perfect first chapter.", tmdbId: null },
+  { title: "The Bridges of Madison County", year: 1995, type: "movie", language: "en", tags: ["critics"], curatorNote: "Clint Eastwood and Meryl Streep — four days, a lifetime of feeling, and the hardest choice.", tmdbId: null },
+  { title: "Sense and Sensibility", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Emma Thompson's Elinor, Kate Winslet's Marianne — the definitive Austen adaptation.", tmdbId: null },
+  { title: "Persuasion", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Anne Elliot and Captain Wentworth's second chance — the most romantic letter in all of literature.", tmdbId: null },
+
+  // ── 1994 titles ──────────────────────────────────────────────────────────────
+  { title: "Chungking Express", year: 1994, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Two lonely Hong Kong cops, two love stories — Wong Kar-wai's breezy, melancholy masterpiece.", tmdbId: null },
+  { title: "Four Weddings and a Funeral", year: 1994, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hugh Grant perfects his persona — the definitive British rom-com.", tmdbId: null },
+  { title: "Forrest Gump", year: 1994, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A love story told across thirty years of American history — Zemeckis at his most emotionally relentless.", tmdbId: null },
+  { title: "True Romance", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Tarantino's most purely romantic script — a comic-book obsessive and a call girl on a bloody road trip.", tmdbId: null },
+
+  // ── 1993 titles ──────────────────────────────────────────────────────────────
+  { title: "Three Colors: Blue", year: 1993, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Kieślowski's portrait of grief and love — Juliette Binoche trying to feel nothing, failing.", tmdbId: null },
+  { title: "Farewell My Concubine", year: 1993, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Chen Kaige's epic of two Peking Opera singers across fifty years of Chinese history.", tmdbId: null },
+  { title: "The Piano", year: 1993, type: "movie", language: "en", tags: ["critics"], curatorNote: "Jane Campion's Palme d'Or winner — a mute woman and her piano, desire and the cost of passion.", tmdbId: null },
+
+  // ── 1992 titles ──────────────────────────────────────────────────────────────
+  { title: "The Bodyguard", year: 1992, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Kevin Costner and Whitney Houston — the soundtrack alone earns its place in the canon.", tmdbId: null },
+  { title: "Howards End", year: 1992, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Merchant Ivory's masterpiece — class, love and the question of who inherits what.", tmdbId: null },
+
+  // ── 1991 titles ──────────────────────────────────────────────────────────────
+  { title: "Mississippi Masala", year: 1991, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Mira Nair's romance between a Ugandan-Indian woman and an African-American man in the American South.", tmdbId: null },
+  { title: "The Lovers on the Bridge", year: 1991, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Leos Carax's beautiful disaster — two drifters on the Pont Neuf, a love story as wild as its production.", tmdbId: null },
+  { title: "The Double Life of Véronique", year: 1991, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Kieślowski's mysterious diptych — two women who share a soul across two countries.", tmdbId: null },
+
+  // ── 1990 titles ──────────────────────────────────────────────────────────────
+  { title: "Ghost", year: 1990, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The pottery scene. That song. Demi Moore and Patrick Swayze in the defining supernatural romance.", tmdbId: null },
+  { title: "Pretty Woman", year: 1990, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A fairy tale in modern dress — still irresistible after all these years.", tmdbId: null },
+  { title: "Edward Scissorhands", year: 1990, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Tim Burton's most tender film — a boy with scissors for hands who can't hold the girl he loves.", tmdbId: null },
+  { title: "Truly Madly Deeply", year: 1990, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Anthony Minghella's ghost love story — a woman who can't let go and the husband who comes back.", tmdbId: null },
+
+  // ── 1989 titles ──────────────────────────────────────────────────────────────
+  { title: "When Harry Met Sally...", year: 1989, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Nora Ephron's definitive can-men-and-women-be-friends film — the answer is, eventually, yes.", tmdbId: null },
+  { title: "Say Anything...", year: 1989, type: "movie", language: "en", tags: ["crowd"], curatorNote: "John Cusack with a boombox. Cameron Crowe's high-school romance that transcends the genre.", tmdbId: null },
+
+  // ── 1988 titles ──────────────────────────────────────────────────────────────
+  { title: "The Unbearable Lightness of Being", year: 1988, type: "movie", language: "en", tags: ["critics"], curatorNote: "Philip Kaufman's adaptation of Kundera — Prague, desire, and the weight of freedom.", tmdbId: null },
+
+  // ── 1987 titles ──────────────────────────────────────────────────────────────
+  { title: "Dirty Dancing", year: 1987, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Nobody puts Baby in a corner. The lift. The summer. Patrick Swayze.", tmdbId: null },
+  { title: "Wings of Desire", year: 1987, type: "movie", language: "de", tags: ["critics"], curatorNote: "Wim Wenders's angel watching over Berlin — and the woman who makes him want to become human.", tmdbId: null },
+
+  // ── 1986 titles ──────────────────────────────────────────────────────────────
+  { title: "Sid and Nancy", year: 1986, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Alex Cox's portrait of the Sex Pistols bassist and his girlfriend — the punk love story, ugly and beautiful.", tmdbId: null },
+
+  // ── 1985 titles ──────────────────────────────────────────────────────────────
+  { title: "A Room with a View", year: 1985, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Helena Bonham Carter in Florence — Merchant Ivory at their most sunlit and romantic.", tmdbId: null },
+
+  // ── 1982 titles ──────────────────────────────────────────────────────────────
+  { title: "An Officer and a Gentleman", year: 1982, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Richard Gere in dress whites carrying Debra Winger out of the factory — an icon for a reason.", tmdbId: null },
+
+  // ── 1981 titles ──────────────────────────────────────────────────────────────
+  { title: "Reds", year: 1981, type: "movie", language: "en", tags: ["critics"], curatorNote: "Warren Beatty's epic about radical journalist John Reed and Louise Bryant — politics and passion in revolution.", tmdbId: null },
+
+  // ── PRE-1980 (CLASSIC sub-pool) ───────────────────────────────────────────────
+  { title: "Brief Encounter", year: 1945, type: "movie", language: "en", tags: ["critics"], curatorNote: "David Lean's masterpiece of repression — a married woman, a married doctor, and the love they can't pursue.", tmdbId: null },
+  { title: "Roman Holiday", year: 1953, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Audrey Hepburn's debut — a princess steals a day in Rome and falls in love with a journalist.", tmdbId: null },
+  { title: "The Umbrellas of Cherbourg", year: 1964, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Demy's sung-through melodrama — every line of dialogue is music, every frame soaked in color.", tmdbId: null },
+  { title: "Letter from an Unknown Woman", year: 1948, type: "movie", language: "en", tags: ["critics"], curatorNote: "Max Ophüls's heartbreaking portrait of a woman who loves a man who never truly sees her.", tmdbId: null },
+  { title: "The Apartment", year: 1960, type: "movie", language: "en", tags: ["critics"], curatorNote: "Wilder's dark comedy about loneliness and office politics — and a love story hiding inside it.", tmdbId: null },
+  { title: "An Affair to Remember", year: 1957, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Cary Grant and Deborah Kerr — the transatlantic ship, the Empire State Building, the wait.", tmdbId: null },
+  { title: "Sunrise: A Song of Two Humans", year: 1927, type: "movie", language: "en", tags: ["critics"], curatorNote: "Murnau's silent masterwork — a husband tempted to kill his wife finds his way back to love.", tmdbId: null },
+  { title: "A Man and a Woman", year: 1966, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Lelouch's Palme d'Or winner — a widow and a widower meet at their children's school and fall in love.", tmdbId: null },
+  { title: "Hiroshima mon amour", year: 1959, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Resnais and Duras's revolutionary film — a French actress and a Japanese architect, memory and desire.", tmdbId: null },
+  { title: "City Lights", year: 1931, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Chaplin's most moving film — the Tramp loves a blind flower girl who mistakes him for a millionaire.", tmdbId: null },
+  { title: "Jules and Jim", year: 1962, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Truffaut's indelible triangle — two friends and the woman they both love, forever in motion.", tmdbId: null },
+  { title: "Doctor Zhivago", year: 1965, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Lean's sweeping Russian epic — Lara and Yuri across revolution and war, unforgettable.", tmdbId: null },
+  { title: "The Red Shoes", year: 1948, type: "movie", language: "en", tags: ["critics"], curatorNote: "Powell and Pressburger's blazing ballet film — art, love and the impossibility of having both.", tmdbId: null },
+  { title: "Gone with the Wind", year: 1939, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Frankly, my dear — the grandest of Hollywood's old epics, with a love story at its stormy heart.", tmdbId: null },
+  { title: "All That Heaven Allows", year: 1955, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sirk's Technicolor melodrama — a widow who falls for her gardener and the world that won't allow it.", tmdbId: null },
+  { title: "West Side Story", year: 1961, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Romeo and Juliet in 1950s New York — the dancing, the music, the impossible love.", tmdbId: null },
+  { title: "Singin' in the Rain", year: 1952, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The greatest Hollywood musical — Gene Kelly, a lamppost, a downpour and pure joy.", tmdbId: null },
+  { title: "The Philadelphia Story", year: 1940, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hepburn, Grant and Stewart — the wittiest romantic comedy in Hollywood history.", tmdbId: null },
+  { title: "Smiles of a Summer Night", year: 1955, type: "movie", language: "sv", tags: ["critics"], curatorNote: "Bergman's only true comedy — a country house, four couples and the midsummer night that sorts them out.", tmdbId: null },
+  { title: "The Way We Were", year: 1973, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Streisand and Redford — opposites who can't stay together and can't stay apart.", tmdbId: null },
+  { title: "Days of Heaven", year: 1978, type: "movie", language: "en", tags: ["critics"], curatorNote: "Malick's most ravishing film — a love triangle in the Texas wheat fields, shot like a painting.", tmdbId: null },
+  { title: "Ninotchka", year: 1939, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Garbo laughs — a Soviet envoy thawed by a charming Parisian count.", tmdbId: null },
+  { title: "Notorious", year: 1946, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hitchcock's most romantic film — Cary Grant and Ingrid Bergman in a spy thriller soaked in desire.", tmdbId: null },
+  { title: "The Merry Widow", year: 1925, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Von Stroheim's silent operetta — a rich widow pursued by a prince sent to win back her fortune.", tmdbId: null },
+  { title: "Harold and Maude", year: 1971, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A death-obsessed young man and a 79-year-old woman fall in love — still one of cinema's great originals.", tmdbId: null },
+  { title: "Casablanca", year: 1942, type: "movie", language: "en", tags: ["critics"], curatorNote: "Of all the gin joints — the most quotable love story in cinema history.", tmdbId: null },
+  { title: "Trouble in Paradise", year: 1932, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Lubitsch's jewel thief romance — sophisticated, witty and achingly light.", tmdbId: null },
+  { title: "Children of Paradise", year: 1945, type: "movie", language: "fr", tags: ["critics"], curatorNote: "Made under Nazi occupation — a mime, an actor, a thief and the woman they all love.", tmdbId: null },
+  { title: "Vertigo", year: 1958, type: "movie", language: "en", tags: ["critics"], curatorNote: "Hitchcock's most unsettling film — a detective's obsession with a woman who may not exist.", tmdbId: null },
+  { title: "Annie Hall", year: 1977, type: "movie", language: "en", tags: ["critics"], curatorNote: "Woody Allen's masterpiece — the anatomy of a relationship told backwards, sideways and honestly.", tmdbId: null },
+  { title: "The Sound of Music", year: 1965, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Julie Andrews and Christopher Plummer — the governess, the children, the Alps and the love story hiding in the musical.", tmdbId: null },
+  { title: "Bonnie and Clyde", year: 1967, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Beatty and Dunaway — the New Hollywood's foundational outlaw romance, still electrifying.", tmdbId: null },
+  { title: "To Catch a Thief", year: 1955, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hitchcock and the Riviera — Cary Grant and Grace Kelly in the most glamorous romance he ever made.", tmdbId: null },
+  { title: "A Star Is Born", year: 1954, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Judy Garland's definitive performance — a star rising as the man who made her falls.", tmdbId: null },
 ];
