@@ -407,6 +407,43 @@ export const ROMCOM_EDITORIAL_BATCHES = [
   // ── 1931 ──────────────────────────────────────────────────────────────────
   { title: "City Lights", year: 1931, type: "movie", language: "en", tags: ["critics"], curatorNote: "Chaplin's tender blend of comedy and romance remains universal.", tmdbId: 10098 },
 
+  // ── 2025 ──────────────────────────────────────────────────────────────────
+  { title: "Timestalker", year: 2025, type: "movie", language: "en", tags: ["quirky"], curatorNote: "A woman is destined to fall for the same man across centuries — wildly original, genre-bending romcom.", tmdbId: 706693 },
+  { title: "Bridget Jones: Mad About the Boy", year: 2025, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "Bridget is back — older, wiser, widowed, and hilarious. A bittersweet and very funny return.", tmdbId: 1272149 },
+
+  // ── 2024 ──────────────────────────────────────────────────────────────────
+  { title: "Hot Frosty", year: 2024, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "A grieving widow falls for a magically animated snowman. Cozy, absurd, and surprisingly sweet.", tmdbId: 1290287 },
+  { title: "Cora Bora", year: 2024, type: "movie", language: "en", tags: ["indie"], curatorNote: "A chaotic musician crashes back into her girlfriend's life. Sharp, messy, and genuinely funny.", tmdbId: 976226 },
+  { title: "The Idea of You", year: 2024, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "A 40-year-old single mom falls for a 24-year-old pop star. Anne Hathaway is irresistible.", tmdbId: 843527 },
+  { title: "Música", year: 2024, type: "movie", language: "en", tags: ["indie"], curatorNote: "A Brazilian-American daydreamer navigates love and identity in New Jersey. Musical, tender, original.", tmdbId: 968441 },
+  { title: "Upgraded", year: 2024, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "A young intern gets mistaken for her boss on a first-class flight and falls for a handsome stranger.", tmdbId: 1014590 },
+
+  // ── 2023 ──────────────────────────────────────────────────────────────────
+  { title: "The Persian Version", year: 2023, type: "movie", language: "en", tags: ["indie"], curatorNote: "An Iranian-American woman navigates family, identity, and unexpected love. Funny and deeply felt.", tmdbId: 1058620 },
+  { title: "Sitting in Bars with Cake", year: 2023, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "Two best friends bake cakes to meet men — a warm, funny friendship-romance that sneaks up on you.", tmdbId: 936952 },
+
+  // ── 2022 ──────────────────────────────────────────────────────────────────
+  { title: "Am I OK?", year: 2022, type: "movie", language: "en", tags: ["indie"], curatorNote: "A woman in her 30s quietly comes out to her best friend. Gentle, honest, and very funny.", tmdbId: 641934 },
+
+  // ── 2020 ──────────────────────────────────────────────────────────────────
+  { title: "Palm Springs", year: 2020, type: "movie", language: "en", tags: ["quirky"], curatorNote: "Two strangers are stuck in an endless time loop at a Palm Springs wedding. Brilliantly funny and romantic.", tmdbId: 587792 },
+
+  // ── 2018 ──────────────────────────────────────────────────────────────────
+  { title: "Crazy Rich Asians", year: 2018, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "A New York professor meets her boyfriend's outrageously wealthy Singapore family. Gorgeous and joyful.", tmdbId: 455207 },
+  { title: "Set It Up", year: 2018, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "Two overworked assistants scheme to set up their bosses — and inevitably fall for each other.", tmdbId: 384677 },
+
+  // ── 2017 ──────────────────────────────────────────────────────────────────
+  { title: "The Big Sick", year: 2017, type: "movie", language: "en", tags: ["indie"], curatorNote: "Based on a true story — a Pakistani comedian falls for a woman who ends up in a coma. Deeply human.", tmdbId: 416477 },
+
+  // ── 2016 ──────────────────────────────────────────────────────────────────
+  { title: "La La Land", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "A jazz pianist and an aspiring actress fall in love in Los Angeles. Dazzling, bittersweet, unforgettable.", tmdbId: 313369 },
+
+  // ── 2011 ──────────────────────────────────────────────────────────────────
+  { title: "Crazy, Stupid, Love.", year: 2011, type: "movie", language: "en", tags: ["feel-good"], curatorNote: "A middle-aged man gets a romantic makeover — with a twist that makes it so much more than a romcom.", tmdbId: 50646 },
+
+  // ── 1996 ──────────────────────────────────────────────────────────────────
+  { title: "Jerry Maguire", year: 1996, type: "movie", language: "en", tags: ["classics"], curatorNote: "A sports agent has a moral crisis and starts over. 'You had me at hello' — one of the great romances.", tmdbId: 9390 },
+
 ];
 
 export const ROMCOM_POOL_COUNT = ROMCOM_EDITORIAL_BATCHES.length;
