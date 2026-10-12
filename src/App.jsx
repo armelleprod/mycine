@@ -950,12 +950,31 @@ async function fetchCanonTitleCandidate(entry, token) {
     );
     if (detailRes.ok) {
       const detail = await detailRes.json();
-      const candidate = { ...detail, media_type: endpoint };
-      cache[cacheKey] = candidate;
-      writeCanonTmdbCache(cache);
-      return candidate;
+      // Sanity-check: confirm the returned title matches the editorial entry.
+      // A stale or wrong tmdbId can silently return a completely different film.
+      const returnedTitle = String(
+        endpoint === "tv" ? (detail.name || "") : (detail.title || "")
+      );
+      const normReturned = normalizeFilterLabel(returnedTitle);
+      const normExpected = normalizeFilterLabel(entry.title || "");
+      const prefixLen = Math.max(4, Math.floor(normExpected.length * 0.6));
+      const titleMatch =
+        normReturned === normExpected ||
+        normReturned.startsWith(normExpected.slice(0, prefixLen)) ||
+        normExpected.startsWith(normReturned.slice(0, prefixLen));
+      if (!titleMatch) {
+        console.warn(
+          `MY CINÉ tmdbId mismatch: expected "${entry.title}" but TMDB ${entry.tmdbId} returned "${returnedTitle}". Falling through to title search.`
+        );
+        // Fall through to title search below
+      } else {
+        const candidate = { ...detail, media_type: endpoint };
+        cache[cacheKey] = candidate;
+        writeCanonTmdbCache(cache);
+        return candidate;
+      }
     }
-    // Fall through to search if direct lookup fails
+    // Fall through to search if direct lookup fails or title mismatch
   }
 
   const params = new URLSearchParams({
