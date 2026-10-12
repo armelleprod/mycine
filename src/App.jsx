@@ -1011,7 +1011,29 @@ async function fetchCanonTitleCandidate(entry, token) {
       (!itemYear || Number(itemYear) === Number(entry.year));
   });
 
-  if (!exact) return null;
+  if (!exact) {
+    // IMDb ID fallback: if title search failed, try TMDB's /find endpoint using imdbId.
+    // This guarantees a match for any entry that has an imdbId, regardless of title spelling.
+    if (entry.imdbId) {
+      const findRes = await fetchWithTimeout(
+        `https://api.themoviedb.org/3/find/${entry.imdbId}?external_source=imdb_id`,
+        { headers:{ Authorization:`Bearer ${token}`, accept:"application/json" } }
+      );
+      if (findRes.ok) {
+        const found = await findRes.json();
+        const results = entry.type === "tv"
+          ? (found.tv_results || [])
+          : (found.movie_results || []);
+        if (results[0]) {
+          const imdbCandidate = { ...results[0], media_type: endpoint };
+          cache[cacheKey] = imdbCandidate;
+          writeCanonTmdbCache(cache);
+          return imdbCandidate;
+        }
+      }
+    }
+    return null;
+  }
 
   const candidate = {
     ...exact,
