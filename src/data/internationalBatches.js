@@ -239,6 +239,11 @@ export const INTERNATIONAL_EDITORIAL_BATCHES = [
   { title: "Young Mothers", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jean-Pierre and Luc Dardenne's Cannes Best Screenplay winner: four teenage mothers in a Liège shelter navigate cycles of poverty, fear, and the question of whether someone badly parented can learn to love well.", tmdbId: 1242015 },
   { title: "13 Days, 13 Nights", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Martin Bourboulon's true-story action thriller: during the 2021 Taliban takeover of Kabul, a French police commander defies all odds to evacuate hundreds of desperate civilians from the besieged embassy to the airport.", tmdbId: 1254135 },
   { title: "The Wizard of the Kremlin", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Olivier Assayas's English-language chronicle of Putin's rise: Jude Law as the Russian president and Paul Dano as his political strategist — a deep dive into how totalitarianism is built, and why people follow.", tmdbId: 1291659 },
+
+  // B27 — France VII (2025 new releases continued)
+  { title: "Two Pianos", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Arnaud Desplechin's characteristically eccentric chamber drama: a concert pianist returns to Lyon to perform with his mentor Charlotte Rampling and faints at the sight of his best friend's wife — love, obsession, and musical fever.", tmdbId: 1331349 },
+  { title: "The Little Sister", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Hafsia Herzi's poignant coming-of-age: Nadia Melliti as a young French Algerian woman in Paris quietly discovering her sexuality while navigating faith, family, and the fear of being seen — César and Cannes award-winning performance.", tmdbId: 961077 },
+  { title: "Arco", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Ugo Bienvenu's animated eco-fable: a boy from a utopian future crash-lands in a 2075 Earth devastated by climate collapse and befriends a girl his age — optimistic, whimsical, and visually inventive.", tmdbId: 804370 },
 ];
 
 export const INTERNATIONAL_POOL_COUNT = INTERNATIONAL_EDITORIAL_BATCHES.length;
