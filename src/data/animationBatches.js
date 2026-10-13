@@ -1,1165 +1,213 @@
-// MY CINÉ V64 — ANIMATION
-// Prepared editorial batches. TMDB enriches metadata only.
+// MY CINÉ — ANIMATION MOVIES
+// Flat array — all entries are direct children of ANIMATION_EDITORIAL_BATCHES.
 
 export const ANIMATION_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Hoppers",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Inside Out",
-      "year": 2015,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Snow White and the Seven Dwarfs",
-      "year": 1937,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Boy and the Heron",
-      "year": 2023,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Robot Dreams",
-      "year": 2023,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Spirited Away",
-      "year": 2001,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Mitchells vs. the Machines",
-      "year": 2021,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Toy Story 5",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Toy Story",
-      "year": 1995,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Pinocchio",
-      "year": 1940,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Tale of the Princess Kaguya",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Marcel the Shell with Shoes On",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "WALL·E",
-      "year": 2008,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Lego Movie",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Super Mario Galaxy Movie",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Super Mario Bros. Movie",
-      "year": 2023,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Fantasia",
-      "year": 1940,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Your Name.",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "A Town Called Panic",
-      "year": 2009,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Spider-Man: Into the Spider-Verse",
-      "year": 2018,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Cloudy with a Chance of Meatballs",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "GOAT",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Incredibles",
-      "year": 2004,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Dumbo",
-      "year": 1941,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Triplets of Belleville",
-      "year": 2003,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Ernest & Celestine",
-      "year": 2012,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Ratatouille",
-      "year": 2007,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Bad Guys",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Minions & Monsters",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Despicable Me",
-      "year": 2010,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Bambi",
-      "year": 1942,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Persepolis",
-      "year": 2007,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "My Life as a Zucchini",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Grave of the Fireflies",
-      "year": 1988,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Emperor's New Groove",
-      "year": 2000,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Hexed",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Encanto",
-      "year": 2021,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Cinderella",
-      "year": 1950,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Wolfwalkers",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Breadwinner",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Coraline",
-      "year": 2009,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "ParaNorman",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Wildwood",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "How to Train Your Dragon",
-      "year": 2010,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Adventures of Prince Achmed",
-      "year": 1926,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Song of the Sea",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Secret of Kells",
-      "year": 2009,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Kubo and the Two Strings",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Fantastic Mr. Fox",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Zootopia 2",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Zootopia",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Alice in Wonderland",
-      "year": 1951,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Flow",
-      "year": 2024,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Chicken for Linda!",
-      "year": 2023,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Wild Robot",
-      "year": 2024,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Puss in Boots: The Last Wish",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Elio",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Finding Nemo",
-      "year": 2003,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Peter Pan",
-      "year": 1953,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Mars Express",
-      "year": 2023,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Apollo 10½: A Space Age Childhood",
-      "year": 2022,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Akira",
-      "year": 1988,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Megamind",
-      "year": 2010,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "KPop Demon Hunters",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Frozen",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Sleeping Beauty",
-      "year": 1959,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Belle",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Summit of the Gods",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Princess Mononoke",
-      "year": 1997,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Nimona",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Dog Man",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Shrek",
-      "year": 2001,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Lady and the Tramp",
-      "year": 1955,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Illusionist",
-      "year": 2010,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Painting",
-      "year": 2011,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Iron Giant",
-      "year": 1999,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Pirates! In an Adventure with Scientists!",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Day the Earth Blew Up: A Looney Tunes Movie",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Space Jam",
-      "year": 1996,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "One Hundred and One Dalmatians",
-      "year": 1961,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "No Dogs or Italians Allowed",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Phantom Boy",
-      "year": 2015,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Who Framed Roger Rabbit",
-      "year": 1988,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Looney Tunes: Back in Action",
-      "year": 2003,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Memoir of a Snail",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Chicken Run",
-      "year": 2000,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Jungle Book",
-      "year": 1967,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Mary and Max",
-      "year": 2009,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "My Love Affair with Marriage",
-      "year": 2022,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Anomalisa",
-      "year": 2015,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The House",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Inside Out 2",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Up",
-      "year": 2009,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Sword in the Stone",
-      "year": 1963,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "I Lost My Body",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Girl Without Hands",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Soul",
-      "year": 2020,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Croods",
-      "year": 2013,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Lord of the Rings: The War of the Rohirrim",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Kung Fu Panda",
-      "year": 2008,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Aristocats",
-      "year": 1970,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Red Turtle",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Ruben Brandt, Collector",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Waltz with Bashir",
-      "year": 2008,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Rango",
-      "year": 2011,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Transformers One",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Big Hero 6",
-      "year": 2014,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Robin Hood",
-      "year": 1973,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The First Slam Dunk",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Mutafukaz",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Ghost in the Shell",
-      "year": 1995,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Teenage Mutant Ninja Turtles: Mutant Mayhem",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Orion and the Dark",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Monsters, Inc.",
-      "year": 2001,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Many Adventures of Winnie the Pooh",
-      "year": 1977,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Little Prince",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Away",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Guillermo del Toro's Pinocchio",
-      "year": 2022,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Willoughbys",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Suzume",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Moana",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Little Mermaid",
-      "year": 1989,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Night Is Short, Walk on Girl",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Lu Over the Wall",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Perfect Blue",
-      "year": 1997,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Cat Returns",
-      "year": 2002,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Flee",
-      "year": 2021,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Coco",
-      "year": 2017,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Beauty and the Beast",
-      "year": 1991,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Swallows of Kabul",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Another Day of Life",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Tower",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "My Sunny Maad",
-      "year": 2021,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Mad God",
-      "year": 2021,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent animated film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Nightmare Before Christmas",
-      "year": 1993,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beautifully crafted favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Yellow Submarine",
-      "year": 1968,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless animation landmark that helped shape the art form.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Wolf House",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "Exceptional animation from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Junk Head",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious animated achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Paprika",
-      "year": 2006,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, visual invention, storytelling or influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "A Scanner Darkly",
-      "year": 2006,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending animated choice.",
-      "type": "movie",
-      "slot": 7
-    }
-  ]
+
+  // B01
+  { title: "Hoppers", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Pixar's breezy new comedy — scientists unlock animal communication and chaos ensues. Possibly the funniest film in the Pixar canon. 94% on Rotten Tomatoes.", tmdbId: 1197306 },
+  { title: "Inside Out", year: 2015, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Pixar turns the internal landscape of an 11-year-old's mind into one of the most emotionally resonant animated films ever made. Joy, Sadness and the rest are unforgettable.", tmdbId: 150540 },
+  { title: "Snow White and the Seven Dwarfs", year: 1937, type: "movie", language: "en", tags: ["classic"], curatorNote: "The film that started it all. Disney's first feature-length animation still dazzles with its hand-drawn artistry and the performance-through-drawing that defines the golden era.", tmdbId: 408 },
+  { title: "The Boy and the Heron", year: 2023, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Miyazaki's last film is a surreal elegy about grief and creation. A boy follows a mysterious heron into a world between life and death. Golden Globe winner.", tmdbId: 508947 },
+  { title: "Robot Dreams", year: 2023, type: "movie", language: "es", tags: ["critics"], curatorNote: "A Spanish-French gem without a single word of dialogue. A dog and his robot companion in 1985 New York — friendship, loss and loneliness rendered in beautiful 2D. 98% on RT.", tmdbId: 1048241 },
+  { title: "Spirited Away", year: 2001, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Miyazaki's masterpiece. A girl stumbles into a spirit world and must work to free her parents. Academy Award winner. One of the greatest films ever made in any medium.", tmdbId: 129 },
+  { title: "The Mitchells vs. the Machines", year: 2021, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A dysfunctional family on a road trip ends up the last hope against a robot apocalypse. Gloriously chaotic animation with a huge heart. 97% on Rotten Tomatoes.", tmdbId: 501929 },
+
+  // B02
+  { title: "Toy Story 5", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Woody and Buzz return after years apart — an emotional reunion that earned 92% on Rotten Tomatoes and reminded audiences why this franchise endures.", tmdbId: 1216716 },
+  { title: "Toy Story", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The film that launched the Pixar era and redefined what animation could be. Woody vs. Buzz, rivalry turned friendship. Holds 100% on Rotten Tomatoes.", tmdbId: 862 },
+  { title: "Pinocchio", year: 1940, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's second feature and many consider it their finest. The craftsmanship — especially underwater Monstro sequence — set a benchmark that took decades to match.", tmdbId: 10895 },
+  { title: "The Tale of the Princess Kaguya", year: 2013, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Studio Ghibli's Isao Takahata adapts an ancient Japanese folktale in breathtaking hand-drawn watercolour. A meditation on beauty, freedom and mortality.", tmdbId: 149870 },
+  { title: "Marcel the Shell with Shoes On", year: 2021, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A tiny shell with a single googly eye narrates his life in a mockumentary that is quietly devastating. 98% on Rotten Tomatoes. Cried by people who didn't see it coming.", tmdbId: 624477 },
+  { title: "WALL·E", year: 2008, type: "movie", language: "en", tags: ["critics"], curatorNote: "Pixar sends a lonely trash-compacting robot through a nearly wordless love story about Earth, consumption and survival. Technically and emotionally stunning.", tmdbId: 10681 },
+  { title: "The Lego Movie", year: 2014, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Everything is awesome — including this film. A plastic construction-toy world becomes the most anarchic, witty animated comedy of its decade. Almost no one saw it coming.", tmdbId: 137106 },
+
+  // B03
+  { title: "The Super Mario Galaxy Movie", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Nintendo's beloved space platformer gets the big-screen treatment. Built for fans and newcomers alike — colourful, fast and full of surprises.", tmdbId: 1084736 },
+  { title: "The Super Mario Bros. Movie", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The most profitable animated film of its year. Pure Nintendo fan service executed with infectious energy. The audience score says it all: 95% on Rotten Tomatoes.", tmdbId: 502356 },
+  { title: "Fantasia", year: 1940, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's grand experiment: classical music visualised as animation. From Mickey and the sorcerer to dancing hippos to Mussorgsky's Night on Bald Mountain — still astonishing.", tmdbId: 756 },
+  { title: "Your Name.", year: 2016, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Two teenagers swap bodies across time and distance in Makoto Shinkai's body-swap love story. A worldwide phenomenon — the highest-grossing anime film of its era.", tmdbId: 372058 },
+  { title: "A Town Called Panic", year: 2009, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Belgian absurdist comedy where plastic toy figures — Cowboy, Indian, Horse — careen through increasingly unhinged situations. Utterly unlike anything else on this list.", tmdbId: 32526 },
+  { title: "Spider-Man: Into the Spider-Verse", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "The film that redefined what superhero animation can do. Each Spider-Person rendered in their own visual language. Academy Award winner. 97% on Rotten Tomatoes.", tmdbId: 324857 },
+  { title: "Cloudy with a Chance of Meatballs", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A scientist accidentally makes food fall from the sky in this gleefully silly Phil Lord & Christopher Miller film — the earliest sign of their anarchic brilliance.", tmdbId: 22794 },
+
+  // B04
+  { title: "GOAT", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "An underdog animated sports story that quickly won over audiences. Witty, kinetic and surprisingly moving. 83% on Rotten Tomatoes and 92% audience score.", tmdbId: 1160018 },
+  { title: "The Incredibles", year: 2004, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A family of superheroes in suburban retirement — Pixar's finest action film. Brad Bird directs with the confidence of the best live-action blockbusters. 97% on RT.", tmdbId: 9806 },
+  { title: "Dumbo", year: 1941, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's shortest feature is also one of its most emotionally pure. A baby elephant with giant ears finds his wings. The 'Baby Mine' sequence has reduced audiences to tears for 80 years.", tmdbId: 9833 },
+  { title: "The Triplets of Belleville", year: 2003, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Sylvain Chomet's bizarre French masterwork. No real dialogue, just an extraordinary visual jazz — a grandmother rescues her kidnapped cyclist grandson with the help of three elderly cabaret singers.", tmdbId: 2734 },
+  { title: "Ernest & Celestine", year: 2012, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A gruff bear and a tiny mouse become unlikely friends in defiance of a society that keeps them apart. Gorgeous watercolour animation. César Award winner. 99% on Rotten Tomatoes.", tmdbId: 84405 },
+  { title: "Ratatouille", year: 2007, type: "movie", language: "en", tags: ["critics"], curatorNote: "A rat who wants to be a chef. Brad Bird's Pixar masterpiece — about art, identity and whether talent belongs to the few or the many. 96% on Rotten Tomatoes.", tmdbId: 2062 },
+  { title: "The Bad Guys", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A gang of career criminals tries to go straight in this stylish DreamWorks caper soaked in anime and French comic-book influences. Pure fun. 87% on Rotten Tomatoes.", tmdbId: 629542 },
+
+  // B05
+  { title: "Minions & Monsters", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The Minions collide with classic Universal monsters in this gleefully silly spin-off. Critics warmed to it: 89% on Rotten Tomatoes.", tmdbId: 1100782 },
+  { title: "Despicable Me", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A supervillain is undone by three orphaned girls. The film that launched one of animation's most successful franchises still works best as a warm comedy about unexpected fatherhood.", tmdbId: 20352 },
+  { title: "Bambi", year: 1942, type: "movie", language: "en", tags: ["classic"], curatorNote: "The film that introduced generations of children to the concept of loss. Disney's most painterly achievement — every frame a watercolour landscape. Devastatingly effective.", tmdbId: 9897 },
+  { title: "Persepolis", year: 2007, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Marjane Satrapi's autobiographical graphic novel becomes a black-and-white animated film about growing up in revolutionary Iran. Funny, political and heartbreaking. 96% on RT.", tmdbId: 1586 },
+  { title: "My Life as a Zucchini", year: 2016, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A Swiss stop-motion film about orphaned children finding family. Gentle, wise and emotionally enormous in its 66 minutes. 99% on Rotten Tomatoes.", tmdbId: 401073 },
+  { title: "Grave of the Fireflies", year: 1988, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Studio Ghibli's anti-war masterpiece. Two children try to survive the firebombing of Japan. One of the most emotionally devastating films — in any medium — ever made.", tmdbId: 12477 },
+  { title: "The Emperor's New Groove", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Disney's most unhinged comedy. A conceited emperor is turned into a llama. Kronk is a gift to cinema. The whole film runs at the pace of a sugar rush.", tmdbId: 11360 },
+
+  // B06
+  { title: "Hexed", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A witch-academy comedy that surprised everyone — funny, inventive and packed with visual gags. One of 2026's most likable animated originals.", tmdbId: 1167456 },
+  { title: "Encanto", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Disney's best original musical in years. Lin-Manuel Miranda's songs, a Colombian family with magical gifts, and themes of generational pressure that hit harder for adults. 'We Don't Talk About Bruno' dominated the world.", tmdbId: 568124 },
+  { title: "Cinderella", year: 1950, type: "movie", language: "en", tags: ["classic"], curatorNote: "The film that rescued Disney after its wartime struggles. Cinderella's ballgown, the pumpkin coach, the glass slipper — visual storytelling at its purest. The template for romantic animation.", tmdbId: 10274 },
+  { title: "Wolfwalkers", year: 2020, type: "movie", language: "en", tags: ["critics"], curatorNote: "Cartoon Saloon's final Irish folklore trilogy film. A girl and a feral wolf-child bond in 17th-century Kilkenny. The hand-drawn style shifts character by character — technically extraordinary. 99% on RT.", tmdbId: 441130 },
+  { title: "The Breadwinner", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An Afghan girl disguises herself as a boy to support her family under Taliban rule. Harrowing, hopeful, and animated with a delicate watercolour style that earned four Annie Award nominations.", tmdbId: 415633 },
+  { title: "Coraline", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Henry Selick's stop-motion horror — a girl discovers a perfect duplicate world with button-eyed parents. Still the definitive animated horror film for teenagers. 91% on RT.", tmdbId: 14836 },
+  { title: "ParaNorman", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A misunderstood boy who can see ghosts has to stop a zombie apocalypse. Laika's most subversive film — genuinely scary, genuinely kind, and sneakily radical at the end.", tmdbId: 80278 },
+
+  // B07
+  { title: "Wildwood", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Based on Colin Meloy's beloved novel — a girl ventures into a forbidden forest to save her baby brother. Laika's most ambitious stop-motion film yet.", tmdbId: 1001311 },
+  { title: "How to Train Your Dragon", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Viking boy befriends the dragon he was supposed to kill. The flying sequences remain some of animation's most thrilling. 99% on Rotten Tomatoes.", tmdbId: 10191 },
+  { title: "The Adventures of Prince Achmed", year: 1926, type: "movie", language: "de", tags: ["classic"], curatorNote: "The oldest surviving animated feature film. Lotte Reiniger's silhouette animation — intricate black-cut figures against hand-painted backgrounds — made in 1926. A genuine miracle of cinema.", tmdbId: 30172 },
+  { title: "Song of the Sea", year: 2014, type: "movie", language: "en", tags: ["passport"], curatorNote: "Cartoon Saloon's Irish selkie myth. A boy and his sister travel across Ireland guided by ancient spirits. Hand-drawn and luminously beautiful — like living stained glass.", tmdbId: 228316 },
+  { title: "The Secret of Kells", year: 2009, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A young monk helps illuminate the Book of Kells in this Oscar-nominated debut from Cartoon Saloon. The geometric flat animation style makes every frame a medieval illumination.", tmdbId: 12155 },
+  { title: "Kubo and the Two Strings", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "Laika's masterwork. A boy armed with a magical shamisen battles supernatural spirits across feudal Japan. The stop-motion work is so precise it feels impossible. 97% on RT.", tmdbId: 313297 },
+  { title: "Fantastic Mr. Fox", year: 2009, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Wes Anderson's stop-motion Roald Dahl adaptation is entirely its own peculiar thing — dry wit, autumnal colours and an anthropomorphic cast of immaculate deadpan. 93% on RT.", tmdbId: 10315 },
+
+  // B08
+  { title: "Zootopia 2", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Judy and Nick return in a sharper, funnier sequel. The world-building is richer, the comedy more confident. 92% on Rotten Tomatoes, 95% audience score.", tmdbId: 376660 },
+  { title: "Zootopia", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A bunny cop and a con-artist fox uncover a city-wide conspiracy in Disney's most socially aware animated film. Holds up as a parable about prejudice and systemic bias. 98% on RT.", tmdbId: 269149 },
+  { title: "Alice in Wonderland", year: 1951, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's most surreal feature. A girl falls into a world of logic-defying chaos — the Cheshire Cat, the Mad Hatter, the Queen of Hearts. Psychedelic before the word existed.", tmdbId: 13053 },
+  { title: "Flow", year: 2024, type: "movie", language: "lv", tags: ["passport"], curatorNote: "A Latvian animated film — a solitary cat navigates a flooded world alongside unlikely animal companions. No dialogue, no humans. Academy Award winner. 97% on Rotten Tomatoes.", tmdbId: 1184918 },
+  { title: "Chicken for Linda!", year: 2023, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A French mother-daughter road comedy — a girl demands her late father's chicken recipe and her mother will go to any lengths. Delightful, loose-lined and funny as anything.", tmdbId: 1041581 },
+  { title: "The Wild Robot", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "A stranded robot raises an orphaned gosling on an uninhabited island. Visually breathtaking — painterly, emotional and intelligent. One of the best animated films of the decade. 97% on RT.", tmdbId: 1108859 },
+  { title: "Puss in Boots: The Last Wish", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Puss discovers he's on his last life and embarks on a quest for a magical wish. The franchise's finest hour — stunning anime-influenced animation and a genuine emotional core. 95% on RT.", tmdbId: 315162 },
+
+  // B09
+  { title: "Elio", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Pixar's cosmic comedy — a boy is accidentally abducted by aliens and must represent Earth as its ambassador. Warm, funny and typically Pixar-beautiful. 83% on RT.", tmdbId: 1087822 },
+  { title: "Finding Nemo", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A clownfish crosses the ocean to rescue his captured son. Pixar's underwater photography is still stunning 20+ years on. 99% on Rotten Tomatoes.", tmdbId: 12 },
+  { title: "Peter Pan", year: 1953, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's golden-era take on Barrie's Neverland. Captain Hook, Tinker Bell, the Lost Boys — one of the studio's most fully realised fantasy worlds.", tmdbId: 12593 },
+  { title: "Mars Express", year: 2023, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A sleek French noir set on a colonised Mars. Android consciousness, corporate cover-ups and a mystery that builds like Blade Runner in 2D animation. An utterly underrated gem.", tmdbId: 1148823 },
+  { title: "Apollo 10½: A Space Age Childhood", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Richard Linklater's rotoscope memoir of growing up in 1969 Houston as the moon landing approaches. Adult nostalgia rendered in animation — contemplative and quietly magical.", tmdbId: 798286 },
+  { title: "Akira", year: 1988, type: "movie", language: "ja", tags: ["passport"], curatorNote: "The film that brought anime to Western audiences. Neo-Tokyo is about to explode. Katsuhiro Otomo's cyberpunk masterpiece still looks like nothing else — animated at 24fps entirely by hand.", tmdbId: 149 },
+  { title: "Megamind", year: 2010, type: "movie", language: "en", tags: ["surprise"], curatorNote: "What happens when the villain wins? DreamWorks' most underrated comedy — a blue supervillain defeats his nemesis and instantly misses having a purpose. Smarter than it appears.", tmdbId: 37645 },
+
+  // B10
+  { title: "KPop Demon Hunters", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "K-pop idols battle demons in Netflix's record-breaking global sensation. Irresistible songs, stylish animation and a cultural crossover that genuinely earned its hype. 92% on RT.", tmdbId: 1086747 },
+  { title: "Frozen", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Let It Go changed pop culture. Disney's billion-dollar musical about two sisters and a kingdom of ice still holds as one of the studio's strongest modern entries. 89% on RT.", tmdbId: 109445 },
+  { title: "Sleeping Beauty", year: 1959, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's most painterly film — every background looks like a Flemish tapestry. Maleficent is the company's greatest villain. And the Tchaikovsky score remains perfect.", tmdbId: 11205 },
+  { title: "Belle", year: 2021, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Mamoru Hosoda reimagines Beauty and the Beast inside an internet-scale virtual world. A shy girl finds her voice as a global singing star. Visually extravagant and emotionally raw.", tmdbId: 639721 },
+  { title: "The Summit of the Gods", year: 2021, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A French-Luxembourg animated mountain-climbing thriller. Obsession, altitude and one of cinema's most beautifully rendered summits. Patient, adult storytelling in animation.", tmdbId: 755566 },
+  { title: "Princess Mononoke", year: 1997, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Miyazaki's most politically complex film. An ancient forest war between animal gods and industrial humans — neither side entirely right. Stunning action and moral weight.", tmdbId: 128 },
+  { title: "Nimona", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "A shapeshifting teen helps a wrongly accused knight clear his name in this queer-coded futuristic medieval world. Rescued from cancellation — and worth every bit of the wait. 92% on RT.", tmdbId: 428694 },
+
+  // B11
+  { title: "Dog Man", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "The beloved Dav Pilkey graphic novel comes to life — a man with a dog's head solves crimes and gets into trouble. Funny, charming and perfectly judged for its audience.", tmdbId: 974816 },
+  { title: "Shrek", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The film that ended Disney's animated dominance for a decade. Mike Myers and Eddie Murphy's ogre-donkey double act launched DreamWorks into the stratosphere. Still quotable.", tmdbId: 809 },
+  { title: "Lady and the Tramp", year: 1955, type: "movie", language: "en", tags: ["classic"], curatorNote: "The spaghetti scene. Disney's most romantic feature — a pampered cocker spaniel and a street dog share a love across the wrong side of the tracks. Timeless.", tmdbId: 10202 },
+  { title: "The Illusionist", year: 2010, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Sylvain Chomet adapts an unproduced Jacques Tati screenplay — a fading stage magician befriends a girl who believes in real magic. Melancholy and gorgeous, wordlessly told.", tmdbId: 37710 },
+  { title: "The Painting", year: 2011, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Characters trapped inside an unfinished painting leave the canvas to find its creator. Jean-François Laguionie's French gem — a film about art making itself, for art lovers of all ages.", tmdbId: 80660 },
+  { title: "The Iron Giant", year: 1999, type: "movie", language: "en", tags: ["critics"], curatorNote: "Brad Bird's 1950s-set masterpiece — a boy befriends a giant robot from space and teaches it that you are what you choose to be. Devastating final act. 96% on Rotten Tomatoes.", tmdbId: 10386 },
+  { title: "The Pirates! In an Adventure with Scientists!", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Aardman's driest comedy. A terrible pirate captain accidentally discovers Darwin's Beagle and wins a competition with a dodo. British humour applied with surgical precision.", tmdbId: 81077 },
+
+  // B12
+  { title: "The Day the Earth Blew Up: A Looney Tunes Movie", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Porky Pig and Daffy Duck save the world from alien mind-control in the most purely fun Looney Tunes theatrical release in decades. 86% on Rotten Tomatoes.", tmdbId: 928532 },
+  { title: "Space Jam", year: 1996, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Michael Jordan, Bugs Bunny and a basketball game against alien invaders. A cultural artefact of the 1990s — nostalgia machine, undeniably fun and permanently in the DNA.", tmdbId: 2300 },
+  { title: "One Hundred and One Dalmatians", year: 1961, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's first use of Xerox photography — a scratchy, spontaneous look unique in the studio's history. Cruella De Vil is iconic. And it saved the studio financially.", tmdbId: 10011 },
+  { title: "No Dogs or Italians Allowed", year: 2022, type: "movie", language: "it", tags: ["passport"], curatorNote: "Alain Ughetto's Italian-French co-production tells his grandfather's story of emigration from Italy to France in tender stop-motion. César Award winner. Quietly extraordinary.", tmdbId: 826009 },
+  { title: "The Phantom Boy", year: 2015, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A Paris-set French animated thriller — a boy can separate his spirit from his body and helps a cop solve a city-wide crime from a hospital bed. Underrated and inventive.", tmdbId: 312831 },
+  { title: "Who Framed Roger Rabbit", year: 1988, type: "movie", language: "en", tags: ["critics"], curatorNote: "The greatest hybrid live-action/animation ever made. Robert Zemeckis and the Amblin team put cartoon characters into 1947 Los Angeles with impossible technical precision. Revolutionary.", tmdbId: 8467 },
+  { title: "Looney Tunes: Back in Action", year: 2003, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Joe Dante's self-aware Looney Tunes movie — full of cinephile gags, surreal setpieces and a genuinely anarchic spirit. Criminally underseen compared to Space Jam.", tmdbId: 8355 },
+
+  // B13
+  { title: "Memoir of a Snail", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Adam Elliot's Australian stop-motion — an introverted snail collector looks back on a lifetime of loss and small joys. Sarah Snook's voice performance is extraordinary. 95% on RT.", tmdbId: 1016084 },
+  { title: "Chicken Run", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Aardman's Plasticine Great Escape. A chicken with big plans organises a POW-style breakout from a Yorkshire farm. Holds 97% on Rotten Tomatoes after 25 years.", tmdbId: 10858 },
+  { title: "The Jungle Book", year: 1967, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's last film from Walt himself. Baloo, Bagheera, King Louie and the songs — 'Bare Necessities', 'I Wan'na Be Like You'. The studio's most relaxed and loveable golden-era picture.", tmdbId: 9325 },
+  { title: "Mary and Max", year: 2009, type: "movie", language: "en", tags: ["surprise"], curatorNote: "An Australian stop-motion film about a pen-pal friendship between a lonely 8-year-old girl in Melbourne and an overweight New Yorker with Asperger's. Devastating. 96% on RT.", tmdbId: 24625 },
+  { title: "My Love Affair with Marriage", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A Baltic-American musical animation about a woman navigating three marriages across decades. Blends folklore, biology lessons and feminist commentary in a wildly unusual structure.", tmdbId: 869573 },
+  { title: "Anomalisa", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "Charlie Kaufman's stop-motion existential crisis — a customer service speaker in Cincinnati finds everyone around him identical. Intimate, sad and profoundly weird. 91% on RT.", tmdbId: 307081 },
+  { title: "The House", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Netflix's anthology of three stop-motion stories in one haunted house across time. Dark comedy, horror and surrealism in rotation — easily the most singular animated film of 2022.", tmdbId: 811867 },
+
+  // B14
+  { title: "Inside Out 2", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Pixar returns to the mind of Riley, now a teenager, as new emotions — Anxiety chief among them — arrive. The anxiety sequence alone is worth the price of admission. 91% on RT.", tmdbId: 1022789 },
+  { title: "Up", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The first 10 minutes are the most emotionally efficient stretch of cinema Pixar ever produced. A grieving man ties balloons to his house and floats to South America. 98% on RT.", tmdbId: 14160 },
+  { title: "The Sword in the Stone", year: 1963, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's Arthurian comedy — young Arthur learns wisdom from the wizard Merlin. The wizard duel between Merlin and Madam Mim remains one of the studio's most inventive sequences.", tmdbId: 9718 },
+  { title: "I Lost My Body", year: 2019, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A severed hand travels across Paris searching for its owner. Jérémy Clapin's French animated film is as strange as that sounds and twice as moving. César Award winner. 98% on RT.", tmdbId: 601007 },
+  { title: "The Girl Without Hands", year: 2016, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Sébastien Laudenbach's French Grimm adaptation is animated almost entirely by a single artist in watercolour. Raw, fluid and unlike any other animation you've seen.", tmdbId: 444777 },
+  { title: "Soul", year: 2020, type: "movie", language: "en", tags: ["critics"], curatorNote: "Pixar asks what makes life worth living through a jazz musician's near-death experience. The Great Before sequences are visually unlike anything in animation. 95% on Rotten Tomatoes.", tmdbId: 508442 },
+  { title: "The Croods", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A prehistoric family discovers fire, sunlight and the outside world. DreamWorks' warmest family film — funny, big-hearted and visually inventive in its creature designs.", tmdbId: 49519 },
+
+  // B15
+  { title: "The Lord of the Rings: The War of the Rohirrim", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The story of Helm Hammerhand — the fortress that bears his name — told in anime-influenced animation. A satisfying Middle-earth side story for fans hungry for more.", tmdbId: 839033 },
+  { title: "Kung Fu Panda", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Jack Black as a clumsy panda who becomes the Dragon Warrior. DreamWorks found the sweet spot between comedy and sincerity and never looked back. 87% on Rotten Tomatoes.", tmdbId: 9502 },
+  { title: "The Aristocats", year: 1970, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's post-Walt entry — Parisian cats, jazz-playing alley cats and a butler's murder plot. Breezy and stylish, with O'Malley and the family's chemistry still charming.", tmdbId: 9990 },
+  { title: "The Red Turtle", year: 2016, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Studio Ghibli co-produced this French silent film — a castaway on a desert island and a mysterious red turtle. Michael Dudok de Wit's dialogue-free meditation on life and time.", tmdbId: 317948 },
+  { title: "Ruben Brandt, Collector", year: 2018, type: "movie", language: "hu", tags: ["surprise"], curatorNote: "A Hungarian animated art-heist thriller — a psychotherapist is haunted by masterpiece paintings and steals them to escape the nightmares. Cubist, referential and uniquely witty.", tmdbId: 504685 },
+  { title: "Waltz with Bashir", year: 2008, type: "movie", language: "he", tags: ["passport"], curatorNote: "An Israeli documentary animated film — a soldier trying to recover his memories from the 1982 Lebanon War. Groundbreaking form, harrowing content. Academy Award nominated.", tmdbId: 16371 },
+  { title: "Rango", year: 2011, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Gore Verbinski and Johnny Depp make an actual adult Western — as an animated film starring a lizard. Beautifully shot-composed, genuinely funny and oddly philosophical. 88% on RT.", tmdbId: 49013 },
+
+  // B16
+  { title: "Transformers One", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The untold story of how Optimus Prime and Megatron became enemies — the animated Transformers film the franchise always deserved. 89% on Rotten Tomatoes.", tmdbId: 698687 },
+  { title: "Big Hero 6", year: 2014, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A boy and his inflatable healthcare robot become superheroes in futuristic San Fransokyo. Disney's most Marvel-flavoured film — high energy, genuine emotion. Academy Award winner.", tmdbId: 177572 },
+  { title: "Robin Hood", year: 1973, type: "movie", language: "en", tags: ["classic"], curatorNote: "The post-Walt Disney studio at its most laid-back. Foxes, bears and chickens stand in for Sherwood Forest's finest — loose, funny and defiantly charming.", tmdbId: 11953 },
+  { title: "The First Slam Dunk", year: 2022, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Takehiko Inoue's legendary basketball manga finally gets its theatrical film. A technical and emotional triumph — Japanese audiences wept. A sports animation benchmark.", tmdbId: 930094 },
+  { title: "Mutafukaz", year: 2017, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "French-Japanese co-production set in Dark Meat City — a broke delivery man discovers he might be an alien-human hybrid. Ultra-violent, ultra-stylish, genuinely unlike anything else.", tmdbId: 454584 },
+  { title: "Ghost in the Shell", year: 1995, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Mamoru Oshii's cyberpunk masterwork. A cyborg cop hunts a hacker in a near-future Japan. The Wachowskis studied it. Bladerunner studied it. Every sci-fi blockbuster since is in its debt.", tmdbId: 346 },
+  { title: "Teenage Mutant Ninja Turtles: Mutant Mayhem", year: 2023, type: "movie", language: "en", tags: ["surprise"], curatorNote: "The freshest take on the Turtles in decades — teenage energy, hand-drawn sketchy style and actual teenage voice actors. Spider-Verse DNA all over it. 95% on Rotten Tomatoes.", tmdbId: 614930 },
+
+  // B17
+  { title: "Orion and the Dark", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Charlie Kaufman writes a film about a boy's friendship with the anthropomorphic Dark — a meditation on fear, existence and what we lose by growing up. Deceptively strange. 91% on RT.", tmdbId: 1072706 },
+  { title: "Monsters, Inc.", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The scream economy. Two professional monsters accidentally befriend the child they were supposed to frighten. Pixar perfects the unlikely-buddy-comedy formula. 96% on RT.", tmdbId: 585 },
+  { title: "The Many Adventures of Winnie the Pooh", year: 1977, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's compilation of their Pooh shorts — the Hundred Acre Wood at its most gentle and contemplative. The closest animated film to the spirit of A.A. Milne's original.", tmdbId: 10948 },
+  { title: "The Little Prince", year: 2015, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Mark Osborne's French-American adaptation mixes paper-cut-out animation for the book with CG for the modern world. A loving reframing of Saint-Exupéry's parable for contemporary childhood.", tmdbId: 246655 },
+  { title: "Away", year: 2019, type: "movie", language: "lv", tags: ["surprise"], curatorNote: "A Latvian one-man-production — Gints Zilbalodis animated the entire film himself. A boy on a motorbike crosses a magical landscape chased by a shadowy giant. Mesmerising and wordless.", tmdbId: 587842 },
+  { title: "Guillermo del Toro's Pinocchio", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "Del Toro's stop-motion masterpiece set in Mussolini's Italy — Pinocchio as a parable about fascism, mortality and parental grief. Technically and emotionally extraordinary. 96% on RT.", tmdbId: 762509 },
+  { title: "The Willoughbys", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Four neglected children orchestrate getting rid of their terrible parents. Pastel-coloured, fairy-tale dark and laced with an irreverent wit that rewards repeat viewing.", tmdbId: 506574 },
+
+  // B18
+  { title: "Suzume", year: 2022, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Makoto Shinkai's road-trip disaster film — a girl must close mysterious doors that release chaos. Visually spectacular and emotionally punishing. Japan's second-highest-grossing anime.", tmdbId: 1060331 },
+  { title: "Moana", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Polynesian chief's daughter sails beyond the reef to save her island. Disney's oceangoing adventure has Lin-Manuel Miranda songs, a demigod voiced by Dwayne Johnson and stunning water animation.", tmdbId: 277834 },
+  { title: "The Little Mermaid", year: 1989, type: "movie", language: "en", tags: ["classic"], curatorNote: "The film that launched the Disney Renaissance. Ariel, Sebastian, Under the Sea — the Howard Ashman-Alan Menken songbook revived Disney's fortunes and changed animation history.", tmdbId: 10144 },
+  { title: "The Night Is Short, Walk on Girl", year: 2017, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Masaaki Yuasa's anarchic comedy — a single night in Kyoto seen through the eyes of a girl who drinks, reads books and has increasingly surreal encounters. Unforgettably alive.", tmdbId: 428078 },
+  { title: "Lu Over the Wall", year: 2017, type: "movie", language: "ja", tags: ["surprise"], curatorNote: "Masaaki Yuasa's mermaid comedy — a teenage musician discovers the girl he's fallen for is a fish who turns into a mermaid when she hears music. Chaotic, joyful and gorgeous.", tmdbId: 452520 },
+  { title: "Perfect Blue", year: 1997, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Satoshi Kon's psychological thriller — a pop idol's transition into acting descends into paranoia and identity collapse. Darren Aronofsky licensed shots for Requiem for a Dream.", tmdbId: 10494 },
+  { title: "The Cat Returns", year: 2002, type: "movie", language: "ja", tags: ["surprise"], curatorNote: "A girl saves a cat and is rewarded with a trip to the Cat Kingdom where she is expected to marry the Cat Prince. Ghibli at its most playful and least threatening.", tmdbId: 10515 },
+
+  // B19
+  { title: "Flee", year: 2021, type: "movie", language: "da", tags: ["critics"], curatorNote: "Danish animated documentary — Amin, an Afghan refugee, finally tells the story he has hidden for 20 years. Three Academy Award nominations. A watershed in animated non-fiction.", tmdbId: 770820 },
+  { title: "Coco", year: 2017, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Mexican boy travels to the Land of the Dead to find his great-great-grandfather. Pixar's most culturally specific film — and possibly its most beautiful. 97% on Rotten Tomatoes.", tmdbId: 354912 },
+  { title: "Beauty and the Beast", year: 1991, type: "movie", language: "en", tags: ["classic"], curatorNote: "The only animated film nominated for the Best Picture Oscar in the pre-expanded-category era. The ballroom sequence remains the apex of Disney's classical animation ambition.", tmdbId: 10020 },
+  { title: "The Swallows of Kabul", year: 2019, type: "movie", language: "fr", tags: ["passport"], curatorNote: "French animated adaptation of Yasmina Khadra's novel. Two Kabul couples under Taliban rule — unflinching in its subject matter and beautifully executed in sepia-toned visuals.", tmdbId: 564674 },
+  { title: "Another Day of Life", year: 2018, type: "movie", language: "pl", tags: ["surprise"], curatorNote: "Polish-Spanish animated documentary about Ryszard Kapuściński's coverage of the Angolan Civil War. Combines animation with live-action interview footage. Goya Award winner.", tmdbId: 461182 },
+  { title: "Tower", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "Rotoscope documentary about the 1966 University of Texas Tower shooting — witnesses recount the day through animation reconstructed from archival footage. Devastating and important.", tmdbId: 427156 },
+  { title: "My Sunny Maad", year: 2021, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "A French woman in Kabul tries to make her life work with her Afghan husband's extended family. Animated from a true story — tender, funny and genuinely cross-cultural.", tmdbId: 793752 },
+
+  // B20
+  { title: "Mad God", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "Phil Tippett's stop-motion nightmare — 40 years in the making. A figure descends through a hellscape of war, industrial horror and cosmic dread. A singular work of obsessive art.", tmdbId: 640146 },
+  { title: "The Nightmare Before Christmas", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Tim Burton and Henry Selick's Halloween-Christmas collision. Jack Skellington wants to take over Christmas. Danny Elfman songs, iconic character design and a visual palette all its own.", tmdbId: 9479 },
+  { title: "Yellow Submarine", year: 1968, type: "movie", language: "en", tags: ["classic"], curatorNote: "The Beatles (sort of) star in a psychedelic animated film about Pepperland under attack from the Blue Meanies. Every frame is a piece of pop art. Impossibly influential.", tmdbId: 7450 },
+  { title: "The Wolf House", year: 2018, type: "movie", language: "es", tags: ["passport"], curatorNote: "Chilean stop-motion horror — a girl escapes a cult and hides in a house that transforms around her. Made by Cristóbal León and Joaquín Cociña in surreal painted-in-frame animation.", tmdbId: 547648 },
+  { title: "Junk Head", year: 2017, type: "movie", language: "ja", tags: ["surprise"], curatorNote: "Takahide Hori animated this entire feature film himself over four years. A post-human future, underground clones and a lost explorer. Astonishing DIY craft. Japanese cult classic.", tmdbId: 490558 },
+  { title: "Paprika", year: 2006, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Satoshi Kon's final feature. A device that lets therapists enter patients' dreams is stolen. Nolan cited it for Inception. A carnival of visual invention that logic cannot contain.", tmdbId: 4977 },
+  { title: "A Scanner Darkly", year: 2006, type: "movie", language: "en", tags: ["critics"], curatorNote: "Richard Linklater's rotoscope Philip K. Dick adaptation. Keanu Reeves in a near-future surveillance state consumed by addiction. The scramble-suit is one of animation's great design solutions.", tmdbId: 4726 },
+
+  // B21 — new additions from research
+  { title: "Coyote vs. Acme", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Wile E. Coyote sues Acme Corporation in a hybrid live-action/animation legal satire. Will Forte and John Cena. Rescued from the WB vault and worth the wait. 96% on Rotten Tomatoes.", tmdbId: 925311 },
+  { title: "Wallace & Gromit: Vengeance Most Fowl", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Nick Park and Aardman bring Wallace and Gromit back in their best feature-length adventure yet — Feathers McGraw returns, smarter and more menacing. 100% on Rotten Tomatoes.", tmdbId: 1089390 },
+  { title: "Ne Zha II", year: 2025, type: "movie", language: "zh", tags: ["passport"], curatorNote: "The Chinese animated blockbuster sequel — the highest-grossing animated film in Chinese history. Ne Zha and Ao Bing return for a mythological showdown of extraordinary scale.", tmdbId: 1114513 },
+  { title: "The Colors Within", year: 2024, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Naoko Yamada's (A Silent Voice) new film — a girl who sees music as colour forms a band with two outsiders. Intimate and visually ravishing. 92% on Rotten Tomatoes.", tmdbId: 1260417 },
+  { title: "Evangelion 3.0+1.0: Thrice Upon a Time", year: 2021, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Hideaki Anno's final Rebuild film brings true closure to Neon Genesis Evangelion. A decade of anticipation met with stunning animation and genuine emotional resolution.", tmdbId: 283566 },
+  { title: "Klaus", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "Netflix's Oscar-nominated origin story of Santa Claus — a lazy postman in a feuding Arctic town accidentally invents Christmas. Pioneered a new shaded 2D technique. 96% on RT.", tmdbId: 508965 },
+  { title: "Look Back", year: 2024, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Tatsuki Fujimoto's (Chainsaw Man) short animated film — two girl cartoonists grow up, drift apart and collide with tragedy. 58 minutes. 100% on Rotten Tomatoes. A small masterpiece.", tmdbId: 1397023 },
+
+  // B22 — further new additions
+  { title: "Avatar Aang: The Last Airbender", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The animated continuation of Avatar's story comes to the big screen. 90% on Rotten Tomatoes, 99% audience score — the fandom got the film it deserved.", tmdbId: 1242193 },
+  { title: "Shaun the Sheep: The Beast of Mossy Bottom", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Aardman returns Shaun to his roots in this feature-length adventure. Brilliantly crafted and irresistibly likable. 99% on Rotten Tomatoes.", tmdbId: 1297823 },
+  { title: "Spider-Man: Across the Spider-Verse", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "The sequel that somehow exceeded the original. Miles Morales crosses six animated universes, each rendered in its own visual language. Redefined what animation can look like. 95% on RT.", tmdbId: 569094 },
+  { title: "Turning Red", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A Toronto girl transforms into a giant red panda whenever she gets too excited. Pixar's most personal and most misunderstood film — a funny, exact portrait of being 13.", tmdbId: 508943 },
+  { title: "Luca", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Two sea monsters disguise themselves as boys on the Italian Riviera and discover friendship, gelato and the danger of being found out. Enrico Casarosa's warm Pixar summer film.", tmdbId: 438799 },
+  { title: "Entergalactic", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Kid Cudi's visual album — a comic-book artist falls for his neighbour in a stylised New York. Music, animation and romance fused into something genuinely unlike anything else. 97% on RT.", tmdbId: 946736 },
+  { title: "The Sea Beast", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Netflix's swashbuckling original — a legendary sea monster hunter is joined by a girl stowaway who changes his view of the creatures he hunts. Spectacular ocean adventure. 94% on RT.", tmdbId: 783461 },
+
+  // B23
+  { title: "Nausicaä of the Valley of the Wind", year: 1984, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Miyazaki's pre-Ghibli masterwork — a princess fights to protect her people and a toxic jungle from warring factions who don't understand it. The film that convinced a publisher to fund Studio Ghibli.", tmdbId: 81 },
+  { title: "The Great Mouse Detective", year: 1986, type: "movie", language: "en", tags: ["classic"], curatorNote: "Disney's Sherlock Holmes in miniature — Basil of Baker Street hunts the nefarious Ratigan through Victorian London. The film that proved Disney could still make great animation after years of stagnation.", tmdbId: 9994 },
+  { title: "Brave", year: 2012, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Pixar's Scottish princess refuses to be married off and accidentally turns her mother into a bear. The studio's first fairy tale and first female lead — funny, fierce and genuinely moving.", tmdbId: 62177 },
+  { title: "Raya and the Last Dragon", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "A warrior searches a fractured world for the last dragon in Disney's Southeast Asian fantasy epic. Stunning action sequences and a message about trust that earns its emotional weight. 95% on RT.", tmdbId: 527774 },
+  { title: "Onward", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Two elf brothers embark on a quest to bring their late father back for one day. Pixar's most underrated film — a road movie about grief, brotherhood and the magic hiding in ordinary things.", tmdbId: 508439 },
+  { title: "Batman: The Long Halloween, Part One", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "DC's animated adaptation of Jeph Loeb's noir masterwork — Gotham's underworld stalked by a Holiday killer while Batman, Gordon and Dent forge a fragile alliance. The definitive Batman origin story.", tmdbId: 736073 },
+  { title: "DC League of Super-Pets", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Krypto the Super-Dog must rescue Superman and the Justice League alongside a ragtag shelter crew with newly-acquired powers. Dwayne Johnson and Kevin Hart bring genuine chemistry. Playful and fun.", tmdbId: 539681 },
+
 ];
