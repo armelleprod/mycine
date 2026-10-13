@@ -163,6 +163,46 @@ export const COMEDY_EDITORIAL_BATCHES = [
   { title: "Bridget Jones: Mad About the Boy", year: 2025, type: "movie", language: "en", tags: ["passport", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1272149 },
   { title: "Lady Bird", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "A defining comedy with enduring craft, influence and rewatchability.", tmdbId: 391713 },
   { title: "Waiting for Guffman", year: 1996, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A defining comedy with enduring craft, influence and rewatchability.", tmdbId: 16448 },
+  // B21 — New 2026 comedies (batch 1)
+  { title: "Coyote vs. Acme", year: 2026, type: "movie", language: "en", tags: ["new", "surprise"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1204680 },
+  { title: "Jackass: Best and Last", year: 2026, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1612018 },
+  { title: "Is This Thing On?", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1140498 },
+  { title: "The History of Concrete", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1596296 },
+  { title: "Nirvanna the Band the Show the Movie", year: 2026, type: "movie", language: "en", tags: ["new", "passport", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1154538 },
+  { title: "Stop! That! Train!", year: 2026, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1541560 },
+  { title: "I Love Boosters", year: 2026, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1227877 },
+  // B22 — New 2026 comedies (batch 2)
+  { title: "The Incomer", year: 2026, type: "movie", language: "en", tags: ["new", "passport", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1554956 },
+  { title: "I Want Your Sex", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1288059 },
+  { title: "GOAT", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1297842 },
+  { title: "Mike & Nick & Nick & Alice", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1115544 },
+  { title: "Idiots", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 445466 },
+  { title: "Kill Me", year: 2026, type: "movie", language: "en", tags: ["new", "surprise"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1211598 },
+  { title: "The Moment", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1422562 },
+  // B23 — New 2025 comedies (batch 1)
+  { title: "The Baltimorons", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1421990 },
+  { title: "If I Had Legs I'd Kick You", year: 2025, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1160360 },
+  { title: "Zootopia 2", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1084242 },
+  { title: "Bugonia", year: 2025, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 701387 },
+  { title: "The Bad Guys 2", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1175942 },
+  { title: "Rental Family", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1208348 },
+  { title: "Jay Kelly", year: 2025, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1069905 },
+  // B24 — New 2025 comedies (batch 2)
+  { title: "Dog Man", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 774370 },
+  { title: "Father Mother Sister Brother", year: 2025, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1159206 },
+  { title: "Good Fortune", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1114967 },
+  { title: "The Thursday Murder Club", year: 2025, type: "movie", language: "en", tags: ["new", "passport", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 744653 },
+  { title: "Freakier Friday", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1125257 },
+  { title: "Spinal Tap II: The End Continues", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 975225 },
+  { title: "Grow", year: 2025, type: "movie", language: "en", tags: ["new", "passport", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1491479 },
+  // B25 — New 2025 comedies (batch 3)
+  { title: "Deep Cover", year: 2025, type: "movie", language: "en", tags: ["new", "passport", "discovery"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1239193 },
+  { title: "Novocaine", year: 2025, type: "movie", language: "en", tags: ["new", "surprise"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1195506 },
+  { title: "Heads of State", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 749170 },
+  { title: "Happy Gilmore 2", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven genre favorite with strong audience or critical recognition.", tmdbId: 1263256 },
+  { title: "Fackham Hall", year: 2025, type: "movie", language: "en", tags: ["new", "passport", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1175174 },
+  { title: "Splitsville", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1337562 },
+  { title: "Brian", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive comedy that broadens the Canon through tone, culture or discovery value.", tmdbId: 1484112 },
 ];
 
 export const COMEDY_POOL_COUNT = COMEDY_EDITORIAL_BATCHES.length;
