@@ -181,6 +181,31 @@ export const THRILLER_EDITORIAL_BATCHES = [
   { title: "Match Point", year: 2005, type: "movie", language: "en", tags: ["passport", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 116 },
   { title: "La Femme Nikita", year: 1990, type: "movie", language: "fr", tags: ["passport", "critics"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 9322 },
   { title: "Run Lola Run", year: 1998, type: "movie", language: "de", tags: ["passport", "surprise"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 104 },
+
+  // B21 — new additions from 2025/2026 sources
+  { title: "One Battle After Another", year: 2025, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A definitive thriller with enduring suspense, craft and influence.", tmdbId: 1054867 },
+  { title: "Sinners", year: 2025, type: "movie", language: "en", tags: ["new", "critics"], curatorNote: "A definitive thriller with enduring suspense, craft and influence.", tmdbId: 1233413 },
+  { title: "No Other Choice", year: 2025, type: "movie", language: "ko", tags: ["new", "passport"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 639988 },
+  { title: "Weapons", year: 2025, type: "movie", language: "en", tags: ["new", "surprise"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1078605 },
+  { title: "Tuner", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1340206 },
+  { title: "It Was Just an Accident", year: 2025, type: "movie", language: "fa", tags: ["passport", "critics"], curatorNote: "A definitive thriller with enduring suspense, craft and influence.", tmdbId: 1456349 },
+  { title: "Highest 2 Lowest", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1242434 },
+
+  // B22
+  { title: "Warfare", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1241436 },
+  { title: "She Rides Shotgun", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1196573 },
+  { title: "Lurker", year: 2025, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1264573 },
+  { title: "Companion", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1084199 },
+  { title: "40 Acres", year: 2024, type: "movie", language: "en", tags: ["passport", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1319951 },
+  { title: "Sovereign", year: 2025, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1130022 },
+  { title: "Dead of Winter", year: 2025, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1235746 },
+
+  // B23
+  { title: "Your Mother Your Mother Your Mother", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1437396 },
+  { title: "The Only Living Pickpocket in New York", year: 2026, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1458099 },
+  { title: "Dangerous Animals", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1285965 },
+  { title: "Obsession", year: 2025, type: "movie", language: "en", tags: ["new", "surprise"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1339713 },
+  { title: "Mission: Impossible - The Final Reckoning", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 575265 },
 ];
 
 export const THRILLER_POOL_COUNT = THRILLER_EDITORIAL_BATCHES.length;
