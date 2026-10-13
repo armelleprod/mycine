@@ -1,1165 +1,260 @@
-// MY CINÉ V66 — TRUE STORIES / BIOPIC
-// Prepared editorial batches. TMDB enriches metadata only.
+// MY CINÉ — TRUE STORIES / BIOPIC
+// Flat array — all entries are direct children of BIOPIC_EDITORIAL_BATCHES.
 
 export const BIOPIC_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Michael",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Bohemian Rhapsody",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Yankee Doodle Dandy",
-      "year": 1942,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "La Vie en Rose",
-      "year": 2007,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Love & Mercy",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Amadeus",
-      "year": 1984,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Weird: The Al Yankovic Story",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Tony",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Julie & Julia",
-      "year": 2009,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Life of Emile Zola",
-      "year": 1937,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Motorcycle Diaries",
-      "year": 2004,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Stan & Ollie",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Capote",
-      "year": 2005,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Confessions of a Dangerous Mind",
-      "year": 2002,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "I Play Rocky",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Rocky",
-      "year": 1976,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Somebody Up There Likes Me",
-      "year": 1956,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Dangal",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Fighter",
-      "year": 2010,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Raging Bull",
-      "year": 1980,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Eddie the Eagle",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Pressure",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Darkest Hour",
-      "year": 2017,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Sergeant York",
-      "year": 1941,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Land of Mine",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The King's Choice",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Downfall",
-      "year": 2004,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Men Who Stare at Goats",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Madden",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Moneyball",
-      "year": 2011,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Knute Rockne, All American",
-      "year": 1940,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Damned United",
-      "year": 2009,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Brian Banks",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Foxcatcher",
-      "year": 2014,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Blind Side",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Hershey",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Social Network",
-      "year": 2010,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Story of Louis Pasteur",
-      "year": 1936,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Billionaire",
-      "year": 2011,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Founder",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "There Will Be Blood",
-      "year": 2007,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Air",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Jimmy",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The King's Speech",
-      "year": 2010,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Young Mr. Lincoln",
-      "year": 1939,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Neruda",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Front Runner",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Lincoln",
-      "year": 2012,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Dick",
-      "year": 1999,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Springsteen: Deliver Me from Nowhere",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Rocketman",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Glenn Miller Story",
-      "year": 1954,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Control",
-      "year": 2007,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Nowhere Boy",
-      "year": 2009,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Walk the Line",
-      "year": 2005,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Walk Hard: The Dewey Cox Story",
-      "year": 2007,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "A Complete Unknown",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Elvis",
-      "year": 2022,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Jolson Story",
-      "year": 1946,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Gainsbourg: A Heroic Life",
-      "year": 2010,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Miles Ahead",
-      "year": 2015,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Coal Miner's Daughter",
-      "year": 1980,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Popstar: Never Stop Never Stopping",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Lee",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Hidden Figures",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Madame Curie",
-      "year": 1943,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "A Private War",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Radioactive",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Oppenheimer",
-      "year": 2023,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Electrical Life of Louis Wain",
-      "year": 2021,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Nyad",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Ford v Ferrari",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Pride of the Yankees",
-      "year": 1942,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The World's Fastest Indian",
-      "year": 2005,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Borg vs McEnroe",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Chariots of Fire",
-      "year": 1981,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Cool Runnings",
-      "year": 1993,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Rustin",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Milk",
-      "year": 2008,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Gandhi",
-      "year": 1982,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Mandela: Long Walk to Freedom",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "A United Kingdom",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Malcolm X",
-      "year": 1992,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Death of Stalin",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Priscilla",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Jackie",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Private Life of Henry VIII",
-      "year": 1933,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "A Royal Affair",
-      "year": 2012,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Queen",
-      "year": 2006,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Spencer",
-      "year": 2021,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Marie Antoinette",
-      "year": 2006,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Ferrari",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Rush",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Great Caruso",
-      "year": 1951,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Senna",
-      "year": 2010,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Tucker: The Man and His Dream",
-      "year": 1988,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Aviator",
-      "year": 2004,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Polka King",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Napoleon",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Braveheart",
-      "year": 1995,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Story of Alexander Graham Bell",
-      "year": 1939,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Mongol",
-      "year": 2007,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Last Emperor",
-      "year": 1987,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Lawrence of Arabia",
-      "year": 1962,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Favourite",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Tetris",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Imitation Game",
-      "year": 2014,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Edison, the Man",
-      "year": 1940,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Man Who Knew Infinity",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Current War",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "A Beautiful Mind",
-      "year": 2001,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "BlackBerry",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Iron Claw",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Remember the Titans",
-      "year": 2000,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Jim Thorpe – All-American",
-      "year": 1951,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Swimmers",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Queen of Katwe",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "I, Tonya",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Battle of the Sexes",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Till",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Just Mercy",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Inherit the Wind",
-      "year": 1960,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Argentina, 1985",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Mauritanian",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Fruitvale Station",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Bernie",
-      "year": 2011,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "She Said",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Spotlight",
-      "year": 2015,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "All the President's Men",
-      "year": 1976,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Killing Fields",
-      "year": 1984,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "A Journal for Jordan",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Insider",
-      "year": 1999,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Can You Ever Forgive Me?",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Fabelmans",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent true-story or biographical film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Ed Wood",
-      "year": 1994,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible true-life favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Lust for Life",
-      "year": 1956,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless biographical or true-story landmark.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Pain and Glory",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "An exceptional true-life film from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Dolemite Is My Name",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious true-story achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Mishima: A Life in Four Chapters",
-      "year": 1985,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, performance, writing or historical insight.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Disaster Artist",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or unconventional approach to a real life.",
-      "type": "movie",
-      "slot": 7
-    }
-  ]
+
+  // B01
+  { title: "Michael", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The most anticipated biopic of the decade — an intimate portrait of Michael Jackson that promises to be as complex and dazzling as its subject.", tmdbId: 1224312 },
+  { title: "Bohemian Rhapsody", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Rami Malek's electrifying performance as Freddie Mercury anchors this crowd-pleasing tribute to Queen's improbable rise. The Live Aid sequence alone is worth the whole film.", tmdbId: 424694 },
+  { title: "Yankee Doodle Dandy", year: 1942, type: "movie", language: "en", tags: ["classic"], curatorNote: "James Cagney's Oscar-winning turn as George M. Cohan is one of Hollywood's great physical performances — pure showmanship elevated to patriotic art.", tmdbId: 24599 },
+  { title: "La Vie en Rose", year: 2007, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Marion Cotillard disappears so completely into Édith Piaf that it stops feeling like acting. A ferociously beautiful portrait of a woman who burned at full intensity.", tmdbId: 1537 },
+  { title: "Love & Mercy", year: 2014, type: "movie", language: "en", tags: ["discovery"], curatorNote: "The split-timeline structure — Paul Dano as the young Brian Wilson, John Cusack as the older — captures a genius mind fracturing in real time. Deeply moving.", tmdbId: 254693 },
+  { title: "Amadeus", year: 1984, type: "movie", language: "en", tags: ["critics"], curatorNote: "Miloš Forman's Best Picture winner reframes Mozart through the jealous eyes of Salieri — a meditation on mediocrity witnessing genius. The music has never been better used in any film.", tmdbId: 279 },
+  { title: "Weird: The Al Yankovic Story", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A glorious parody of the biopic genre itself, with Daniel Radcliffe going full absurdist as 'Weird Al.' Funnier and sharper than it has any right to be.", tmdbId: 849930 },
+
+  // B02
+  { title: "Tony", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A 19-year-old Anthony Bourdain in Provincetown, 1978 — A24's portrait of the chef-writer before the fame, the television, the mythology. Dominic Sessa inhabits the hunger of a young man who hasn't yet found his form.", tmdbId: 1425475 },
+  { title: "Julie & Julia", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Meryl Streep's Julia Child is a force of nature — warm, funny, and utterly alive. The parallel story of a blogger cooking her way through Julia's cookbook is pure comfort cinema.", tmdbId: 20308 },
+  { title: "The Life of Emile Zola", year: 1937, type: "movie", language: "en", tags: ["classic"], curatorNote: "Paul Muni's Academy Award-winning portrait of the author who risked everything to defend Dreyfus. One of Hollywood's grandest biopics from its golden era.", tmdbId: 33682 },
+  { title: "The Motorcycle Diaries", year: 2004, type: "movie", language: "es", tags: ["passport"], curatorNote: "Gael García Bernal embodies the young Che Guevara with restless idealism on a continent-crossing journey that changed everything. Walter Salles directs with breathtaking landscape poetry.", tmdbId: 298 },
+  { title: "Stan & Ollie", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Steve Coogan and John C. Reilly as Laurel and Hardy during their final, fading tour — a bittersweet meditation on partnership, legacy, and the melancholy of a curtain call.", tmdbId: 487557 },
+  { title: "Capote", year: 2005, type: "movie", language: "en", tags: ["critics"], curatorNote: "Philip Seymour Hoffman's Truman Capote is one of cinema's great character studies — the writer consuming himself in research for In Cold Blood, losing himself in the process.", tmdbId: 2274 },
+  { title: "Confessions of a Dangerous Mind", year: 2002, type: "movie", language: "en", tags: ["surprise"], curatorNote: "George Clooney's directorial debut treats Chuck Barris's claim of being a CIA assassin with total sincerity — absurdist, stylish, and genuinely unsettling.", tmdbId: 5765 },
+
+  // B03
+  { title: "I Play Rocky", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The untold story of Chuck Wepner, the real-life boxer whose fight against Ali inspired Sylvester Stallone to write Rocky — the man behind the myth finally gets his moment.", tmdbId: 1350301 },
+  { title: "Rocky", year: 1976, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Sylvester Stallone wrote this and made it about an underdog with one shot at glory — and somehow it became one of cinema's most enduring love stories, to boxing and to dreams.", tmdbId: 1367 },
+  { title: "Somebody Up There Likes Me", year: 1956, type: "movie", language: "en", tags: ["classic"], curatorNote: "Paul Newman as Rocky Graziano in his breakthrough role — raw, urgent, and shot by Robert Wise with a street-level grit that feels decades ahead of its time.", tmdbId: 12311 },
+  { title: "Dangal", year: 2016, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Aamir Khan transforms himself physically to play Mahavir Singh Phogat, a wrestling father who trains his daughters to become world champions. India's highest-grossing film for good reason.", tmdbId: 328111 },
+  { title: "The Fighter", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Christian Bale's Oscar-winning turn as Dicky Eklund steals every scene, but this is really about two brothers trying to escape the gravity of a Massachusetts mill town.", tmdbId: 45317 },
+  { title: "Raging Bull", year: 1980, type: "movie", language: "en", tags: ["critics"], curatorNote: "Scorsese's savage self-portrait in another man's body — De Niro's Jake LaMotta is cinema's most punishing act of method commitment. Shot in black-and-white for the ages.", tmdbId: 522 },
+  { title: "Eddie the Eagle", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Taron Egerton as the lovably hopeless British ski jumper at the 1988 Calgary Olympics — proof that finishing last with heart is its own kind of triumph.", tmdbId: 303858 },
+
+  // B04
+  { title: "November 1963", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Robert Carlyle and John Travolta in an exploration of the days surrounding the Kennedy assassination — not the Zapruder frame, but the human wreckage of grief that followed a nation into the dark.", tmdbId: 1370815 },
+  { title: "Darkest Hour", year: 2017, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Gary Oldman's extraordinary Churchill — jowly, magnificent, and terrifying in equal measure — navigating the 28 days that decided whether Britain would fight or fold.", tmdbId: 399404 },
+  { title: "Sergeant York", year: 1941, type: "movie", language: "en", tags: ["classic"], curatorNote: "Gary Cooper won his first Oscar as the pacifist Tennessee farmer who became America's greatest WWI hero. Frank Capra-esque in its belief in the ordinary man.", tmdbId: 25941 },
+  { title: "Land of Mine", year: 2015, type: "movie", language: "da", tags: ["passport"], curatorNote: "A Danish masterwork: young German POWs forced to clear landmines after WWII, supervised by a sergeant who must choose between justice and humanity. Devastating.", tmdbId: 327528 },
+  { title: "The King's Choice", year: 2016, type: "movie", language: "no", tags: ["passport"], curatorNote: "Norway's Oscar entry — the 72 hours in 1940 when King Haakon VII defied the Nazis and refused to surrender. A quiet film about the loudest kind of courage.", tmdbId: 387592 },
+  { title: "Downfall", year: 2004, type: "movie", language: "de", tags: ["passport"], curatorNote: "Bruno Ganz's Hitler in the Berlin bunker during the final days — so definitive it spawned a thousand parody subtitles, but the original remains genuinely harrowing.", tmdbId: 9890 },
+  { title: "The Men Who Stare at Goats", year: 2009, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Based on Jon Ronson's real account of the U.S. Army's paranormal research unit — a stranger-than-fiction comedy that plays its absurdities completely straight.", tmdbId: 12594 },
+
+  // B05
+  { title: "Madden", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The definitive portrait of John Madden — how a football coach became the voice of the sport, a video game icon, and an American institution all at once.", tmdbId: 1399895 },
+  { title: "Moneyball", year: 2011, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Brad Pitt and Jonah Hill reinvent the sports drama as a heist movie about statistics — Aaron Sorkin's cracking dialogue keeps this as sharp as any courtroom thriller.", tmdbId: 60308 },
+  { title: "Knute Rockne, All American", year: 1940, type: "movie", language: "en", tags: ["classic"], curatorNote: "Ronald Reagan's 'Win one for the Gipper' was born here. Pat O'Brien as Notre Dame's legendary coach in a film that defined the sports biopic template for decades.", tmdbId: 43354 },
+  { title: "The Damned United", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Michael Sheen as Brian Clough during his disastrous 44-day tenure at Leeds United — a Shakespearean study in ego, brilliance, and catastrophic self-sabotage.", tmdbId: 22752 },
+  { title: "Brian Banks", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "The true story of a football prodigy who lost a decade to a wrongful conviction and then fought his way back — understated, dignified, and quietly devastating.", tmdbId: 454538 },
+  { title: "Foxcatcher", year: 2014, type: "movie", language: "en", tags: ["critics"], curatorNote: "Steve Carell against type as the deranged millionaire John du Pont — Bennett Miller's slow-burn portrait of wealth, obsession, and the hollow pursuit of legacy.", tmdbId: 218722 },
+  { title: "The Blind Side", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Sandra Bullock's Oscar-winning performance anchors this feel-good true story of NFL player Michael Oher and the family that changed his life — whatever its complications.", tmdbId: 15317 },
+
+  // B06
+  { title: "Hershey", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The remarkable true story of Milton Hershey, the chocolate magnate who built a town and a school for orphans — ambition and idealism on an American scale.", tmdbId: 1399896 },
+  { title: "The Social Network", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "David Fincher and Aaron Sorkin's crackling portrait of Mark Zuckerberg as a Shakespearean villain — the best film of the 2010s dressed as a tech origin story.", tmdbId: 37799 },
+  { title: "The Story of Louis Pasteur", year: 1936, type: "movie", language: "en", tags: ["classic"], curatorNote: "Paul Muni won the Oscar for this portrait of the scientist who invented pasteurization and saved millions of lives — Hollywood at its most earnestly admirable.", tmdbId: 29408 },
+  { title: "The Billionaire", year: 2011, type: "movie", language: "th", tags: ["passport"], curatorNote: "The true story of Top Ittipat, who built a seaweed snack empire from scratch as a teenager after losing everything. Thailand's inspiring David vs. Goliath business saga.", tmdbId: 100770 },
+  { title: "The Founder", year: 2016, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Michael Keaton as Ray Kroc — not the inspiring story McDonald's wants you to think it is. A brilliantly uncomfortable portrait of the American dream as predatory franchising.", tmdbId: 296523 },
+  { title: "There Will Be Blood", year: 2007, type: "movie", language: "en", tags: ["critics"], curatorNote: "Daniel Day-Lewis as Daniel Plainview is one of cinema's great monsters — PTA's operatic portrait of American capitalism and religious hypocrisy devouring everything it touches.", tmdbId: 2351 },
+  { title: "Air", year: 2023, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Ben Affleck's film about the Nike deal that changed basketball — a corporate boardroom drama that somehow becomes genuinely thrilling. Matt Damon as Sonny Vaccaro is a revelation.", tmdbId: 962077 },
+
+  // B07
+  { title: "Jimmy", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A portrait of Jimmy Carter that finds the measure of a man often underestimated — his post-presidency as much as his time in office defining a uniquely humble legacy.", tmdbId: 1399897 },
+  { title: "The King's Speech", year: 2010, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Colin Firth and Geoffrey Rush in one of cinema's great odd-couple partnerships — the stammering king and the eccentric Australian speech therapist who helped save Britain.", tmdbId: 45269 },
+  { title: "Young Mr. Lincoln", year: 1939, type: "movie", language: "en", tags: ["classic"], curatorNote: "John Ford's deeply personal portrait of Lincoln as a young country lawyer — Henry Fonda inhabits the myth so naturally it feels less like acting than channeling.", tmdbId: 14535 },
+  { title: "Neruda", year: 2016, type: "movie", language: "es", tags: ["passport"], curatorNote: "Pablo Larraín's anti-biopic — the great poet as fugitive from Pinochet's Chile, pursued by a fictional detective. More interested in myth than biography, and all the richer for it.", tmdbId: 404567 },
+  { title: "The Front Runner", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Hugh Jackman as Gary Hart, the candidate who could have been president — Jason Reitman's examination of the media moment that changed American politics forever.", tmdbId: 452576 },
+  { title: "Lincoln", year: 2012, type: "movie", language: "en", tags: ["critics"], curatorNote: "Daniel Day-Lewis's third Oscar and the definitive Lincoln — Spielberg narrows focus to a single legislative battle and finds the whole of American democracy in it.", tmdbId: 83788 },
+  { title: "Dick", year: 1999, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Two teenage girls accidentally become Deep Throat — the Watergate scandal reimagined as a teen comedy with Kirsten Dunst and Michelle Williams. Sharper than it looks.", tmdbId: 10858 },
+
+  // B08
+  { title: "Springsteen: Deliver Me from Nowhere", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Jeremy Allen White as the young Bruce Springsteen recording Nebraska alone in his bedroom — a portrait of an artist stripping away everything to find what he actually had to say.", tmdbId: 1230368 },
+  { title: "Rocketman", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Taron Egerton as Elton John in a musical biopic that actually lets its subject be complicated — darker and more honest than Bohemian Rhapsody, and more fun because of it.", tmdbId: 492188 },
+  { title: "The Glenn Miller Story", year: 1954, type: "movie", language: "en", tags: ["classic"], curatorNote: "James Stewart as the bandleader who invented a sound and disappeared into legend — Anthony Mann directs with the warmth of the era's big band sweetness.", tmdbId: 17339 },
+  { title: "Control", year: 2007, type: "movie", language: "en", tags: ["critics"], curatorNote: "Anton Corbijn's black-and-white portrait of Ian Curtis, Joy Division's tormented frontman — Sam Riley gives one of the decade's most committed performances in this bleak elegy.", tmdbId: 4428 },
+  { title: "Nowhere Boy", year: 2009, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Aaron Taylor-Johnson as the teenage John Lennon — the years before the Beatles, before fame, before the myth. Sam Taylor-Johnson finds the wounded boy behind the icon.", tmdbId: 34106 },
+  { title: "Walk the Line", year: 2005, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Joaquin Phoenix and Reese Witherspoon perform all their own music as Johnny Cash and June Carter — a love story as much as a music biopic, and deeply felt throughout.", tmdbId: 351 },
+  { title: "Walk Hard: The Dewey Cox Story", year: 2007, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jake Kasdan and Judd Apatow's surgical dismantling of every music biopic cliché — John C. Reilly commits so fully that it doubles as genuine tribute while destroying the genre.", tmdbId: 13279 },
+
+  // B09
+  { title: "A Complete Unknown", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Timothée Chalamet's Bob Dylan arrives in New York with nothing and in three years becomes the voice of a generation. James Mangold's film captures the electricity of a myth being born.", tmdbId: 696374 },
+  { title: "Elvis", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Baz Luhrmann's maximalist Elvis is polarizing by design — Austin Butler's performance is genuinely extraordinary, and Tom Hanks's Colonel Parker is pure American carnival horror.", tmdbId: 831462 },
+  { title: "The Jolson Story", year: 1946, type: "movie", language: "en", tags: ["classic"], curatorNote: "Larry Parks lip-syncing Jolson's actual recordings creates an uncanny, mesmerizing performance — the definitive showbiz-rise narrative that all music biopics still echo.", tmdbId: 37530 },
+  { title: "Gainsbourg: A Heroic Life", year: 2010, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Joann Sfar's deliriously inventive biopic of Serge Gainsbourg weaves surrealist fantasy into the provocateur's life — part comic book, part fever dream. Totally unlike anything else.", tmdbId: 36643 },
+  { title: "Miles Ahead", year: 2015, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Don Cheadle directs and stars as Miles Davis in this fragmented, jazz-structured portrait — not chronological, not comfortable, exactly as restless and innovative as its subject.", tmdbId: 276907 },
+  { title: "Coal Miner's Daughter", year: 1980, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Sissy Spacek's Oscar-winning Loretta Lynn — from poverty in Kentucky to country legend. One of the most warmly human music biopics ever made, with a performance of total authenticity.", tmdbId: 10929 },
+  { title: "Popstar: Never Stop Never Stopping", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "The Lonely Island's mockumentary about a vapid pop star is a near-perfect comedy that also works as genuine affection for the genre it skewers.", tmdbId: 337339 },
+
+  // B10
+  { title: "Lee", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Kate Winslet as war photographer Lee Miller — a woman who documented WWII's horrors and whose extraordinary life was hidden behind her husband's legacy for decades.", tmdbId: 520758 },
+  { title: "Hidden Figures", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The true story of the Black women mathematicians at NASA who computed the trajectories for America's first space missions while fighting segregation. Essential and electric.", tmdbId: 381284 },
+  { title: "Madame Curie", year: 1943, type: "movie", language: "en", tags: ["classic"], curatorNote: "Greer Garson as Marie Curie in MGM's elegant tribute — a rare Hollywood portrait of a woman's scientific achievement made during the war years, still surprisingly rigorous.", tmdbId: 42204 },
+  { title: "A Private War", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "Rosamund Pike as Marie Colvin, the war correspondent who kept returning to the front lines despite — or because of — her PTSD. A visceral and finally heartbreaking portrait of courage.", tmdbId: 445630 },
+  { title: "Radioactive", year: 2019, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Marjane Satrapi's formally inventive portrait of Marie Curie uses flash-forwards to the atomic age — asking what it means when a discovery outlives and overwhelms its discoverer.", tmdbId: 503387 },
+  { title: "Oppenheimer", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Nolan's three-hour portrait of J. Robert Oppenheimer as the man who built the bomb and spent the rest of his life haunted by it — Cillian Murphy at the absolute peak of his powers.", tmdbId: 872585 },
+  { title: "The Electrical Life of Louis Wain", year: 2021, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Benedict Cumberbatch as the Victorian artist whose psychedelic cat paintings may tell a story of mental illness — or genius — or both. Beautifully strange.", tmdbId: 647661 },
+
+  // B11
+  { title: "Nyad", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Annette Bening and Jodie Foster as Diana Nyad and her trainer — the story of a 64-year-old swimming from Cuba to Florida without a cage is also a love story about stubbornness.", tmdbId: 1056360 },
+  { title: "Ford v Ferrari", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Christian Bale and Matt Damon on a mission to build a car that can beat Ferrari at Le Mans — James Mangold's roaring tribute to craftsmanship, speed, and corporate interference.", tmdbId: 337401 },
+  { title: "Pride of the Yankees", year: 1942, type: "movie", language: "en", tags: ["classic"], curatorNote: "Gary Cooper as Lou Gehrig — the farewell speech alone has made millions cry for 80 years. The sport is background; what matters is a man facing death with extraordinary grace.", tmdbId: 24955 },
+  { title: "The World's Fastest Indian", year: 2005, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Anthony Hopkins as Burt Munro, the New Zealand mechanic who broke the land speed record on a 1920 Indian motorcycle. Charming, gentle, and completely irresistible.", tmdbId: 1445 },
+  { title: "Borg vs McEnroe", year: 2017, type: "movie", language: "sv", tags: ["passport"], curatorNote: "Shia LaBeouf's McEnroe and Sverrir Gudnason's Borg as twin portraits of obsession — the ice and the volcano, Wimbledon 1980, and the strange intimacy of rivals who need each other.", tmdbId: 395834 },
+  { title: "Chariots of Fire", year: 1981, type: "movie", language: "en", tags: ["critics"], curatorNote: "Hugh Hudson's Oscar-winner about the 1924 Olympics remains the definitive portrait of competing motivations — running for God versus running for country, and the loneliness of both.", tmdbId: 9443 },
+  { title: "Cool Runnings", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The true-ish story of Jamaica's first bobsled team at the 1988 Calgary Olympics — John Candy's coaching performance gives this crowd-pleaser unexpected heart.", tmdbId: 8191 },
+
+  // B12
+  { title: "Rustin", year: 2023, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Colman Domingo as Bayard Rustin, the brilliant and erased architect of the 1963 March on Washington — a long-overdue portrait of a man history sidelined because of who he loved.", tmdbId: 1053860 },
+  { title: "Milk", year: 2008, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sean Penn's Oscar-winning Harvey Milk, San Francisco's first openly gay elected official — Gus Van Sant's tribute captures both the joy of the movement and the tragedy awaiting it.", tmdbId: 9522 },
+  { title: "Gandhi", year: 1982, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Ben Kingsley's immersive Gandhi won eight Oscars — Attenborough's epic scope meets an intimate character study of how one man's conviction moved the largest empire on earth.", tmdbId: 11835 },
+  { title: "Mandela: Long Walk to Freedom", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Idris Elba's commanding Mandela tracks 50 years of struggle — and Naomie Harris as Winnie is the film's most complicated, compelling performance.", tmdbId: 155903 },
+  { title: "A United Kingdom", year: 2016, type: "movie", language: "en", tags: ["discovery"], curatorNote: "The true story of Seretse Khama and Ruth Williams, who married across racial lines in 1948 and were exiled for it — a love story that helped birth modern Botswana.", tmdbId: 362365 },
+  { title: "Malcolm X", year: 1992, type: "movie", language: "en", tags: ["critics"], curatorNote: "Spike Lee and Denzel Washington's three-hour epic — still the definitive portrait of a man who never stopped evolving, and one of American cinema's great political films.", tmdbId: 16468 },
+  { title: "The Death of Stalin", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Armando Iannucci turns the immediate aftermath of Stalin's death into a dark farce — Jeffrey Tambor, Steve Buscemi, Michael Palin jostling for power in a court of terrified courtiers.", tmdbId: 407448 },
+
+  // B13
+  { title: "Priscilla", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sofia Coppola's quiet inversion of the Elvis myth — Cailee Spaeny as the teenager who entered the cage at Graceland. A portrait of gilded captivity told from inside the gold.", tmdbId: 1075794 },
+  { title: "Jackie", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "Natalie Portman in the grief-haunted days after the Kennedy assassination — Pablo Larraín's formally daring portrait refuses the consolations of hagiography.", tmdbId: 376867 },
+  { title: "The Private Life of Henry VIII", year: 1933, type: "movie", language: "en", tags: ["classic"], curatorNote: "Charles Laughton's Henry is one of cinema's great larger-than-life performances — the king as glutton, tyrant, and unlikely object of sympathy. The first British film to win an Oscar.", tmdbId: 24360 },
+  { title: "A Royal Affair", year: 2012, type: "movie", language: "da", tags: ["passport"], curatorNote: "The true story of Enlightenment-era Denmark: a German doctor becomes the king's physician, the queen's lover, and the architect of radical reform — until the court destroys him.", tmdbId: 93676 },
+  { title: "The Queen", year: 2006, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Helen Mirren's Oscar-winning portrait of Elizabeth II navigating the week after Princess Diana's death — a masterclass in suggesting vast interiority behind an impassive face.", tmdbId: 3116 },
+  { title: "Spencer", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "Kristen Stewart's Diana is a ghost haunting her own Christmas — Pablo Larraín's impressionistic portrait of a woman dissolving in the amber of royal expectation.", tmdbId: 652965 },
+  { title: "Marie Antoinette", year: 2006, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Sofia Coppola transplants Versailles to the 80s with a New Wave soundtrack — anachronistic, gorgeous, and unexpectedly empathetic about a teenage girl drowning in history.", tmdbId: 3079 },
+
+  // B14
+  { title: "Ferrari", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Adam Driver as Enzo Ferrari in the summer of 1957 — Michael Mann's operatic portrait of a man who built cars like weapons and treated life with the same ruthless intensity.", tmdbId: 385687 },
+  { title: "Rush", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Ron Howard's electric portrait of Niki Lauda and James Hunt's 1976 F1 rivalry — Chris Hemsworth and Daniel Brühl are perfectly cast as opposites who define each other.", tmdbId: 82703 },
+  { title: "The Great Caruso", year: 1951, type: "movie", language: "en", tags: ["classic"], curatorNote: "Mario Lanza as the legendary tenor in MGM's most lavishly voiced biopic — a showcase for one of the great natural voices of the 20th century caught in its prime.", tmdbId: 43282 },
+  { title: "Senna", year: 2010, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Asif Kapadia's documentary portrait of Ayrton Senna uses only archival footage to create something that feels more intimate than any drama — the greatest sports documentary ever made.", tmdbId: 54891 },
+  { title: "Tucker: The Man and His Dream", year: 1988, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Coppola's tribute to Preston Tucker, the dreamer who tried to revolutionize the American car industry — Jeff Bridges's exuberance makes you root for a con man with genuine vision.", tmdbId: 11377 },
+  { title: "The Aviator", year: 2004, type: "movie", language: "en", tags: ["critics"], curatorNote: "DiCaprio's Howard Hughes is a man being eaten by his own genius — Scorsese's two-and-a-half hour portrait of a visionary consumed by OCD is one of his most tender films.", tmdbId: 1972 },
+  { title: "The Polka King", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jack Black as Jan Lewan, the Polish immigrant polka musician who ran a Ponzi scheme on his own fans — an irresistible true crime comedy about an absolutely irresistible con man.", tmdbId: 466272 },
+
+  // B15
+  { title: "Napoleon", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Ridley Scott's Joaquin Phoenix gives us a Napoleon who is petulant, brilliant, and hopelessly in love with Josephine — a revisionist portrait that trades grandeur for human scale.", tmdbId: 677179 },
+  { title: "Braveheart", year: 1995, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Mel Gibson's William Wallace may be historical fantasy, but as epic filmmaking it remains overwhelming — the battle scenes hold up, and the passion carries you past every liberty taken.", tmdbId: 197 },
+  { title: "The Story of Alexander Graham Bell", year: 1939, type: "movie", language: "en", tags: ["classic"], curatorNote: "Don Ameche in the role that made his name synonymous with the telephone — charming studio-era biography of invention and the commercial struggle to bring an idea to the world.", tmdbId: 53767 },
+  { title: "Mongol", year: 2007, type: "movie", language: "mn", tags: ["passport"], curatorNote: "Sergei Bodrov's visually ravishing first chapter of a proposed Genghis Khan trilogy — the young Temüjin as slave and outcast, long before he became history's most feared conqueror.", tmdbId: 12622 },
+  { title: "The Last Emperor", year: 1987, type: "movie", language: "en", tags: ["critics"], curatorNote: "Bernardo Bertolucci's nine-Oscar masterpiece follows Puyi from the Forbidden City to a re-education camp — the sweep of 20th-century Chinese history through one extraordinary life.", tmdbId: 746 },
+  { title: "Lawrence of Arabia", year: 1962, type: "movie", language: "en", tags: ["classic"], curatorNote: "Peter O'Toole in the role that defined the epic — David Lean's 70mm portrait of T.E. Lawrence is cinema at its most physically grand and psychologically complex.", tmdbId: 3082 },
+  { title: "The Favourite", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "Yorgos Lanthimos turns the court of Queen Anne into a vicious comedy of power — Olivia Colman, Emma Stone, and Rachel Weisz in a triangular war that demolishes the heritage film.", tmdbId: 488291 },
+
+  // B16
+  { title: "Tetris", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Taron Egerton as the businessman who secured the Western rights to Tetris behind the Iron Curtain — a genuine thriller about IP rights in the final days of the Soviet Union.", tmdbId: 1048273 },
+  { title: "The Imitation Game", year: 2014, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Benedict Cumberbatch as Alan Turing — the man who broke Enigma and saved millions of lives, then was chemically castrated by the country he saved. A crime that took 70 years to acknowledge.", tmdbId: 205596 },
+  { title: "Edison, the Man", year: 1940, type: "movie", language: "en", tags: ["classic"], curatorNote: "Spencer Tracy as the older Edison looking back on a life of invention — a companion piece to Mickey Rooney's Young Tom Edison, earnest and reverent in the grand MGM tradition.", tmdbId: 41513 },
+  { title: "The Man Who Knew Infinity", year: 2015, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Dev Patel as Ramanujan, the self-taught Indian mathematician who arrived at Cambridge with theorems no one could explain — a portrait of mathematical genius meeting rigid institutional doubt.", tmdbId: 335778 },
+  { title: "The Current War", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Benedict Cumberbatch's Edison versus Michael Shannon's Westinghouse in the war to power America — Alfonso Gomez-Rejon's director's cut is a kinetic portrait of competing visions.", tmdbId: 370755 },
+  { title: "A Beautiful Mind", year: 2001, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Russell Crowe as John Nash — Ron Howard's portrait of the mathematician's schizophrenia is sentimental but genuinely moving, with a third-act reveal that reorders everything.", tmdbId: 453 },
+  { title: "BlackBerry", year: 2023, type: "movie", language: "en", tags: ["surprise"], curatorNote: "The rise and spectacular fall of RIM told as a shaggy comedy — Jay Baruchel and Glenn Howerton as the unlikely partners who invented the smartphone and then lost it to hubris.", tmdbId: 884605 },
+
+  // B17
+  { title: "The Iron Claw", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "Zac Efron in the devastating story of the Von Erich wrestling dynasty — Sean Durkin makes a film about grief and the American masculine ideal that is almost impossible to shake off.", tmdbId: 704264 },
+  { title: "Remember the Titans", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Denzel Washington coaching an integrated Virginia high school football team in 1971 — a crowd-pleaser with genuine historical stakes and a performance of authoritative warmth.", tmdbId: 10529 },
+  { title: "Jim Thorpe: All-American", year: 1951, type: "movie", language: "en", tags: ["classic"], curatorNote: "Burt Lancaster as the greatest athlete of the early 20th century — the Sac and Fox Nation member who won Olympic gold in 1912, then had his medals stripped away.", tmdbId: 73923 },
+  { title: "The Swimmers", year: 2022, type: "movie", language: "ar", tags: ["passport"], curatorNote: "The true story of Syrian sisters Sara and Yusra Mardini, who swam their refugee boat to shore and then competed in the 2016 Olympics — extraordinary courage meets extraordinary cinema.", tmdbId: 838800 },
+  { title: "Queen of Katwe", year: 2016, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Lupita Nyong'o and David Oyelowo in the true story of Phiona Mutesi, the Ugandan chess prodigy who rose from the slums of Kampala — warm, specific, and quietly triumphant.", tmdbId: 305348 },
+  { title: "I, Tonya", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "Margot Robbie's Tonya Harding is a force of nature in Craig Gillespie's deliberately unreliable portrait — a working-class woman destroyed by a media that had already decided who she was.", tmdbId: 404368 },
+  { title: "Battle of the Sexes", year: 2017, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Emma Stone and Steve Carell as Billie Jean King and Bobby Riggs in the 1973 tennis match that was really about gender, power, and what sports means to a country's self-image.", tmdbId: 415392 },
+
+  // B18
+  { title: "Till", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "Danielle Deadwyler's shattering performance as Mamie Till, who insisted on an open casket to show the world what was done to her son — one of the decade's most necessary films.", tmdbId: 792498 },
+  { title: "Just Mercy", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Michael B. Jordan as Bryan Stevenson, the civil rights lawyer fighting for a wrongfully convicted death row inmate — a film about the American legal system's particular cruelties.", tmdbId: 534434 },
+  { title: "Inherit the Wind", year: 1960, type: "movie", language: "en", tags: ["classic"], curatorNote: "Spencer Tracy and Fredric March as the Scopes Trial lawyers, thinly disguised, in Stanley Kramer's fierce defense of intellectual freedom — still combustible after 65 years.", tmdbId: 22584 },
+  { title: "Argentina, 1985", year: 2022, type: "movie", language: "es", tags: ["passport"], curatorNote: "The true story of the trial of Argentina's military junta after the dirty war — Ricardo Darín leading a small team of prosecutors against men who believed they would never face justice.", tmdbId: 761053 },
+  { title: "The Mauritanian", year: 2021, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Jodie Foster and Tahar Rahim in the true story of Mohamedou Ould Slahi, held without charge in Guantánamo for 14 years — a film about justice and its deliberate absence.", tmdbId: 602223 },
+  { title: "Fruitvale Station", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Ryan Coogler's debut follows Oscar Grant through the last day of his life — one of the great films about what it means to be Black in America, intimate and formally devastating.", tmdbId: 179387 },
+  { title: "Bernie", year: 2011, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jack Black in his greatest role as a beloved Texas undertaker who kills an old widow — Richard Linklater's true-crime comedy is told half in mockumentary by actual Carthage, Texas residents.", tmdbId: 63095 },
+
+  // B19
+  { title: "She Said", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "Carey Mulligan and Zoe Kazan as the New York Times reporters who broke the Weinstein story — Maria Schrader's procedural honors the work of journalism by showing exactly how it is done.", tmdbId: 764426 },
+  { title: "Spotlight", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "Tom McCarthy's Best Picture winner about the Boston Globe team that exposed the Catholic Church abuse scandal — the most precise film about journalism ever made.", tmdbId: 314365 },
+  { title: "All the President's Men", year: 1976, type: "movie", language: "en", tags: ["classic"], curatorNote: "Dustin Hoffman and Robert Redford as Woodward and Bernstein — Alan J. Pakula's masterpiece of investigative journalism as paranoid thriller, still the gold standard.", tmdbId: 1904 },
+  { title: "The Killing Fields", year: 1984, type: "movie", language: "en", tags: ["critics"], curatorNote: "The story of journalist Sydney Schanberg and his interpreter Dith Pran during the Khmer Rouge genocide — Haing S. Ngor's Oscar-winning performance carries the full weight of history.", tmdbId: 11974 },
+  { title: "A Journal for Jordan", year: 2021, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Denzel Washington directs Michael B. Jordan as the soldier Dana Canedy's husband, writing a journal for his unborn son before his final deployment — a quiet grief worn with dignity.", tmdbId: 574982 },
+  { title: "The Insider", year: 1999, type: "movie", language: "en", tags: ["critics"], curatorNote: "Russell Crowe as the Big Tobacco whistleblower and Al Pacino as the 60 Minutes producer — Michael Mann's two-and-a-half hour procedural is as suspenseful as any action film.", tmdbId: 9472 },
+  { title: "Can You Ever Forgive Me?", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Melissa McCarthy against type as the broke biographer who started forging celebrity letters — Marielle Heller's film is about loneliness, literary love, and the small frauds we commit to feel seen.", tmdbId: 468161 },
+
+  // B20
+  { title: "The Fabelmans", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "Spielberg's most personal film — a semi-autobiographical portrait of a boy discovering cinema while his family fractures. Gabriel LaBelle carries it beautifully, and the final scene is perfect.", tmdbId: 777270 },
+  { title: "Ed Wood", year: 1994, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Tim Burton's black-and-white love letter to the worst director in Hollywood history — Johnny Depp's Ed Wood is relentlessly enthusiastic, and Martin Landau's Bela Lugosi is genuinely heartbreaking.", tmdbId: 10001 },
+  { title: "Lust for Life", year: 1956, type: "movie", language: "en", tags: ["classic"], curatorNote: "Kirk Douglas's incandescent Vincent van Gogh, with Anthony Quinn's Oscar-winning Gauguin — Vincent Minnelli finds the painting's visual intensity in Douglas's physical and emotional abandon.", tmdbId: 22387 },
+  { title: "Pain and Glory", year: 2019, type: "movie", language: "es", tags: ["passport"], curatorNote: "Almodóvar's most autobiographical film — Antonio Banderas as a faded director looking back on his life, his mother, his art, and the wounds that made him. Luminous and moving.", tmdbId: 573435 },
+  { title: "Dolemite Is My Name", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Eddie Murphy's joyous return in the role of a lifetime as Rudy Ray Moore — Craig Brewer's film about the hustler who willed Dolemite into existence is irresistible.", tmdbId: 524369 },
+  { title: "Mishima: A Life in Four Chapters", year: 1985, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Paul Schrader's formally radical portrait interweaves Mishima's life with dramatizations of his novels — a film about art and death and the obsessive relationship between them.", tmdbId: 10421 },
+  { title: "The Disaster Artist", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "James Franco as Tommy Wiseau making The Room — one of the strangest true stories in Hollywood history, played as both comedy and a weirdly sincere portrait of creative delusion.", tmdbId: 396370 },
+
+  // B21
+  { title: "I Swear", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "96% on Rotten Tomatoes and one of 2026's most talked-about films — a story of testimony, truth, and what it costs a woman to be believed. Streaming and urgent.", tmdbId: 1417438 },
+  { title: "Palestine '36", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "98% certified fresh — a documentary drama about the 1936 Arab revolt in Mandatory Palestine that reshaped the region's future. Essential history filmed with conviction.", tmdbId: 1426089 },
+  { title: "Mr. Burton", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Toby Jones and Harry Lawtey in the portrait of Richard Burton that the great Welsh actor deserves — 93% on RT, a film about the alchemy of performance and the cost of genius.", tmdbId: 1224941 },
+  { title: "The Chronology of Water", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Kristen Stewart directs and Imogen Poots stars in this adaptation of Lidia Yuknavitch's fierce memoir about a swimmer, a writer, and a life reconstructed from the debris of trauma.", tmdbId: 1271524 },
+  { title: "The Testament of Ann Lee", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "85% certified fresh — the story of Ann Lee, the 18th-century founder of the Shakers, who crossed the Atlantic with nothing but an unshakeable vision. Spiritual history as intimate portrait.", tmdbId: 1366373 },
+  { title: "Blue Moon", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Richard Linklater's film about the last night of Lorenz Hart's life — 90% certified fresh, a meditation on the creative partnership that made Rodgers and Hart and the dissolution that unmade Hart.", tmdbId: 1197306 },
+  { title: "Merrily We Roll Along", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Richard Linklater's 20-year project, shooting with the same cast over two decades — 95% certified fresh. The Sondheim musical reimagined as cinema's most patient act of devotion.", tmdbId: 1010818 },
+
+  // B22
+  { title: "Better Man", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Robbie Williams as a CGI chimpanzee — Michael Gracey's lunatic gambit somehow works. 89% certified fresh, a music biopic that earns its strangeness by committing completely.", tmdbId: 617126 },
+  { title: "Selma", year: 2014, type: "movie", language: "en", tags: ["critics"], curatorNote: "99% on Rotten Tomatoes — Ava DuVernay's portrait of the 1965 Selma to Montgomery marches is one of the great American political films. David Oyelowo's King is definitive.", tmdbId: 285 },
+  { title: "12 Years a Slave", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Steve McQueen's Palme d'Or and Best Picture winner — Chiwetel Ejiofor as Solomon Northup in 12 years of American slavery. Brilliant, essential, and impossible to look away from.", tmdbId: 76203 },
+  { title: "A Beautiful Day in the Neighborhood", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "95% certified fresh — Tom Hanks as Fred Rogers, seen through the eyes of the journalist (Matthew Rhys) assigned to profile him. A quiet film about radical kindness that changes you.", tmdbId: 597014 },
+  { title: "American Splendor", year: 2003, type: "movie", language: "en", tags: ["critics"], curatorNote: "94% certified fresh — Harvey Pekar played by Paul Giamatti but also appearing as himself, telling the story of his own ordinary extraordinary life in Cleveland. A formally inventive masterwork.", tmdbId: 10972 },
+  { title: "Still: A Michael J. Fox Movie", year: 2023, type: "movie", language: "en", tags: ["critics"], curatorNote: "99% certified fresh — Davis Guggenheim's portrait of Michael J. Fox living with Parkinson's disease while still performing is one of the most life-affirming documentaries ever made.", tmdbId: 1016346 },
+  { title: "Argo", year: 2012, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Ben Affleck's Best Picture winner about the CIA fake movie operation that rescued six Americans from Tehran — 96% certified fresh, a thriller that keeps the tension wound tight throughout.", tmdbId: 68734 },
+
+  // B23
+  { title: "Cabrini", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "91% certified fresh — the story of Frances Xavier Cabrini, the Italian immigrant nun who fought Tammany Hall and built a hospital empire in New York. Cristiana Dell'Anna is a revelation.", tmdbId: 894205 },
+  { title: "One Life", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Anthony Hopkins as the elderly Nicholas Winton confronting the memory of the 669 Jewish children he rescued from Czechoslovakia before the war. 91% certified fresh — deeply moving.", tmdbId: 1218105 },
+  { title: "King Richard", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Will Smith's Oscar win as Richard Williams, the father who coached Venus and Serena from the Compton public courts to Wimbledon — 90% certified fresh, warm and propulsive.", tmdbId: 614479 },
+  { title: "First Man", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "Damien Chazelle's portrait of Neil Armstrong is the Apollo film that dares to look inward — 87% certified fresh, Ryan Gosling's quietness is the performance that holds the whole film.", tmdbId: 287693 },
+  { title: "Captain Phillips", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Tom Hanks as the real captain taken hostage by Somali pirates — Paul Greengrass directs the final sequence like a hammer. 93% certified fresh. The last five minutes alone are extraordinary.", tmdbId: 155 },
+  { title: "Fighting With My Family", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Florence Pugh in her breakout role as WWE star Paige — 93% certified fresh, a British working-class family story wrapped inside a crowd-pleasing sports drama. Dwayne Johnson as himself is perfect.", tmdbId: 533514 },
+  { title: "127 Hours", year: 2010, type: "movie", language: "en", tags: ["critics"], curatorNote: "Danny Boyle turns Aron Ralston's arm-amputation ordeal into a kinetic, life-affirming film — 93% certified fresh. James Franco at the peak of his powers, alone in a canyon, fighting to live.", tmdbId: 44115 },
+
+  // B24
+  { title: "Erin Brockovich", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Julia Roberts's Oscar-winning portrait of the legal clerk who built the largest class-action lawsuit in US history against Pacific Gas and Electric — 87% certified fresh, furious and funny.", tmdbId: 13322 },
+  { title: "Hacksaw Ridge", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Andrew Garfield as Desmond Doss, the conscientious objector who saved 75 lives at Okinawa without firing a weapon — Mel Gibson's return to form, 84% certified fresh, viscerally powerful.", tmdbId: 324786 },
+  { title: "Steve Jobs", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "Aaron Sorkin's triptych across three product launches — Michael Fassbender's Jobs is not sympathetic and that is exactly the point. Danny Boyle directs the most theatrically daring biopic in years.", tmdbId: 264569 },
+  { title: "Sully", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Tom Hanks as Chesley Sullenberger, who landed on the Hudson and then faced an NTSB hearing that questioned his judgment — Clint Eastwood's best late film, 85% certified fresh.", tmdbId: 374720 },
+  { title: "Lion", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Dev Patel and Nicole Kidman in the true story of Saroo Brierley, who used Google Earth to find the Indian village he was separated from as a five-year-old — 84% certified fresh, genuinely moving.", tmdbId: 362150 },
+  { title: "Fire of Love", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "98% certified fresh — the volcanic romance of Katia and Maurice Krafft, volcanologists who died together in a pyroclastic flow they'd spent their lives filming. The footage is astounding.", tmdbId: 782844 },
+  { title: "Into the Wild", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Sean Penn's portrait of Christopher McCandless, who gave away everything and walked into the Alaskan wilderness — 83% certified fresh, Emile Hirsch carrying the idealism and the tragedy in equal measure.", tmdbId: 9362 },
+
+  // B25
+  { title: "Dallas Buyers Club", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Matthew McConaughey's Oscar-winning Ron Woodroof — the homophobic Texan who smuggled AIDS medication and was changed by the community he served. 92% certified fresh, lean and honest.", tmdbId: 186869 },
+  { title: "Dumb Money", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Paul Dano as Keith Gill, the Reddit trader who took on Wall Street over GameStop — 84% certified fresh, a David-and-Goliath story told with genuine class consciousness and propulsive energy.", tmdbId: 941552 },
+  { title: "Only the Brave", year: 2017, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The story of the Granite Mountain Hotshots, the elite wildland firefighting crew — Josh Brolin and Miles Teller in a film that earns every tear. 87% certified fresh, 19 men walking into fire.", tmdbId: 416497 },
+  { title: "The Outrun", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Saoirse Ronan as Rona, returning to Orkney after treatment for alcoholism — 82% certified fresh. A quiet, unsentimental portrait of recovery that refuses all the usual beats and is stronger for it.", tmdbId: 1066861 },
+  { title: "The Elephant Man", year: 1980, type: "movie", language: "en", tags: ["critics"], curatorNote: "David Lynch's black-and-white portrait of Joseph Merrick — John Hurt under prosthetics, Anthony Hopkins as his protector. 91% on RT. A film about dignity and the cruelty of the gaze.", tmdbId: 10098 },
+  { title: "Straight Outta Compton", year: 2015, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The origin story of N.W.A — how five young men from Compton invented gangsta rap and changed American music. 89% certified fresh, energetic and angry and still essential.", tmdbId: 277558 },
+  { title: "42", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Chadwick Boseman as Jackie Robinson, the year he broke baseball's color barrier — 81% certified fresh. Harrison Ford as Branch Rickey gives one of his late-career best performances.", tmdbId: 115823 },
+
+  // B26
+  { title: "André Is an Idiot", year: 2026, type: "movie", language: "fr", tags: ["passport"], curatorNote: "97% certified fresh — the French biographical portrait of artist André Labarthe that arrives with near-unanimous critical enthusiasm. Formally daring, emotionally precise.", tmdbId: 1416813 },
+  { title: "Society of the Snow", year: 2024, type: "movie", language: "es", tags: ["passport"], curatorNote: "J.A. Bayona's portrait of the 1972 Andes plane crash survivors — 90% certified fresh. The film Netflix needed to make to justify its budget on a true story that cinema had never fully told.", tmdbId: 1058513 },
+  { title: "The Wind Rises", year: 2013, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Miyazaki's farewell — the fictionalized life of Jiro Horikoshi, who designed the Zero fighter, drawn as a love story and a meditation on beauty in service of destruction. 88% certified fresh.", tmdbId: 149870 },
+  { title: "The Promised Land", year: 2023, type: "movie", language: "da", tags: ["passport"], curatorNote: "Mads Mikkelsen in the Danish Oscar entry — ranked #9 on the biopic list. The 18th-century captain who tried to tame Jutland's heath and was destroyed by the nobility who wanted to stop him.", tmdbId: 951491 },
+  { title: "Kneecap", year: 2024, type: "movie", language: "ga", tags: ["passport"], curatorNote: "The Irish-language hip-hop trio from Belfast, playing themselves — 79% critics score. A film about cultural survival, colonial suppression, and making music in the language the British tried to erase.", tmdbId: 1183867 },
+  { title: "Happening", year: 2021, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Audrey Diwan's Palme d'Or winner about a young woman seeking an illegal abortion in 1963 France — 78% critics score, shot with a claustrophobic precision that makes the political feel visceral.", tmdbId: 767452 },
+  { title: "Gangubai Kathiawadi", year: 2022, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Sanjay Leela Bhansali's portrait of the Bombay brothel madam who became a social reformer and political figure — Alia Bhatt extraordinary, the film operatic and righteous.", tmdbId: 885225 },
+
+  // B27
+  { title: "Nouvelle Vague", year: 2024, type: "movie", language: "fr", tags: ["passport"], curatorNote: "A portrait of Jean-Luc Godard and the birth of French New Wave cinema — 76% critics score. For anyone who loves cinema, this is essential: the story of how a group of critics changed what film could be.", tmdbId: 1171111 },
+  { title: "Super/Man: The Christopher Reeve Story", year: 2024, type: "movie", language: "en", tags: ["crowd"], curatorNote: "98% certified fresh — the documentary portrait of Christopher Reeve's life after his riding accident is one of the best films of 2024. A study in grace, courage, and what the body can survive.", tmdbId: 1245578 },
+  { title: "A Million Miles Away", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Michael Peña as José Hernández, the farmworker's son who became a NASA astronaut after 12 application rejections — 89% certified fresh. The American dream story told with genuine dignity.", tmdbId: 1008441 },
+  { title: "tick, tick... BOOM!", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "Andrew Garfield as the young Jonathan Larson, racing against his 30th birthday and the clock to write the musical that would become Rent — Lin-Manuel Miranda's directorial debut is electric.", tmdbId: 736081 },
+  { title: "Molly's Game", year: 2017, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Jessica Chastain as Molly Bloom, the Olympic skier who ran the world's most exclusive underground poker game — Aaron Sorkin's debut as director, 82% certified fresh, talk-fast and compelling.", tmdbId: 403119 },
+  { title: "Benediction", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "Terence Davies' portrait of WWI poet Siegfried Sassoon — 80% critics score, a film that honors both the pacifist and the man tormented by sexuality he could barely name. Quietly devastating.", tmdbId: 766919 },
+  { title: "The Apprentice", year: 2024, type: "movie", language: "en", tags: ["critics"], curatorNote: "Ali Abbasi's portrait of the young Donald Trump under Roy Cohn's mentorship — 83% certified fresh. Sebastian Stan and Jeremy Strong in a film that reads power as something learned, not innate.", tmdbId: 1051896 },
+
+  // B28
+  { title: "Irena's Vow", year: 2023, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Sophie Nélisse as Irena Gut, the Polish woman who hid twelve Jews in a Nazi major's villa under his nose — 86% certified fresh, a true story of extraordinary nerve told without Hollywood sentimentality.", tmdbId: 888247 },
+  { title: "Stand and Deliver", year: 1988, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Edward James Olmos as Jaime Escalante, the East LA math teacher who got his barrio students to pass the AP calculus exam — 89% certified fresh, a film about what a great teacher believes.", tmdbId: 10419 },
+  { title: "McFarland, USA", year: 2015, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Kevin Costner as the coach who built a champion cross-country team from the children of farmworkers in California's Central Valley — 80% certified fresh, warm and specific and genuinely earned.", tmdbId: 277950 },
+  { title: "Serpico", year: 1973, type: "movie", language: "en", tags: ["critics"], curatorNote: "Al Pacino as the NYPD whistleblower who refused to take bribes and nearly died for it — 93% on RT, Sidney Lumet's portrait of institutional corruption and one man's costly integrity.", tmdbId: 9426 },
+  { title: "American Gangster", year: 2007, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Denzel Washington as Frank Lucas and Russell Crowe as the cop hunting him — Ridley Scott's two-and-a-half hour portrait of 1970s Harlem drug empire, 81% certified fresh and endlessly watchable.", tmdbId: 4512 },
+  { title: "Munich", year: 2005, type: "movie", language: "en", tags: ["critics"], curatorNote: "Spielberg's portrait of the Mossad team sent to assassinate the Munich massacre perpetrators — 78% certified fresh, Eric Bana navigating moral erosion in one of the director's most conflicted films.", tmdbId: 217 },
+  { title: "Kinsey", year: 2004, type: "movie", language: "en", tags: ["critics"], curatorNote: "Liam Neeson as Alfred Kinsey, the entomologist who turned his obsessive methodology to human sexuality and changed the world — 90% certified fresh, a film about science in collision with shame.", tmdbId: 10750 },
+
 ];
+
+export const BIOPIC_POOL_COUNT = BIOPIC_EDITORIAL_BATCHES.length;
