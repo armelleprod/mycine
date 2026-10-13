@@ -1,1165 +1,244 @@
-// MY CINÉ V68 — INTERNATIONAL
-// Prepared editorial batches. TMDB enriches metadata only.
+// MY CINÉ — INTERNATIONAL
+// Flat array — all entries are direct children of INTERNATIONAL_EDITORIAL_BATCHES.
 
 export const INTERNATIONAL_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Sentimental Value",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Amélie",
-      "year": 2001,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Bicycle Thieves",
-      "year": 1948,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Secret in Their Eyes",
-      "year": 2009,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Worst Person in the World",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Parasite",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Wild Tales",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "It Was Just an Accident",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Intouchables",
-      "year": 2011,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Rules of the Game",
-      "year": 1939,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "A Separation",
-      "year": 2011,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Hit the Road",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Taste of Cherry",
-      "year": 1997,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Taxi",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Secret Agent",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "City of God",
-      "year": 2002,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Black Orpheus",
-      "year": 1959,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Central Station",
-      "year": 1998,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Bacurau",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Pixote",
-      "year": 1980,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Second Mother",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Sirāt",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Pan's Labyrinth",
-      "year": 2006,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Exterminating Angel",
-      "year": 1962,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Motorcycle Diaries",
-      "year": 2004,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The August Virgin",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Spirit of the Beehive",
-      "year": 1973,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Women on the Verge of a Nervous Breakdown",
-      "year": 1988,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Sound of Falling",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Lives of Others",
-      "year": 2006,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "M",
-      "year": 1931,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Phoenix",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Undine",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The White Ribbon",
-      "year": 2009,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Good Bye, Lenin!",
-      "year": 2003,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "No Other Choice",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Train to Busan",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Housemaid",
-      "year": 1960,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Decision to Leave",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Microhabitat",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Burning",
-      "year": 2018,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Extreme Job",
-      "year": 2019,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Voice of Hind Rajab",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Capernaum",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Battle of Algiers",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Theeb",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Man Who Sold His Skin",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Waltz with Bashir",
-      "year": 2008,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Insult",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "All We Imagine as Light",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "3 Idiots",
-      "year": 2009,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Pather Panchali",
-      "year": 1955,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Lunchbox",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Court",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Apu Trilogy",
-      "year": 1959,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Monsoon Wedding",
-      "year": 2001,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "I'm Still Here",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Invisible Life of Eurídice Gusmão",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Limite",
-      "year": 1931,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Aquarius",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Neon Bull",
-      "year": 2015,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Given Word",
-      "year": 1962,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Way He Looks",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Emilia Pérez",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "La Haine",
-      "year": 1995,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Children of Paradise",
-      "year": 1945,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Portrait of a Lady on Fire",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Girlhood",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The 400 Blows",
-      "year": 1959,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Bélier Family",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Seed of the Sacred Fig",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "About Elly",
-      "year": 2009,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Cow",
-      "year": 1969,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Salesman",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "A Hero",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Close-Up",
-      "year": 1990,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Lizard",
-      "year": 2004,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Flow",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Triplets of Belleville",
-      "year": 2003,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Adventures of Prince Achmed",
-      "year": 1926,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Red Turtle",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "My Life as a Zucchini",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Persepolis",
-      "year": 2007,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "A Town Called Panic",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Girl with the Needle",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Another Round",
-      "year": 2020,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Passion of Joan of Arc",
-      "year": 1928,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Hunt",
-      "year": 2012,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "A Royal Affair",
-      "year": 2012,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Ordet",
-      "year": 1955,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Men & Chicken",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Vermiglio",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Cinema Paradiso",
-      "year": 1988,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Rome, Open City",
-      "year": 1945,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Great Beauty",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Happy as Lazzaro",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "8½",
-      "year": 1963,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Mafia Kills Only in Summer",
-      "year": 2013,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Dahomey",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Timbuktu",
-      "year": 2014,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Black Girl",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Atlantics",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "This Is Not a Burial, It's a Resurrection",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Touki Bouki",
-      "year": 1973,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The African Doctor",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Promised Land",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Celebration",
-      "year": 1998,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Day of Wrath",
-      "year": 1943,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Land of Mine",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Godland",
-      "year": 2022,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Babette's Feast",
-      "year": 1987,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Adam's Apples",
-      "year": 2005,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Perfect Days",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Shoplifters",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Tokyo Story",
-      "year": 1953,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Drive My Car",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Wheel of Fortune and Fantasy",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Rashomon",
-      "year": 1950,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "One Cut of the Dead",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Anatomy of a Fall",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Artist",
-      "year": 2011,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Le Jour se lève",
-      "year": 1939,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Class",
-      "year": 2008,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Two Days, One Night",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "A Prophet",
-      "year": 2009,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "OSS 117: Cairo, Nest of Spies",
-      "year": 2006,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Zone of Interest",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Run Lola Run",
-      "year": 1998,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Cabinet of Dr. Caligari",
-      "year": 1920,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Toni Erdmann",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Western",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Aguirre, the Wrath of God",
-      "year": 1972,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Look Who's Back",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Godzilla Minus One",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international film chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Seven Samurai",
-      "year": 1954,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An accessible global favorite with proven audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Ugetsu",
-      "year": 1953,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A timeless international landmark that helped shape cinema.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Departures",
-      "year": 2008,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting film from a different language, country or cinematic tradition.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "After Life",
-      "year": 1998,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international achievement worth finding.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Harakiri",
-      "year": 1962,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional direction, writing, performance or global influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Tampopo",
-      "year": 1985,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending journey beyond Hollywood.",
-      "type": "movie",
-      "slot": 7
-    }
-  ]
+  // B1 — Latin America / Mixed
+  { title: "Sentimental Value", year: 2025, type: "movie", language: "no", tags: ["passport"], curatorNote: "Joachim Trier's tender Norwegian drama about a daughter reconnecting with her estranged father through filmmaking.", tmdbId: 1118031 },
+  { title: "Amélie", year: 2001, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jean-Pierre Jeunet's whimsical Montmartre fairy tale turned a shy Parisian waitress into one of cinema's most beloved heroines.", tmdbId: 194 },
+  { title: "Bicycle Thieves", year: 1948, type: "movie", language: "it", tags: ["passport"], curatorNote: "Vittorio De Sica's neorealist masterpiece follows a desperate father and son across postwar Rome hunting a stolen bike — and the last thread of dignity.", tmdbId: 843 },
+  { title: "The Secret in Their Eyes", year: 2009, type: "movie", language: "es", tags: ["passport"], curatorNote: "Juan José Campanella's Oscar-winning Argentine thriller weaves a cold case, a doomed love, and memory into something devastating and beautiful.", tmdbId: 21765 },
+  { title: "The Worst Person in the World", year: 2021, type: "movie", language: "no", tags: ["passport"], curatorNote: "Joachim Trier's Oslo portrait of a woman reinventing herself through her thirties — funny, aching, and one of the sharpest relationship films in years.", tmdbId: 763215 },
+  { title: "Parasite", year: 2019, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Bong Joon-ho's Palme d'Or and Oscar sweep: a class-war thriller that moves from dark comedy to horror without ever losing its grip.", tmdbId: 496243 },
+  { title: "Wild Tales", year: 2014, type: "movie", language: "es", tags: ["passport"], curatorNote: "Damián Szifron's Argentine anthology of vengeance and absurdity — six furious stories about what happens when ordinary people snap.", tmdbId: 264644 },
+
+  // B2 — Iran / France / MENA Mixed
+  { title: "The Voice of Hind Rajab", year: 2025, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Kaouther Ben Hania's devastating Tunisian docufiction reconstructs the real distress calls of a Palestinian child trapped in Gaza — every phone call is authentic, and the weight of that reality is unbearable.", tmdbId: 1480382 },
+  { title: "It Was Just an Accident", year: 2025, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Jafar Panahi's Palme d'Or winner — shot in secret while under house arrest — finds dark comedy in a late-night accident that spirals into questions of guilt and complicity under authoritarian rule.", tmdbId: 1416745 },
+  { title: "The Intouchables", year: 2011, type: "movie", language: "fr", tags: ["passport"], curatorNote: "The Olivier Nakache/Éric Toledano crowd-pleaser: a paraplegic aristocrat and his irrepressible Senegalese carer form an unlikely friendship that charmed the world.", tmdbId: 60308 },
+  { title: "The Rules of the Game", year: 1939, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jean Renoir's biting comedy of manners at a weekend country estate — a portrait of a society sleepwalking toward disaster, banned on release for being too truthful.", tmdbId: 490 },
+  { title: "A Separation", year: 2011, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Asghar Farhadi's Cannes and Oscar winner dissects a Tehran marriage and its fallout — a moral thriller without a villain where every character is right and wrong.", tmdbId: 72976 },
+  { title: "Hit the Road", year: 2021, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Panah Panahi's debut: a family drives across Iran's landscapes with a secret no one will say aloud — melancholy, playful, and visually ravishing.", tmdbId: 862250 },
+  { title: "Taste of Cherry", year: 1997, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Abbas Kiarostami's Palme d'Or meditation: a man drives around Tehran's outskirts asking strangers for a quiet, terrible favor — and encounters the full breadth of existence.", tmdbId: 10926 },
+  { title: "Taxi", year: 2015, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Jafar Panahi films himself driving a Tehran cab while banned from filmmaking — a wry, ingenious documentary-fiction hybrid that doubles as an act of defiance.", tmdbId: 332827 },
+
+  // B3 — Brazil
+  { title: "The Secret Agent", year: 2025, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Kleber Mendonça Filho's Brazilian spy thriller set in 1977 Recife — a tense cat-and-mouse between a dissident and the agents closing in on him.", tmdbId: 1393551 },
+  { title: "City of God", year: 2002, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Fernando Meirelles and Kátia Lund's kinetic portrait of Rio's Cidade de Deus — two decades of drug wars seen through the eyes of a boy who picked up a camera instead of a gun.", tmdbId: 598 },
+  { title: "Black Orpheus", year: 1959, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Marcel Camus transplants the Orpheus myth to Rio's carnival — all color, samba, and tragedy, the first Brazilian film to win both Palme d'Or and Oscar.", tmdbId: 43645 },
+  { title: "Central Station", year: 1998, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Walter Salles's road movie: a bitter letter-writer and a young orphan cross Brazil's sertão together — Fernanda Montenegro's performance is one for the ages.", tmdbId: 15006 },
+  { title: "Bacurau", year: 2019, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Kleber Mendonça Filho and Juliano Dornelles's genre-defying provocation: a remote Brazilian village vanishes from maps and then hunted outsiders arrive.", tmdbId: 529862 },
+  { title: "Pixote", year: 1980, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Héctor Babenco's gut-punch neorealism: a ten-year-old escapes a São Paulo detention center and survives on the streets — cast almost entirely with real street children.", tmdbId: 35843 },
+  { title: "The Second Mother", year: 2015, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Anna Muylaert's precise, warm comedy-drama about a live-in maid in São Paulo whose daughter arrives and refuses to observe the household's invisible rules.", tmdbId: 307809 },
+
+  // B4 — Spain / Latin America
+  { title: "Sirāt", year: 2025, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Oliver Laxe's Spanish-Moroccan road film follows a father crossing the Sahara to find his son — a luminous, wordless journey of grief and landscape.", tmdbId: 1352073 },
+  { title: "Pan's Labyrinth", year: 2006, type: "movie", language: "es", tags: ["passport"], curatorNote: "Guillermo del Toro's dark fairy tale set against postwar Spain: a girl escapes fascist reality through a labyrinth that may or may not be real.", tmdbId: 1368 },
+  { title: "The Exterminating Angel", year: 1962, type: "movie", language: "es", tags: ["passport"], curatorNote: "Luis Buñuel's surrealist dinner party where the guests simply cannot leave — a savage attack on the bourgeoisie disguised as an elegant social comedy.", tmdbId: 10795 },
+  { title: "The Motorcycle Diaries", year: 2004, type: "movie", language: "es", tags: ["passport"], curatorNote: "Walter Salles tracks a young Ernesto Guevara and Alberto Granado's 1952 journey across South America — the road trip that changed a continent's history.", tmdbId: 7551 },
+  { title: "The August Virgin", year: 2019, type: "movie", language: "es", tags: ["passport"], curatorNote: "Jonás Trueba's loose, luminous Madrid summer film follows a woman who stays in the city while everyone leaves — a love letter to urban drifting and self-reinvention.", tmdbId: 601186 },
+  { title: "The Spirit of the Beehive", year: 1973, type: "movie", language: "es", tags: ["passport"], curatorNote: "Víctor Erice's mesmerizing Franco-era fable: a young girl in Castile sees Frankenstein at the village cinema and begins searching for the monster in the fields.", tmdbId: 9982 },
+  { title: "Women on the Verge of a Nervous Breakdown", year: 1988, type: "movie", language: "es", tags: ["passport"], curatorNote: "Pedro Almodóvar's farcical Madrid carousel — a TV actress, a gazpacho laced with sleeping pills, and every woman in Madrid in simultaneous meltdown.", tmdbId: 1585 },
+
+  // B5 — Germany
+  { title: "Sound of Falling", year: 2025, type: "movie", language: "de", tags: ["passport"], curatorNote: "Mascha Schilinski's generational German drama follows women across the same farm through different decades — elliptical, haunting, and visually extraordinary.", tmdbId: 1367483 },
+  { title: "The Lives of Others", year: 2006, type: "movie", language: "de", tags: ["passport"], curatorNote: "Florian Henckel von Donnersmarck's Oscar winner: an East German Stasi agent surveilling a playwright slowly realizes the life being watched is richer than his own.", tmdbId: 4116 },
+  { title: "M", year: 1931, type: "movie", language: "de", tags: ["passport"], curatorNote: "Fritz Lang's expressionist masterwork — Peter Lorre as a child murderer hunted by both police and the Berlin underworld — invented the serial-killer procedural.", tmdbId: 953 },
+  { title: "Phoenix", year: 2014, type: "movie", language: "de", tags: ["passport"], curatorNote: "Christian Petzold's postwar noir: a Holocaust survivor reconstructed by surgery searches for her husband, who doesn't recognize her and recruits her to impersonate his wife.", tmdbId: 244772 },
+  { title: "Undine", year: 2020, type: "movie", language: "de", tags: ["passport"], curatorNote: "Christian Petzold's modern myth: a Berlin urban historian bound by an ancient curse falls in love just as she's supposed to destroy the man who abandoned her.", tmdbId: 665537 },
+  { title: "The White Ribbon", year: 2009, type: "movie", language: "de", tags: ["passport"], curatorNote: "Michael Haneke's Palme d'Or black-and-white study of a German Protestant village in 1913 — the children who will become the architects of fascism are already here.", tmdbId: 28277 },
+  { title: "Good Bye, Lenin!", year: 2003, type: "movie", language: "de", tags: ["passport"], curatorNote: "Wolfgang Becker's bittersweet reunification comedy: a son keeps East Germany alive in his mother's sickroom after the Wall falls while she recovers from a coma.", tmdbId: 586 },
+
+  // B6 — Korea
+  { title: "No Other Choice", year: 2025, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Park Chan-wook's follow-up to Decision to Leave — a morally labyrinthine Korean thriller about a man confronted with a choice that implicates everyone around him.", tmdbId: 639988 },
+  { title: "Train to Busan", year: 2016, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Yeon Sang-ho's zombie blockbuster on a KTX to Busan — relentlessly kinetic but earned: every death means something because the characters do.", tmdbId: 396535 },
+  { title: "The Housemaid", year: 1960, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Kim Ki-young's shocking Korean melodrama about a maid who destroys a middle-class household — baroque, sexually charged, and decades ahead of its time.", tmdbId: 69644 },
+  { title: "Decision to Leave", year: 2022, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Park Chan-wook's sun-drenched noir: a detective falls for the suspect in her husband's death — an obsessive, ravishingly composed love story disguised as a procedural.", tmdbId: 880593 },
+  { title: "Microhabitat", year: 2017, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Jeon Go-woon's quiet Korean gem: a housekeeper gives up her apartment rather than cigarettes and whisky, couch-surfing through her old friends' compromised lives.", tmdbId: 477906 },
+  { title: "Burning", year: 2018, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Lee Chang-dong's slow-burn adaptation of Murakami — a young man, a mysterious woman, and a wealthy stranger who says he burns greenhouses — and something is wrong.", tmdbId: 517814 },
+  { title: "Extreme Job", year: 2019, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Lee Byeong-heon's Korean action-comedy hit: narcotics cops go undercover running a fried chicken restaurant and accidentally become the most popular spot in Seoul.", tmdbId: 586262 },
+
+  // B7 — Lebanon / MENA
+  { title: "Capernaum", year: 2018, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Nadine Labaki's Cannes Grand Prix winner: a 12-year-old Lebanese boy sues his parents for bringing him into a world that couldn't care for him.", tmdbId: 497828 },
+  { title: "The Battle of Algiers", year: 1966, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Gillo Pontecorvo's quasi-documentary re-enactment of the Algerian uprising against French colonial rule — so realistic it was screened at the Pentagon.", tmdbId: 5765 },
+  { title: "Theeb", year: 2014, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Naji Abu Nowar's Jordanian Lawrence-era desert Western — a Bedouin boy guides a British officer through the Hejaz and encounters the end of his world.", tmdbId: 291352 },
+  { title: "The Man Who Sold His Skin", year: 2020, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Kaouther Ben Hania's Tunisian Oscar nominee: a Syrian refugee agrees to have a visa tattooed on his back by a celebrity artist — a savage parable about bodies as commodities.", tmdbId: 693661 },
+  { title: "Waltz with Bashir", year: 2008, type: "movie", language: "he", tags: ["passport"], curatorNote: "Ari Folman's animated documentary: the director tries to recover his lost memories of serving in Lebanon in 1982 — culminating in the Sabra and Shatila massacre.", tmdbId: 14644 },
+  { title: "The Insult", year: 2017, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Ziad Doueiri's Lebanese courtroom drama: a minor argument between a Palestinian refugee and a Christian Phalangist escalates into a trial for the entire civil war.", tmdbId: 431044 },
+
+  // B8 — India
+  { title: "All We Imagine as Light", year: 2024, type: "movie", language: "ml", tags: ["passport"], curatorNote: "Payal Kapadia's Cannes Grand Prix winner — two Mumbai nurses, one longing for an absent husband, the other for a man she can't keep — glows with nocturnal poetry.", tmdbId: 1093995 },
+  { title: "3 Idiots", year: 2009, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Rajkumar Hirani's Bollywood comedy about engineering students rebelling against rote learning became one of India's all-time highest-grossing films for good reason.", tmdbId: 20453 },
+  { title: "Pather Panchali", year: 1955, type: "movie", language: "bn", tags: ["passport"], curatorNote: "Satyajit Ray's debut and the first of the Apu Trilogy — a Bengali childhood in rural poverty rendered with such beauty and feeling it changed world cinema.", tmdbId: 8539 },
+  { title: "The Lunchbox", year: 2013, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Ritesh Batra's Mumbai romance: a misdirected lunchbox connects a lonely housewife and a widower nearing retirement — a love story told entirely in notes and food.", tmdbId: 197103 },
+  { title: "Court", year: 2014, type: "movie", language: "mr", tags: ["passport"], curatorNote: "Chaitanya Tamhane's Marathi legal drama observes a folk singer's absurd trial for allegedly inciting a sewer worker's suicide — a portrait of a justice system in stasis.", tmdbId: 289740 },
+  { title: "The Apu Trilogy", year: 1959, type: "movie", language: "bn", tags: ["passport"], curatorNote: "Satyajit Ray's three-film journey — Pather Panchali, Aparajito, The World of Apu — follows a boy from Bengal's fields to Calcutta's streets: the soul of Indian cinema.", tmdbId: 31805 },
+  { title: "Monsoon Wedding", year: 2001, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Mira Nair's Golden Lion winner: a Delhi family arranges a wedding in five days while old secrets surface — a joyful, complicated portrait of modern India.", tmdbId: 10137 },
+
+  // B9 — Brazil II
+  { title: "I'm Still Here", year: 2024, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Walter Salles's return: the true story of Eunice Paiva, whose husband disappeared under Brazil's military dictatorship — Fernanda Torres won Best Actress at Cannes.", tmdbId: 1233972 },
+  { title: "The Invisible Life of Eurídice Gusmão", year: 2019, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Karim Aïnouz's Cannes Un Certain Regard winner: two sisters in 1950s Rio are separated by circumstance and spend their lives not knowing the other is alive.", tmdbId: 596222 },
+  { title: "Limite", year: 1931, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Mário Peixoto's silent avant-garde masterwork — three people adrift at sea, their pasts revealed in a radical fragmented structure that anticipates Resnais by decades.", tmdbId: 40916 },
+  { title: "Aquarius", year: 2016, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Kleber Mendonça Filho's portrait of a retired music critic who refuses to sell her Recife apartment to developers — Sônia Braga's performance is a force of nature.", tmdbId: 380595 },
+  { title: "Neon Bull", year: 2015, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Gabriel Mascaro's sensuous, elliptical portrait of rodeo workers in northeastern Brazil — their bodies, desires, and dreams given space most Brazilian cinema ignores.", tmdbId: 363676 },
+  { title: "The Given Word", year: 1962, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Anselmo Duarte's Palme d'Or winner — a Brazilian peasant makes a vow to carry a cross to church; the Church refuses it; the people don't.", tmdbId: 54181 },
+  { title: "The Way He Looks", year: 2014, type: "movie", language: "pt", tags: ["passport"], curatorNote: "Daniel Ribeiro's São Paulo coming-of-age: a blind teenager discovers first love with a new classmate — tender, precise, and one of the finest queer films of its decade.", tmdbId: 260030 },
+
+  // B10 — France II
+  { title: "Emilia Pérez", year: 2024, type: "movie", language: "es", tags: ["passport"], curatorNote: "Jacques Audiard's Cannes sensation: a Mexican cartel boss enlists a lawyer to fake her death and transition — an audacious crime musical that swept the Palme.", tmdbId: 974453 },
+  { title: "La Haine", year: 1995, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Mathieu Kassovitz's 24-hour banlieue portrait — three friends after a riot, a gun found in the rubble, and a clock ticking — urgent, furious, and still necessary.", tmdbId: 2757 },
+  { title: "Children of Paradise", year: 1945, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Marcel Carné's wartime epic made under Nazi occupation: the theater world of 1840s Paris and four men in love with the same woman — French cinema's Hamlet.", tmdbId: 9691 },
+  { title: "Portrait of a Lady on Fire", year: 2019, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Céline Sciamma's 18th-century Breton love story between a painter and the woman she's been commissioned to depict — every frame a painting, every look a declaration.", tmdbId: 578701 },
+  { title: "Girlhood", year: 2014, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Céline Sciamma's exhilarating portrait of Black girlhood in the Parisian suburbs — the hotel-room Rihanna scene alone justifies its place in any essential cinema list.", tmdbId: 248633 },
+  { title: "The 400 Blows", year: 1959, type: "movie", language: "fr", tags: ["passport"], curatorNote: "François Truffaut's autobiographical debut launched the French New Wave: Antoine Doinel runs from school, from home, from a society that has no place for him.", tmdbId: 578 },
+  { title: "The Bélier Family", year: 2014, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Éric Lartigau's French crowd-pleaser about a hearing teenager raised by deaf parents who discovers she can sing — funny, warm, and the basis for the Oscar-winning CODA.", tmdbId: 259700 },
+
+  // B11 — Iran II
+  { title: "The Seed of the Sacred Fig", year: 2024, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Mohammad Rasoulof's Cannes Jury Prize winner — made while under house arrest and smuggled out of Iran — a magistrate's daughters show him footage from the 2022 protests.", tmdbId: 1117521 },
+  { title: "About Elly", year: 2009, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Asghar Farhadi's pressure-cooker thriller: a Tehran friend group's holiday by the Caspian becomes a nightmare when a woman disappears and they struggle to tell the truth.", tmdbId: 44264 },
+  { title: "The Cow", year: 1969, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Dariush Mehrjui's foundational Iranian film — a villager so bonded to his cow that after it dies he begins to believe he is the cow — strange, affecting, and deeply human.", tmdbId: 94965 },
+  { title: "The Salesman", year: 2016, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Asghar Farhadi's Oscar winner: a Tehran couple performing Death of a Salesman are shattered by an assault in their new apartment — the play and the marriage bleeding into each other.", tmdbId: 402672 },
+  { title: "A Hero", year: 2021, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Asghar Farhadi's Cannes Grand Prix: a man on prison furlough becomes a media hero for returning a found bag of gold — and then the story unravels.", tmdbId: 777245 },
+  { title: "Close-Up", year: 1990, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Abbas Kiarostami blurs documentary and fiction in this account of a man tried for impersonating director Mohsen Makhmalbaf — and the real director appears to forgive him.", tmdbId: 10754 },
+  { title: "The Lizard", year: 2004, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Kamal Tabrizi's beloved Iranian comedy: a thief escapes prison disguised as a mullah and accidentally becomes a genuinely beloved village imam.", tmdbId: 52454 },
+
+  // B12 — International Animation
+  { title: "Flow", year: 2024, type: "movie", language: "lv", tags: ["passport"], curatorNote: "Gints Zilbalodis's Latvian animated film — a cat navigates a flooded world alongside a capybara, a lemur, and a secretary bird — wordless, wondrous, and deeply moving.", tmdbId: 1184918 },
+  { title: "The Triplets of Belleville", year: 2003, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Sylvain Chomet's hand-drawn masterwork: a grandmother cycles across the Atlantic to rescue her Tour de France-kidnapped grandson — almost wordless, utterly unforgettable.", tmdbId: 600 },
+  { title: "The Adventures of Prince Achmed", year: 1926, type: "movie", language: "de", tags: ["passport"], curatorNote: "Lotte Reiniger's silhouette animation is the oldest surviving animated feature film — a tale from A Thousand and One Nights that still astonishes a century later.", tmdbId: 25078 },
+  { title: "The Red Turtle", year: 2016, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Michael Dudok de Wit's Studio Ghibli co-production: a man stranded on an island and a mysterious red turtle — a wordless myth about solitude, love, and the passage of time.", tmdbId: 376292 },
+  { title: "My Life as a Zucchini", year: 2016, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Claude Barras's Swiss stop-motion gem: an orphaned boy befriends the other children in his group home — 66 minutes of stop-motion tenderness that doesn't shy from the dark.", tmdbId: 399761 },
+  { title: "Persepolis", year: 2007, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Marjane Satrapi's black-and-white animated memoir of growing up in revolutionary Iran — defiant, funny, and one of the essential autobiographical films of its era.", tmdbId: 14227 },
+  { title: "A Town Called Panic", year: 2009, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Stéphane Aubier and Vincent Patar's anarchic Belgian plastic-toy animation: Cowboy, Indian, and Horse accidentally order 50 million bricks and chaos ensues.", tmdbId: 22945 },
+
+  // B13 — Denmark / Scandinavia
+  { title: "The Girl with the Needle", year: 2024, type: "movie", language: "da", tags: ["passport"], curatorNote: "Magnus von Horn's brutal black-and-white period piece — Copenhagen 1919, a desperate factory worker and a woman who runs an adoption service with a dark secret.", tmdbId: 1064213 },
+  { title: "Another Round", year: 2020, type: "movie", language: "da", tags: ["passport"], curatorNote: "Thomas Vinterberg's Cannes Best Director and Oscar winner: four Danish teachers test the theory that a constant 0.05% blood-alcohol level improves life — it does, then doesn't.", tmdbId: 751286 },
+  { title: "The Passion of Joan of Arc", year: 1928, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Carl Theodor Dreyer's silent masterpiece shot entirely in close-up — Renée Jeanne Falconetti's face across 82 minutes remains the greatest performance ever captured on film.", tmdbId: 421 },
+  { title: "The Hunt", year: 2012, type: "movie", language: "da", tags: ["passport"], curatorNote: "Thomas Vinterberg's Cannes Best Actor winner: a kindergarten teacher's life is destroyed by an accidental false accusation — a precise dissection of mob psychology.", tmdbId: 117999 },
+  { title: "A Royal Affair", year: 2012, type: "movie", language: "da", tags: ["passport"], curatorNote: "Nikolaj Arcel's historical drama about a court physician who becomes the lover of the Danish queen and briefly transforms an Enlightenment kingdom — beautiful and propulsive.", tmdbId: 95756 },
+  { title: "Ordet", year: 1955, type: "movie", language: "da", tags: ["passport"], curatorNote: "Carl Theodor Dreyer's transcendent masterwork about faith, doubt, and a miracle in a Danish farming community — the final scene is cinema's most quietly extraordinary moment.", tmdbId: 15354 },
+  { title: "Men & Chicken", year: 2015, type: "movie", language: "da", tags: ["passport"], curatorNote: "Anders Thomas Jensen's pitch-black Danish fable: two brothers discover their true origins involve a remote island and a family stranger than any dream.", tmdbId: 318149 },
+
+  // B14 — Italy
+  { title: "Vermiglio", year: 2024, type: "movie", language: "it", tags: ["passport"], curatorNote: "Maura Delpero's Venetian Golden Lion winner: a family in an isolated Alpine village during WWII's final year — a period masterwork of landscape and quiet devastation.", tmdbId: 1197306 },
+  { title: "Cinema Paradiso", year: 1988, type: "movie", language: "it", tags: ["passport"], curatorNote: "Giuseppe Tornatore's beloved elegy: a filmmaker returns to his Sicilian village and remembers the projectionist who shaped his life — the ending ruined a generation.", tmdbId: 11216 },
+  { title: "Rome, Open City", year: 1945, type: "movie", language: "it", tags: ["passport"], curatorNote: "Roberto Rossellini's neorealist cornerstone — shot in Nazi-occupied Rome as the liberation was underway, with actual rubble and real grief — changed what cinema could say.", tmdbId: 9502 },
+  { title: "The Great Beauty", year: 2013, type: "movie", language: "it", tags: ["passport"], curatorNote: "Paolo Sorrentino's Fellini-esque Oscar winner: a 65-year-old Roman journalist drifts through parties and ruins, searching for the beauty he glimpsed once and lost.", tmdbId: 175430 },
+  { title: "Happy as Lazzaro", year: 2018, type: "movie", language: "it", tags: ["passport"], curatorNote: "Alice Rohrwacher's fairy tale about a saintly sharecropper exploited by a noble family — and what happens when time collapses and nothing changes, except everything does.", tmdbId: 497543 },
+  { title: "8½", year: 1963, type: "movie", language: "it", tags: ["passport"], curatorNote: "Federico Fellini's self-portrait of a filmmaker paralyzed by creative crisis — a labyrinth of memory, fantasy, and desire that invented the modern film-about-filmmaking.", tmdbId: 1051 },
+  { title: "The Mafia Kills Only in Summer", year: 2013, type: "movie", language: "it", tags: ["passport"], curatorNote: "Pif's Palermo dark comedy: a man recalls growing up alongside the Corleonesi murders — a bittersweet love story where the Mafia is always just offscreen, ruining everything.", tmdbId: 244653 },
+
+  // B15 — Africa
+  { title: "Dahomey", year: 2024, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Mati Diop's Berlinale Golden Bear winner: 26 looted Dahomean royal treasures return from Paris to Benin — the statues speak; the young nation debates what return means.", tmdbId: 1272496 },
+  { title: "Timbuktu", year: 2014, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Abderrahmane Sissako's Malian Oscar nominee: a jihadist occupation bans music, football, and laughter in Timbuktu — and a cattle herder refuses to simply comply.", tmdbId: 265177 },
+  { title: "Black Girl", year: 1966, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Ousmane Sembène's devastating debut feature — a Senegalese woman goes to France to work as an au pair and discovers her humanity is worth nothing to her employers.", tmdbId: 36243 },
+  { title: "Atlantics", year: 2019, type: "movie", language: "wo", tags: ["passport"], curatorNote: "Mati Diop's Cannes Grand Prix winner: young men from Dakar set out on a boat for Europe; the women they leave behind begin to be visited by something from the sea.", tmdbId: 600309 },
+  { title: "This Is Not a Burial, It's a Resurrection", year: 2019, type: "movie", language: "st", tags: ["passport"], curatorNote: "Lemohang Jeremiah Mosese's Lesotho epic: an 80-year-old woman refuses to leave her village when a dam threatens to flood it — shot on 16mm with a storyteller's vocal.", tmdbId: 655681 },
+  { title: "Touki Bouki", year: 1973, type: "movie", language: "wo", tags: ["passport"], curatorNote: "Djibril Diop Mambéty's Senegalese New Wave landmark: two young lovers dream of escaping to Paris — a film as restless and uncompromising as its characters.", tmdbId: 89609 },
+  { title: "The African Doctor", year: 2016, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Julien Rambaldi's warm French comedy-drama based on a true story: a Congolese doctor posted to a small Burgundy village in 1975 slowly wins over a suspicious community.", tmdbId: 391698 },
+
+  // B16 — Denmark / Scandinavia II
+  { title: "The Promised Land", year: 2023, type: "movie", language: "da", tags: ["passport"], curatorNote: "Nikolaj Arcel's Mads Mikkelsen historical epic: an 18th-century Danish soldier attempts to cultivate the wild Jutland heath and comes up against a sadistic local lord.", tmdbId: 897087 },
+  { title: "The Celebration", year: 1998, type: "movie", language: "da", tags: ["passport"], curatorNote: "Thomas Vinterberg's original Dogme 95 masterwork: a family birthday dinner at which the eldest son reveals a secret no one at the table is prepared to hear.", tmdbId: 3060 },
+  { title: "Day of Wrath", year: 1943, type: "movie", language: "da", tags: ["passport"], curatorNote: "Carl Theodor Dreyer's austere 17th-century witch-trial drama — made under Nazi occupation and thick with the atmosphere of accusation, repression, and moral cowardice.", tmdbId: 41597 },
+  { title: "Land of Mine", year: 2015, type: "movie", language: "da", tags: ["passport"], curatorNote: "Martin Zandvliet's harrowing Danish film: teenage German POWs are forced to clear WWII mines from Danish beaches by hand — a portrait of dehumanization that humanizes.", tmdbId: 310602 },
+  { title: "Godland", year: 2022, type: "movie", language: "da", tags: ["passport"], curatorNote: "Hlynur Pálmason's Icelandic epic: a Danish priest crosses Iceland in the 1800s to build a church and is slowly unmade by the landscape — shot on period lenses, ravishing.", tmdbId: 778564 },
+  { title: "Babette's Feast", year: 1987, type: "movie", language: "da", tags: ["passport"], curatorNote: "Gabriel Axel's Oscar winner: a French refugee becomes housekeeper for two pious Norwegian sisters and one night prepares a feast that transforms the whole community.", tmdbId: 9019 },
+  { title: "Adam's Apples", year: 2005, type: "movie", language: "da", tags: ["passport"], curatorNote: "Anders Thomas Jensen's gleefully dark Danish tragicomedy: a neo-Nazi sentenced to community service encounters a priest who is constitutionally incapable of seeing evil.", tmdbId: 9020 },
+
+  // B17 — Japan
+  { title: "Perfect Days", year: 2023, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Wim Wenders in Tokyo: a public toilet cleaner lives a life of radical contentment — Kōji Yakusho's Cannes Best Actor performance is a masterclass in inhabiting stillness.", tmdbId: 976893 },
+  { title: "Shoplifters", year: 2018, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Hirokazu Kore-eda's Palme d'Or winner: a makeshift family of Tokyo outcasts survives by shoplifting — until a discovery forces each of them to decide what family actually means.", tmdbId: 530415 },
+  { title: "Tokyo Story", year: 1953, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Yasujirō Ozu's quiet masterpiece: elderly parents visit their grown children in Tokyo and find they are more bother than welcome — the saddest film ever made about ordinary life.", tmdbId: 13406 },
+  { title: "Drive My Car", year: 2021, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Ryusuke Hamaguchi's Cannes Best Screenplay winner: a grieving stage director rehearsing Uncle Vanya is driven by a taciturn woman, and both are slowly disarmed.", tmdbId: 776503 },
+  { title: "Wheel of Fortune and Fantasy", year: 2021, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Ryusuke Hamaguchi's triptych of chance encounters and misunderstandings — three short films about the small pivots on which entire lives turn.", tmdbId: 751097 },
+  { title: "Rashomon", year: 1950, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Akira Kurosawa's foundational puzzle: four witnesses to a killing in a forest give four entirely different accounts — and none of them, including the dead man, can be trusted.", tmdbId: 548 },
+  { title: "One Cut of the Dead", year: 2017, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Shin'ichirō Ueda's cult sensation — the first 37 minutes are a low-budget zombie film; then the film explains itself and becomes something wholly unexpected and joyful.", tmdbId: 476669 },
+
+  // B18 — France III
+  { title: "Anatomy of a Fall", year: 2023, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Justine Triet's Palme d'Or courtroom thriller: a woman is tried for her husband's death in the Alps — and the real subject is the violence of marriage and narrative.", tmdbId: 1008042 },
+  { title: "The Artist", year: 2011, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Michel Hazanavicius's black-and-white silent film swept five Oscars: a Hollywood star of the silents refuses to speak as talkies arrive, and a young actress overtakes him.", tmdbId: 63957 },
+  { title: "Le Jour se lève", year: 1939, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Marcel Carné's poetic realist classic: a factory worker locks himself in his room after a killing and spends the night in flashback — Jean Gabin at the peak of his powers.", tmdbId: 16374 },
+  { title: "The Class", year: 2008, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Laurent Cantet's Palme d'Or winner — a year in a Paris secondary school class, shot with the actual students and their real teacher, improvised and urgent.", tmdbId: 12592 },
+  { title: "Two Days, One Night", year: 2014, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jean-Pierre and Luc Dardenne's pressure-test: a factory worker has a weekend to visit each of her colleagues and persuade them to give up their bonus so she keeps her job.", tmdbId: 267579 },
+  { title: "A Prophet", year: 2009, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jacques Audiard's Cannes Grand Prix winner: a young Arab man enters a French prison knowing nothing and emerges as a criminal mastermind — brutal, brilliant, Balzacian.", tmdbId: 33512 },
+  { title: "OSS 117: Cairo, Nest of Spies", year: 2006, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Michel Hazanavicius's pitch-perfect parody of 1950s spy films — Jean Dujardin's blissfully incompetent French spy is comedy gold, and the production design is immaculate.", tmdbId: 21057 },
+
+  // B19 — Germany II
+  { title: "The Zone of Interest", year: 2023, type: "movie", language: "de", tags: ["passport"], curatorNote: "Jonathan Glazer's Cannes Grand Prix and Oscar winner: the commandant of Auschwitz and his family tend their garden next to the camp walls — horror as absence and sound.", tmdbId: 701279 },
+  { title: "Run Lola Run", year: 1998, type: "movie", language: "de", tags: ["passport"], curatorNote: "Tom Tykwer's kinetic Berlin puzzle: Lola has 20 minutes to get 100,000 marks to save her boyfriend — and plays the scenario out three times, each time differently.", tmdbId: 104 },
+  { title: "The Cabinet of Dr. Caligari", year: 1920, type: "movie", language: "de", tags: ["passport"], curatorNote: "Robert Wiene's expressionist landmark — slanted walls, painted shadows, a carnival hypnotist and his somnambulist — the film that invented horror as a visual language.", tmdbId: 321 },
+  { title: "Toni Erdmann", year: 2016, type: "movie", language: "de", tags: ["passport"], curatorNote: "Maren Ade's three-hour Cannes darling: a prankster father visits his corporate-strategist daughter in Bucharest and refuses to let her pretend she's fine — hilarious and devastating.", tmdbId: 381726 },
+  { title: "Western", year: 2017, type: "movie", language: "de", tags: ["passport"], curatorNote: "Valeska Grisebach's quiet, radical film: German construction workers in rural Bulgaria; the foreman forms an unlikely friendship with the locals and a horse.", tmdbId: 441777 },
+  { title: "Aguirre, the Wrath of God", year: 1972, type: "movie", language: "de", tags: ["passport"], curatorNote: "Werner Herzog and Klaus Kinski's conquest masterwork: a conquistador leads a raft down the Amazon convinced he will found El Dorado — madness filmed as fact.", tmdbId: 2989 },
+  { title: "Look Who's Back", year: 2015, type: "movie", language: "de", tags: ["passport"], curatorNote: "David Wnendt's satirical provocation: Hitler wakes up in 2014 Berlin, assumes he's an actor, becomes a comedy star on YouTube — and the public loves him.", tmdbId: 302026 },
+
+  // B20 — Japan II
+  { title: "Godzilla Minus One", year: 2023, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Takashi Yamazaki's Oscar-winning VFX and genuine emotional devastation: postwar Japan, a kamikaze pilot who couldn't die faces Godzilla and the survival guilt he carries.", tmdbId: 940721 },
+  { title: "Seven Samurai", year: 1954, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Akira Kurosawa's masterwork — seven warriors defend a village from bandits — the template for every ensemble action film ever made and still the best of all of them.", tmdbId: 346 },
+  { title: "Ugetsu", year: 1953, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Kenji Mizoguchi's ghost story and war film in one: a potter in feudal Japan chases wealth and a ghostly aristocrat while his wife waits — ethereal, devastating.", tmdbId: 21584 },
+  { title: "Departures", year: 2008, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Yōjirō Takita's Oscar winner: a cellist returns to his hometown and takes a job as a ritual body preparer — a film about death that is entirely about the preciousness of life.", tmdbId: 14537 },
+  { title: "After Life", year: 1998, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Hirokazu Kore-eda's philosophical gem: the newly dead must choose one memory to take into eternity — a film that makes you think about your own memory for days afterward.", tmdbId: 18479 },
+  { title: "Harakiri", year: 1962, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Masaki Kobayashi's samurai masterwork — a ronin arrives at a lord's gates requesting to commit ritual suicide, and dismantles the samurai code from the inside out.", tmdbId: 30620 },
+  { title: "Tampopo", year: 1985, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Jûzô Itami's 'ramen Western': a truck driver helps a widowed noodle shop owner perfect her recipe — a joyful meditation on food, desire, and the pursuit of the perfect bowl.", tmdbId: 10714 },
+
+  // B21 — Bosnia / Romania / Vietnam / Poland (gap-fill: high Metascore critics picks)
+  { title: "Quo Vadis, Aida?", year: 2020, type: "movie", language: "bs", tags: ["passport"], curatorNote: "Jasmila Žbanić's Srebrenica masterwork: a UN translator desperately tries to protect her family as the massacre unfolds around her — one of the most devastating films about genocide ever made.", tmdbId: 728118 },
+  { title: "Do Not Expect Too Much from the End of the World", year: 2023, type: "movie", language: "ro", tags: ["passport"], curatorNote: "Radu Jude's savage, funny, formally wild Romanian provocation — a production assistant drives across Bucharest all day while the country's contradictions pile up around her.", tmdbId: 937085 },
+  { title: "Inside the Yellow Cocoon Shell", year: 2023, type: "movie", language: "vi", tags: ["passport"], curatorNote: "Thien An Pham's stunning debut: a young man travels through Vietnam's countryside to return his sister-in-law's body home — three hours of contemplative beauty and spiritual searching.", tmdbId: 1114816 },
+  { title: "Green Border", year: 2023, type: "movie", language: "pl", tags: ["passport"], curatorNote: "Agnieszka Holland's urgent black-and-white document: refugees trapped in the forest between Belarus and Poland, used as political pawns — unflinching and morally necessary.", tmdbId: 1121956 },
+  { title: "About Dry Grasses", year: 2023, type: "movie", language: "tr", tags: ["passport"], curatorNote: "Nuri Bilge Ceylan's three-and-a-half-hour Anatolian winter: a disenchanted schoolteacher's accusations, desires, and self-delusions laid bare in the tradition of the great Russian novels.", tmdbId: 665733 },
+  { title: "Return to Seoul", year: 2022, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Davy Chou's elliptical identity portrait: a French-Korean woman adopted at birth returns to Seoul on impulse and searches for her biological parents across multiple visits over years.", tmdbId: 952701 },
+  { title: "No Bears", year: 2022, type: "movie", language: "fa", tags: ["passport"], curatorNote: "Jafar Panahi's film-within-a-film, made while under travel ban from Iran — a director managing a crew remotely becomes entangled in a village's superstitions — defiant and devastating.", tmdbId: 974521 },
+
+  // B22 — France IV / Belgium / Spain (gap-fill: acclaimed 2021–2023)
+  { title: "Petite Maman", year: 2021, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Céline Sciamma's 73-minute miracle: a girl grieving her grandmother meets a playmate in the woods who turns out to be her mother at the same age — intimate, magical, and precisely observed.", tmdbId: 749004 },
+  { title: "Saint Omer", year: 2022, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Alice Diop's Venice Golden Lion winner reconstructs a real infanticide trial — a novelist observes a young Senegalese woman in the dock and her own relationship to motherhood unravels.", tmdbId: 925943 },
+  { title: "Close", year: 2022, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Lukas Dhont's Grand Prix winner at Cannes: two thirteen-year-old boys whose deep friendship fractures under social pressure — a film about masculinity's first casualties.", tmdbId: 901563 },
+  { title: "Tori and Lokita", year: 2022, type: "movie", language: "fr", tags: ["passport"], curatorNote: "The Dardenne brothers' most urgent film in years: a Togolese girl and a Beninese boy, illegal migrants in Belgium, navigate exploitation and bureaucracy with fierce loyalty to each other.", tmdbId: 914203 },
+  { title: "Happening", year: 2021, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Audrey Diwan's Venice Golden Lion: a 1963 French student seeks an illegal abortion — Anamaria Vartolomei's performance turns a political subject into something viscerally, inescapably personal.", tmdbId: 793998 },
+  { title: "One Fine Morning", year: 2022, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Mia Hansen-Løve's tender Berlin film: a single mother caring for her dying father begins a love affair — grief, desire, and ordinary life held in perfect equilibrium.", tmdbId: 747779 },
+  { title: "The Taste of Things", year: 2023, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Tran Anh Hung's sensuous Cannes Best Director winner: a 19th-century French chef and his devoted cook prepare magnificent meals while dancing around a love they won't quite name.", tmdbId: 964960 },
+
+  // B23 — Spain / Catalan / Galician / Finnish / Norwegian (gap-fill: European fringe)
+  { title: "Totem", year: 2023, type: "movie", language: "es", tags: ["passport"], curatorNote: "Lila Avilés's Mexican family portrait: a seven-year-old's father is dying, and the whole extended family gathers — chaos, love, and loss seen entirely through a child's eyes.", tmdbId: 958186 },
+  { title: "Alcarràs", year: 2022, type: "movie", language: "ca", tags: ["passport"], curatorNote: "Carla Simón's Berlin Golden Bear winner: a Catalan farming family faces the loss of their peach orchard to solar panels — a summer of harvesting and mourning, shot with non-actors.", tmdbId: 804251 },
+  { title: "The Beasts", year: 2022, type: "movie", language: "gl", tags: ["passport"], curatorNote: "Rodrigo Sorogoyen's Galician rural thriller: a French couple farming in a depopulating Galician village face escalating hostility from their neighbors — slowly, terrifyingly.", tmdbId: 848685 },
+  { title: "Argentina, 1985", year: 2022, type: "movie", language: "es", tags: ["passport"], curatorNote: "Santiago Mitre's Oscar-nominated courtroom drama reconstructs the real trial of Argentina's military junta after the Dirty War — idealistic prosecutors vs. the architects of terror.", tmdbId: 714888 },
+  { title: "Fallen Leaves", year: 2023, type: "movie", language: "fi", tags: ["passport"], curatorNote: "Aki Kaurismäki's late masterpiece: two lonely Helsinki workers meet by accident and keep almost finding each other — deadpan, tender, and suffused with his particular melancholy joy.", tmdbId: 986280 },
+  { title: "Sick of Myself", year: 2022, type: "movie", language: "no", tags: ["passport"], curatorNote: "Kristoffer Borgli's vicious Oslo satire: a young woman engineers her own disfigurement to claim the attention her artist boyfriend has stolen from her — dark comedy at its most Norwegian.", tmdbId: 788734 },
+  { title: "The Teachers' Lounge", year: 2023, type: "movie", language: "de", tags: ["passport"], curatorNote: "Ilker Çatak's German pressure-cooker: an idealistic teacher investigates a theft and sets off a chain reaction of suspicion, accusation, and institutional hysteria — Kafka in a school.", tmdbId: 998022 },
+
+  // B24 — Morocco / Pakistan / 2025 Global (gap-fill: underrepresented voices + new 2025)
+  { title: "The Blue Caftan", year: 2022, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Maryam Touzani's Moroccan three-hander: a married couple running a traditional caftan workshop and the young apprentice who arrives — a slow, gorgeous film about craft, desire, and acceptance.", tmdbId: 958279 },
+  { title: "Joyland", year: 2022, type: "movie", language: "ur", tags: ["passport"], curatorNote: "Saim Sadiq's debut — the first Pakistani film at Cannes — follows a youngest son who joins an erotic dance theater and falls for its trans star, quietly dismantling his family's patriarchal order.", tmdbId: 962571 },
+  { title: "Monster", year: 2023, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Hirokazu Kore-eda's Cannes winner for Best Screenplay: a bullied child, his teacher, a single mother — each holds a piece of the truth, revealed in rotating perspectives. Ryuichi Sakamoto's final score.", tmdbId: 1050035 },
+  { title: "Two Prosecutors", year: 2025, type: "movie", language: "ru", tags: ["passport"], curatorNote: "Sergei Loznitsa's Soviet-era two-hander: a deputy prosecutor discovers his boss is being investigated by a colleague — a precise, suffocating portrait of complicity under Stalinist bureaucracy.", tmdbId: 1257406 },
+  { title: "Homebound", year: 2025, type: "movie", language: "hi", tags: ["passport"], curatorNote: "Neeraj Ghaywan's intimate Indian drama follows a domestic worker navigating caste, class, and belonging in contemporary Mumbai — precise, compassionate, and quietly radical.", tmdbId: 1227739 },
+  { title: "The President's Cake", year: 2025, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Hasan Hadi's debut: a Baghdad widow bakes Saddam Hussein's birthday cake on pain of death and spends the night trying to deliver it — absurdist gallows humor from postwar Iraq.", tmdbId: 1464883 },
+  { title: "Resurrection", year: 2025, type: "movie", language: "zh", tags: ["passport"], curatorNote: "Bi Gan's long-awaited third feature — the visionary director of Kaili Blues and Long Day's Journey Into Night returns with an elliptical epic about memory, myth, and Chinese landscape.", tmdbId: 878608 },
+
+  // B25 — France V (user-requested additions: contemporary French cinema)
+  { title: "Through the Night", year: 2023, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Delphine Girard's tense Belgian-French thriller follows a 911 dispatcher who takes a terrifying call from a woman in danger — and stays on the line through the night to help her survive.", tmdbId: 925124 },
+  { title: "Bad Seeds", year: 2018, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Kheiron's semi-autobiographical French comedy: two delinquent teens from Paris's banlieues are sent to a reformatory run by an idealistic teacher — warm, funny, and rooted in real community.", tmdbId: 498249 },
+  { title: "Lady J", year: 2018, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Emmanuel Mouret's elegant 18th-century French comedy of manners: a widow schemes to punish a notorious libertine and finds the tables elegantly turned — witty, literary, and ravishingly costumed.", tmdbId: 515911 },
+  { title: "I Am Not an Easy Man", year: 2018, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Éléonore Pourriat's French gender-swap comedy: a chauvinist wakes up in a matriarchal society where men are objectified and women run everything — sharper than its premise suggests.", tmdbId: 515841 },
+  { title: "The Piano Teacher", year: 2001, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Michael Haneke's icy Cannes triple prize-winner: Isabelle Huppert as a Vienna conservatory teacher governed by repression and dark desire — a sadomasochistic love story that admits no comfort.", tmdbId: 1791 },
+  { title: "The Diving Bell and the Butterfly", year: 2007, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Julian Schnabel's Cannes Best Director winner: Elle editor Jean-Dominique Bauby, paralyzed by a stroke at 45, dictates his memoir with blinks of one eye — devastating, life-affirming, and visually extraordinary.", tmdbId: 2013 },
+  { title: "Of Gods and Men", year: 2010, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Xavier Beauvois's Cannes Grand Prix winner: eight French monks in an Algerian mountain village face a fateful choice when jihadist violence closes in — restrained, profound, and deeply human.", tmdbId: 46332 },
+
+  // B26 — France VI (IndieWire classics + 2025 new releases)
+  { title: "Tell No One", year: 2006, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Guillaume Canet's beloved French thriller: a widowed doctor receives a mysterious message that appears to be from his long-dead wife, while police reopen her murder case with him as the new suspect.", tmdbId: 10795 },
+  { title: "La Vie en Rose", year: 2007, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Olivier Dahan's portrait of Édith Piaf with Marion Cotillard's Oscar-winning transformation — the first performer to win Best Actress for a French-language performance, channeling every fracture of Piaf's life.", tmdbId: 1407 },
+  { title: "White Material", year: 2009, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Claire Denis and Isabelle Huppert: a French coffee plantation owner refuses to flee as civil war erupts around her — a simmering, gorgeous portrait of colonial blindness and the violence it invites.", tmdbId: 46207 },
+  { title: "Stranger by the Lake", year: 2013, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Alain Guiraudie's Cannes Un Certain Regard prize-winner: a man cruising at a lakeside gay spot witnesses a murder and falls deeper in love with the killer — erotic, terrifying, and formally precise.", tmdbId: 186992 },
+  { title: "I Lost My Body", year: 2019, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jérémy Clapin's Cannes prize-winning animation: a severed hand crawls across Paris to reunite with its body while its owner's doomed romance unfolds in parallel — morbid, moving, and entirely original.", tmdbId: 586940 },
+  { title: "Other People's Children", year: 2022, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Rebecca Zlotowski's quietly devastating portrait of a woman in her 40s who falls for a single father and his young daughter — Virginie Efira at her most vulnerable, in one of the finest films about desire and loss.", tmdbId: 803694 },
+  { title: "The Stranger", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "François Ozon's black-and-white adaptation of Camus's L'Étranger with Benjamin Voisin as Meursault — faithful yet crucially updating the colonial context, restoring a name and a sister to the murdered Algerian.", tmdbId: 1429348 },
+  { title: "Alpha", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Julia Ducournau follows Titane with this A24 body horror coming-of-age: a rebellious 13-year-old's tattoo sparks dread in her physician mother as a mysterious plague turns victims to marble — bold, breathtaking imagery.", tmdbId: 1284460 },
+  { title: "Young Mothers", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jean-Pierre and Luc Dardenne's Cannes Best Screenplay winner: four teenage mothers in a Liège shelter navigate cycles of poverty, fear, and the question of whether someone badly parented can learn to love well.", tmdbId: 1242015 },
+  { title: "13 Days, 13 Nights", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Martin Bourboulon's true-story action thriller: during the 2021 Taliban takeover of Kabul, a French police commander defies all odds to evacuate hundreds of desperate civilians from the besieged embassy to the airport.", tmdbId: 1254135 },
+  { title: "The Wizard of the Kremlin", year: 2025, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Olivier Assayas's English-language chronicle of Putin's rise: Jude Law as the Russian president and Paul Dano as his political strategist — a deep dive into how totalitarianism is built, and why people follow.", tmdbId: 1291659 },
 ];
+
+export const INTERNATIONAL_POOL_COUNT = INTERNATIONAL_EDITORIAL_BATCHES.length;
