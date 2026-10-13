@@ -206,6 +206,13 @@ export const THRILLER_EDITORIAL_BATCHES = [
   { title: "Dangerous Animals", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "A distinctive thriller that broadens the Canon through tone, culture or discovery value.", tmdbId: 1285965 },
   { title: "Obsession", year: 2025, type: "movie", language: "en", tags: ["new", "surprise"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 1339713 },
   { title: "Mission: Impossible - The Final Reckoning", year: 2025, type: "movie", language: "en", tags: ["new", "crowd"], curatorNote: "A proven high-tension favorite with strong critical or audience recognition.", tmdbId: 575265 },
+
+  // B24
+  { title: "Scream 7", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The Ghostface legacy returns — a new chapter in the meta-horror franchise that reinvented slashers.", tmdbId: 1159559 },
+  { title: "Die Blutgräfin", year: 2026, type: "movie", language: "de", tags: ["new", "passport"], curatorNote: "A German-language period horror-thriller revisiting the legend of Countess Báthory.", tmdbId: 1251608 },
+  { title: "Return to Silent Hill", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Christophe Gans returns to the fog — a nightmarish love story in Silent Hill's cursed town.", tmdbId: 680493 },
+  { title: "Insidious: Out of the Further", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The franchise's sixth chapter pulls a new family into the terrifying Further.", tmdbId: 1291595 },
+  { title: "Bring Her Back", year: 2025, type: "movie", language: "en", tags: ["new", "discovery"], curatorNote: "From the Talk to Me directors — a searing family horror about grief and the cost of getting what you want.", tmdbId: 1151031 },
 ];
 
 export const THRILLER_POOL_COUNT = THRILLER_EDITORIAL_BATCHES.length;
