@@ -1,1725 +1,191 @@
-// MY CINÉ V84 — INTERNATIONAL TV SERIES
-// Parallel TV editorial batches. Film files remain untouched.
+// MY CINÉ — INTERNATIONAL SERIES
+// Flat array — all entries are direct children of INTERNATIONAL_SERIES_EDITORIAL_BATCHES.
+// English-language entries (Canadian, Australian, British, South African, Nigerian) carry crowd/critics/surprise tags.
+// All non-English entries carry passport tag.
 
 export const INTERNATIONAL_SERIES_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Pachinko",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Money Heist",
-      "year": 2017,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Das Boot",
-      "year": 1985,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Dark",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "My Brilliant Friend",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Borgen",
-      "year": 2010,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Extraordinary Attorney Woo",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Moving",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Crash Landing on You",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Sandglass",
-      "year": 1995,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "My Mister",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Misaeng: Incomplete Life",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Kingdom",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Hospital Playlist",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "First Love",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Alice in Borderland",
-      "year": 2020,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Oshin",
-      "year": 1983,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Midnight Diner: Tokyo Stories",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Makanai: Cooking for the Maiko House",
-      "year": 2023,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Gannibal",
-      "year": 2022,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Full-Time Wife Escapist",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Snow Girl",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Elite",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "The Ministry of Time",
-      "year": 2015,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "The Innocent",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Mess You Leave Behind",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Patria",
-      "year": 2020,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Paquita Salas",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Drops of God",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Call My Agent!",
-      "year": 2015,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Maigret",
-      "year": 1991,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "The Bureau",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Black Spot",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Returned",
-      "year": 2012,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "A Very Secret Service",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Empress",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Babylon Berlin",
-      "year": 2017,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Heimat",
-      "year": 1984,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Deutschland 83",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Same Sky",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Interpreter of Silence",
-      "year": 2023,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "How to Sell Drugs Online (Fast)",
-      "year": 2019,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Chestnut Man",
-      "year": 2021,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Bridge",
-      "year": 2011,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "The Kingdom",
-      "year": 1994,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Trapped",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Valhalla Murders",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Killing",
-      "year": 2007,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Norsemen",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Law According to Lidia Poët",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Gomorrah",
-      "year": 2014,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "The Octopus",
-      "year": 1984,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Suburra: Blood on Rome",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Trial",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Young Pope",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Bad Guy",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Envoys",
-      "year": 2021,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Club de Cuervos",
-      "year": 2015,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "The Rich Also Cry",
-      "year": 1979,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "The House of Flowers",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Secret of the River",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Monarca",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Nothing to See Here",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Kohrra",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Sacred Games",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Malgudi Days",
-      "year": 1987,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Delhi Crime",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Made in Heaven",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Paatal Lok",
-      "year": 2020,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Panchayat",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Tehran",
-      "year": 2020,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Fauda",
-      "year": 2015,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "The Spy",
-      "year": 2019,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Valley of Tears",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Our Boys",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Honourable Woman",
-      "year": 2014,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Beauty Queen of Jerusalem",
-      "year": 2021,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Blood & Water",
-      "year": 2020,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Queen Sono",
-      "year": 2020,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Shaka Zulu",
-      "year": 1986,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Shaka iLembe",
-      "year": 2023,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Savage Beauty",
-      "year": 2022,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "King of Boys: The Return of the King",
-      "year": 2021,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "How to Ruin Christmas",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Lost Flowers of Alice Hart",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Wentworth",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "A Country Practice",
-      "year": 1981,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Mystery Road",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Newsreader",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Top of the Lake",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Deadloch",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Little Bird",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Schitt's Creek",
-      "year": 2015,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Degrassi Junior High",
-      "year": 1987,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Cardinal",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Sort Of",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Anne with an E",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Kim's Convenience",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Gold",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Derry Girls",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Brideshead Revisited",
-      "year": 1981,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Giri/Haji",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Virtues",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Happy Valley",
-      "year": 2014,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Detectorists",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Woods",
-      "year": 2020,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Mire",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Dekalog",
-      "year": 1989,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "1983",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Sleepers",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Burning Bush",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Defence",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Longest Promise",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Reset",
-      "year": 2022,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "The Bund",
-      "year": 1980,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "The Bad Kids",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "A Murderous Affair in Horizon Tower",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Long Season",
-      "year": 2023,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Someday or One Day",
-      "year": 2019,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "Cigarette Girl",
-      "year": 2023,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Glory",
-      "year": 2022,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Meteor Garden",
-      "year": 2001,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Girl from Nowhere",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Ghost Bride",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The World Between Us",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "The Good Detective",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Twelve",
-      "year": 2019,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Undercover",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Inspector Rex",
-      "year": 1994,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Professor T.",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "The Break",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "Tabula Rasa",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Clan",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ],
-  [
-    {
-      "title": "The Playlist",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent international series chosen to lead this set.",
-      "type": "tv",
-      "slot": 1,
-      "moodTags": [
-        "travel somewhere",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Young Royals",
-      "year": 2021,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A beloved global series with proven audience appeal.",
-      "type": "tv",
-      "slot": 2,
-      "moodTags": [
-        "travel somewhere",
-        "feel good"
-      ]
-    },
-    {
-      "title": "Scenes from a Marriage",
-      "year": 1973,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A landmark international television series that helped shape the form.",
-      "type": "tv",
-      "slot": 3,
-      "moodTags": [
-        "nostalgia",
-        "travel somewhere"
-      ]
-    },
-    {
-      "title": "Caliphate",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "A transporting series rooted in another country or culture.",
-      "type": "tv",
-      "slot": 4,
-      "moodTags": [
-        "travel somewhere",
-        "escape"
-      ]
-    },
-    {
-      "title": "Quicksand",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A less obvious international series worth discovering.",
-      "type": "tv",
-      "slot": 5,
-      "moodTags": [
-        "hidden masterpiece",
-        "make me think"
-      ]
-    },
-    {
-      "title": "The Investigation",
-      "year": 2020,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional writing, performance, direction or cultural insight.",
-      "type": "tv",
-      "slot": 6,
-      "moodTags": [
-        "make me think",
-        "mind blown"
-      ]
-    },
-    {
-      "title": "Love & Anarchy",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or genre-bending global choice.",
-      "type": "tv",
-      "slot": 7,
-      "moodTags": [
-        "surprise me",
-        "feel good"
-      ]
-    }
-  ]
+  // S1 — Global Mix / Launch Batch
+  { title: "Pachinko", year: 2022, type: "series", language: "ko", tags: ["passport"], curatorNote: "Apple TV+'s multigenerational saga follows a Korean family from colonial-era Japan to 1980s Osaka — a sweeping, intimate epic about identity, sacrifice, and survival.", tmdbId: 110492 },
+  { title: "Money Heist", year: 2017, type: "series", language: "es", tags: ["passport"], curatorNote: "Álex Pina's Spanish heist phenomenon: a criminal mastermind known only as The Professor orchestrates an audacious robbery on Spain's Royal Mint while his team dresses as Dalí.", tmdbId: 71446 },
+  { title: "Das Boot", year: 1985, type: "series", language: "de", tags: ["passport"], curatorNote: "Wolfgang Petersen's expanded TV cut of his submarine masterpiece — the full eight-hour claustrophobic odyssey of a U-96 crew in the Battle of the Atlantic.", tmdbId: 1954 },
+  { title: "Dark", year: 2017, type: "series", language: "de", tags: ["passport"], curatorNote: "Germany's first Netflix original: four families in the small town of Winden collide across three time periods as a child's disappearance unravels generations of secrets.", tmdbId: 70523 },
+  { title: "My Brilliant Friend", year: 2018, type: "series", language: "it", tags: ["passport"], curatorNote: "Saverio Costanzo's ravishing HBO/RAI adaptation of Elena Ferrante's Neapolitan novels — two women's sixty-year friendship through poverty, violence, and ambition in postwar Naples.", tmdbId: 79008 },
+  { title: "Borgen", year: 2010, type: "series", language: "da", tags: ["passport"], curatorNote: "Adam Price's Danish political drama follows Birgitte Nyborg as she unexpectedly becomes Denmark's first female prime minister — one of TV's finest portraits of power and its price.", tmdbId: 40008 },
+  { title: "Extraordinary Attorney Woo", year: 2022, type: "series", language: "ko", tags: ["passport"], curatorNote: "A whip-smart young lawyer with autism navigates Seoul's legal world — ENA's breakout hit balances courtroom drama with genuine warmth and the best whale monologues on television.", tmdbId: 200014 },
+
+  // S2 — Korea I
+  { title: "Moving", year: 2023, type: "series", language: "ko", tags: ["passport"], curatorNote: "Disney+'s most expensive Korean production: the children of secret government agents discover their parents' past as new threats emerge — a superhero drama with real emotional weight.", tmdbId: 209867 },
+  { title: "Crash Landing on You", year: 2019, type: "series", language: "ko", tags: ["passport"], curatorNote: "A South Korean heiress crash-lands in North Korea after a paragliding accident and falls for the military officer who finds her — tvN's romantic phenomenon that made Hyun Bin and Son Ye-jin global stars.", tmdbId: 94796 },
+  { title: "Sandglass", year: 1995, type: "series", language: "ko", tags: ["passport"], curatorNote: "MBC's landmark 1995 drama set across three decades of Korean history, from the Gwangju Uprising to the fall of military dictatorship — the series that stopped a nation.", tmdbId: 100007 },
+  { title: "My Mister", year: 2018, type: "series", language: "ko", tags: ["passport"], curatorNote: "A middle-aged engineer and a young woman living parallel lives of silent suffering form an unlikely bond in tvN's quiet, devastating masterwork about dignity and human connection.", tmdbId: 76023 },
+  { title: "Misaeng: Incomplete Life", year: 2014, type: "series", language: "ko", tags: ["passport"], curatorNote: "tvN's beloved workplace drama follows a former Go prodigy who failed his professional exam and enters corporate life as a temporary employee — an honest, aching portrait of modern labor.", tmdbId: 62127 },
+  { title: "Kingdom", year: 2019, type: "series", language: "ko", tags: ["passport"], curatorNote: "Netflix's prestige Joseon-era zombie thriller: a crown prince investigating his father's mysterious illness discovers a plague spreading through the countryside — gorgeous, terrifying, and politically sharp.", tmdbId: 83267 },
+  { title: "Hospital Playlist", year: 2020, type: "series", language: "ko", tags: ["passport"], curatorNote: "Five doctors who've been friends since medical school navigate patients, colleagues, and their band rehearsals — tvN's warm ensemble drama about the people who hold hospitals together.", tmdbId: 97061 },
+
+  // S3 — Japan I
+  { title: "First Love", year: 2022, type: "series", language: "ja", tags: ["passport"], curatorNote: "Yuki Tanada's Netflix romance weaves two timelines across twenty years as two people who loved each other in youth orbit back together — anchored by Hikaru Utada's songs.", tmdbId: 205881 },
+  { title: "Alice in Borderland", year: 2020, type: "series", language: "ja", tags: ["passport"], curatorNote: "A disaffected young man and his friends wake up in a deserted Tokyo where survival means playing deadly games — Shinsuke Sato's Netflix thriller is a kinetic, inventive dystopia.", tmdbId: 110316 },
+  { title: "Oshin", year: 1983, type: "series", language: "ja", tags: ["passport"], curatorNote: "NHK's iconic morning drama follows a girl sold into servitude in 1907 Meiji Japan across eight decades of a country's transformation — the most-watched Japanese series ever broadcast.", tmdbId: 18289 },
+  { title: "Midnight Diner: Tokyo Stories", year: 2016, type: "series", language: "ja", tags: ["passport"], curatorNote: "A small Tokyo diner open only from midnight to 7am serves regulars who share stories — Joji Matsuoka's gentle anthology is the warmest place on television.", tmdbId: 68408 },
+  { title: "The Makanai: Cooking for the Maiko House", year: 2023, type: "series", language: "ja", tags: ["passport"], curatorNote: "Hirokazu Kore-eda directs this Netflix series about a girl who becomes the cook for a Kyoto maiko house after failing the geisha exams — a quiet, nourishing portrait of found family.", tmdbId: 209572 },
+  { title: "Gannibal", year: 2022, type: "series", language: "ja", tags: ["passport"], curatorNote: "A police officer assigned to a remote Japanese village discovers his new community may harbor cannibalistic secrets — Disney+'s rural horror series is genuinely unsettling.", tmdbId: 204825 },
+  { title: "The Full-Time Wife Escapist", year: 2016, type: "series", language: "ja", tags: ["passport"], curatorNote: "An unemployed woman and a man who hates dealing with people enter a fake marriage of convenience — TBS's workplace-domestic hybrid is clever, funny, and quietly subversive about gender roles.", tmdbId: 67236 },
+
+  // S4 — Spain
+  { title: "The Snow Girl", year: 2023, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix España's thriller follows a journalist who becomes obsessed with a five-year-old cold case — a girl who vanished from a Málaga parade — and discovers her investigation may be rigged.", tmdbId: 193516 },
+  { title: "Elite", year: 2018, type: "series", language: "es", tags: ["passport"], curatorNote: "Three working-class students on scholarship enter Las Encinas, Spain's most exclusive private school, and a murder unravels the class tensions beneath the privilege — Netflix's Spanish sensation.", tmdbId: 76396 },
+  { title: "The Ministry of Time", year: 2015, type: "series", language: "es", tags: ["passport"], curatorNote: "TVE's ingenious Spanish sci-fi follows a secret government department that guards historical time doors — a playful, brainy series that treats Spanish history as its playground.", tmdbId: 61274 },
+  { title: "The Innocent", year: 2021, type: "series", language: "es", tags: ["passport"], curatorNote: "Oriol Paulo adapts Harlan Coben's novel for Netflix España: a man who killed someone accidentally nine years ago finds his new life unraveling when his wife's secret past resurfaces.", tmdbId: 117283 },
+  { title: "The Mess You Leave Behind", year: 2020, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix España's Galician thriller: a new literature teacher at a high school discovers her predecessor died under suspicious circumstances — and her students know more than they'll say.", tmdbId: 107814 },
+  { title: "Patria", year: 2020, type: "series", language: "es", tags: ["passport"], curatorNote: "Fernando Aramburu's novel becomes HBO España's shattering series: two lifelong friends whose families were torn apart by ETA terrorism try to understand what they lost and who they became.", tmdbId: 103093 },
+  { title: "Paquita Salas", year: 2016, type: "series", language: "es", tags: ["passport"], curatorNote: "Flooxer/Netflix's mockumentary about a deluded, devoted talent agent from the 1990s trying to stay relevant — a deeply funny, unexpectedly tender comedy about loyalty and obsolescence.", tmdbId: 69654 },
+
+  // S5 — France
+  { title: "Drops of God", year: 2023, type: "series", language: "fr", tags: ["passport"], curatorNote: "Apple TV+'s Franco-Japanese co-production: a legendary wine critic's daughter and a rival sommelier compete to inherit his estate by identifying twelve wines he called his 'apostles.'", tmdbId: 203933 },
+  { title: "Call My Agent!", year: 2015, type: "series", language: "fr", tags: ["passport"], curatorNote: "France 2's beloved backstage comedy follows the chaotic Paris talent agency ASK whose agents must keep their famous clients happy while their firm teeters on collapse — celebrity cameos and all.", tmdbId: 65798 },
+  { title: "Maigret", year: 1991, type: "series", language: "fr", tags: ["passport"], curatorNote: "Bruno Cremer's definitive portrayal of Simenon's Commissaire Maigret: twelve years of meticulous French procedurals built on psychology rather than action, atmosphere over plot.", tmdbId: 18731 },
+  { title: "The Bureau", year: 2015, type: "series", language: "fr", tags: ["passport"], curatorNote: "Canal+'s espionage masterpiece follows a French intelligence officer returning from a deep cover mission — only to find himself falling for a woman he met undercover. Five seasons of intricate, humane spy drama.", tmdbId: 61889 },
+  { title: "Black Spot", year: 2017, type: "series", language: "fr", tags: ["passport"], curatorNote: "France 2's eerie Nordic-noir set in an isolated forest town with an inexplicably high murder rate — a woman mayor and a city-assigned detective circle each other and the forest's ancient secrets.", tmdbId: 71948 },
+  { title: "The Returned", year: 2012, type: "series", language: "fr", tags: ["passport"], curatorNote: "Fabrice Gobert's Canal+ supernatural drama: the dead quietly return to a French mountain town, unchanged, unaware they died — an atmosphere of dread and grief unlike anything else on television.", tmdbId: 46298 },
+  { title: "A Very Secret Service", year: 2015, type: "series", language: "fr", tags: ["passport"], curatorNote: "Canal+'s period spy comedy set in 1960 French intelligence: a naive young agent discovers his handlers care more about France's reputation than any actual espionage — absurdist, sharp, and gloriously deadpan.", tmdbId: 64822 },
+
+  // S6 — Germany
+  { title: "The Empress", year: 2022, type: "series", language: "de", tags: ["passport"], curatorNote: "Netflix's lush reimagining of Elisabeth of Austria's early reign — the young empress navigating the Habsburg court's politics and her complicated marriage to Franz Joseph with a modern sensibility.", tmdbId: 205241 },
+  { title: "Babylon Berlin", year: 2017, type: "series", language: "de", tags: ["passport"], curatorNote: "Tom Tykwer and the Arnolds' decadent, operatic portrait of Weimar-era Berlin: a traumatized detective from Cologne arrives in a city of jazz clubs, political violence, and criminal conspiracies.", tmdbId: 70741 },
+  { title: "Heimat", year: 1984, type: "series", language: "de", tags: ["passport"], curatorNote: "Edgar Reitz's monumental fifteen-hour chronicle of one Hunsrück village from 1919 to 1982 — a German family saga that treats ordinary lives with the patience and depth of great literature.", tmdbId: 41490 },
+  { title: "Deutschland 83", year: 2015, type: "series", language: "de", tags: ["passport"], curatorNote: "Anna Winger's spy thriller drops a young East German soldier into West Germany as an undercover agent in 1983 — the first German series to air on American television.", tmdbId: 62683 },
+  { title: "The Same Sky", year: 2017, type: "series", language: "de", tags: ["passport"], curatorNote: "ZDF's Cold War thriller: a West German government official becomes entangled with an East German 'Romeo spy' sent to seduce NATO secrets out of her — atmospheric and morally precise.", tmdbId: 68085 },
+  { title: "The Interpreter of Silence", year: 2023, type: "series", language: "de", tags: ["passport"], curatorNote: "ARD Mediathek's six-part thriller follows a sign-language interpreter pulled into a murder investigation when she alone understands what a deaf witness is trying to say.", tmdbId: 237456 },
+  { title: "How to Sell Drugs Online (Fast)", year: 2019, type: "series", language: "de", tags: ["passport"], curatorNote: "Netflix's German comedy-thriller riffs on a true story: a teenager builds Europe's largest online drug marketplace from his bedroom to impress his ex-girlfriend — fast, funny, and surprisingly moral.", tmdbId: 90462 },
+
+  // S7 — Scandinavia I
+  { title: "The Chestnut Man", year: 2021, type: "series", language: "da", tags: ["passport"], curatorNote: "Netflix/DR's Danish serial killer thriller: detectives hunting a methodical murderer who leaves small figurines made of chestnuts — adapted from Søren Sveistrup's novel with cold Nordic precision.", tmdbId: 130987 },
+  { title: "The Bridge", year: 2011, type: "series", language: "da", tags: ["passport"], curatorNote: "A body found exactly on the border between Sweden and Denmark forces police from both countries to work together — SVT/DR's defining Scandi-noir launched a thousand imitators and none have matched it.", tmdbId: 45016 },
+  { title: "The Kingdom", year: 1994, type: "series", language: "da", tags: ["passport"], curatorNote: "Lars von Trier's DR miniseries set in a Copenhagen hospital built on ancient marshland — where the supernatural and the medical bureaucracy collide in ways that are blackly funny and genuinely frightening.", tmdbId: 13406 },
+  { title: "Trapped", year: 2015, type: "series", language: "is", tags: ["passport"], curatorNote: "RÚV's Icelandic crime drama set in a remote fjord town cut off by a blizzard — a body washes ashore the same night a ferry docks, and the local police chief must solve a murder with no way out.", tmdbId: 65069 },
+  { title: "The Valhalla Murders", year: 2019, type: "series", language: "is", tags: ["passport"], curatorNote: "RÚV's Icelandic procedural pairs a Reykjavík detective with a psychologist tracking a serial killer connecting murders across Iceland — spare, atmospheric, and unexpectedly human.", tmdbId: 92315 },
+  { title: "The Killing", year: 2007, type: "series", language: "da", tags: ["passport"], curatorNote: "DR's Sarah Lund trilogy that launched the global Scandi-noir wave — each season follows a single case across weeks of real time, with Sofie Gråbøl's detective becoming one of television's great characters.", tmdbId: 31374 },
+  { title: "Norsemen", year: 2016, type: "series", language: "no", tags: ["passport"], curatorNote: "NRK's Viking sitcom shot simultaneously in Norwegian and English: a clan of squabbling Norsemen navigate raids, politics, and anachronistic modern attitudes with perfectly straight faces.", tmdbId: 67008 },
+
+  // S8 — Italy
+  { title: "The Law According to Lidia Poët", year: 2023, type: "series", language: "it", tags: ["passport"], curatorNote: "Netflix Italia's period legal drama inspired by the first woman admitted to the Italian bar in 1883 — disbarred immediately, she continues practicing through her brother's firm, solving crimes in Turin.", tmdbId: 201440 },
+  { title: "Gomorrah", year: 2014, type: "series", language: "it", tags: ["passport"], curatorNote: "Stefano Sollima's Sky Atlantic crime epic charts the brutal internal politics of the Neapolitan Camorra — five seasons of moral ambiguity, visceral violence, and operatic tragedy.", tmdbId: 60866 },
+  { title: "The Octopus", year: 1984, type: "series", language: "it", tags: ["passport"], curatorNote: "RAI's landmark miniseries about a Palermo police commissioner waging war against the Sicilian Mafia — the series that made Italians confront the organization they preferred not to name.", tmdbId: 29015 },
+  { title: "Suburra: Blood on Rome", year: 2017, type: "series", language: "it", tags: ["passport"], curatorNote: "Netflix Italia's prequel to the 2015 film traces three young men — a criminal, a politician's son, and a gypsy clan heir — whose fates converge in Rome's corrupt political underground.", tmdbId: 71668 },
+  { title: "The Trial", year: 2019, type: "series", language: "it", tags: ["passport"], curatorNote: "Netflix Italia's legal thriller puts a young public prosecutor on trial for the murder of a girl she claimed to be protecting — a taut, layered inversion of the courtroom drama.", tmdbId: 97719 },
+  { title: "The Young Pope", year: 2016, type: "series", language: "it", tags: ["passport"], curatorNote: "Paolo Sorrentino's HBO/Sky co-production: Jude Law as a young, reactionary, possibly sainted American elected Pope — a delirious meditation on faith, power, and Sorrentino's own Vatican hallucinations.", tmdbId: 67644 },
+  { title: "The Bad Guy", year: 2022, type: "series", language: "it", tags: ["passport"], curatorNote: "Amazon Prime Italia's dark Sicilian comedy: an anti-mafia prosecutor wrongly convicted as a mafioso decides to lean into his new identity — a wild, satirical ride through Italian criminality and bureaucracy.", tmdbId: 208905 },
+
+  // S9 — Latin America
+  { title: "The Envoys", year: 2021, type: "series", language: "es", tags: ["passport"], curatorNote: "Amazon's Mexican supernatural thriller: two Vatican envoys investigate possible miracles in a remote Mexican mountain town where faith, politics, and something older are colliding.", tmdbId: 111534 },
+  { title: "Club de Cuervos", year: 2015, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix's first original Latin American series: a Mexican football club's owner dies and his feuding children fight for control — a sharp family satire with a genuine love for the sport.", tmdbId: 62688 },
+  { title: "The Rich Also Cry", year: 1979, type: "series", language: "es", tags: ["passport"], curatorNote: "Televisa's telenovela landmark that became a global phenomenon: the Salvaterra family's melodrama of inheritance, love, and ruin played in over 70 countries and defined the genre for a generation.", tmdbId: 85729 },
+  { title: "The House of Flowers", year: 2018, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix México's mordant family comedy: the De la Mora clan's florist empire is sustained by secrets, and a suicide in the flower shop front brings them all tumbling out — camp, funny, and savage.", tmdbId: 78306 },
+  { title: "The Secret of the River", year: 2024, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix Colombia's coming-of-age thriller set in 1980s Bogotá: three teenagers discover a body in the river near their school and begin an investigation that pulls them into the city's dangerous undercurrents.", tmdbId: 237918 },
+  { title: "Monarca", year: 2019, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix México's Succession-inflected family drama: the heir of a powerful tequila empire returns home after years abroad and discovers the company's survival depends on moral compromises she never anticipated.", tmdbId: 89555 },
+  { title: "Nothing to See Here", year: 2023, type: "series", language: "es", tags: ["passport"], curatorNote: "Netflix Spain/Mexico co-production: a small town's new mayor discovers a criminal network using her municipality as a transit point — a sharp political comedy that gets darker with every episode.", tmdbId: 231749 },
+
+  // S10 — India
+  { title: "Kohrra", year: 2023, type: "series", language: "pa", tags: ["passport"], curatorNote: "Netflix India's Punjabi-language noir: a grizzled inspector and his young partner investigate the murder of an NRI groom in rural Punjab — a richly atmospheric study of caste, migration, and shame.", tmdbId: 228066 },
+  { title: "Sacred Games", year: 2018, type: "series", language: "hi", tags: ["passport"], curatorNote: "Netflix India's landmark adaptation of Vikram Chandra's novel: a Mumbai police officer receives a call from a gangster promising to save the city in twenty-five days — India's first Netflix original.", tmdbId: 75854 },
+  { title: "Malgudi Days", year: 1987, type: "series", language: "kn", tags: ["passport"], curatorNote: "Shankar Nag's Doordarshan adaptation of R.K. Narayan's stories about the imaginary South Indian town of Malgudi — gentle, wise, and the definitive portrait of a vanishing India.", tmdbId: 33939 },
+  { title: "Delhi Crime", year: 2019, type: "series", language: "hi", tags: ["passport"], curatorNote: "Netflix India's Emmy-winning procedural based on the 2012 Delhi gang rape investigation — DCP Vartika Chaturvedi's team works against time and public outrage in a shattering, measured drama.", tmdbId: 84819 },
+  { title: "Made in Heaven", year: 2019, type: "series", language: "hi", tags: ["passport"], curatorNote: "Zoya Akhtar and Reema Kagti's Amazon Prime series follows Delhi wedding planners navigating the contradictions of modern India — class, queerness, tradition, and aspiration colliding at every reception.", tmdbId: 84718 },
+  { title: "Paatal Lok", year: 2020, type: "series", language: "hi", tags: ["passport"], curatorNote: "Amazon Prime India's crime epic follows an underworld cop assigned an apparently career-defining case who discovers it connects to every layer of Indian society — brutal, layered, and unapologetically political.", tmdbId: 101288 },
+  { title: "Panchayat", year: 2020, type: "series", language: "hi", tags: ["passport"], curatorNote: "Amazon Prime India's understated comedy follows an urban graduate reluctantly posted as secretary to a rural UP village panchayat — a warm, precise sitcom about India's gap between aspiration and reality.", tmdbId: 101289 },
+
+  // S11 — Israel / MENA
+  { title: "Tehran", year: 2020, type: "series", language: "he", tags: ["passport"], curatorNote: "Apple TV+'s Israeli-Iranian espionage thriller: a Mossad hacker infiltrates Tehran on a sabotage mission that quickly unravels — tense, morally complex, and deeply ambivalent about its own premise.", tmdbId: 94997 },
+  { title: "Fauda", year: 2015, type: "series", language: "he", tags: ["passport"], curatorNote: "Lior Raz and Avi Issacharoff's Israeli undercover thriller follows a special forces unit operating in Palestinian territory — viscerally exciting and refusing comfortable moral certainties.", tmdbId: 65013 },
+  { title: "The Spy", year: 2019, type: "series", language: "fr", tags: ["passport"], curatorNote: "Netflix's French-Israeli co-production starring Sacha Baron Cohen as Eli Cohen, the legendary Mossad agent who infiltrated the highest levels of Syrian government in the 1960s.", tmdbId: 89560 },
+  { title: "Valley of Tears", year: 2020, type: "series", language: "he", tags: ["passport"], curatorNote: "HOT's epic dramatization of Israel's most traumatic war — the 1973 Yom Kippur War — following soldiers and civilians across the Sinai and Golan fronts in the first days of catastrophic surprise.", tmdbId: 113110 },
+  { title: "Our Boys", year: 2019, type: "series", language: "he", tags: ["passport"], curatorNote: "HBO/HOT's unflinching miniseries about the 2014 murder of a Palestinian teenager by Israeli extremists and the investigations that followed — a moral gut-punch that neither side wanted made.", tmdbId: 95117 },
+  { title: "The Honourable Woman", year: 2014, type: "series", language: "en", tags: ["critics"], curatorNote: "Hugo Blick's BBC/Sundance miniseries: Maggie Gyllenhaal as a British-Israeli arms heiress trying to make peace with the Palestinians — a slow-burn intelligence thriller of almost unbearable tension.", tmdbId: 59977 },
+  { title: "The Beauty Queen of Jerusalem", year: 2021, type: "series", language: "he", tags: ["passport"], curatorNote: "Netflix Israel's multigenerational family epic spans over a century of Jerusalem's Sephardic Jewish community — from Ottoman rule through Israeli independence and beyond, told through four generations of women.", tmdbId: 113572 },
+
+  // S12 — Africa
+  { title: "Blood & Water", year: 2020, type: "series", language: "en", tags: ["crowd"], curatorNote: "Netflix South Africa's teen thriller: a high-schooler transfers to an elite Cape Town school after spotting a classmate who may be her kidnapped sister — binge-worthy and proudly South African.", tmdbId: 107884 },
+  { title: "Queen Sono", year: 2020, type: "series", language: "en", tags: ["crowd"], curatorNote: "Netflix's first African original: Pearl Thusi as a South African intelligence operative balancing missions across the continent with her complicated family legacy — slick, pan-African, and hugely fun.", tmdbId: 100088 },
+  { title: "Shaka Zulu", year: 1986, type: "series", language: "en", tags: ["crowd"], curatorNote: "SABC's controversial 1986 epic dramatizes the life of the Zulu king — a massively expensive production that remains the most ambitious South African television drama ever made.", tmdbId: 12910 },
+  { title: "Shaka iLembe", year: 2023, type: "series", language: "zu", tags: ["passport"], curatorNote: "Mzansi Magic's Zulu-language retelling of the Shaka saga — filmed in isiZulu with a large indigenous cast, reclaiming the story from outside perspectives with scope and cultural specificity.", tmdbId: 237003 },
+  { title: "Savage Beauty", year: 2022, type: "series", language: "en", tags: ["crowd"], curatorNote: "Netflix South Africa's revenge thriller: a mysterious woman infiltrates a beauty empire to destroy the family that ruined her life — soapy, stylish, and addictively plotted.", tmdbId: 194411 },
+  { title: "King of Boys: The Return of the King", year: 2021, type: "series", language: "en", tags: ["crowd"], curatorNote: "Netflix Nigeria's sequel series to Kemi Adetiba's film: Alhaja Eniola Salami returns from exile to reclaim her criminal empire in Lagos — Sola Sobowale commands every scene she's in.", tmdbId: 194284 },
+  { title: "How to Ruin Christmas", year: 2020, type: "series", language: "en", tags: ["crowd"], curatorNote: "Netflix South Africa's holiday comedy series: the chaotic Tuwane family reunion goes spectacularly wrong when the bad sister returns for her sibling's Christmas wedding — warm, funny, and proudly South African.", tmdbId: 114471 },
+
+  // S13 — Australia / New Zealand
+  { title: "The Lost Flowers of Alice Hart", year: 2023, type: "series", language: "en", tags: ["crowd"], curatorNote: "Amazon Prime's Australian adaptation of Holly Ringland's novel: a girl traumatized by her family's violent past finds refuge on her grandmother's wildflower farm — and discovers its own secrets.", tmdbId: 194200 },
+  { title: "Wentworth", year: 2013, type: "series", language: "en", tags: ["crowd"], curatorNote: "Foxtel's gritty reimagining of Prisoner for a contemporary audience: Bea Smith enters Wentworth Correctional Centre and the full machinery of prison politics — a relentlessly intense women's prison drama.", tmdbId: 55621 },
+  { title: "A Country Practice", year: 1981, type: "series", language: "en", tags: ["crowd"], curatorNote: "Seven Network's long-running rural drama set in the fictional town of Wandin Valley — seventeen seasons of Australian life, social issues, and the country practice that served as its moral center.", tmdbId: 9067 },
+  { title: "Mystery Road", year: 2018, type: "series", language: "en", tags: ["crowd"], curatorNote: "ABC's Australian neo-noir series expanding from Ivan Sen's films: Detective Jay Swan investigates crimes at the intersection of white and Indigenous communities — gorgeous, slow, and morally searching.", tmdbId: 78301 },
+  { title: "The Newsreader", year: 2021, type: "series", language: "en", tags: ["crowd"], curatorNote: "ABC Australia's period drama set in a 1986 Melbourne newsroom during the AIDS crisis and space shuttle disaster — a precise, compassionate portrait of television journalism and the people inside it.", tmdbId: 131906 },
+  { title: "Top of the Lake", year: 2013, type: "series", language: "en", tags: ["critics"], curatorNote: "Jane Campion's BBC/Sundance co-production: a detective returns to a New Zealand lakeside town to investigate a twelve-year-old's pregnancy — atmospheric, feminist, and genuinely disturbing.", tmdbId: 47102 },
+  { title: "Deadloch", year: 2023, type: "series", language: "en", tags: ["crowd"], curatorNote: "Amazon Prime Australia's feminist crime comedy: a by-the-book detective arrives in a remote Tasmanian tourist town to assist the local officer in a murder investigation — sharp, funny, and deeply queer.", tmdbId: 216225 },
+
+  // S14 — Canada
+  { title: "Little Bird", year: 2023, type: "series", language: "en", tags: ["crowd"], curatorNote: "CBC's powerful miniseries based on the Sixties Scoop — a Cree-Métis woman searches for her birth family decades after being taken from her community as a child — a necessary and deeply felt drama.", tmdbId: 219236 },
+  { title: "Schitt's Creek", year: 2015, type: "series", language: "en", tags: ["crowd"], curatorNote: "Eugene and Daniel Levy's CBC comedy about the wealthy Rose family forced to relocate to a small town they once bought as a joke — the show that proved a sitcom could end perfectly.", tmdbId: 64197 },
+  { title: "Degrassi Junior High", year: 1987, type: "series", language: "en", tags: ["crowd"], curatorNote: "CBC's groundbreaking teen drama tackled abortion, AIDS, drug use, and sexuality in 1987 with a naturalism that made it essential viewing for an entire generation of Canadian teenagers.", tmdbId: 12424 },
+  { title: "Cardinal", year: 2017, type: "series", language: "en", tags: ["crowd"], curatorNote: "CTV's atmospheric Canadian thriller set in Northern Ontario: Detective John Cardinal investigates the murder of a missing girl while Internal Affairs investigates him — grim, quiet, and beautifully shot.", tmdbId: 68165 },
+  { title: "Sort Of", year: 2021, type: "series", language: "en", tags: ["crowd"], curatorNote: "HBO Max/CBC's tender Toronto comedy-drama about Sabi, a gender-fluid Pakistani-Canadian finding their way between their immigrant family's expectations and a chosen family of queerness and care.", tmdbId: 132451 },
+  { title: "Anne with an E", year: 2017, type: "series", language: "en", tags: ["crowd"], curatorNote: "CBC/Netflix's reimagining of Anne of Green Gables takes the orphan's story seriously as a trauma narrative — Amybeth McNulty's Anne is fiercely modern while remaining faithful to Montgomery's spirit.", tmdbId: 67236 },
+  { title: "Kim's Convenience", year: 2016, type: "series", language: "en", tags: ["crowd"], curatorNote: "CBC's warm family sitcom about a Korean-Canadian family running a Toronto convenience store — Ins Choi's stage play adaptation became a gentle, funny portrait of diaspora and generational misunderstanding.", tmdbId: 67378 },
+
+  // S15 — UK / Ireland
+  { title: "The Gold", year: 2023, type: "series", language: "en", tags: ["crowd"], curatorNote: "BBC One's dramatization of the 1983 Brinks-Mat gold bullion robbery — the largest heist in British history, and the decade of chaos and corruption that followed as the gold was laundered.", tmdbId: 218127 },
+  { title: "Derry Girls", year: 2018, type: "series", language: "en", tags: ["crowd"], curatorNote: "Lisa McGee's Channel 4 comedy set in 1990s Northern Ireland: five teenagers navigate the Troubles, Catholic school, and the constant indignity of being young — the funniest show about history ever made.", tmdbId: 74897 },
+  { title: "Brideshead Revisited", year: 1981, type: "series", language: "en", tags: ["crowd"], curatorNote: "ITV's eleven-episode adaptation of Evelyn Waugh's novel — Jeremy Irons and Anthony Andrews as Oxford friends whose lives intertwine with the Flyte family across decades, faith, and war.", tmdbId: 1416 },
+  { title: "Giri/Haji", year: 2019, type: "series", language: "en", tags: ["critics"], curatorNote: "BBC Two's bilingual thriller: a Tokyo detective travels to London to find his brother suspected of a Yakuza murder — switching languages as it switches worlds, with a finale that uses dance instead of dialogue.", tmdbId: 90993 },
+  { title: "The Virtues", year: 2019, type: "series", language: "en", tags: ["surprise"], curatorNote: "Shane Meadows's Channel 4 miniseries follows a Manchester man traveling to Ireland to confront a childhood trauma — elliptical, devastating, and unlike anything else on television.", tmdbId: 91613 },
+  { title: "Happy Valley", year: 2014, type: "series", language: "en", tags: ["critics"], curatorNote: "Sally Wainwright's BBC One crime drama: a Yorkshire police sergeant becomes entangled with a local drug dealer and a kidnapping connected to the man who destroyed her family — Sarah Lancashire's definitive performance.", tmdbId: 57205 },
+  { title: "Detectorists", year: 2014, type: "series", language: "en", tags: ["surprise"], curatorNote: "Mackenzie Crook's BAFTA-winning BBC Four comedy about two gentle Essex men searching fields with metal detectors — quietly perfect television about friendship, failure, and the way time passes.", tmdbId: 61550 },
+
+  // S16 — Poland / Czech Republic
+  { title: "The Woods", year: 2020, type: "series", language: "pl", tags: ["passport"], curatorNote: "Netflix Poland's thriller: a Warsaw prosecutor finds a cold case from 1994 — when his sister vanished in the woods — reactivated by a new body, forcing him to confront what happened that summer.", tmdbId: 107113 },
+  { title: "The Mire", year: 2018, type: "series", language: "pl", tags: ["passport"], curatorNote: "Netflix Poland's period noir set in a 1980s industrial town: a local reporter and a party journalist investigate the murder of a teenage girl while navigating the last years of communist Poland.", tmdbId: 93728 },
+  { title: "Dekalog", year: 1989, type: "series", language: "pl", tags: ["passport"], curatorNote: "Krzysztof Kieślowski's ten-film cycle for Polish television — each a meditation on one of the Ten Commandments set in a Warsaw housing block — the greatest work ever made for the small screen.", tmdbId: 14977 },
+  { title: "1983", year: 2018, type: "series", language: "pl", tags: ["passport"], curatorNote: "Netflix Poland's alternate history: a law student and a rogue detective investigate a conspiracy in a Poland where communism never fell after a 1983 terrorist attack changed the country's trajectory.", tmdbId: 80421 },
+  { title: "The Sleepers", year: 2019, type: "series", language: "cs", tags: ["passport"], curatorNote: "Netflix Czech Republic's Cold War thriller: the discovery of a decades-old body reopens a case about sleeper agents from the communist era — and what it means to have been on the wrong side of history.", tmdbId: 94501 },
+  { title: "Burning Bush", year: 2013, type: "series", language: "cs", tags: ["passport"], curatorNote: "Agnieszka Holland's HBO Europe miniseries about Jan Palach — the Czech student who set himself on fire in 1969 to protest the Soviet occupation — and the lawyer who fought for his memory.", tmdbId: 61265 },
+  { title: "The Defence", year: 2018, type: "series", language: "cs", tags: ["passport"], curatorNote: "HBO Europe's Czech legal thriller follows a brilliant defense lawyer whose methods are as morally questionable as her clients — a sharp character study set against Prague's post-communist legal system.", tmdbId: 87018 },
+
+  // S17 — China / Taiwan
+  { title: "The Longest Promise", year: 2023, type: "series", language: "zh", tags: ["passport"], curatorNote: "iQIYI's xianxia fantasy epic: a young woman from a hunted tribe is trained by the most powerful immortal cultivator as his disciple, unaware of the destiny binding them across lifetimes.", tmdbId: 220154 },
+  { title: "Reset", year: 2022, type: "series", language: "zh", tags: ["passport"], curatorNote: "iQIYI's time-loop thriller: a woman and a student are the only survivors of a bus explosion who discover they're trapped reliving the same catastrophic forty-five minutes and must find a way to stop it.", tmdbId: 206490 },
+  { title: "The Bund", year: 1980, type: "series", language: "zh", tags: ["passport"], curatorNote: "TVB's landmark Hong Kong gangster epic set in 1930s Shanghai — Chow Yun-fat's star-making role as a charming criminal rising through the city's criminal hierarchy changed Hong Kong television forever.", tmdbId: 33849 },
+  { title: "The Bad Kids", year: 2020, type: "series", language: "zh", tags: ["passport"], curatorNote: "Youku's critically acclaimed thriller: three children accidentally film a murder and use the footage as leverage — a tense, morally sophisticated crime drama that became mainland China's most discussed series.", tmdbId: 115238 },
+  { title: "A Murderous Affair in Horizon Tower", year: 2020, type: "series", language: "zh", tags: ["passport"], curatorNote: "iQIYI's procedural about detectives investigating a murder in a luxury apartment building — a tightly plotted Chinese crime series that earned its reputation for intelligence and restraint.", tmdbId: 107415 },
+  { title: "The Long Season", year: 2023, type: "series", language: "zh", tags: ["passport"], curatorNote: "iQIYI's neo-noir set across three time periods in a rust-belt northeastern Chinese city — a retired factory worker searches for his missing son and uncovers a crime that spans decades.", tmdbId: 224222 },
+  { title: "Someday or One Day", year: 2019, type: "series", language: "zh", tags: ["passport"], curatorNote: "Taiwanese time-travel romance: a young woman grieving her boyfriend wakes up in 1998 in the body of a girl who resembles her — a twisty, emotionally devastating mystery about love, fate, and identity.", tmdbId: 93390 },
+
+  // S18 — Southeast Asia / Mixed
+  { title: "Cigarette Girl", year: 2023, type: "series", language: "id", tags: ["passport"], curatorNote: "Netflix Indonesia's period drama spans the 1960s and 2010s: a clove cigarette factory worker's story is revealed through her grandson's search for the truth about his family — gorgeous and melancholic.", tmdbId: 228471 },
+  { title: "The Glory", year: 2022, type: "series", language: "ko", tags: ["passport"], curatorNote: "Kim Eun-sook's Netflix K-drama about a woman who methodically dismantles the lives of the classmates who brutalized her in school — Song Hye-kyo's controlled, cold performance anchors something genuinely disturbing.", tmdbId: 208167 },
+  { title: "Meteor Garden", year: 2001, type: "series", language: "zh", tags: ["passport"], curatorNote: "The original Taiwanese adaptation of the manga Hana Yori Dango that launched a thousand remakes — a scholarship girl at an elite school defies the F4, a quartet of wealthy boys who rule the campus.", tmdbId: 32826 },
+  { title: "Girl from Nowhere", year: 2018, type: "series", language: "th", tags: ["passport"], curatorNote: "Netflix Thailand's dark anthology: Nanno, a mysterious transfer student who appears at a different school each episode and exposes the hypocrisies lurking beneath the surface — stylish and genuinely unsettling.", tmdbId: 83074 },
+  { title: "The Ghost Bride", year: 2020, type: "series", language: "ms", tags: ["passport"], curatorNote: "Netflix Malaysia's fantasy drama based on Yangsze Choo's novel: a young Chinese-Malaysian woman in 1890s Malacca is asked to become a ghost bride for a dead young man and becomes entangled in the world of the dead.", tmdbId: 96419 },
+  { title: "The World Between Us", year: 2019, type: "series", language: "zh", tags: ["passport"], curatorNote: "Taiwan's Public Television Service's landmark drama explores the aftermath of a random mass shooting from multiple perspectives — the killer's family, the victims, the lawyers — one of the finest series ever made in Asia.", tmdbId: 88523 },
+  { title: "The Good Detective", year: 2020, type: "series", language: "ko", tags: ["passport"], curatorNote: "JTBC's procedural drama about an honest detective and his morally flexible partner — quietly compelling in its study of institutional corruption and the cost of maintaining principles inside a broken system.", tmdbId: 108978 },
+
+  // S19 — Belgium / Austria
+  { title: "The Twelve", year: 2019, type: "series", language: "nl", tags: ["passport"], curatorNote: "One's Belgian legal drama follows twelve jurors deliberating a notorious murder trial — as the case unfolds, the jury members' own secrets and prejudices emerge in a chamber piece of quiet intensity.", tmdbId: 91762 },
+  { title: "Undercover", year: 2019, type: "series", language: "nl", tags: ["passport"], curatorNote: "Netflix Belgium's bilingual thriller based on a true story: two undercover cops posing as a couple infiltrate the world of the world's largest ecstasy producer on the Dutch-Belgian border.", tmdbId: 89073 },
+  { title: "Inspector Rex", year: 1994, type: "series", language: "de", tags: ["passport"], curatorNote: "ORF Austria's beloved police procedural starring a German Shepherd detective dog working Vienna's homicide division — seventeen seasons across Austria and Italy made Rex the most famous TV dog in Europe.", tmdbId: 36249 },
+  { title: "Professor T.", year: 2015, type: "series", language: "nl", tags: ["passport"], curatorNote: "ONE's Belgian crime drama featuring a brilliant but misanthropic criminology professor reluctantly consulted by the Ghent police — dry, witty, and anchored by Koen De Bouw's impeccable performance.", tmdbId: 62195 },
+  { title: "The Break", year: 2016, type: "series", language: "fr", tags: ["passport"], curatorNote: "RTBF/Netflix Belgium's Wallonian noir: a Brussels detective returns to his hometown in the Ardennes for a career break and becomes embroiled in the murder of a young footballer — atmospheric and unhurried.", tmdbId: 67041 },
+  { title: "Tabula Rasa", year: 2017, type: "series", language: "nl", tags: ["passport"], curatorNote: "Vier's Belgian psychological thriller: a woman with anterograde amnesia is told she's the key witness to a missing person's case — she just can't remember what she saw. A tense, formally inventive thriller.", tmdbId: 74143 },
+  { title: "Clan", year: 2012, type: "series", language: "nl", tags: ["passport"], curatorNote: "VRT's Flemish black comedy about a family of women who accidentally kill the abusive husband of one of the sisters and then work together to dispose of the body — hilarious and surprisingly dark.", tmdbId: 46856 },
+
+  // S20 — Sweden / Scandinavia II
+  { title: "The Playlist", year: 2022, type: "series", language: "sv", tags: ["passport"], curatorNote: "Netflix's Swedish dramatization of Spotify's founding: six perspectives on how Daniel Ek and Martin Lorentzon built the streaming service that changed music — and the artists who lost the most in the process.", tmdbId: 175875 },
+  { title: "Young Royals", year: 2021, type: "series", language: "sv", tags: ["passport"], curatorNote: "Netflix Sweden's Prince Wilhelm falls for a scholarship student at his elite boarding school — a tender, serious coming-of-age romance about duty, identity, and the cost of living authentically.", tmdbId: 130542 },
+  { title: "Scenes from a Marriage", year: 1973, type: "series", language: "sv", tags: ["passport"], curatorNote: "Ingmar Bergman's SVT miniseries — six episodes charting a marriage's dissolution with Liv Ullmann and Erland Josephson — later recut into a film, but the full version is one of art's most honest examinations of love.", tmdbId: 63320 },
+  { title: "Caliphate", year: 2020, type: "series", language: "sv", tags: ["passport"], curatorNote: "SVT's Swedish terrorism thriller: a SÄPO agent receives a tip from a Swedish woman in ISIS-controlled Syria about an imminent attack in Stockholm — taut, morally serious, and deeply uncomfortable.", tmdbId: 97084 },
+  { title: "Quicksand", year: 2019, type: "series", language: "sv", tags: ["passport"], curatorNote: "Netflix Sweden's adaptation of Malin Persson Giolito's novel: a teenage girl is on trial for a school shooting — the investigation unfolds in flashback, examining privilege, pressure, and complicity.", tmdbId: 83869 },
+  { title: "The Investigation", year: 2020, type: "series", language: "da", tags: ["passport"], curatorNote: "DR's procedural about the investigation of journalist Kim Wall's murder on a submarine — told entirely without depicting the killer, focusing entirely on the painstaking work of finding the truth.", tmdbId: 113963 },
+  { title: "Love & Anarchy", year: 2020, type: "series", language: "sv", tags: ["passport"], curatorNote: "Netflix Sweden's romantic comedy: a digitalization consultant hired to modernize an old Stockholm publishing house enters into a game of escalating dares with a young IT technician — charming, sexy, and surprisingly sharp.", tmdbId: 110491 },
+
+  // S21 — France (series)
+  { title: "Marseille", year: 2016, type: "series", language: "fr", tags: ["passport"], curatorNote: "Netflix France's political drama: Gérard Depardieu as a veteran mayor who discovers his chosen successor has turned against him — a sun-drenched portrait of power, betrayal, and the weight of ambition in France's second city.", tmdbId: 65466 },
 ];
+
+export const INTERNATIONAL_SERIES_POOL_COUNT = INTERNATIONAL_SERIES_EDITORIAL_BATCHES.length;
