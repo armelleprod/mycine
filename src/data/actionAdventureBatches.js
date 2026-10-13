@@ -1,1165 +1,172 @@
-// Generated from My_Cine_Action_Adventure_Database_Definitive_v1.xlsx
-// Editorial batches are the source of truth. TMDB enriches metadata only.
-
 export const ACTION_ADVENTURE_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Fuze",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Raiders of the Lost Ark",
-      "year": 1981,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Seven Samurai",
-      "year": 1954,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "RRR",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Shadow Strays",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Mad Max: Fury Road",
-      "year": 2015,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Everything Everywhere All at Once",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Rip",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Top Gun: Maverick",
-      "year": 2022,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Adventures of Robin Hood",
-      "year": 1938,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Raid",
-      "year": 2011,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Polite Society",
-      "year": 2023,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Die Hard",
-      "year": 1988,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Fall Guy",
-      "year": 2024,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Wrecking Crew",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Mission: Impossible – Fallout",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The General",
-      "year": 1926,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Godzilla Minus One",
-      "year": 2023,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "She Rides Shotgun",
-      "year": 2025,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Matrix",
-      "year": 1999,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Naked Gun",
-      "year": 2025,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Mission: Impossible – The Final Reckoning",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Jurassic Park",
-      "year": 1993,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Wages of Fear",
-      "year": 1953,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Sisu: Road to Revenge",
-      "year": 2025,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Monkey Man",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Lawrence of Arabia",
-      "year": 1962,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Edge of Tomorrow",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Predator: Badlands",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Gladiator",
-      "year": 2000,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Yojimbo",
-      "year": 1961,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Furious",
-      "year": 2025,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Rebel Ridge",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Crouching Tiger, Hidden Dragon",
-      "year": 2000,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Dungeons & Dragons: Honor Among Thieves",
-      "year": 2023,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "One Battle After Another",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Lord of the Rings: The Return of the King",
-      "year": 2003,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Wild Bunch",
-      "year": 1969,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Man from Nowhere",
-      "year": 2010,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Ministry of Ungentlemanly Warfare",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Dark Knight",
-      "year": 2008,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Upgrade",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "F1",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Spider-Man: Into the Spider-Verse",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Hidden Fortress",
-      "year": 1958,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Furiosa: A Mad Max Saga",
-      "year": 2024,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Woman King",
-      "year": 2022,
-      "badge": "💎 Discovery",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Bourne Ultimatum",
-      "year": 2007,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Big Trouble in Little China",
-      "year": 1986,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Predator: Killer of Killers",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Police Story",
-      "year": 1985,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "North by Northwest",
-      "year": 1959,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Casino Royale",
-      "year": 2006,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Riders of Justice",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Princess Mononoke",
-      "year": 1997,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "13 Assassins",
-      "year": 2010,
-      "badge": "✨ Surprise",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Fantastic Four: First Steps",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Lord of the Rings: The Two Towers",
-      "year": 2002,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Ben-Hur",
-      "year": 1959,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Lord of the Rings: The Fellowship of the Ring",
-      "year": 2001,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Ballerina",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Hard Boiled",
-      "year": 1992,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Skyfall",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Dune: Part Two",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Star Wars",
-      "year": 1977,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Good, the Bad and the Ugly",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Oldboy",
-      "year": 2003,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Witch: Part 1. The Subversion",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Sisu",
-      "year": 2023,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Hero",
-      "year": 2002,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Dog Stars",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Fist of Fury",
-      "year": 1972,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Aliens",
-      "year": 1986,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Host",
-      "year": 2006,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Havoc",
-      "year": 2025,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Dredd",
-      "year": 2012,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "House of Flying Daggers",
-      "year": 2004,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Superman",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Enter the Dragon",
-      "year": 1973,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Battle of Algiers",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Snowpiercer",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Nice Guys",
-      "year": 2016,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Taken",
-      "year": 2008,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Once Upon a Time in China",
-      "year": 1991,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Runner",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Empire Strikes Back",
-      "year": 1980,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Killer",
-      "year": 1989,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "GoldenEye",
-      "year": 1995,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Good, the Bad, the Weird",
-      "year": 2008,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "1917",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "La Femme Nikita",
-      "year": 1990,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Thunderbolts*",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Avengers: Endgame",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Akira",
-      "year": 1988,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Ip Man",
-      "year": 2008,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Fifth Element",
-      "year": 1997,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "No Time to Die",
-      "year": 2021,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "District 9",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Mandalorian & Grogu",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Kill Bill: Vol. 1",
-      "year": 2003,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Mad Max 2: The Road Warrior",
-      "year": 1981,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "District B13",
-      "year": 2004,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Eight Hundred",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Raid 2",
-      "year": 2014,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Dunkirk",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Masters of the Universe",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Iron Man",
-      "year": 2008,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Ran",
-      "year": 1985,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Battle Royale",
-      "year": 2000,
-      "badge": "🌍 Passport",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Raging Fire",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Train to Busan",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Léon: The Professional",
-      "year": 1994,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Odyssey",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Black Panther",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Sholay",
-      "year": 1975,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Ong-Bak: Muay Thai Warrior",
-      "year": 2003,
-      "badge": "🌍 Passport",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Kingsman: The Secret Service",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Godzilla Minus Zero",
-      "year": 2026,
-      "badge": "🏆 Critics",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Tenet",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Project Hail Mary",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Spider-Man 2",
-      "year": 2004,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Goldfinger",
-      "year": 1964,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Avatar",
-      "year": 2009,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Star Wars: The Force Awakens",
-      "year": 2015,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "King Kong",
-      "year": 1933,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Conan the Barbarian",
-      "year": 1982,
-      "badge": "✨ Surprise",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Supergirl: Woman of Tomorrow",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Thief of Bagdad",
-      "year": 1940,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Great Escape",
-      "year": 1963,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "John Wick: Chapter 4",
-      "year": 2023,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Old Guard",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Heat",
-      "year": 1995,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Blues Brothers",
-      "year": 1980,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Street Fighter",
-      "year": 2026,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Indiana Jones and the Temple of Doom",
-      "year": 1984,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Jason and the Argonauts",
-      "year": 1963,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A proven high-energy favorite with strong critical recognition, audience appeal or rewatchability.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Inception",
-      "year": 2010,
-      "badge": "🌍 Passport",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Boy Kills World",
-      "year": 2024,
-      "badge": "💎 Discovery",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Jaws",
-      "year": 1975,
-      "badge": "🏆 Critics",
-      "curatorNote": "A defining action or adventure achievement with enduring craft, spectacle and influence.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Fight or Flight",
-      "year": 2025,
-      "badge": "✨ Surprise",
-      "curatorNote": "A distinctive action or adventure film that broadens the Canon through style, culture or discovery value.",
-      "type": "movie",
-      "slot": 7
-    }
-  ]
+  // B01
+  { title: "Fuze", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Unapologetically leaning into its own pulpy excess, Fuze detonates as a stylish thriller with energy, craft, and twists to spare.", tmdbId: 1242265 },
+  { title: "Raiders of the Lost Ark", year: 1981, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The gold standard of adventure filmmaking — Indy, the Ark, and pure cinematic joy.", tmdbId: 85 },
+  { title: "Seven Samurai", year: 1954, type: "movie", language: "ja", tags: ["classic"], curatorNote: "Kurosawa's masterpiece of honor, sacrifice, and collective heroism that defined the action genre.", tmdbId: 346 },
+  { title: "RRR", year: 2022, type: "movie", language: "te", tags: ["passport"], curatorNote: "A delirious Telugu action epic that out-Hollywoods Hollywood — friendship, rebellion, and jaw-dropping spectacle.", tmdbId: 579974 },
+  { title: "The Shadow Strays", year: 2024, type: "movie", language: "id", tags: ["discovery"], curatorNote: "A ferocious Indonesian action film about a young assassin going rogue — visceral, stylish, and relentless.", tmdbId: 1151949 },
+  { title: "Mad Max: Fury Road", year: 2015, type: "movie", language: "en", tags: ["critics"], curatorNote: "Two hours of pure kinetic cinema — Miller's masterwork of practical stunts and feminist fury.", tmdbId: 76341 },
+  { title: "Everything Everywhere All at Once", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A multiverse action comedy that somehow becomes the most emotionally devastating film of its year.", tmdbId: 545611 },
+  // B02
+  { title: "The Rip", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Leveraging Ben Affleck and Matt Damon's classic chemistry, The Rip tears into its potboiler setup with compulsively watchable confidence.", tmdbId: 1306368 },
+  { title: "Top Gun: Maverick", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The rare legacy sequel that surpasses the original — Cruise delivers pure big-screen magic at 30,000 feet.", tmdbId: 361743 },
+  { title: "The Adventures of Robin Hood", year: 1938, type: "movie", language: "en", tags: ["classic"], curatorNote: "Errol Flynn at peak swashbuckling glory — the definitive Robin Hood remains irresistibly charming.", tmdbId: 10907 },
+  { title: "The Raid", year: 2011, type: "movie", language: "id", tags: ["passport"], curatorNote: "An Indonesian action film that redefined close-quarters combat — 100 floors, one cop, zero mercy.", tmdbId: 94329 },
+  { title: "Polite Society", year: 2023, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A British-Pakistani martial arts comedy that's pure genre joy — sisterhood, weddings, and flying kicks.", tmdbId: 977223 },
+  { title: "Die Hard", year: 1988, type: "movie", language: "en", tags: ["critics"], curatorNote: "Yippee-ki-yay — the blueprint for every action thriller since, still impossibly entertaining.", tmdbId: 562 },
+  { title: "The Fall Guy", year: 2024, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A love letter to stuntpeople and movie magic that's more fun than it has any right to be.", tmdbId: 746036 },
+  // B03
+  { title: "The Wrecking Crew", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "As brawny and disarmingly charming as its two leading men — Momoa and Bautista smash through with colorful pyrotechnics.", tmdbId: 1168190 },
+  { title: "Mission: Impossible – Fallout", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The franchise's peak — McQuarrie orchestrates the most sustained action filmmaking of the decade.", tmdbId: 353081 },
+  { title: "The General", year: 1926, type: "movie", language: "en", tags: ["classic"], curatorNote: "Buster Keaton's greatest stunt film — a Civil War chase sequence that still astonishes a century later.", tmdbId: 961 },
+  { title: "Godzilla Minus One", year: 2023, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Japan reclaims its greatest monster with devastating emotional and physical impact — a magnificent achievement.", tmdbId: 940721 },
+  { title: "She Rides Shotgun", year: 2025, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A taut thriller about a father-daughter survival road trip that punches well above its weight.", tmdbId: 1196573 },
+  { title: "The Matrix", year: 1999, type: "movie", language: "en", tags: ["critics"], curatorNote: "Reality-bending action philosophy that changed how films look, move, and think — still thrilling.", tmdbId: 603 },
+  { title: "The Naked Gun", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A surprisingly successful comedy revival that honors the original's anarchic spirit.", tmdbId: 1035259 },
+  // B04
+  { title: "Mission: Impossible – The Final Reckoning", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Tom Cruise's final mission delivers the ultimate action spectacle — a landmark farewell to cinema's great daredevil.", tmdbId: 575265 },
+  { title: "Jurassic Park", year: 1993, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Spielberg's greatest magic trick — dinosaurs that still feel real thirty years on.", tmdbId: 329 },
+  { title: "The Wages of Fear", year: 1953, type: "movie", language: "fr", tags: ["classic"], curatorNote: "A French suspense masterpiece of unbearable tension — four men, two trucks, liquid nitroglycerin.", tmdbId: 204 },
+  { title: "Sisu: Road to Revenge", year: 2025, type: "movie", language: "fi", tags: ["passport"], curatorNote: "The Finnish one-man army returns — brutal, inventive, and wickedly fun Scandinavian vengeance.", tmdbId: 1223601 },
+  { title: "Monkey Man", year: 2024, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Dev Patel's fierce directorial debut — Indian mythology meets John Wick in a furious revenge thriller.", tmdbId: 560016 },
+  { title: "Lawrence of Arabia", year: 1962, type: "movie", language: "en", tags: ["critics"], curatorNote: "David Lean's epic of impossible scale — the desert has never looked so vast, the hero so conflicted.", tmdbId: 947 },
+  { title: "Edge of Tomorrow", year: 2014, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Tom Cruise dies, resets, and improves — a brilliantly constructed sci-fi action comedy hiding in plain sight.", tmdbId: 137113 },
+  // B05
+  { title: "Predator: Badlands", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "A bold new chapter in the Predator saga that expands the mythology in unexpected and thrilling directions.", tmdbId: 1242898 },
+  { title: "Gladiator", year: 2000, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Russell Crowe's defining role — Ridley Scott resurrects the epic with thunderous action and genuine emotion.", tmdbId: 98 },
+  { title: "Yojimbo", year: 1961, type: "movie", language: "ja", tags: ["classic"], curatorNote: "Kurosawa's mercenary samurai plays both sides — the prototype for every cool anti-hero that followed.", tmdbId: 11878 },
+  { title: "The Furious", year: 2025, type: "movie", language: "zh", tags: ["passport"], curatorNote: "Director Tanigaki Kenji delivers a brutal, balletic martial arts extravaganza — 97% on RT for a reason.", tmdbId: 1280738 },
+  { title: "Rebel Ridge", year: 2024, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Jeremy Saulnier strips action down to its essentials — quiet, righteous, and explosive when it matters.", tmdbId: 646097 },
+  { title: "Crouching Tiger, Hidden Dragon", year: 2000, type: "movie", language: "zh", tags: ["critics"], curatorNote: "Ang Lee's wuxia dream of gravity-defying poetry — the film that made the world fall in love with wire-fu.", tmdbId: 146 },
+  { title: "Dungeons & Dragons: Honor Among Thieves", year: 2023, type: "movie", language: "en", tags: ["surprise"], curatorNote: "The D&D movie no one expected to be this good — clever, funny, and genuinely adventurous.", tmdbId: 493529 },
+  // B06
+  { title: "One Battle After Another", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Brad Pitt leads an extraordinary ensemble through Cormac McCarthy's brutal WWII odyssey.", tmdbId: 1054867 },
+  { title: "The Lord of the Rings: The Return of the King", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The most triumphant finale in blockbuster history — eleven Oscars and every one deserved.", tmdbId: 122 },
+  { title: "The Wild Bunch", year: 1969, type: "movie", language: "en", tags: ["classic"], curatorNote: "Peckinpah's elegiac Western rewrote what violence in cinema could mean — brutal, beautiful, unforgettable.", tmdbId: 576 },
+  { title: "The Man from Nowhere", year: 2010, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Won Bin's lone-wolf thriller is Korean action at its most precise and devastating — a modern classic.", tmdbId: 51608 },
+  { title: "The Ministry of Ungentlemanly Warfare", year: 2024, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Guy Ritchie's WWII action romp based on a true story — stylish, irreverent, and great fun.", tmdbId: 799583 },
+  { title: "The Dark Knight", year: 2008, type: "movie", language: "en", tags: ["critics"], curatorNote: "Nolan's crime epic transcended superhero cinema — Heath Ledger's Joker remains cinema's great villain.", tmdbId: 155 },
+  { title: "Upgrade", year: 2018, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A lean, mean sci-fi thriller about a man given lethal AI upgrades — Leigh Whannell's calling card.", tmdbId: 500664 },
+  // B07
+  { title: "F1", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Apple and Kosinski put cameras on actual Formula 1 cars — the most immersive racing film ever made.", tmdbId: 911430 },
+  { title: "Spider-Man: Into the Spider-Verse", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The best Spider-Man film ever made — an animation revolution that redefined what the medium can do.", tmdbId: 324857 },
+  { title: "The Hidden Fortress", year: 1958, type: "movie", language: "ja", tags: ["classic"], curatorNote: "Kurosawa's adventure comedy — the template for Star Wars, and enormously entertaining in its own right.", tmdbId: 1059 },
+  { title: "Furiosa: A Mad Max Saga", year: 2024, type: "movie", language: "en", tags: ["passport"], curatorNote: "George Miller's origin story for Fury Road's greatest character — epic in scope and ambition.", tmdbId: 786892 },
+  { title: "The Woman King", year: 2022, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Viola Davis leads an all-women warrior army — a fierce historical epic Hollywood rarely makes.", tmdbId: 724495 },
+  { title: "The Bourne Ultimatum", year: 2007, type: "movie", language: "en", tags: ["critics"], curatorNote: "The trilogy's apex — Greengrass's kinetic editing and Damon's intensity create the Platonic spy thriller.", tmdbId: 2503 },
+  { title: "Big Trouble in Little China", year: 1986, type: "movie", language: "en", tags: ["surprise"], curatorNote: "John Carpenter's gloriously unhinged action comedy — Kurt Russell at maximum swagger in a neon fever dream.", tmdbId: 6978 },
+  // B08
+  { title: "Predator: Killer of Killers", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "An anthology approach to the Predator universe — bold, vicious, and the most creative entry since the original.", tmdbId: 1376434 },
+  { title: "Police Story", year: 1985, type: "movie", language: "zh", tags: ["crowd"], curatorNote: "Jackie Chan's masterwork — jaw-dropping practical stunts and slapstick comedy in perfect balance.", tmdbId: 9056 },
+  { title: "North by Northwest", year: 1959, type: "movie", language: "en", tags: ["classic"], curatorNote: "Hitchcock's ultimate wrong-man thriller — Cary Grant in a tailored suit outruns spies across America.", tmdbId: 213 },
+  { title: "Casino Royale", year: 2006, type: "movie", language: "en", tags: ["passport"], curatorNote: "Daniel Craig reboots Bond as a brutalist force of nature — the franchise's definitive reinvention.", tmdbId: 36557 },
+  { title: "Riders of Justice", year: 2020, type: "movie", language: "da", tags: ["discovery"], curatorNote: "A Danish dark comedy about statistical revenge — Mads Mikkelsen leads one of the most surprising action films in years.", tmdbId: 663870 },
+  { title: "Princess Mononoke", year: 1997, type: "movie", language: "ja", tags: ["critics"], curatorNote: "Miyazaki's most epic film — an environmental battle poem where there are no true villains, only forces.", tmdbId: 128 },
+  { title: "13 Assassins", year: 2010, type: "movie", language: "ja", tags: ["surprise"], curatorNote: "Miike's samurai masterwork builds to a 45-minute siege — patient, precise, and devastating.", tmdbId: 58857 },
+  // B09
+  { title: "The Fantastic Four: First Steps", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "A retro-futurist MCU triumph that finally does Marvel's First Family justice with heart and spectacle.", tmdbId: 617126 },
+  { title: "The Lord of the Rings: The Two Towers", year: 2002, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The trilogy's propulsive middle chapter — Helm's Deep remains the gold standard of cinematic siege battles.", tmdbId: 121 },
+  { title: "Ben-Hur", year: 1959, type: "movie", language: "en", tags: ["classic"], curatorNote: "The chariot race alone justifies eleven Oscars — epic filmmaking at its most grandly human.", tmdbId: 665 },
+  { title: "The Lord of the Rings: The Fellowship of the Ring", year: 2001, type: "movie", language: "en", tags: ["passport"], curatorNote: "Jackson's miraculous opening chapter — the moment cinema proved fantasy could be genuinely great.", tmdbId: 120 },
+  { title: "Ballerina", year: 2024, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A John Wick spin-off that earns its place in the universe — Ana de Armas is electrifying.", tmdbId: 1369374 },
+  { title: "Hard Boiled", year: 1992, type: "movie", language: "zh", tags: ["critics"], curatorNote: "John Woo's ballistic ballet — the hospital siege is the most choreographed shootout in film history.", tmdbId: 11782 },
+  { title: "Skyfall", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Sam Mendes turns Bond into an art film — Deakins' cinematography and Bardem's villain make it transcendent.", tmdbId: 37724 },
+  // B10
+  { title: "Dune: Part Two", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Villeneuve's follow-up is even more spectacular — sci-fi epic filmmaking at its most ambitious.", tmdbId: 693134 },
+  { title: "Star Wars", year: 1977, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The film that changed everything — Lucas's space opera invented modern blockbuster mythology.", tmdbId: 11 },
+  { title: "The Good, the Bad and the Ugly", year: 1966, type: "movie", language: "it", tags: ["classic"], curatorNote: "Leone and Morricone's masterwork — a three-hour duel stretched to operatic perfection.", tmdbId: 429 },
+  { title: "Oldboy", year: 2003, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Park Chan-wook's revenge opera contains the most iconic hallway fight in cinema — and much darker truths.", tmdbId: 670 },
+  { title: "The Witch: Part 1. The Subversion", year: 2018, type: "movie", language: "ko", tags: ["discovery"], curatorNote: "A Korean sci-fi action thriller with a devastating final act — the breakout role for Kim Da-mi.", tmdbId: 530254 },
+  { title: "Sisu", year: 2023, type: "movie", language: "fi", tags: ["critics"], curatorNote: "A Finnish gold miner versus an entire Nazi unit — outrageously violent and totally irresistible.", tmdbId: 840326 },
+  { title: "Hero", year: 2002, type: "movie", language: "zh", tags: ["surprise"], curatorNote: "Zhang Yimou's wuxia poem is the most beautiful action film ever made — each chapter a different color.", tmdbId: 79 },
+  // B11
+  { title: "The Dog Stars", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Ridley Scott's adaptation of Peter Heller's post-apocalyptic novel — lush, melancholic, and visually stunning.", tmdbId: 1384216 },
+  { title: "Fist of Fury", year: 1972, type: "movie", language: "zh", tags: ["crowd"], curatorNote: "Bruce Lee at incandescent peak — a furious showcase of speed and power that established a legend.", tmdbId: 11713 },
+  { title: "Aliens", year: 1986, type: "movie", language: "en", tags: ["classic"], curatorNote: "Cameron transforms Ridley Scott's horror into a war film — marines vs. xenomorphs, with Sigourney Weaver supreme.", tmdbId: 679 },
+  { title: "The Host", year: 2006, type: "movie", language: "ko", tags: ["passport"], curatorNote: "Bong Joon-ho's monster movie is also a political satire and family drama — Korean genre cinema at its best.", tmdbId: 1255 },
+  { title: "Havoc", year: 2025, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Gareth Evans returns to the action genre with Tom Hardy — brutal, labyrinthine, and relentless.", tmdbId: 668489 },
+  { title: "Dredd", year: 2012, type: "movie", language: "en", tags: ["critics"], curatorNote: "The most underrated action film of its decade — Dredd doesn't quip, he judges.", tmdbId: 49049 },
+  { title: "House of Flying Daggers", year: 2004, type: "movie", language: "zh", tags: ["surprise"], curatorNote: "Zhang Yimou's action romance is ravishingly beautiful — bamboo forests, autumn leaves, and heartbreak.", tmdbId: 9550 },
+  // B12
+  { title: "Superman", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "James Gunn's DCU relaunch gives the Man of Steel his heart back — optimistic, funny, and genuinely super.", tmdbId: 1061474 },
+  { title: "Enter the Dragon", year: 1973, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Bruce Lee's Hollywood crowning achievement — a tournament film that transcends martial arts cinema.", tmdbId: 9461 },
+  { title: "The Battle of Algiers", year: 1966, type: "movie", language: "fr", tags: ["classic"], curatorNote: "Pontecorvo's docudrama masterpiece — still the most honest and devastating film about urban guerrilla warfare.", tmdbId: 17295 },
+  { title: "Snowpiercer", year: 2013, type: "movie", language: "en", tags: ["passport"], curatorNote: "Bong Joon-ho's class-war train thriller — each carriage a new society, each fight a political argument.", tmdbId: 110415 },
+  { title: "The Nice Guys", year: 2016, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Shane Black's 70s noir buddy comedy — Crowe and Gosling are one of cinema's great pairings.", tmdbId: 290250 },
+  { title: "Taken", year: 2008, type: "movie", language: "en", tags: ["critics"], curatorNote: "Liam Neeson's very particular set of skills launched an entire subgenre — still the leanest version.", tmdbId: 8681 },
+  { title: "Once Upon a Time in China", year: 1991, type: "movie", language: "zh", tags: ["surprise"], curatorNote: "Tsui Hark and Jet Li reinvent the kung fu hero for the modern age — spectacular and surprisingly moving.", tmdbId: 10617 },
+  // B13
+  { title: "Runner", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A high-octane chase thriller that keeps escalating — lean, kinetic, and impossible to stop watching.", tmdbId: 1377237 },
+  { title: "The Empire Strikes Back", year: 1980, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The greatest sequel ever made — darker, deeper, and the moment Star Wars became mythology.", tmdbId: 1891 },
+  { title: "The Killer", year: 1989, type: "movie", language: "zh", tags: ["classic"], curatorNote: "John Woo's defining work — a hitman's code of honor expressed through impossibly elegant gunplay.", tmdbId: 10835 },
+  { title: "GoldenEye", year: 1995, type: "movie", language: "en", tags: ["passport"], curatorNote: "Brosnan's triumphant Bond debut revived the franchise — still the most satisfying post-Cold War spy film.", tmdbId: 710 },
+  { title: "The Good, the Bad, the Weird", year: 2008, type: "movie", language: "ko", tags: ["discovery"], curatorNote: "Kim Jee-woon's Korean Western is a delirious action comedy set in Manchuria — pure genre pleasure.", tmdbId: 15067 },
+  { title: "1917", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "Mendes and Deakins craft an unbroken WWI nightmare — the single-take illusion creates unbearable immediacy.", tmdbId: 530915 },
+  { title: "La Femme Nikita", year: 1990, type: "movie", language: "fr", tags: ["surprise"], curatorNote: "Besson's original — Anne Parillaud's transformation from savage to assassin remains electrifying.", tmdbId: 9322 },
+  // B14
+  { title: "Thunderbolts*", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Marvel's antiheroes find unexpected emotional depth — a surprisingly moving film about broken people.", tmdbId: 986056 },
+  { title: "Avengers: Endgame", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A decade of storytelling paid off in three hours of pure emotion — cinema's greatest curtain call.", tmdbId: 299534 },
+  { title: "Akira", year: 1988, type: "movie", language: "ja", tags: ["classic"], curatorNote: "Otomo's anime apocalypse still looks decades ahead of its time — the film that proved animation is art.", tmdbId: 149 },
+  { title: "Ip Man", year: 2008, type: "movie", language: "zh", tags: ["passport"], curatorNote: "Donnie Yen's career peak — the Wing Chun grandmaster faces Japanese occupation with quiet, devastating power.", tmdbId: 14756 },
+  { title: "The Fifth Element", year: 1997, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Besson's delirious space opera — orange hair, opera singing, and the most imaginative production design ever.", tmdbId: 18 },
+  { title: "No Time to Die", year: 2021, type: "movie", language: "en", tags: ["critics"], curatorNote: "A genuinely moving farewell to Daniel Craig's Bond — the franchise finally let its hero feel.", tmdbId: 370172 },
+  { title: "District 9", year: 2009, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Blomkamp's apartheid allegory wrapped in alien action — the most politically urgent blockbuster of its era.", tmdbId: 17654 },
+  // B15
+  { title: "The Mandalorian & Grogu", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The galaxy's favorite odd couple graduate to the big screen — bigger, bolder, and still heartwarming.", tmdbId: 1228710 },
+  { title: "Kill Bill: Vol. 1", year: 2003, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Tarantino's revenge opus is pure cinema — the Crazy 88 fight remains the most audacious action setpiece of its decade.", tmdbId: 24 },
+  { title: "Mad Max 2: The Road Warrior", year: 1981, type: "movie", language: "en", tags: ["classic"], curatorNote: "Miller's post-apocalyptic blueprint — the convoy chase that defined a genre and proved practical stunts are eternal.", tmdbId: 8810 },
+  { title: "District B13", year: 2004, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Parkour meets Luc Besson's Paris — the founding document of free-running action cinema.", tmdbId: 10045 },
+  { title: "The Eight Hundred", year: 2020, type: "movie", language: "zh", tags: ["discovery"], curatorNote: "China's most expensive war film — 800 soldiers holding a warehouse against an entire army, visually stunning.", tmdbId: 508935 },
+  { title: "The Raid 2", year: 2014, type: "movie", language: "id", tags: ["critics"], curatorNote: "Evans expands his world into a crime epic — longer, more ambitious, and every bit as brutal as the original.", tmdbId: 180299 },
+  { title: "Dunkirk", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Nolan strips war cinema to sensory experience — survival without heroic speeches, just desperate bodies.", tmdbId: 374720 },
+  // B16
+  { title: "Masters of the Universe", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Travis Knight finds the humanity in He-Man — by the power of Grayskull, this is a delightful adventure.", tmdbId: 454639 },
+  { title: "Iron Man", year: 2008, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The one that started it all — Downey's charisma and Favreau's craft launched a billion-dollar universe.", tmdbId: 1726 },
+  { title: "Ran", year: 1985, type: "movie", language: "ja", tags: ["classic"], curatorNote: "Kurosawa's King Lear is his most painterly masterwork — samurai armies clash in compositions of terrible beauty.", tmdbId: 11645 },
+  { title: "Battle Royale", year: 2000, type: "movie", language: "ja", tags: ["passport"], curatorNote: "The original last-student-standing thriller — Fukasaku's satire of youth competition is brutal and brilliant.", tmdbId: 3176 },
+  { title: "Raging Fire", year: 2021, type: "movie", language: "zh", tags: ["discovery"], curatorNote: "Donnie Yen and Nicholas Tse's final action film from director Benny Chan — a blazing Hong Kong farewell.", tmdbId: 513692 },
+  { title: "Train to Busan", year: 2016, type: "movie", language: "ko", tags: ["critics"], curatorNote: "The zombie film that remembered zombies are about humans — Yeon Sang-ho's masterwork of genre and grief.", tmdbId: 396535 },
+  { title: "Léon: The Professional", year: 1994, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Besson's hitman opus — Jean Reno and a young Natalie Portman in the most melancholy action film ever made.", tmdbId: 101 },
+  // B17
+  { title: "The Odyssey", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Christopher Nolan takes on Homer — an epic sea voyage and homecoming reimagined with IMAX grandeur.", tmdbId: 1368337 },
+  { title: "Black Panther", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Coogler's Wakanda is Marvel's most realized world — political, beautiful, and culturally seismic.", tmdbId: 284054 },
+  { title: "Sholay", year: 1975, type: "movie", language: "hi", tags: ["classic"], curatorNote: "The greatest Bollywood action film — a 200-minute Western epic that India has watched ten thousand times.", tmdbId: 12259 },
+  { title: "Ong-Bak: Muay Thai Warrior", year: 2003, type: "movie", language: "th", tags: ["passport"], curatorNote: "Tony Jaa introduced Muay Thai to the world with zero wires, zero CGI, and maximum impact.", tmdbId: 9316 },
+  { title: "Kingsman: The Secret Service", year: 2014, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Matthew Vaughn deconstructs Bond with gleeful irreverence — the church scene is action cinema's great guilty pleasure.", tmdbId: 207703 },
+  { title: "Godzilla Minus Zero", year: 2026, type: "movie", language: "ja", tags: ["critics"], curatorNote: "The follow-up to Minus One digs deeper into Japan's postwar trauma — devastating and visually extraordinary.", tmdbId: 1381071 },
+  { title: "Tenet", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Nolan's temporal espionage puzzle is deliberately confounding — a pure cinema experience that demands submission.", tmdbId: 577922 },
+  // B18
+  { title: "Project Hail Mary", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Andy Weir's beloved novel becomes a space survival adventure with Ryan Gosling — warm, funny, and awe-inspiring.", tmdbId: 687163 },
+  { title: "Spider-Man 2", year: 2004, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Raimi's masterpiece — the train fight remains the finest superhero action sequence ever filmed.", tmdbId: 558 },
+  { title: "Goldfinger", year: 1964, type: "movie", language: "en", tags: ["classic"], curatorNote: "The Bond film that defined Bond films — gadgets, girls, gold, and Connery at absolute peak.", tmdbId: 658 },
+  { title: "Avatar", year: 2009, type: "movie", language: "en", tags: ["passport"], curatorNote: "Cameron's technological marvel transformed cinema — Pandora's bioluminescent world is a genuine wonder.", tmdbId: 19995 },
+  { title: "Star Wars: The Force Awakens", year: 2015, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Abrams passes the lightsaber to a new generation — the perfect nostalgia hit that introduced Rey and Finn.", tmdbId: 140607 },
+  { title: "King Kong", year: 1933, type: "movie", language: "en", tags: ["critics"], curatorNote: "The original monster movie — stop-motion magic and primal myth that launched a hundred sequels.", tmdbId: 244 },
+  { title: "Conan the Barbarian", year: 1982, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Milius's sword-and-sorcery epic — Schwarzenegger, Poledouris's thunderous score, and pure pulp glory.", tmdbId: 9387 },
+  // B19
+  { title: "Supergirl: Woman of Tomorrow", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Millie Alcock brings a swagger to Kara Zor-El that'd make Krypton proud — a promising new DCU hero.", tmdbId: 1081003 },
+  { title: "The Thief of Bagdad", year: 1940, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Technicolor Arabian Nights fantasy — flying carpets and genies that still dazzle eighty years on.", tmdbId: 12232 },
+  { title: "The Great Escape", year: 1963, type: "movie", language: "en", tags: ["classic"], curatorNote: "Sturges assembles the greatest ensemble cast in WWII cinema — and that motorcycle jump earns its legend.", tmdbId: 5925 },
+  { title: "John Wick: Chapter 4", year: 2023, type: "movie", language: "en", tags: ["passport"], curatorNote: "The franchise's grandest chapter — the Sacré-Cœur staircase fight alone is worth the price of admission.", tmdbId: 603692 },
+  { title: "The Old Guard", year: 2020, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Charlize Theron as an immortal mercenary — a sharp, uncommonly thoughtful action film.", tmdbId: 547016 },
+  { title: "Heat", year: 1995, type: "movie", language: "en", tags: ["critics"], curatorNote: "Mann's crime epic — Pacino vs. DeNiro and the most realistically filmed bank robbery in cinema history.", tmdbId: 949 },
+  { title: "The Blues Brothers", year: 1980, type: "movie", language: "en", tags: ["surprise"], curatorNote: "On a mission from God — the greatest car-chase comedy ever made, with the best soundtrack.", tmdbId: 525 },
+  // B20
+  { title: "Street Fighter", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A fresh take on the video game classic that finally captures the tournament fighter's energy and chaos.", tmdbId: 1153576 },
+  { title: "Indiana Jones and the Temple of Doom", year: 1984, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Darker and more intense than Raiders — the rope bridge finale and mine cart chase are pure adventure cinema.", tmdbId: 87 },
+  { title: "Jason and the Argonauts", year: 1963, type: "movie", language: "en", tags: ["classic"], curatorNote: "Harryhausen's skeleton army fight is stop-motion's crowning achievement — mythological adventure at its finest.", tmdbId: 11533 },
+  { title: "Inception", year: 2010, type: "movie", language: "en", tags: ["passport"], curatorNote: "Nolan's dream heist operates on four levels simultaneously — action sequences that defy gravity and logic.", tmdbId: 27205 },
+  { title: "Boy Kills World", year: 2024, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A gloriously deranged action film about a deaf-mute trained to kill — wild, weird, and tremendous fun.", tmdbId: 882059 },
+  { title: "Jaws", year: 1975, type: "movie", language: "en", tags: ["critics"], curatorNote: "Spielberg invented the summer blockbuster with a malfunctioning mechanical shark — and it still terrifies.", tmdbId: 578 },
+  { title: "Fight or Flight", year: 2025, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Josh Hartnett and UFC champion Valentina Shevchenko in a taut action thriller set aboard a transatlantic flight.", tmdbId: 1212855 },
+  // B21 — ADD batch
+  { title: "Spider-Man: Brand New Day", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "The highest-grossing domestic release of all time swings into a bold new chapter for the web-slinger.", tmdbId: 969681 },
+  { title: "Avengers: Doomsday", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "The Russo Brothers return for the MCU's most ambitious crossover event — Doom vs. every hero alive.", tmdbId: 1003596 },
+  { title: "Mortal Kombat II", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A self-aware slugfest that plays directly to fans — fatalities, lore, and Karl Urban delivering maximum carnage.", tmdbId: 931285 },
+  { title: "Hope", year: 2026, type: "movie", language: "ko", tags: ["passport", "new"], curatorNote: "Na Hong-jin's long-awaited return — a Korean sci-fi epic that blends existential dread with explosive action.", tmdbId: 1058424 },
+  { title: "The Death of Robin Hood", year: 2026, type: "movie", language: "en", tags: ["discovery", "new"], curatorNote: "An A24 deconstruction of legend with Hugh Jackman — what happens when the myth must finally end?", tmdbId: 1284465 },
+  { title: "The End of Oak Street", year: 2026, type: "movie", language: "en", tags: ["critics", "new"], curatorNote: "David Robert Mitchell's cosmic suburban thriller with Anne Hathaway and Ewan McGregor — 86% on RT.", tmdbId: 1101383 },
+  { title: "Over Your Dead Body", year: 2026, type: "movie", language: "en", tags: ["surprise", "new"], curatorNote: "Jorma Taccone's Hitchcockian cabin thriller — Jason Segel and Samara Weaving each planning to kill the other.", tmdbId: 1390300 },
 ];
+
+export const ACTION_ADVENTURE_POOL_COUNT = ACTION_ADVENTURE_EDITORIAL_BATCHES.length;
