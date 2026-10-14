@@ -185,6 +185,15 @@ export const HIDDEN_GEMS_SERIES_EDITORIAL_BATCHES = [
   { title: "State of Play", year: 2003, type: "tv", language: "en", tags: ["critics"], curatorNote: "David Morrissey and John Simm in Paul Abbott's BBC political thriller about a journalist investigating a politician's dead mistress. Six episodes of perfect television.", tmdbId: 1407 },
   { title: "The Thick of It", year: 2005, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Armando Iannucci's BBC political comedy — Peter Capaldi's Malcolm Tucker redefines what a fictional political operative looks like. Every episode contains at least one perfect piece of writing.", tmdbId: 5800 },
 
+  // B21
+  { title: "Severance", year: 2026, type: "tv", language: "en", tags: ["new"], curatorNote: "Adam Scott in Ben Stiller's Apple TV+ psychological thriller about office workers whose work and home memories are surgically separated. Season 2 arrived in 2026 and deepened everything — one of the decade's essential shows.", tmdbId: 95396 },
+  { title: "The Studio", year: 2025, type: "tv", language: "en", tags: ["new"], curatorNote: "Seth Rogen and Evan Goldberg's Apple TV+ comedy about running a Hollywood studio — a love letter to cinema made by people who genuinely love cinema. The best Hollywood satire since The Player.", tmdbId: 283566 },
+  { title: "Adolescence", year: 2025, type: "tv", language: "en", tags: ["critics"], curatorNote: "Jack Thorne's Netflix four-parter about a 13-year-old boy arrested for murder — each episode one unbroken take. Stephen Graham and Owen Cooper give performances you won't shake for weeks.", tmdbId: 262954 },
+  { title: "The Pitt", year: 2025, type: "tv", language: "en", tags: ["new"], curatorNote: "Noah Wyle and R. Scott Gemmill's Max medical drama set entirely in a single Pittsburgh ER shift — real time, real stakes, the best hospital drama since the original ER.", tmdbId: 260513 },
+  { title: "English Teacher", year: 2024, type: "tv", language: "en", tags: ["surprise"], curatorNote: "Brian Jordan Alvarez writes and stars as a gay high school teacher in Texas navigating a culture-war minefield with deadpan grace. FX's sleeper of the year — quietly devastating in its best moments.", tmdbId: 240274 },
+  { title: "Disclaimer", year: 2024, type: "tv", language: "en", tags: ["critics"], curatorNote: "Alfonso Cuarón's Apple TV+ miniseries — Cate Blanchett as a documentary filmmaker whose life is upended by a stranger's novel. Formally dazzling and genuinely disturbing.", tmdbId: 236867 },
+  { title: "A Man on the Inside", year: 2024, type: "tv", language: "en", tags: ["crowd"], curatorNote: "Ted Danson as a retired professor who goes undercover in a San Francisco retirement community. Michael Schur's Netflix comedy is warm, funny, and kinder than it needs to be.", tmdbId: 240472 },
+
 ];
 
 export const HIDDEN_GEMS_SERIES_POOL_COUNT = HIDDEN_GEMS_SERIES_EDITORIAL_BATCHES.length;
