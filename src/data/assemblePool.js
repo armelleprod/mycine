@@ -156,76 +156,92 @@ function assignBadges(entries) {
   const result = new Array(entries.length).fill(null);
   const assigned = new Set();
 
-  const findBest = (check, prefer) => {
+  // findBest: find the best unassigned entry matching `check`, sorted by `prefer`.
+  // withTmdb: when true, requires tmdbId != null (first pass).
+  const findBest = (check, prefer, withTmdb = false) => {
+    const fullCheck = withTmdb ? (e => check(e) && e.tmdbId != null) : check;
     const candidates = entries
       .map((e, i) => ({ e, i }))
-      .filter(({ e, i }) => !assigned.has(i) && check(e));
+      .filter(({ e, i }) => !assigned.has(i) && fullCheck(e));
     if (candidates.length === 0) return -1;
     if (prefer) candidates.sort((a, b) => prefer(a.e, b.e));
     return candidates[0].i;
   };
 
-  // Slot 1: Tonight's Pick — prefer current year with a real tmdbId.
-  // Plan B: step back year by year if no current-year entry has a tmdbId.
-  let slot0 = findBest(
-    e => Number(e.year) === CURRENT_YEAR && e.tmdbId != null,
-    (a, b) => Number(b.year) - Number(a.year)
-  );
+  // findWithFallback: try ideal match WITH tmdbId first; if none, relax to any tmdbId entry.
+  // This is the Plan B pattern applied to every slot.
+  const findWithFallback = (check, prefer) => {
+    let idx = findBest(check, prefer, true);  // ideal: matches criteria AND has tmdbId
+    if (idx === -1) idx = findBest(e => e.tmdbId != null, prefer, false); // fallback: any tmdbId
+    return idx;
+  };
+
+  // Slot 1: Tonight's Pick — current year, tmdbId required.
+  // Plan B: step back year by year, then any tmdbId entry.
+  let slot0 = findBest(e => Number(e.year) === CURRENT_YEAR, (a, b) => Number(b.year) - Number(a.year), true);
   if (slot0 === -1) {
     for (let y = CURRENT_YEAR - 1; y >= 2020; y--) {
-      slot0 = findBest(
-        e => Number(e.year) === y && e.tmdbId != null,
-        null
-      );
+      slot0 = findBest(e => Number(e.year) === y, null, true);
       if (slot0 !== -1) break;
     }
   }
-  if (slot0 === -1) {
-    // Last resort: any entry with a tmdbId
-    slot0 = findBest(e => e.tmdbId != null, (a, b) => Number(b.year) - Number(a.year));
-  }
+  if (slot0 === -1) slot0 = findBest(e => e.tmdbId != null, (a, b) => Number(b.year) - Number(a.year), false);
   if (slot0 !== -1) { result[0] = slot0; assigned.add(slot0); }
 
-  // Slot 2: RECENT — 2025 or 2026 only, prefer 2026 first, then 2025
+  // Slot 2: RECENT — 2025 or later, prefer newer, tmdbId required.
+  // Plan B: any tmdbId entry.
   const slot0Year = slot0 !== -1 ? Number(entries[slot0].year) : null;
-  const slot1 = findBest(
+  let slot1 = findBest(
     e => Number(e.year) >= 2025,
     (a, b) => {
       const aScore = Number(a.year) === slot0Year ? 0 : 1;
       const bScore = Number(b.year) === slot0Year ? 0 : 1;
       return bScore - aScore || Number(b.year) - Number(a.year);
-    }
+    },
+    true
   );
+  if (slot1 === -1) slot1 = findBest(e => e.tmdbId != null, null, false);
   if (slot1 !== -1) { result[1] = slot1; assigned.add(slot1); }
 
-  // Slot 3: Classic — year < 2000, oldest first for variety
-  const slot2 = findBest(e => Number(e.year) < 2000, null);
+  // Slot 3: Classic — year < 2000. Plan B: any tmdbId entry.
+  const slot2 = findWithFallback(e => Number(e.year) < 2000, null);
   if (slot2 !== -1) { result[2] = slot2; assigned.add(slot2); }
 
-  // Slot 4: Passport — non-English
-  const slot3 = findBest(e => e.language && e.language !== "en", null);
+  // Slot 4: Passport — non-English. Plan B: any tmdbId entry.
+  const slot3 = findWithFallback(e => e.language && e.language !== "en", null);
   if (slot3 !== -1) { result[3] = slot3; assigned.add(slot3); }
 
-  // Slot 5: Critics
-  const slot4 = findBest(e => Array.isArray(e.tags) && e.tags.includes("critics"), null);
+  // Slot 5: Critics. Plan B: any tmdbId entry.
+  const slot4 = findWithFallback(e => Array.isArray(e.tags) && e.tags.includes("critics"), null);
   if (slot4 !== -1) { result[4] = slot4; assigned.add(slot4); }
 
-  // Slot 6: Crowd Favorite
-  const slot5 = findBest(e => Array.isArray(e.tags) && e.tags.includes("crowd"), null);
+  // Slot 6: Crowd Favorite. Plan B: any tmdbId entry.
+  const slot5 = findWithFallback(e => Array.isArray(e.tags) && e.tags.includes("crowd"), null);
   if (slot5 !== -1) { result[5] = slot5; assigned.add(slot5); }
 
-  // Slot 7: Surprise
-  const slot6 = findBest(e => Array.isArray(e.tags) && e.tags.includes("surprise"), null);
+  // Slot 7: Surprise. Plan B: any tmdbId entry.
+  const slot6 = findWithFallback(e => Array.isArray(e.tags) && e.tags.includes("surprise"), null);
   if (slot6 !== -1) { result[6] = slot6; assigned.add(slot6); }
 
-  // Any entry not yet assigned a badge slot gets placed in the first empty slot
+  // Fill any remaining empty slots — prefer tmdbId entries first, then anything left.
   for (let slotIndex = 0; slotIndex < BATCH_SIZE; slotIndex++) {
     if (result[slotIndex] !== null) continue;
+    // First pass: tmdbId entries only
     for (let i = 0; i < entries.length; i++) {
-      if (!assigned.has(i)) {
+      if (!assigned.has(i) && entries[i].tmdbId != null) {
         result[slotIndex] = i;
         assigned.add(i);
         break;
+      }
+    }
+    // Second pass: anything left (tmdbId: null is better than a blank slot)
+    if (result[slotIndex] === null) {
+      for (let i = 0; i < entries.length; i++) {
+        if (!assigned.has(i)) {
+          result[slotIndex] = i;
+          assigned.add(i);
+          break;
+        }
       }
     }
   }
