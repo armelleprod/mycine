@@ -6,7 +6,7 @@
 export const HIDDEN_GEMS_BATCHES = [
 
   // B01
-  { title: "Eephus", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Carson Lund's hypnotic debut — the last baseball game ever played on a small-town field, stretched into a meditation on endings. Sundance 2024 standout.", tmdbId: null },
+  { title: "Eephus", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Carson Lund's hypnotic debut — the last baseball game ever played on a small-town field, stretched into a meditation on endings. Sundance 2024 standout.", tmdbId: 1226777 },
   { title: "Sing Street", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "John Carney's joyful Dublin coming-of-age musical — a teenage boy forms a band to impress a girl and accidentally discovers himself. Irresistible.", tmdbId: 367735 },
   { title: "Local Hero", year: 1983, type: "movie", language: "en", tags: ["classic"], curatorNote: "Bill Forsyth's gentle, quietly devastating comedy about an oil company rep sent to buy a Scottish village. One of the great films about what we think we want.", tmdbId: 26491 },
   { title: "The Quiet Girl", year: 2022, type: "movie", language: "ga", tags: ["passport"], curatorNote: "Colm Bairéad's luminous Irish-language film about a quiet child who discovers dignity in silence. Ireland's first Oscar nominee for Best International Film.", tmdbId: 784010 },
@@ -15,7 +15,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Brigsby Bear", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A man raised in a bunker emerges to discover the TV show he grew up with was made just for him. Deliriously original, unexpectedly moving.", tmdbId: 431244 },
 
   // B02
-  { title: "The Ballad of Wallis Island", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Tom Basden and Tim Key's bittersweet comedy about a superfan who wins a private concert from his favourite folk duo on a remote island. Warm and wise.", tmdbId: null },
+  { title: "The Ballad of Wallis Island", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Tom Basden and Tim Key's bittersweet comedy about a superfan who wins a private concert from his favourite folk duo on a remote island. Warm and wise.", tmdbId: 1122099 },
   { title: "Hunt for the Wilderpeople", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Taika Waititi at his warmest — a delinquent boy and a gruff farmer on the run through the New Zealand bush. Sam Neill is a revelation.", tmdbId: 382596 },
   { title: "The Last Detail", year: 1973, type: "movie", language: "en", tags: ["classic"], curatorNote: "Hal Ashby's profane, tender road movie — two Navy men escort a young sailor to prison and start to feel guilty about it. Jack Nicholson at his most alive.", tmdbId: 10739 },
   { title: "The Lunchbox", year: 2013, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A misdirected lunch in Mumbai sparks an unlikely epistolary romance between a lonely housewife and a widower nearing retirement. Quiet and aching.", tmdbId: 196787 },
@@ -24,7 +24,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Brian and Charles", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A lonely Welsh inventor builds a robot from a washing machine and a mannequin head, and it comes alive. Absurdly funny, surprisingly heartfelt.", tmdbId: 763215 },
 
   // B03
-  { title: "On Becoming a Guinea Fowl", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Rungano Nyoni's Zambian black comedy about the secrets that surface when a family gathers for a funeral. Claustrophobic, black-humoured, and devastating.", tmdbId: null },
+  { title: "On Becoming a Guinea Fowl", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Rungano Nyoni's Zambian black comedy about the secrets that surface when a family gathers for a funeral. Claustrophobic, black-humoured, and devastating.", tmdbId: 1082938 },
   { title: "The Peanut Butter Falcon", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A young man with Down syndrome escapes his care home to become a pro wrestler. Shia LaBeouf's best performance, in a film made purely from warmth.", tmdbId: 441728 },
   { title: "The Straight Story", year: 1999, type: "movie", language: "en", tags: ["classic"], curatorNote: "David Lynch's gentlest film — an elderly man drives a lawnmower hundreds of miles to visit his estranged brother. Every frame is grace.", tmdbId: 11354 },
   { title: "Rocks", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sarah Gavron's BAFTA-winning portrait of a London teenager keeping her family together after her mother disappears. Authentic, urgent, and quietly extraordinary.", tmdbId: 611119 },
@@ -33,7 +33,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Thunder Road", year: 2018, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jim Cummings wrote, directed, and stars as a grief-stricken cop falling apart in real time. Starts with the most uncomfortable eulogy in cinema history.", tmdbId: 527774 },
 
   // B04
-  { title: "Ghostlight", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "A construction worker reluctantly joins an amateur production of Romeo and Juliet while his family falls apart. Kelly O'Sullivan and Alex Thompson's tender, life-affirming surprise.", tmdbId: null },
+  { title: "Ghostlight", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "A construction worker reluctantly joins an amateur production of Romeo and Juliet while his family falls apart. Kelly O'Sullivan and Alex Thompson's tender, life-affirming surprise.", tmdbId: 1214469 },
   { title: "About Time", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Richard Curtis's time-travel romance that's really about learning to be present. Domhnall Gleeson and Rachel McAdams — but it's Bill Nighy who will make you weep.", tmdbId: 155308 },
   { title: "Harold and Maude", year: 1971, type: "movie", language: "en", tags: ["classic"], curatorNote: "Hal Ashby's cult masterpiece — a death-obsessed 20-year-old falls in love with a free-spirited 79-year-old. Cat Stevens on the soundtrack. Still radical.", tmdbId: 9778 },
   { title: "A Man Called Ove", year: 2015, type: "movie", language: "sv", tags: ["passport"], curatorNote: "Sweden's Oscar submission about a curmudgeonly widower whose plans to die alone are foiled by noisy new neighbours. Rolf Lassgård breaks your heart.", tmdbId: 296457 },
@@ -42,7 +42,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Safety Not Guaranteed", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A journalist investigates a man who placed a classified ad seeking a time-travel partner. Mark Duplass is deeply sincere in this Sundance gem.", tmdbId: 97020 },
 
   // B05
-  { title: "Dìdi", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Sean Wang's autobiographical portrait of a Taiwanese-American 13-year-old in 2008 Fremont, CA. Captures adolescence with painful fidelity — a Sundance prize-winner.", tmdbId: null },
+  { title: "Dìdi", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Sean Wang's autobiographical portrait of a Taiwanese-American 13-year-old in 2008 Fremont, CA. Captures adolescence with painful fidelity — a Sundance prize-winner.", tmdbId: 1158915 },
   { title: "The Way Way Back", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A miserable 14-year-old finds himself at a water park with Sam Rockwell as his unlikely mentor. One of the great coming-of-age comedies of the 2010s.", tmdbId: 154025 },
   { title: "Breaking Away", year: 1979, type: "movie", language: "en", tags: ["classic"], curatorNote: "Peter Yates' Oscar-winning gem about a working-class Indiana kid obsessed with Italian cycling. One of American cinema's purest celebrations of aspiration.", tmdbId: 11979 },
   { title: "The Divine Order", year: 2017, type: "movie", language: "de", tags: ["passport"], curatorNote: "A Swiss housewife leads a campaign for women's suffrage in 1971 — the year Switzerland finally let women vote. Rousing, funny, quietly furious.", tmdbId: 415985 },
@@ -51,7 +51,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Dinner in America", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A raw punk rock romantic comedy about a fugitive musician and a gentle misfit who discovers he's her idol. Foul-mouthed, shockingly tender.", tmdbId: 614611 },
 
   // B06 — replaced Sing Street duplicate with Power Ballad
-  { title: "Kneecap", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "The insane true story of Belfast's Irish-language hip-hop trio, told with anarchic energy. Part biopic, part punk manifesto — a total blast.", tmdbId: null },
+  { title: "Kneecap", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "The insane true story of Belfast's Irish-language hip-hop trio, told with anarchic energy. Part biopic, part punk manifesto — a total blast.", tmdbId: 1180629 },
   { title: "Power Ballad", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "John Carney (Sing Street, Once) delivers another music gem — Paul Rudd as a fading wedding singer, Nick Jonas as a boy-band star who steals his song. Charming and bittersweet.", tmdbId: null },
   { title: "Phantom of the Paradise", year: 1974, type: "movie", language: "en", tags: ["classic"], curatorNote: "Brian De Palma's glam-horror rock opera — a composer's soul is stolen by a Faustian record mogul. Camp, violent, and wildly inventive. A cult classic.", tmdbId: 10727 },
   { title: "Linda Linda Linda", year: 2005, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Japanese high school girls form a band with three days to learn to play. Nobuhiro Yamashita's gentle, funny, deeply likeable coming-of-age film.", tmdbId: 32682 },
@@ -60,7 +60,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Popstar: Never Stop Never Stopping", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "The Lonely Island's pop-star mockumentary — funnier than it had any right to be, and a more accurate satire of the music industry than most serious docs.", tmdbId: 293863 },
 
   // B07
-  { title: "Thelma", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "June Squibb at 94 as a grandmother who gets phone-scammed and goes after the criminals herself. Josh Margolin's action-comedy is genuinely thrilling.", tmdbId: null },
+  { title: "Thelma", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "June Squibb at 94 as a grandmother who gets phone-scammed and goes after the criminals herself. Josh Margolin's action-comedy is genuinely thrilling.", tmdbId: 1051891 },
   { title: "The Farewell", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Lulu Wang's semi-autobiographical comedy-drama — a Chinese-American family gathers for a fake wedding to say goodbye to their grandmother without telling her she's dying.", tmdbId: 522016 },
   { title: "The Taking of Pelham One Two Three", year: 1974, type: "movie", language: "en", tags: ["classic"], curatorNote: "Walter Matthau vs. Robert Shaw in the original New York subway hostage thriller. Grimy, tense, and impossibly stylish. The remake doesn't come close.", tmdbId: 14371 },
   { title: "The Mole Agent", year: 2020, type: "movie", language: "es", tags: ["passport"], curatorNote: "A Chilean detective agency recruits an 83-year-old to go undercover in a nursing home. Maite Alberdi's doc is funny and then, quietly, devastating.", tmdbId: 703584 },
@@ -69,7 +69,7 @@ export const HIDDEN_GEMS_BATCHES = [
   { title: "Robot & Frank", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A retired jewel thief in the near future is given a robot carer he learns to use as a heist accomplice. Frank Langella is magnificent.", tmdbId: 101299 },
 
   // B08
-  { title: "Hundreds of Beavers", year: 2022, type: "movie", language: "en", tags: ["new"], curatorNote: "A black-and-white slapstick epic about an applejack salesman surviving the frontier — shot in Wisconsin for almost nothing, funnier than most studio comedies.", tmdbId: null },
+  { title: "Hundreds of Beavers", year: 2022, type: "movie", language: "en", tags: ["new"], curatorNote: "A black-and-white slapstick epic about an applejack salesman surviving the frontier — shot in Wisconsin for almost nothing, funnier than most studio comedies.", tmdbId: 1019939 },
   { title: "Palm Springs", year: 2020, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Andy Samberg and Cristin Milioti in a Groundhog Day time loop rom-com that actually has something new to say about love and commitment. Smart and genuinely funny.", tmdbId: 587940 },
   { title: "The Lavender Hill Mob", year: 1951, type: "movie", language: "en", tags: ["classic"], curatorNote: "Alec Guinness as a mild Bank of England clerk who secretly plots to melt down gold bullion and smuggle it out as Eiffel Tower souvenirs. Peak Ealing comedy.", tmdbId: 2787 },
   { title: "Beyond the Infinite Two Minutes", year: 2020, type: "movie", language: "ja", tags: ["passport"], curatorNote: "A Japanese café owner discovers his TV screen shows two minutes into the future. Shot in one continuous take, seemingly on a smartphone. A miracle of low-budget ingenuity.", tmdbId: 775408 },
