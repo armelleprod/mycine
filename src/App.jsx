@@ -1774,7 +1774,7 @@ const MOOD_JOURNEY_ROLES = [
 function uniqueEditorialPool(batches = []) {
   const seen = new Set();
   const pool = [];
-  for (const item of batches.flat()) {
+  for (const item of batches) {
     if (!item) continue;
     const key = `${String(item.type || "").toLowerCase()}|${String(item.title || "").trim().toLowerCase()}|${Number(item.year || 0)}`;
     if (!item.title || seen.has(key)) continue;
