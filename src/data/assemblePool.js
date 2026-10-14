@@ -4,8 +4,9 @@
 //
 // DESIGN: Triple-rotation guarantee —
 //   Slot 1 (Tonight's Pick) always comes from a SEPARATE rotation over the current-year sub-pool
-//   (year === CURRENT_YEAR). This guarantees a 2026 title every single batch,
-//   regardless of where the main pool pointer happens to be.
+//   (year === CURRENT_YEAR), restricted to entries with a real tmdbId so the card always loads.
+//   Plan B: if no current-year entries have a tmdbId, steps back year by year (down to 2020),
+//   then falls back to any entry with a tmdbId. A blank Tonight's Pick card is never shown.
 //   Slot 2 (RECENT) always comes from a SECOND SEPARATE rotation over year >= 2025 entries
 //   (excluding Tonight's Pick). This guarantees a 2025 or 2026 title is always available for RECENT,
 //   regardless of where the main pool pointer happens to be.
@@ -87,10 +88,25 @@ function getNextFromRotation(pool, storageKey, count) {
 //      If a guaranteed slot had no qualifying entries (recentPick or newPick is null),
 //      the main pool picks one extra to always reach 7 total.
 function getNextBatch(pool, storageKey) {
-  const recentPool = pool.filter(e => Number(e.year) === CURRENT_YEAR);
+  // Tonight's Pick sub-pool: prefer current year, but only entries with a real tmdbId.
+  // Plan B: if no current-year entries have a tmdbId, step back year by year until we find some.
+  // This ensures Tonight's Pick always resolves to a fully-loadable card.
+  const hasTmdb = e => e.tmdbId != null;
+  let recentPool = pool.filter(e => Number(e.year) === CURRENT_YEAR && hasTmdb(e));
+  if (recentPool.length === 0) {
+    // Walk back one year at a time, down to 2020, until we find entries with tmdbIds.
+    for (let y = CURRENT_YEAR - 1; y >= 2020; y--) {
+      recentPool = pool.filter(e => Number(e.year) === y && hasTmdb(e));
+      if (recentPool.length > 0) break;
+    }
+  }
+  // Final fallback: any entry with a tmdbId
+  if (recentPool.length === 0) {
+    recentPool = pool.filter(hasTmdb);
+  }
   const recentKey = storageKey + ":recent";
 
-  // Step 1: one guaranteed Tonight's Pick (year === CURRENT_YEAR)
+  // Step 1: one guaranteed Tonight's Pick (from sub-pool above)
   let recentPick = null;
   if (recentPool.length > 0) {
     const picks = getNextFromRotation(recentPool, recentKey, 1);
@@ -149,11 +165,25 @@ function assignBadges(entries) {
     return candidates[0].i;
   };
 
-  // Slot 1: Tonight's Pick — current year only (2026)
-  const slot0 = findBest(
-    e => Number(e.year) === CURRENT_YEAR,
+  // Slot 1: Tonight's Pick — prefer current year with a real tmdbId.
+  // Plan B: step back year by year if no current-year entry has a tmdbId.
+  let slot0 = findBest(
+    e => Number(e.year) === CURRENT_YEAR && e.tmdbId != null,
     (a, b) => Number(b.year) - Number(a.year)
   );
+  if (slot0 === -1) {
+    for (let y = CURRENT_YEAR - 1; y >= 2020; y--) {
+      slot0 = findBest(
+        e => Number(e.year) === y && e.tmdbId != null,
+        null
+      );
+      if (slot0 !== -1) break;
+    }
+  }
+  if (slot0 === -1) {
+    // Last resort: any entry with a tmdbId
+    slot0 = findBest(e => e.tmdbId != null, (a, b) => Number(b.year) - Number(a.year));
+  }
   if (slot0 !== -1) { result[0] = slot0; assigned.add(slot0); }
 
   // Slot 2: RECENT — 2025 or 2026 only, prefer 2026 first, then 2025
@@ -219,12 +249,13 @@ function assignBadges(entries) {
  * Takes a flat array of entry objects and returns exactly 7 entries,
  * each assigned a badge based on the entry's actual properties.
  *
- * GUARANTEE: Slot 1 (Tonight's Pick) always shows a 2026 title, drawn from
- * a separate rotation over the current-year sub-pool. Slot 2 (RECENT) always
- * shows 2025 or 2026, drawn from a second separate rotation over year >= 2025
- * entries (excluding Tonight's Pick). The remaining slots rotate through
- * the full pool. If a pool has no qualifying entries for a guaranteed slot
- * (e.g. no 2026 titles), the main pool compensates so 7 entries are always returned.
+ * GUARANTEE: Slot 1 (Tonight's Pick) always shows a fully-loadable card — it draws from
+ * a separate rotation of current-year entries that have a real tmdbId. If none exist,
+ * it steps back year by year (down to 2020), then falls back to any tmdbId entry.
+ * A blank/broken Tonight's Pick is never shown. Slot 2 (RECENT) always shows 2025 or 2026,
+ * drawn from a second separate rotation over year >= 2025 entries (excluding Tonight's Pick).
+ * The remaining slots rotate through the full pool. If a pool has no qualifying entries
+ * for a guaranteed slot, the main pool compensates so 7 entries are always returned.
  *
  * Entry object shape:
  * {
