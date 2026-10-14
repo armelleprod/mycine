@@ -113,10 +113,15 @@ function getNextBatch(pool, storageKey) {
     recentPick = picks[0] || null;
   }
 
-  // Step 2: one guaranteed RECENT pick (year >= 2025, not already picked)
-  const newPool = pool.filter(
-    e => Number(e.year) >= 2025 && e.title !== recentPick?.title
+  // Step 2: one guaranteed RECENT pick (year >= 2025, not already picked, tmdbId required).
+  // Plan B: if no recent entries have a tmdbId, fall back to any tmdbId entry not already picked.
+  // This ensures the RECENT slot always resolves to a fully-loadable card.
+  let newPool = pool.filter(
+    e => Number(e.year) >= 2025 && e.title !== recentPick?.title && hasTmdb(e)
   );
+  if (newPool.length === 0) {
+    newPool = pool.filter(e => hasTmdb(e) && e.title !== recentPick?.title);
+  }
   const newKey = storageKey + ":new";
   let newPick = null;
   if (newPool.length > 0) {
