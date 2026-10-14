@@ -1,1165 +1,217 @@
-// MY CINÉ V69 — HIDDEN GEMS
-// Prepared editorial batches. TMDB enriches metadata only.
+// MY CINÉ V69 — HIDDEN GEMS (MOVIES)
+// Flat pool — all entries are direct children of the top-level array.
+// Tags derived from badge mapping. Language codes ISO 639-1.
+// POOL_COUNT auto-computed via .length.
 
-export const HIDDEN_GEMS_EDITORIAL_BATCHES = [
-  [
-    {
-      "title": "Eephus",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Sing Street",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Local Hero",
-      "year": 1983,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Quiet Girl",
-      "year": 2022,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Columbus",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Paterson",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Brigsby Bear",
-      "year": 2017,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Ballad of Wallis Island",
-      "year": 2025,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Hunt for the Wilderpeople",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Last Detail",
-      "year": 1973,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Lunchbox",
-      "year": 2013,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Station Agent",
-      "year": 2003,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Leave No Trace",
-      "year": 2018,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Brian and Charles",
-      "year": 2022,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "On Becoming a Guinea Fowl",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Peanut Butter Falcon",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Straight Story",
-      "year": 1999,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Rocks",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Support the Girls",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Certain Women",
-      "year": 2016,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Thunder Road",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Ghostlight",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "About Time",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Harold and Maude",
-      "year": 1971,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "A Man Called Ove",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Mass",
-      "year": 2021,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "A Ghost Story",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Safety Not Guaranteed",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Dìdi",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Way Way Back",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Breaking Away",
-      "year": 1979,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Divine Order",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Shithouse",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Eighth Grade",
-      "year": 2018,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Dinner in America",
-      "year": 2020,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Kneecap",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Sing Street",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Phantom of the Paradise",
-      "year": 1974,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Linda Linda Linda",
-      "year": 2005,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Frank",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Inside Llewyn Davis",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Popstar: Never Stop Never Stopping",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Thelma",
-      "year": 2024,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Farewell",
-      "year": 2019,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Taking of Pelham One Two Three",
-      "year": 1974,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Mole Agent",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Lucky",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Nebraska",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Robot & Frank",
-      "year": 2012,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Hundreds of Beavers",
-      "year": 2022,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Palm Springs",
-      "year": 2020,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Lavender Hill Mob",
-      "year": 1951,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Beyond the Infinite Two Minutes",
-      "year": 2020,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Dave Made a Maze",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "One Cut of the Dead",
-      "year": 2017,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The VelociPastor",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Vast of Night",
-      "year": 2019,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Coherence",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Incredible Shrinking Man",
-      "year": 1957,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Aniara",
-      "year": 2018,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Prospect",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Moon",
-      "year": 2009,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Frequently Asked Questions About Time Travel",
-      "year": 2009,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Kid Detective",
-      "year": 2020,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Game Night",
-      "year": 2018,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Last of Sheila",
-      "year": 1973,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Invisible Guest",
-      "year": 2016,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Clovehitch Killer",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Brick",
-      "year": 2005,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Nice Guys",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Calibre",
-      "year": 2018,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Blue Ruin",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Hitch-Hiker",
-      "year": 1953,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Marshland",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Guilty",
-      "year": 2018,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "A Simple Plan",
-      "year": 1998,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Guard",
-      "year": 2011,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Night House",
-      "year": 2020,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Autopsy of Jane Doe",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Innocents",
-      "year": 1961,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Orphanage",
-      "year": 2007,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Caveat",
-      "year": 2020,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Saint Maud",
-      "year": 2019,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Extra Ordinary",
-      "year": 2019,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Rider",
-      "year": 2017,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Hell or High Water",
-      "year": 2016,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Ride the High Country",
-      "year": 1962,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Theeb",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Sweet Country",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Meek's Cutoff",
-      "year": 2010,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Slow West",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Fits",
-      "year": 2015,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Frances Ha",
-      "year": 2012,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Daisies",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Girlhood",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Appropriate Behavior",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Never Rarely Sometimes Always",
-      "year": 2020,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Obvious Child",
-      "year": 2014,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The One I Love",
-      "year": 2014,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Ruby Sparks",
-      "year": 2012,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "A New Leaf",
-      "year": 1971,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Worst Person in the World",
-      "year": 2021,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Comet",
-      "year": 2014,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Certified Copy",
-      "year": 2010,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Plus One",
-      "year": 2019,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Blindspotting",
-      "year": 2018,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "Short Term 12",
-      "year": 2013,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Nothing But a Man",
-      "year": 1964,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "The Insult",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Monos",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Fruitvale Station",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Sorry to Bother You",
-      "year": 2018,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Death of Stalin",
-      "year": 2017,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "In the Loop",
-      "year": 2009,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "The Firemen's Ball",
-      "year": 1967,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Wild Tales",
-      "year": 2014,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "The Square",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Force Majeure",
-      "year": 2014,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Four Lions",
-      "year": 2010,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "A Dark Song",
-      "year": 2016,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Green Knight",
-      "year": 2021,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Kuroneko",
-      "year": 1968,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "November",
-      "year": 2017,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "I Kill Giants",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "The Fall",
-      "year": 2006,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Lure",
-      "year": 2015,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "The Art of Self-Defense",
-      "year": 2019,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "The Menu",
-      "year": 2022,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Kind Hearts and Coronets",
-      "year": 1949,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "Men & Chicken",
-      "year": 2015,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Greener Grass",
-      "year": 2019,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Dogtooth",
-      "year": 2009,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "The Greasy Strangler",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ],
-  [
-    {
-      "title": "Nine Days",
-      "year": 2020,
-      "badge": "🍿 Tonight's Pick",
-      "curatorNote": "A strong recent hidden gem chosen to lead this set.",
-      "type": "movie",
-      "slot": 1
-    },
-    {
-      "title": "After Yang",
-      "year": 2021,
-      "badge": "❤️ Crowd Favorite",
-      "curatorNote": "An underseen favorite with especially warm audience appeal.",
-      "type": "movie",
-      "slot": 2
-    },
-    {
-      "title": "Seconds",
-      "year": 1966,
-      "badge": "🎞️ Classic",
-      "curatorNote": "A rediscovered classic deserving a larger modern audience.",
-      "type": "movie",
-      "slot": 3
-    },
-    {
-      "title": "I Lost My Body",
-      "year": 2019,
-      "badge": "🌍 Passport",
-      "curatorNote": "An underseen treasure from another cinematic culture.",
-      "type": "movie",
-      "slot": 4
-    },
-    {
-      "title": "Marjorie Prime",
-      "year": 2017,
-      "badge": "💎 Discovery",
-      "curatorNote": "A true buried treasure worth seeking out.",
-      "type": "movie",
-      "slot": 5
-    },
-    {
-      "title": "Upstream Color",
-      "year": 2013,
-      "badge": "🏆 Critics",
-      "curatorNote": "Exceptional filmmaking that never received the audience it deserved.",
-      "type": "movie",
-      "slot": 6
-    },
-    {
-      "title": "Swiss Army Man",
-      "year": 2016,
-      "badge": "✨ Surprise",
-      "curatorNote": "An unexpected, playful or wonderfully singular discovery.",
-      "type": "movie",
-      "slot": 7
-    }
-  ]
+export const HIDDEN_GEMS_BATCHES = [
+
+  // B01
+  { title: "Eephus", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Carson Lund's hypnotic debut — the last baseball game ever played on a small-town field, stretched into a meditation on endings. Sundance 2024 standout.", tmdbId: null },
+  { title: "Sing Street", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "John Carney's joyful Dublin coming-of-age musical — a teenage boy forms a band to impress a girl and accidentally discovers himself. Irresistible.", tmdbId: 367735 },
+  { title: "Local Hero", year: 1983, type: "movie", language: "en", tags: ["classic"], curatorNote: "Bill Forsyth's gentle, quietly devastating comedy about an oil company rep sent to buy a Scottish village. One of the great films about what we think we want.", tmdbId: 26491 },
+  { title: "The Quiet Girl", year: 2022, type: "movie", language: "ga", tags: ["passport"], curatorNote: "Colm Bairéad's luminous Irish-language film about a quiet child who discovers dignity in silence. Ireland's first Oscar nominee for Best International Film.", tmdbId: 784010 },
+  { title: "Columbus", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Kogonada's debut feature about grief, architecture, and the people who appear at pivotal moments. Hauntingly still and deeply felt.", tmdbId: 430934 },
+  { title: "Paterson", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "Jim Jarmusch's poem about a bus driver poet in Paterson, NJ. A film that finds infinity in the everyday — Adam Driver has never been better.", tmdbId: 370755 },
+  { title: "Brigsby Bear", year: 2017, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A man raised in a bunker emerges to discover the TV show he grew up with was made just for him. Deliriously original, unexpectedly moving.", tmdbId: 431244 },
+
+  // B02
+  { title: "The Ballad of Wallis Island", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Tom Basden and Tim Key's bittersweet comedy about a superfan who wins a private concert from his favourite folk duo on a remote island. Warm and wise.", tmdbId: null },
+  { title: "Hunt for the Wilderpeople", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Taika Waititi at his warmest — a delinquent boy and a gruff farmer on the run through the New Zealand bush. Sam Neill is a revelation.", tmdbId: 382596 },
+  { title: "The Last Detail", year: 1973, type: "movie", language: "en", tags: ["classic"], curatorNote: "Hal Ashby's profane, tender road movie — two Navy men escort a young sailor to prison and start to feel guilty about it. Jack Nicholson at his most alive.", tmdbId: 10739 },
+  { title: "The Lunchbox", year: 2013, type: "movie", language: "hi", tags: ["passport"], curatorNote: "A misdirected lunch in Mumbai sparks an unlikely epistolary romance between a lonely housewife and a widower nearing retirement. Quiet and aching.", tmdbId: 196787 },
+  { title: "The Station Agent", year: 2003, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Peter Dinklage moves to an abandoned New Jersey train depot to be alone — and finds people won't let him. Thomas McCarthy's perfect small film.", tmdbId: 11530 },
+  { title: "Leave No Trace", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "Debra Granik's follow-up to Winter's Bone — a father and daughter living off the grid in a Portland forest. Ben Foster gives the performance of his career.", tmdbId: 468569 },
+  { title: "Brian and Charles", year: 2022, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A lonely Welsh inventor builds a robot from a washing machine and a mannequin head, and it comes alive. Absurdly funny, surprisingly heartfelt.", tmdbId: 763215 },
+
+  // B03
+  { title: "On Becoming a Guinea Fowl", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Rungano Nyoni's Zambian black comedy about the secrets that surface when a family gathers for a funeral. Claustrophobic, black-humoured, and devastating.", tmdbId: null },
+  { title: "The Peanut Butter Falcon", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A young man with Down syndrome escapes his care home to become a pro wrestler. Shia LaBeouf's best performance, in a film made purely from warmth.", tmdbId: 441728 },
+  { title: "The Straight Story", year: 1999, type: "movie", language: "en", tags: ["classic"], curatorNote: "David Lynch's gentlest film — an elderly man drives a lawnmower hundreds of miles to visit his estranged brother. Every frame is grace.", tmdbId: 11354 },
+  { title: "Rocks", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sarah Gavron's BAFTA-winning portrait of a London teenager keeping her family together after her mother disappears. Authentic, urgent, and quietly extraordinary.", tmdbId: 611119 },
+  { title: "Support the Girls", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Andrew Bujalski's undersung gem about a day in the life of a Hooters-style restaurant manager. Regina Hall is extraordinary in one of the decade's great overlooked performances.", tmdbId: 499907 },
+  { title: "Certain Women", year: 2016, type: "movie", language: "en", tags: ["critics"], curatorNote: "Kelly Reichardt's triptych of Montana women — quiet, elliptical, achingly real. Kristen Stewart's wordless final scene will stay with you.", tmdbId: 390555 },
+  { title: "Thunder Road", year: 2018, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jim Cummings wrote, directed, and stars as a grief-stricken cop falling apart in real time. Starts with the most uncomfortable eulogy in cinema history.", tmdbId: 527774 },
+
+  // B04
+  { title: "Ghostlight", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "A construction worker reluctantly joins an amateur production of Romeo and Juliet while his family falls apart. Kelly O'Sullivan and Alex Thompson's tender, life-affirming surprise.", tmdbId: null },
+  { title: "About Time", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Richard Curtis's time-travel romance that's really about learning to be present. Domhnall Gleeson and Rachel McAdams — but it's Bill Nighy who will make you weep.", tmdbId: 155308 },
+  { title: "Harold and Maude", year: 1971, type: "movie", language: "en", tags: ["classic"], curatorNote: "Hal Ashby's cult masterpiece — a death-obsessed 20-year-old falls in love with a free-spirited 79-year-old. Cat Stevens on the soundtrack. Still radical.", tmdbId: 9778 },
+  { title: "A Man Called Ove", year: 2015, type: "movie", language: "sv", tags: ["passport"], curatorNote: "Sweden's Oscar submission about a curmudgeonly widower whose plans to die alone are foiled by noisy new neighbours. Rolf Lassgård breaks your heart.", tmdbId: 296457 },
+  { title: "Mass", year: 2021, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Two sets of parents meet in a church meeting room — one lost a son to a school shooting, the other raised the shooter. Four actors in a room. Unbearable and essential.", tmdbId: 776726 },
+  { title: "A Ghost Story", year: 2017, type: "movie", language: "en", tags: ["critics"], curatorNote: "David Lowery's film about grief, time, and what we leave behind — Casey Affleck as a ghost in a bedsheet watching centuries pass. Radically patient cinema.", tmdbId: 401981 },
+  { title: "Safety Not Guaranteed", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A journalist investigates a man who placed a classified ad seeking a time-travel partner. Mark Duplass is deeply sincere in this Sundance gem.", tmdbId: 97020 },
+
+  // B05
+  { title: "Dìdi", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Sean Wang's autobiographical portrait of a Taiwanese-American 13-year-old in 2008 Fremont, CA. Captures adolescence with painful fidelity — a Sundance prize-winner.", tmdbId: null },
+  { title: "The Way Way Back", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A miserable 14-year-old finds himself at a water park with Sam Rockwell as his unlikely mentor. One of the great coming-of-age comedies of the 2010s.", tmdbId: 154025 },
+  { title: "Breaking Away", year: 1979, type: "movie", language: "en", tags: ["classic"], curatorNote: "Peter Yates' Oscar-winning gem about a working-class Indiana kid obsessed with Italian cycling. One of American cinema's purest celebrations of aspiration.", tmdbId: 11979 },
+  { title: "The Divine Order", year: 2017, type: "movie", language: "de", tags: ["passport"], curatorNote: "A Swiss housewife leads a campaign for women's suffrage in 1971 — the year Switzerland finally let women vote. Rousing, funny, quietly furious.", tmdbId: 415985 },
+  { title: "Shithouse", year: 2020, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Cooper Raiff's debut — a lonely college freshman meets a girl in the dorms one night, and they just talk. Achingly sincere and completely its own thing.", tmdbId: 738065 },
+  { title: "Eighth Grade", year: 2018, type: "movie", language: "en", tags: ["critics"], curatorNote: "Bo Burnham's portrait of the last week of middle school — Elsie Fisher is painfully real. The most accurate film ever made about being 13.", tmdbId: 479887 },
+  { title: "Dinner in America", year: 2020, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A raw punk rock romantic comedy about a fugitive musician and a gentle misfit who discovers he's her idol. Foul-mouthed, shockingly tender.", tmdbId: 614611 },
+
+  // B06 — replaced Sing Street duplicate with Power Ballad
+  { title: "Kneecap", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "The insane true story of Belfast's Irish-language hip-hop trio, told with anarchic energy. Part biopic, part punk manifesto — a total blast.", tmdbId: null },
+  { title: "Power Ballad", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "John Carney (Sing Street, Once) delivers another music gem — Paul Rudd as a fading wedding singer, Nick Jonas as a boy-band star who steals his song. Charming and bittersweet.", tmdbId: null },
+  { title: "Phantom of the Paradise", year: 1974, type: "movie", language: "en", tags: ["classic"], curatorNote: "Brian De Palma's glam-horror rock opera — a composer's soul is stolen by a Faustian record mogul. Camp, violent, and wildly inventive. A cult classic.", tmdbId: 10727 },
+  { title: "Linda Linda Linda", year: 2005, type: "movie", language: "ja", tags: ["passport"], curatorNote: "Japanese high school girls form a band with three days to learn to play. Nobuhiro Yamashita's gentle, funny, deeply likeable coming-of-age film.", tmdbId: 32682 },
+  { title: "Frank", year: 2014, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Michael Fassbender spends most of the film inside a giant papier-mâché head as the eccentric frontman of an avant-garde band. Weirder and more moving than it sounds.", tmdbId: 209263 },
+  { title: "Inside Llewyn Davis", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "The Coens' most melancholy film — a folk musician who just can't catch a break, one freezing New York week in 1961. Oscar Isaac has never been better.", tmdbId: 166841 },
+  { title: "Popstar: Never Stop Never Stopping", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "The Lonely Island's pop-star mockumentary — funnier than it had any right to be, and a more accurate satire of the music industry than most serious docs.", tmdbId: 293863 },
+
+  // B07
+  { title: "Thelma", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "June Squibb at 94 as a grandmother who gets phone-scammed and goes after the criminals herself. Josh Margolin's action-comedy is genuinely thrilling.", tmdbId: null },
+  { title: "The Farewell", year: 2019, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Lulu Wang's semi-autobiographical comedy-drama — a Chinese-American family gathers for a fake wedding to say goodbye to their grandmother without telling her she's dying.", tmdbId: 522016 },
+  { title: "The Taking of Pelham One Two Three", year: 1974, type: "movie", language: "en", tags: ["classic"], curatorNote: "Walter Matthau vs. Robert Shaw in the original New York subway hostage thriller. Grimy, tense, and impossibly stylish. The remake doesn't come close.", tmdbId: 14371 },
+  { title: "The Mole Agent", year: 2020, type: "movie", language: "es", tags: ["passport"], curatorNote: "A Chilean detective agency recruits an 83-year-old to go undercover in a nursing home. Maite Alberdi's doc is funny and then, quietly, devastating.", tmdbId: 703584 },
+  { title: "Lucky", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Harry Dean Stanton's final film — a 90-year-old atheist contemplating mortality in a small desert town. A gentle, irreplaceable farewell.", tmdbId: 461634 },
+  { title: "Nebraska", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Alexander Payne's black-and-white road movie — a son drives his ageing, possibly delusional father to collect a million-dollar prize. Bruce Dern is heartbreaking.", tmdbId: 193893 },
+  { title: "Robot & Frank", year: 2012, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A retired jewel thief in the near future is given a robot carer he learns to use as a heist accomplice. Frank Langella is magnificent.", tmdbId: 101299 },
+
+  // B08
+  { title: "Hundreds of Beavers", year: 2022, type: "movie", language: "en", tags: ["new"], curatorNote: "A black-and-white slapstick epic about an applejack salesman surviving the frontier — shot in Wisconsin for almost nothing, funnier than most studio comedies.", tmdbId: null },
+  { title: "Palm Springs", year: 2020, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Andy Samberg and Cristin Milioti in a Groundhog Day time loop rom-com that actually has something new to say about love and commitment. Smart and genuinely funny.", tmdbId: 587940 },
+  { title: "The Lavender Hill Mob", year: 1951, type: "movie", language: "en", tags: ["classic"], curatorNote: "Alec Guinness as a mild Bank of England clerk who secretly plots to melt down gold bullion and smuggle it out as Eiffel Tower souvenirs. Peak Ealing comedy.", tmdbId: 2787 },
+  { title: "Beyond the Infinite Two Minutes", year: 2020, type: "movie", language: "ja", tags: ["passport"], curatorNote: "A Japanese café owner discovers his TV screen shows two minutes into the future. Shot in one continuous take, seemingly on a smartphone. A miracle of low-budget ingenuity.", tmdbId: 775408 },
+  { title: "Dave Made a Maze", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A man builds a cardboard maze in his living room and gets lost inside it — his friends go in to rescue him. Completely absurd and totally committed.", tmdbId: 453907 },
+  { title: "One Cut of the Dead", year: 2017, type: "movie", language: "ja", tags: ["critics"], curatorNote: "A low-budget zombie film that turns into something else entirely. Do not read anything about it — just watch it. One of the great cinematic surprises.", tmdbId: 513648 },
+  { title: "The VelociPastor", year: 2018, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A priest gains the ability to turn into a dinosaur and fights crime. The title is the whole pitch. Intentionally terrible and entirely self-aware.", tmdbId: 513649 },
+
+  // B09
+  { title: "The Vast of Night", year: 2019, type: "movie", language: "en", tags: ["new"], curatorNote: "Andrew Patterson's debut — two teenagers in 1950s New Mexico intercept a mysterious radio frequency. Made for next to nothing, it crackles with atmosphere.", tmdbId: 568374 },
+  { title: "Coherence", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Eight friends at a dinner party during a comet pass. Shot in four nights in a real house with no script — the paranoia escalates brilliantly.", tmdbId: 220289 },
+  { title: "The Incredible Shrinking Man", year: 1957, type: "movie", language: "en", tags: ["classic"], curatorNote: "Jack Arnold's sci-fi classic about a man slowly miniaturizing — and the existential horror that follows. The final monologue is one of cinema's great speeches.", tmdbId: 2978 },
+  { title: "Aniara", year: 2018, type: "movie", language: "sv", tags: ["passport"], curatorNote: "A Swedish spaceship detours from Mars and can't turn back. Based on a Nobel-nominated epic poem — existentially bleak and visually stunning.", tmdbId: 537108 },
+  { title: "Prospect", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A teenage girl and her father land on a toxic moon to harvest gems. Pedro Pascal before anyone knew his name, in a gorgeous lo-fi sci-fi western.", tmdbId: 508439 },
+  { title: "Moon", year: 2009, type: "movie", language: "en", tags: ["critics"], curatorNote: "Duncan Jones's debut — Sam Rockwell alone on a lunar base as his three-year contract ends. A masterclass in intelligent, human-scale science fiction.", tmdbId: 9658 },
+  { title: "Frequently Asked Questions About Time Travel", year: 2009, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Three British pub regulars stumble through time travel by accident. Underrated gem that should be mentioned in the same breath as Hot Fuzz.", tmdbId: 27271 },
+
+  // B10
+  { title: "The Kid Detective", year: 2020, type: "movie", language: "en", tags: ["new"], curatorNote: "Adam Brody as a once-famous child detective now in his 30s, still taking local cases. A genuinely surprising mystery with an ending that earns it.", tmdbId: 694670 },
+  { title: "Game Night", year: 2018, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A couple's murder mystery game night turns real. John Francis Daley and Jonathan Goldstein's comedy is smarter and funnier than its premise suggests.", tmdbId: 432076 },
+  { title: "The Last of Sheila", year: 1973, type: "movie", language: "en", tags: ["classic"], curatorNote: "Stephen Sondheim and Anthony Perkins wrote this wickedly clever mystery — a Hollywood producer invites friends on a yacht, one of whom killed his wife. Intricate and devious.", tmdbId: 27461 },
+  { title: "The Invisible Guest", year: 2016, type: "movie", language: "es", tags: ["passport"], curatorNote: "Oriol Paulo's Spanish thriller — a businessman wakes up next to a murder victim and hires a lawyer to reconstruct the night. Twist upon twist upon twist.", tmdbId: 380594 },
+  { title: "The Clovehitch Killer", year: 2018, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A teenage boy begins to suspect his perfectly normal father is a serial killer. Duncan Skiles' quiet, creeping dread is almost unbearable.", tmdbId: 564158 },
+  { title: "Brick", year: 2005, type: "movie", language: "en", tags: ["critics"], curatorNote: "Rian Johnson's debut — a hard-boiled noir set entirely within a California high school, played completely straight. Joseph Gordon-Levitt is extraordinary.", tmdbId: 9382 },
+  { title: "The Nice Guys", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Shane Black's 1970s LA buddy comedy — Russell Crowe and Ryan Gosling at their most charming. Funnier than almost anything else that year.", tmdbId: 290250 },
+
+  // B11
+  { title: "Calibre", year: 2018, type: "movie", language: "en", tags: ["new"], curatorNote: "Two friends on a hunting trip in the Scottish Highlands make a catastrophic mistake. Matt Palmer's debut is one of the tightest thrillers of the decade.", tmdbId: 498172 },
+  { title: "Blue Ruin", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Jeremy Saulnier's revenge thriller about a drifter who decides to kill the man who murdered his parents — and is terrible at it. Tense, funny, and painful.", tmdbId: 215999 },
+  { title: "The Hitch-Hiker", year: 1953, type: "movie", language: "en", tags: ["classic"], curatorNote: "Ida Lupino directed this claustrophobic noir — two friends pick up a hitchhiker who turns out to be a wanted killer. The first noir directed by a woman.", tmdbId: 28178 },
+  { title: "Marshland", year: 2014, type: "movie", language: "es", tags: ["passport"], curatorNote: "Alberto Rodríguez's Spanish procedural — two detectives in 1980 Andalusia investigate teenage murders. Visually stunning, politically charged, deeply unsettling.", tmdbId: 295022 },
+  { title: "The Guilty", year: 2018, type: "movie", language: "da", tags: ["passport"], curatorNote: "A Danish emergency dispatcher takes a distressing call and tries to help a woman in danger — all from his desk. Gustav Möller's debut is relentlessly tense.", tmdbId: 488889 },
+  { title: "A Simple Plan", year: 1998, type: "movie", language: "en", tags: ["critics"], curatorNote: "Sam Raimi's quiet Coen-esque thriller — three men find $4 million in a crashed plane, and greed does what greed does. Bill Paxton has never been better.", tmdbId: 9512 },
+  { title: "The Guard", year: 2011, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Brendan Gleeson as a politically incorrect Irish cop paired with an earnest FBI agent played by Don Cheadle. Hilarious, subversive, and deeply Irish.", tmdbId: 58903 },
+
+  // B12
+  { title: "The Night House", year: 2020, type: "movie", language: "en", tags: ["new"], curatorNote: "Rebecca Hall is magnificent as a widow who discovers disturbing secrets about her late husband. David Bruckner's horror film uses grief to devastating effect.", tmdbId: 580044 },
+  { title: "The Autopsy of Jane Doe", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "André Øvredal's two-hander — Brian Cox and Emile Hirsch perform an autopsy on an unidentified woman while strange things happen in the morgue. Supremely crafted.", tmdbId: 334543 },
+  { title: "The Innocents", year: 1961, type: "movie", language: "en", tags: ["classic"], curatorNote: "Jack Clayton's adaptation of The Turn of the Screw — Deborah Kerr as a governess who believes the children in her care are haunted. The most elegant ghost story ever made.", tmdbId: 26944 },
+  { title: "The Orphanage", year: 2007, type: "movie", language: "es", tags: ["passport"], curatorNote: "J.A. Bayona's Spanish horror about a woman who returns to her childhood orphanage with her family. Produced by Guillermo del Toro — haunting and heartbreaking.", tmdbId: 3104 },
+  { title: "Caveat", year: 2020, type: "movie", language: "en", tags: ["discovery"], curatorNote: "An amnesiac agrees to housesit on a remote island with a strange young woman, chained for her safety. Damian McCarthy's debut is deeply, stubbornly disturbing.", tmdbId: 750424 },
+  { title: "Saint Maud", year: 2019, type: "movie", language: "en", tags: ["critics"], curatorNote: "Rose Glass's debut — a hospice nurse becomes obsessively, dangerously devoted to saving a dying patient's soul. One of the decade's great horror films.", tmdbId: 567604 },
+  { title: "Extra Ordinary", year: 2019, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A mild-mannered Irish driving instructor uses her ghost-wrangling skills to help a single dad whose daughter has been marked for sacrifice. Charming and very funny.", tmdbId: 567544 },
+
+  // B13
+  { title: "The Rider", year: 2017, type: "movie", language: "en", tags: ["new"], curatorNote: "Chloé Zhao's breakthrough — a real rodeo rider recovering from a near-fatal fall, played by himself. Heartbreaking and quietly magnificent.", tmdbId: 449007 },
+  { title: "Hell or High Water", year: 2016, type: "movie", language: "en", tags: ["crowd"], curatorNote: "David Mackenzie's modern western — two brothers rob banks to save their family ranch. Jeff Bridges and Chris Pine in a film that crackles with purpose.", tmdbId: 296524 },
+  { title: "Ride the High Country", year: 1962, type: "movie", language: "en", tags: ["classic"], curatorNote: "Sam Peckinpah's elegiac western — two ageing lawmen escort gold through the mountains. Randolph Scott and Joel McCrea in one of the genre's great farewells.", tmdbId: 4512 },
+  { title: "Theeb", year: 2014, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Naji Abu Nowar's Jordanian Bedouin western — a young boy guides a stranger through Ottoman-era desert, and everything goes wrong. Jordan's first Oscar submission.", tmdbId: 282291 },
+  { title: "Sweet Country", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Warwick Thornton's Australian western about an Aboriginal man who kills a white farmer in self-defence and flees across the outback. Visually searing.", tmdbId: 448913 },
+  { title: "Meek's Cutoff", year: 2010, type: "movie", language: "en", tags: ["critics"], curatorNote: "Kelly Reichardt's revisionist Oregon Trail western — three wagon families lost in the desert in 1845. Patient, feminist, and quietly radical.", tmdbId: 50783 },
+  { title: "Slow West", year: 2015, type: "movie", language: "en", tags: ["surprise"], curatorNote: "John Maclean's debut — a naïve Scottish boy crosses the American frontier to find his love, with Michael Fassbender as his morally ambiguous guide.", tmdbId: 283366 },
+
+  // B14
+  { title: "The Fits", year: 2015, type: "movie", language: "en", tags: ["new"], curatorNote: "Anna Rose Holmer's debut — an 11-year-old girl joins a drill team on a Cincinnati housing estate as mysterious fainting spells sweep the group. Hypnotic and unsettling.", tmdbId: 352635 },
+  { title: "Frances Ha", year: 2012, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Noah Baumbach and Greta Gerwig's New York portrait — a dancer who doesn't quite have her life together, yet radiates irresistible energy. Shot in gorgeous black and white.", tmdbId: 141733 },
+  { title: "Daisies", year: 1966, type: "movie", language: "cs", tags: ["classic"], curatorNote: "Věra Chytilová's Czech New Wave provocation — two women named Marie decide the world is spoiled and behave accordingly. Anarchic, feminist, still electrifying.", tmdbId: 68098 },
+  { title: "Girlhood", year: 2014, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Céline Sciamma's luminous French coming-of-age film — a Black teenager in the Paris banlieues finds herself through a girl gang. The 'Diamonds' scene is iconic.", tmdbId: 254419 },
+  { title: "Appropriate Behavior", year: 2014, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Desiree Akhavan's semi-autobiographical debut — a bisexual Iranian-American navigating Brooklyn breakups and immigrant family expectations. Sharp, funny, and honest.", tmdbId: 252171 },
+  { title: "Never Rarely Sometimes Always", year: 2020, type: "movie", language: "en", tags: ["critics"], curatorNote: "Eliza Hittman's devastating road movie — two teenage cousins travel from Pennsylvania to New York for an abortion. Plays almost entirely in silence and gesture.", tmdbId: 604985 },
+  { title: "Obvious Child", year: 2014, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Gillian Robespierre's 'abortion rom-com' — Jenny Slate is disarmingly real as a stand-up comic who gets pregnant after a one-night stand. Funny, frank, kind.", tmdbId: 265170 },
+
+  // B15
+  { title: "The One I Love", year: 2014, type: "movie", language: "en", tags: ["new"], curatorNote: "Mark Duplass and Elisabeth Moss discover something strange at their couples retreat. Don't read about it — the less you know, the better.", tmdbId: 248783 },
+  { title: "Ruby Sparks", year: 2012, type: "movie", language: "en", tags: ["crowd"], curatorNote: "A novelist writes his dream woman into existence and she comes to life. Paul Dano and Zoe Kazan examine the fantasy of the perfect partner with wit and unease.", tmdbId: 109451 },
+  { title: "A New Leaf", year: 1971, type: "movie", language: "en", tags: ["classic"], curatorNote: "Elaine May wrote, directed, and stars as a botanist who marries a broke playboy (Walter Matthau) who plans to murder her. One of the funniest films ever made.", tmdbId: 46369 },
+  { title: "The Worst Person in the World", year: 2021, type: "movie", language: "no", tags: ["passport"], curatorNote: "Joachim Trier's Oslo rom-com-drama about a woman in her late 20s who can't stop reinventing herself. Renate Reinsve won Best Actress at Cannes. Luminous.", tmdbId: 867218 },
+  { title: "Comet", year: 2014, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Sam Esmail's non-linear romantic drama — a fractious couple's relationship told across parallel universes and six years. Visually audacious and surprisingly emotional.", tmdbId: 244786 },
+  { title: "Certified Copy", year: 2010, type: "movie", language: "en", tags: ["critics"], curatorNote: "Abbas Kiarostami's Juliette Binoche-led mystery — a couple in Tuscany may be strangers, may be married. One of cinema's great games of identity and desire.", tmdbId: 46706 },
+  { title: "Plus One", year: 2019, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Two friends agree to be each other's plus-one for a summer of weddings. Jeff Chan and Andrew Rhymer's rom-com is sweet, sharp, and underseen.", tmdbId: 543512 },
+
+  // B16
+  { title: "Blindspotting", year: 2018, type: "movie", language: "en", tags: ["new"], curatorNote: "Daveed Diggs and Rafael Casal's explosive Oakland drama about gentrification and race — part spoken word, part thriller, entirely its own thing.", tmdbId: 481774 },
+  { title: "Short Term 12", year: 2013, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Destin Daniel Cretton's drama set in a foster care facility. Brie Larson broke through here — it's as compassionate and clear-eyed a film as you'll find.", tmdbId: 183011 },
+  { title: "Nothing But a Man", year: 1964, type: "movie", language: "en", tags: ["classic"], curatorNote: "Michael Roemer's overlooked masterpiece — a Black railroad worker in the Deep South tries to build a life with dignity. Ivan Dixon is magnificent. Essential American cinema.", tmdbId: 46625 },
+  { title: "The Insult", year: 2017, type: "movie", language: "ar", tags: ["passport"], curatorNote: "Ziad Doueiri's Lebanese courtroom drama — a minor dispute between a Palestinian refugee and a Christian Lebanese man escalates into a national crisis. Oscar-nominated.", tmdbId: 442816 },
+  { title: "Monos", year: 2019, type: "movie", language: "es", tags: ["discovery"], curatorNote: "Alejandro Landes' Colombian war film about child soldiers on a mountain plateau. Apocalypse Now by way of Lord of the Flies — visually staggering.", tmdbId: 507997 },
+  { title: "Fruitvale Station", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Ryan Coogler's debut about the last 24 hours of Oscar Grant's life before he was shot by transit police on New Year's Day 2009. Michael B. Jordan is heartbreaking.", tmdbId: 179066 },
+  { title: "Sorry to Bother You", year: 2018, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Boots Riley's debut — a Black telemarketer discovers a white voice and rocket-launches his career, until he discovers what the company actually does. Radical and funny.", tmdbId: 480858 },
+
+  // B17
+  { title: "The Death of Stalin", year: 2017, type: "movie", language: "en", tags: ["new"], curatorNote: "Armando Iannucci's pitch-black comedy about the chaos following Stalin's death — a masterpiece of satire and a terrifying portrait of power.", tmdbId: 420648 },
+  { title: "In the Loop", year: 2009, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Iannucci's first feature — the Anglo-American rush to war dissected through a torrent of abuse and incompetence. Peter Capaldi's Malcolm Tucker is a force of nature.", tmdbId: 18776 },
+  { title: "The Firemen's Ball", year: 1967, type: "movie", language: "cs", tags: ["classic"], curatorNote: "Miloš Forman's Czech satire — a small-town fire brigade's charity ball collapses into magnificent chaos. A masterclass in comedy as political critique.", tmdbId: 11899 },
+  { title: "Wild Tales", year: 2014, type: "movie", language: "es", tags: ["passport"], curatorNote: "Damián Szifron's Argentine anthology of vengeance — six stories of people pushed past their breaking point. Oscar-nominated. Every segment is a masterclass.", tmdbId: 266647 },
+  { title: "The Square", year: 2017, type: "movie", language: "sv", tags: ["discovery"], curatorNote: "Ruben Östlund's Palme d'Or winner — a Swedish contemporary art museum's PR campaign goes catastrophically wrong. Caustic, funny, deeply uncomfortable.", tmdbId: 397837 },
+  { title: "Force Majeure", year: 2014, type: "movie", language: "sv", tags: ["critics"], curatorNote: "Ruben Östlund's earlier masterpiece — a man instinctively abandons his family when an avalanche approaches, and the aftermath slowly destroys his marriage.", tmdbId: 257344 },
+  { title: "Four Lions", year: 2010, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Chris Morris's comedy about four British jihadists who are completely incompetent. Somehow hilarious and devastating in equal measure. One of the bravest films ever made.", tmdbId: 53395 },
+
+  // B18
+  { title: "A Dark Song", year: 2016, type: "movie", language: "en", tags: ["new"], curatorNote: "Liam Gavin's debut — a grieving mother and a disreputable occultist lock themselves in a house for months to perform a dangerous ritual. Genuinely unsettling.", tmdbId: 401788 },
+  { title: "The Green Knight", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "David Lowery's Arthurian epic — Dev Patel as a young Gawain on a quest to meet his fate. Visually rapturous, deliberately strange, and unforgettable.", tmdbId: 606010 },
+  { title: "Kuroneko", year: 1968, type: "movie", language: "ja", tags: ["classic"], curatorNote: "Kaneto Shindō's Japanese ghost story — two women murdered by samurai return as vengeful spirits. Ravishingly shot in black and white, one of horror's great films.", tmdbId: 26611 },
+  { title: "November", year: 2017, type: "movie", language: "et", tags: ["passport"], curatorNote: "Rainer Sarnet's Estonian folk horror — a peasant village where people trade souls to the Devil, steal from the neighbours, and fall in love with a ghost. Extraordinary.", tmdbId: 441756 },
+  { title: "I Kill Giants", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "A lonely girl hunts giants in her coastal town — or does she? Anders Walter's fantasy drama handles grief with rare intelligence and gentleness.", tmdbId: 436682 },
+  { title: "The Fall", year: 2006, type: "movie", language: "en", tags: ["critics"], curatorNote: "Tarsem Singh's visual fever dream — a stuntman in a 1920s hospital tells a little girl an increasingly strange story. Shot in 28 countries. Nothing else looks like it.", tmdbId: 12156 },
+  { title: "The Lure", year: 2015, type: "movie", language: "pl", tags: ["surprise"], curatorNote: "Agnieszka Smoczyńska's Polish horror musical — two mermaid sisters get jobs in a 1980s Warsaw nightclub and things get strange and bloody. Completely one of a kind.", tmdbId: 345591 },
+
+  // B19
+  { title: "The Art of Self-Defense", year: 2019, type: "movie", language: "en", tags: ["new"], curatorNote: "Riley Stearns' dark comedy — Jesse Eisenberg joins a karate dojo after being attacked and slowly discovers the cult lurking beneath. Deadpan and disturbing.", tmdbId: 531756 },
+  { title: "The Menu", year: 2022, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Mark Mylod's satire — a celebrity chef prepares a once-in-a-lifetime meal for an exclusive island restaurant, with lethal consequences. Ralph Fiennes at his most menacing.", tmdbId: 593643 },
+  { title: "Kind Hearts and Coronets", year: 1949, type: "movie", language: "en", tags: ["classic"], curatorNote: "Robert Hamer's Ealing masterpiece — Alec Guinness plays all eight members of a noble family being murdered by a distant heir. The blackest of black comedies.", tmdbId: 12778 },
+  { title: "Men & Chicken", year: 2015, type: "movie", language: "da", tags: ["passport"], curatorNote: "Anders Thomas Jensen's Danish black comedy — two brothers discover they have more siblings on a remote island, running a very strange farm. Deeply weird and funny.", tmdbId: 309404 },
+  { title: "Greener Grass", year: 2019, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Jocelyn DeBoer and Dawn Luebbe's surrealist suburban satire — a woman gives her child to her neighbour on a whim. Uncanny, funny, and extremely odd.", tmdbId: 552025 },
+  { title: "Dogtooth", year: 2009, type: "movie", language: "el", tags: ["critics"], curatorNote: "Yorgos Lanthimos' debut — Greek parents raise their adult children in total isolation from the outside world, teaching them a private language. Unsettling and essential.", tmdbId: 35670 },
+  { title: "The Greasy Strangler", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A father and son run a disco walking tour while a grease-covered serial killer stalks the neighbourhood. Absolutely revolting. Absolutely committed. Cult classic.", tmdbId: 372739 },
+
+  // B20
+  { title: "Nine Days", year: 2020, type: "movie", language: "en", tags: ["new"], curatorNote: "Edson Oda's debut — a man watches lives on Earth through TV screens and must choose which soul will be born next. Winston Duke is profound.", tmdbId: 577840 },
+  { title: "After Yang", year: 2021, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Kogonada's second film — a father tries to repair his family's android companion and discovers a life's worth of memories stored inside. Quiet and devastating.", tmdbId: 681683 },
+  { title: "Seconds", year: 1966, type: "movie", language: "en", tags: ["classic"], curatorNote: "John Frankenheimer's noir nightmare — a middle-aged banker is given a second life as a new person by a mysterious corporation. Rock Hudson in his best role.", tmdbId: 11680 },
+  { title: "I Lost My Body", year: 2019, type: "movie", language: "fr", tags: ["passport"], curatorNote: "Jérémy Clapin's French animated film — a severed hand escapes a lab and travels across Paris to find its owner. César winner, Netflix Oscar contender. Hauntingly original.", tmdbId: 586642 },
+  { title: "Marjorie Prime", year: 2017, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Michael Almereyda's quiet sci-fi — an elderly woman interacts with a younger hologram of her late husband. Jon Hamm. Lois Smith. About memory, grief, and love.", tmdbId: 435200 },
+  { title: "Upstream Color", year: 2013, type: "movie", language: "en", tags: ["critics"], curatorNote: "Shane Carruth's follow-up to Primer — two strangers are drawn together by a strange parasite that connects them to pigs and orchids. Elusive and unforgettable.", tmdbId: 186587 },
+  { title: "Swiss Army Man", year: 2016, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Paul Dano survives on a desert island by riding a flatulent corpse played by Daniel Radcliffe back to civilization. The Daniels' debut. More moving than it has any right to be.", tmdbId: 368691 },
+
+  // B21 — 2026 Hidden Gems (from user's sourced lists)
+  { title: "Blue Heron", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Sophy Romvari's masterpiece about a girl's rose-tinted childhood memories of her immigrant family on Vancouver Island. A cult classic in the making — drawn comparisons to Aftersun.", tmdbId: null },
+  { title: "The Furious", year: 2026, type: "movie", language: "zh", tags: ["new"], curatorNote: "Xie Miao and Joe Taslim in a Hong Kong action film about a mute man dismantling a trafficking ring to save his daughter. Directed by Kenji Tanigaki — the year's best action film.", tmdbId: null },
+  { title: "The Christophers", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Steven Soderbergh's art-heist cat-and-mouse game — Sir Ian McKellen gives one of the performances of his career opposite Michaela Coel. Criminally underseen.", tmdbId: null },
+  { title: "Buffet Infinity", year: 2026, type: "movie", language: "en", tags: ["discovery"], curatorNote: "An analog horror film told through cheap local TV commercials following a mysterious buffet business. Uniquely funny and genuinely dreadful in equal measure.", tmdbId: null },
+  { title: "Faces of Death", year: 2026, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Dacre Montgomery stars as a content moderator who discovers viral recreations of the cult horror franchise's death scenes. Smart, gory, and made for the social media era.", tmdbId: null },
+  { title: "Rose of Nevada", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "George MacKay and Callum Turner join a mysterious crew transported 30 years into the past. A soft sci-fi masterpiece about identity, collective trauma, and taking over someone else's life.", tmdbId: null },
+  { title: "Saccharine", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "A medical student eats human ashes to lose weight and is haunted by the ghost of the deceased. Body horror meets diet culture satire — exceptionally impactful.", tmdbId: null },
+
+  // B22 — 2026 Comedy & Sci-Fi Gems
+  { title: "Tony", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Matt Johnson's A24 coming-of-age comedy with Dominic Sessa as a young Anthony Bourdain — captures the spirit of Kitchen Confidential in a warm, breezy summer film.", tmdbId: null },
+  { title: "Gail Daughtry and the Celebrity Sex Pass", year: 2026, type: "movie", language: "en", tags: ["discovery"], curatorNote: "Zoey Deutch is hilarious as a Kansas hairdresser chasing Jon Hamm across LA after her fiancé uses his celebrity pass. David Wain's absurdist comedy bombed — find it anyway.", tmdbId: null },
+  { title: "Mike & Nick & Nick & Alice", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "James Marsden, Eiza González, and Vince Vaughn playing dual roles in a Hulu sci-fi comedy — The Terminator meets Game Night, all in one night. Better than it sounds.", tmdbId: null },
+  { title: "Pillion", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Harry Lighton's acclaimed debut — Alexander Skarsgård and Harry Melling in a sensitive, unconventional dark romance about a timid man swept into a biker's world.", tmdbId: null },
+  { title: "The Sheep Detectives", year: 2026, type: "movie", language: "en", tags: ["crowd"], curatorNote: "Hugh Jackman, Emma Thompson, and Julia Louis-Dreyfus in the murder mystery where the investigators are sheep. Unexpectedly charming — think Paddington, not Garfield.", tmdbId: null },
+  { title: "Sweetness", year: 2026, type: "movie", language: "en", tags: ["critics"], curatorNote: "A Canadian SXSW drama about a young girl's intense, uncomfortable obsession with her music idol. Haunting and precise about the line between adoration and danger.", tmdbId: null },
+  { title: "Teenage Sex and Death at Camp Miasma", year: 2026, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jane Schoenbrun's surrealistic slasher — Hannah Einbinder as an indie filmmaker fixated on casting Gillian Anderson. Deconstructs the genre while loving it deeply.", tmdbId: null },
+
+  // B23 — 2026 Thrillers & Overlooked Films + 2020s Best Hidden Gems
+  { title: "The Last Stop in Yuma County", year: 2024, type: "movie", language: "en", tags: ["new"], curatorNote: "Francis Galluppi's tension-masterclass debut — strangers trapped in a desert diner with two bank robbers. High-concept Coen-esque thriller executed with ruthless efficiency.", tmdbId: 1024748 },
+  { title: "Normal", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "Bob Odenkirk in a dark conspiracy thriller — a small-town setup with gripping action and a quirky edge. The kind of tense, intelligent genre film that slips through the cracks.", tmdbId: null },
+  { title: "In the Grey", year: 2026, type: "movie", language: "en", tags: ["new"], curatorNote: "A stunning survival-thriller set in the frozen wilderness — critically praised and utterly ignored at the box office. One of the year's most visceral and overlooked experiences.", tmdbId: null },
+  { title: "Strange Darling", year: 2023, type: "movie", language: "en", tags: ["discovery"], curatorNote: "JT Mollner's non-linear indie thriller shot on 16mm — a cat-and-mouse chase that subverts every expectation. Go in blind. One of the decade's most daring genre films.", tmdbId: 1008042 },
+  { title: "The Coffee Table", year: 2022, type: "movie", language: "es", tags: ["passport"], curatorNote: "Caye Casas's Spanish domestic horror — a couple argues about a coffee table while the audience holds its breath waiting for what they know is coming. Deeply, irreversibly disturbing.", tmdbId: 936171 },
+  { title: "How to Blow Up a Pipeline", year: 2022, type: "movie", language: "en", tags: ["critics"], curatorNote: "Daniel Goldhaber's eco-thriller heist — eight activists sabotage an oil pipeline. Urgent, intelligent, and more entertaining than any political film has a right to be.", tmdbId: 829124 },
+  { title: "The Fallout", year: 2021, type: "movie", language: "en", tags: ["surprise"], curatorNote: "Jenna Ortega defines her generation in this post-school-shooting drama about the quiet internal aftershocks. Megan Park directed with compassion and absolute honesty.", tmdbId: 770671 },
+
 ];
+
+export const HIDDEN_GEMS_POOL_COUNT = HIDDEN_GEMS_BATCHES.length;
