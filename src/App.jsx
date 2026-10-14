@@ -1861,7 +1861,13 @@ async function buildPrebuiltEditorialBatch(
   }
 
   const storageKey = `mycine-pool-rotation-${genreKey}`;
-  const editorialBatch = assembleBatchFromPool(editorialBatches, storageKey);
+  // Mood batches arrive pre-assembled: [[item×7], [item×7], ...] from buildUniqueMoodJourneyBatches.
+  // Detect this by checking if the first element is itself an array.
+  // In that case, select the batch by batchNumber directly; do NOT re-run assembleBatchFromPool.
+  const isPreBatched = Array.isArray(editorialBatches) && Array.isArray(editorialBatches[0]);
+  const editorialBatch = isPreBatched
+    ? (editorialBatches[batchNumber - 1] || editorialBatches[0] || [])
+    : assembleBatchFromPool(editorialBatches, storageKey);
 
   if (!editorialBatch || editorialBatch.length === 0) {
     throw new Error(`No entries available in ${genreKey} pool.`);
