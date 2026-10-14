@@ -2,19 +2,16 @@
 // Assembles a fresh 7-entry editorial batch from a flat pool each time a user requests.
 // Rotates through the pool via localStorage so the same titles don't repeat every session.
 //
-// DESIGN: Quad-rotation guarantee —
+// DESIGN: Triple-rotation guarantee —
 //   Slot 1 (Tonight's Pick) always comes from a SEPARATE rotation over the current-year sub-pool
 //   (year === CURRENT_YEAR). This guarantees a 2026 title every single batch,
 //   regardless of where the main pool pointer happens to be.
 //   Slot 2 (RECENT) always comes from a SECOND SEPARATE rotation over year >= 2025 entries
 //   (excluding Tonight's Pick). This guarantees a 2025 or 2026 title is always available for RECENT,
 //   regardless of where the main pool pointer happens to be.
-//   Slot 3 (CLASSIC) always comes from a THIRD SEPARATE rotation over year < 1980 entries
-//   (excluding slots 1-2). This guarantees a pre-1980 title every batch.
-//   Slot 4 (PASSPORT) always comes from a FOURTH SEPARATE rotation over all non-English entries
-//   (excluding slots 1-3). This rotates evenly across all languages, preventing any one
-//   language from dominating the slot.
-//   The remaining 3 entries come from the main pool rotation (all 4 guaranteed picks excluded).
+//   The remaining entries come from the main pool rotation (both guaranteed picks excluded).
+//   If a guaranteed slot has no qualifying entries (e.g. no 2026 titles in the pool),
+//   the main pool fills the extra slot so the total always reaches 7.
 //   Badges are assigned AFTER selection based on what each entry actually is.
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -83,14 +80,12 @@ function getNextFromRotation(pool, storageKey, count) {
   }
 }
 
-// Assembles 7 entries using quad rotation:
+// Assembles 7 entries using triple rotation:
 //   1. Pick 1 entry from the recent sub-pool (year === CURRENT_YEAR) — Tonight's Pick guarantee.
 //   2. Pick 1 entry from the new sub-pool (year >= 2025, excluding Tonight's Pick) — RECENT badge guarantee.
-//   3. Pick 1 entry from the classic sub-pool (year < 1980, excluding steps 1-2) — CLASSIC badge guarantee.
-//   4. Pick 1 entry from the passport sub-pool (language !== "en", excluding steps 1-3) — PASSPORT diversity guarantee.
-//   5. Pick 3 entries from the main pool (excluding all 4 guaranteed picks).
-// This guarantees Slot 1 (Tonight's Pick = 2026), Slot 2 (RECENT = 2025+),
-// Slot 3 (CLASSIC = pre-1980), and Slot 4 (PASSPORT = non-English) are always filled.
+//   3. Pick remaining entries from the main pool (excluding the guaranteed picks).
+//      If a guaranteed slot had no qualifying entries (recentPick or newPick is null),
+//      the main pool picks one extra to always reach 7 total.
 function getNextBatch(pool, storageKey) {
   const recentPool = pool.filter(e => Number(e.year) === CURRENT_YEAR);
   const recentKey = storageKey + ":recent";
@@ -113,47 +108,18 @@ function getNextBatch(pool, storageKey) {
     newPick = picks[0] || null;
   }
 
-  // Step 3: one guaranteed CLASSIC pick (year < 1980, not already picked)
-  const excludedAfterStep2 = new Set(
+  // Step 3: fill remaining slots from the main pool, excluding both guaranteed picks.
+  // Use the actual number of guaranteed picks found (not always 2) so total always = 7.
+  const excludedTitles = new Set(
     [recentPick?.title, newPick?.title].filter(Boolean)
   );
-  const classicPool = pool.filter(
-    e => Number(e.year) < 1980 && !excludedAfterStep2.has(e.title)
-  );
-  const classicKey = storageKey + ":classic";
-  let classicPick = null;
-  if (classicPool.length > 0) {
-    const picks = getNextFromRotation(classicPool, classicKey, 1);
-    classicPick = picks[0] || null;
-  }
-
-  // Step 4: one guaranteed PASSPORT pick (non-English, not already picked)
-  // Rotates through ALL non-English entries equally, preventing any one language from dominating.
-  const excludedAfterStep3 = new Set(
-    [recentPick?.title, newPick?.title, classicPick?.title].filter(Boolean)
-  );
-  const passportPool = pool.filter(
-    e => e.language && e.language !== "en" && !excludedAfterStep3.has(e.title)
-  );
-  const passportKey = storageKey + ":passport";
-  let passportPick = null;
-  if (passportPool.length > 0) {
-    const picks = getNextFromRotation(passportPool, passportKey, 1);
-    passportPick = picks[0] || null;
-  }
-
-  // Step 5: 3 more from the main pool, excluding all 4 guaranteed picks
-  const excludedTitles = new Set(
-    [recentPick?.title, newPick?.title, classicPick?.title, passportPick?.title].filter(Boolean)
-  );
   const mainPool = pool.filter(e => !excludedTitles.has(e.title));
-  const mainPicks = getNextFromRotation(mainPool, storageKey, BATCH_SIZE - 4);
+  const guaranteedCount = [recentPick, newPick].filter(Boolean).length;
+  const mainPicks = getNextFromRotation(mainPool, storageKey, BATCH_SIZE - guaranteedCount);
 
   const batch = [];
   if (recentPick) batch.push(recentPick);
   if (newPick) batch.push(newPick);
-  if (classicPick) batch.push(classicPick);
-  if (passportPick) batch.push(passportPick);
   batch.push(...mainPicks);
 
   // Trim to BATCH_SIZE in case edge cases (tiny pool) over-fill
@@ -202,8 +168,8 @@ function assignBadges(entries) {
   );
   if (slot1 !== -1) { result[1] = slot1; assigned.add(slot1); }
 
-  // Slot 3: Classic — year < 1980, oldest first for variety
-  const slot2 = findBest(e => Number(e.year) < 1980, null);
+  // Slot 3: Classic — year < 2000, oldest first for variety
+  const slot2 = findBest(e => Number(e.year) < 2000, null);
   if (slot2 !== -1) { result[2] = slot2; assigned.add(slot2); }
 
   // Slot 4: Passport — non-English
@@ -243,16 +209,6 @@ function assignBadges(entries) {
     if (badge === "🆕 RECENT" && Number(entry.year) < 2025) {
       badge = "✨ Surprise";
     }
-    // Safety guard: never label an entry "Classic" unless its year is before 1980.
-    // If the Classic slot falls back to a newer title, downgrade to Surprise.
-    if (badge === "🎞️ Classic" && Number(entry.year) >= 1980) {
-      badge = "✨ Surprise";
-    }
-    // Safety guard: never label an entry "Passport" unless it is non-English.
-    // If the Passport slot falls back to an English title, downgrade to Surprise.
-    if (badge === "🌍 Passport" && (!entry.language || entry.language === "en")) {
-      badge = "✨ Surprise";
-    }
     return { ...entry, badge, slot: slotIndex + 1 };
   });
 }
@@ -266,12 +222,9 @@ function assignBadges(entries) {
  * GUARANTEE: Slot 1 (Tonight's Pick) always shows a 2026 title, drawn from
  * a separate rotation over the current-year sub-pool. Slot 2 (RECENT) always
  * shows 2025 or 2026, drawn from a second separate rotation over year >= 2025
- * entries (excluding Tonight's Pick). Slot 3 (CLASSIC) always shows a pre-1980
- * title, drawn from a third separate rotation over year < 1980 entries.
- * Slot 4 (PASSPORT) always shows a non-English title, drawn from a fourth
- * separate rotation over all non-English entries — rotating evenly across
- * languages so no single language dominates. The remaining 3 slots rotate
- * through the full pool (all 4 guaranteed picks excluded).
+ * entries (excluding Tonight's Pick). The remaining slots rotate through
+ * the full pool. If a pool has no qualifying entries for a guaranteed slot
+ * (e.g. no 2026 titles), the main pool compensates so 7 entries are always returned.
  *
  * Entry object shape:
  * {
