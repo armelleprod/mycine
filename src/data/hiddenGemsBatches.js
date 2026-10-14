@@ -3,7 +3,7 @@
 // Tags derived from badge mapping. Language codes ISO 639-1.
 // POOL_COUNT auto-computed via .length.
 
-export const HIDDEN_GEMS_BATCHES = [
+export const HIDDEN_GEMS_EDITORIAL_BATCHES = [
 
   // B01
   { title: "Eephus", year: 2025, type: "movie", language: "en", tags: ["new"], curatorNote: "Carson Lund's hypnotic debut — the last baseball game ever played on a small-town field, stretched into a meditation on endings. Sundance 2024 standout.", tmdbId: 1226777 },
@@ -233,4 +233,4 @@ export const HIDDEN_GEMS_BATCHES = [
 
 ];
 
-export const HIDDEN_GEMS_POOL_COUNT = HIDDEN_GEMS_BATCHES.length;
+export const HIDDEN_GEMS_POOL_COUNT = HIDDEN_GEMS_EDITORIAL_BATCHES.length;
