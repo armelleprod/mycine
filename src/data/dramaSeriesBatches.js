@@ -547,14 +547,6 @@ export const DRAMA_SERIES_EDITORIAL_BATCHES = [
     curatorNote: "Sharon Horgan's Irish series — four sisters plotting to kill their abusive brother-in-law while we watch two timelines converge. The funniest show about domestic abuse ever made, which is exactly as strange and perfect as it sounds."
   },
   {
-    title: "The Bear",
-    year: 2022,
-    type: "tv",
-    language: "en",
-    tags: ["critics", "crowd"],
-    curatorNote: "Jeremy Allen White inherits a chaotic Chicago sandwich shop and tries to turn it into something real. The most formally inventive drama on television — episode 7 of season 2 ('Forks') is a single-take masterwork."
-  },
-  {
     title: "Pachinko",
     year: 2022,
     type: "tv",
