@@ -303,7 +303,7 @@ export const LGBTQ_EDITORIAL_BATCHES = [
     "moodTags": ["date night", "ugly cry"]
   },
   {
-    "title": "The Boys in the Band",
+    "title": "The Boys in the Band (1970)",
     "year": 1970,
     "type": "movie",
     "language": "en",
@@ -983,7 +983,7 @@ export const LGBTQ_EDITORIAL_BATCHES = [
     "moodTags": ["feel good", "date night"]
   },
   {
-    "title": "The Boys in the Band",
+    "title": "The Boys in the Band (2020)",
     "year": 2020,
     "type": "movie",
     "language": "en",
@@ -1381,6 +1381,86 @@ export const LGBTQ_EDITORIAL_BATCHES = [
     "tmdbId": 1808,
     "curatorNote": "Todd Haynes' glam-rock fantasia about a Bowie-esque figure who disappears from public life — Ewan McGregor, Jonathan Rhys Meyers, and the most sensory film about pop music ever made.",
     "moodTags": ["surprise me", "make me think"]
+  },
+  {
+    "title": "Heartstopper Forever",
+    "year": 2026,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 1468683,
+    "curatorNote": "Kit Connor and Joe Locke return as Charlie and Nick — Wash Westmoreland directs this feature-length farewell to the beloved graphic-novel universe, following the pair into adulthood.",
+    "moodTags": ["feel good", "date night"]
+  },
+  {
+    "title": "La bola negra",
+    "year": 2026,
+    "type": "movie",
+    "language": "es",
+    "tags": ["passport"],
+    "tmdbId": 1422041,
+    "curatorNote": "Javier Ambrossi and Javier Calvo — Spain's most exciting director duo — deliver their most personal film yet: a 84 Metascore portrait of queer identity, ambition, and the cost of belonging.",
+    "moodTags": ["make me think"]
+  },
+  {
+    "title": "The History of Sound",
+    "year": 2025,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 891584,
+    "curatorNote": "Josh O'Connor and Paul Mescal as two men who meet in WWI-era New England, documenting folk music — a slow, devastating love story about the things that survive and the things that don't.",
+    "moodTags": ["make me think", "ugly cry"]
+  },
+  {
+    "title": "Plainclothes",
+    "year": 2025,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 1255718,
+    "curatorNote": "A 1990s NYC undercover cop thriller with a queer undercurrent — Carmen López Vidal's debut plays the genre straight while quietly dismantling it from within.",
+    "moodTags": ["make me think", "on the edge of my seat"]
+  },
+  {
+    "title": "Twinless",
+    "year": 2025,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 1245347,
+    "curatorNote": "A grief support group for people who've lost a twin becomes the unlikely setting for a queer connection — tender, specific, and quietly devastating on loss and found family.",
+    "moodTags": ["ugly cry", "date night"]
+  },
+  {
+    "title": "Pillion",
+    "year": 2026,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 1287141,
+    "curatorNote": "99% on Rotten Tomatoes. A BDSM love story stripped of every cliché — Harry Lighton's debut is tender, formally confident, and unlike anything else in queer cinema right now.",
+    "moodTags": ["date night", "make me think"]
+  },
+  {
+    "title": "Leviticus",
+    "year": 2026,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 1564614,
+    "curatorNote": "93% RT. Australian supernatural horror-romance: two teenage boys hunted by an entity that takes the form of whoever they desire most — visceral, terrifying, and achingly queer.",
+    "moodTags": ["on the edge of my seat", "surprise me"]
+  },
+  {
+    "title": "Peter Hujar's Day",
+    "year": 2025,
+    "type": "movie",
+    "language": "en",
+    "tags": ["new"],
+    "tmdbId": 1159539,
+    "curatorNote": "Ira Sachs directs Ben Whishaw as the legendary NYC photographer Peter Hujar — a single day in 1970s Manhattan that captures an entire world on the edge of transformation.",
+    "moodTags": ["make me think"]
   }
 ];
 
